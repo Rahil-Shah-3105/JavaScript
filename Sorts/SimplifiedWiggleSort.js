@@ -1,3 +1,4 @@
+const logger = console;
 /*
  * Wiggle sort sorts the array into a wave like array.
  * An array ‘arr[0..n-1]’ is sorted in wave form if arr[0] <= arr[1] >= arr[2] <= arr[3] >= arr[4] <= …..
@@ -8,15 +9,19 @@
 import { quickSelectSearch } from '../Search/QuickSelectSearch.js'
 
 export const simplifiedWiggleSort = function (arr) {
+logger.debug(`>>> Entering simplifiedWiggleSort(arr=${arr})`);
   // find Median using QuickSelect
   let median = quickSelectSearch(arr, Math.floor(arr.length / 2.0))
   median = median[Math.floor(arr.length / 2.0)]
+logger.debug(`simplifiedWiggleSort(arr=${arr}): median → ${median}`);
 
   const sorted = new Array(arr.length)
 
+logger.debug(`simplifiedWiggleSort(arr=${arr}): sorted → ${sorted}`);
   let smallerThanMedianIndx = 0
   let greaterThanMedianIndx = arr.length - 1 - (arr.length % 2)
 
+logger.debug(`simplifiedWiggleSort(arr=${arr}): greaterThanMedianIndx → ${greaterThanMedianIndx}`);
   for (let i = 0; i < arr.length; i++) {
     if (arr[i] > median) {
       sorted[greaterThanMedianIndx] = arr[i]
@@ -32,5 +37,6 @@ export const simplifiedWiggleSort = function (arr) {
     }
   }
 
+logger.debug(`<<< Exiting simplifiedWiggleSort(arr=${arr})`);
   return sorted
 }

@@ -1,3 +1,4 @@
+const logger = console;
 /*
   A program to calculate the Aliquot Sum of a number.
   The aliquot sum of a number n, is the sum of all the proper divisors of n apart from n itself
@@ -12,6 +13,7 @@
  * @param {Number} input The number whose aliquot sum you want to calculate
  */
 function aliquotSum(input) {
+logger.debug(`>>> Entering aliquotSum(input=${input})`);
   // input can't be negative
   if (input < 0) throw new TypeError('Input cannot be Negative')
 
@@ -27,6 +29,7 @@ function aliquotSum(input) {
     if (input % i === 0) sum += i
   }
 
+logger.debug(`<<< Exiting aliquotSum(input=${input})`);
   return sum
 }
 

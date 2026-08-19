@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * @author Eric Lavault <https://github.com/lvlte>
  *
@@ -21,6 +22,7 @@
  * @returns {array}
  */
 export function decExp(a, b, base = 10, exp = [], d = {}, dlen = 0) {
+logger.debug(`>>> Entering decExp(a=${a},b=${b},base=${base},exp=${exp},d=${d},dlen=${dlen})`);
   if (base < 2 || base > 10) {
     throw new RangeError('Unsupported base. Must be in range [2, 10]')
   }
@@ -45,6 +47,7 @@ export function decExp(a, b, base = 10, exp = [], d = {}, dlen = 0) {
   // Euclid's division lemma : a = bq + r
   const r = a % b
   const q = (a - r) / b
+logger.debug(`decExp(a=${a},b=${b},base=${base},exp=${exp},d=${d},dlen=${dlen}): q → ${q}`);
 
   // Decimal expansion (1st element is the integer part)
   exp.push(+q.toString(base))
@@ -63,5 +66,6 @@ export function decExp(a, b, base = 10, exp = [], d = {}, dlen = 0) {
     return [exp[0], exp.slice(1), d[a] - 1]
   }
 
+logger.debug(`<<< Exiting decExp(a=${a},b=${b},base=${base},exp=${exp},d=${d},dlen=${dlen})`);
   return decExp(a, b, base, exp, d, dlen)
 }

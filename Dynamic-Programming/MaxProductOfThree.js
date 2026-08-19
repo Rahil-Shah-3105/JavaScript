@@ -1,3 +1,4 @@
+const logger = console;
 /**
  *  Given an array of numbers, return the maximum product
  *  of 3 numbers from the array
@@ -6,6 +7,7 @@
  * @returns number
  */
 export function maxProductOfThree(arrayItems) {
+logger.debug(`>>> Entering maxProductOfThree(arrayItems=${arrayItems})`);
   // if size is less than 3, no triplet exists
   const n = arrayItems.length
   if (n < 3) throw new Error('Triplet cannot exist with the given array')
@@ -34,5 +36,6 @@ export function maxProductOfThree(arrayItems) {
   }
   const prod1 = max1 * max2 * max3
   const prod2 = max1 * min1 * min2
+logger.debug(`<<< Exiting maxProductOfThree(arrayItems=${arrayItems})`);
   return Math.max(prod1, prod2)
 }

@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * The Koch snowflake is a fractal curve and one of the earliest fractals to have been described.
  *
@@ -16,8 +17,12 @@
 /** Class to handle the vector calculations. */
 export class Vector2 {
   constructor(x, y) {
+	logger.debug(`>>> Entering constructor(x=${x},y=${y})`);
     this.x = x
     this.y = y
+	logger.debug(`constructor(x=${x},y=${y}): this.y → ${this.y}`);
+	logger.debug(`constructor(x=${x},y=${y}): this.x → ${this.x}`);
+	logger.debug(`<<< Exiting constructor(x=${x},y=${y})`);
   }
 
   /**
@@ -27,8 +32,10 @@ export class Vector2 {
    * @returns The sum-vector.
    */
   add(vector) {
+	logger.debug(`>>> Entering add(vector=${vector})`);
     const x = this.x + vector.x
     const y = this.y + vector.y
+	logger.debug(`<<< Exiting add(vector=${vector})`);
     return new Vector2(x, y)
   }
 
@@ -39,8 +46,10 @@ export class Vector2 {
    * @returns The difference-vector.
    */
   subtract(vector) {
+	logger.debug(`>>> Entering subtract(vector=${vector})`);
     const x = this.x - vector.x
     const y = this.y - vector.y
+	logger.debug(`<<< Exiting subtract(vector=${vector})`);
     return new Vector2(x, y)
   }
 
@@ -51,8 +60,10 @@ export class Vector2 {
    * @returns The scaled vector.
    */
   multiply(scalar) {
+	logger.debug(`>>> Entering multiply(scalar=${scalar})`);
     const x = this.x * scalar
     const y = this.y * scalar
+	logger.debug(`<<< Exiting multiply(scalar=${scalar})`);
     return new Vector2(x, y)
   }
 
@@ -63,11 +74,16 @@ export class Vector2 {
    * @returns The rotated vector.
    */
   rotate(angleInDegrees) {
+	logger.debug(`>>> Entering rotate(angleInDegrees=${angleInDegrees})`);
     const radians = (angleInDegrees * Math.PI) / 180
     const ca = Math.cos(radians)
     const sa = Math.sin(radians)
     const x = ca * this.x - sa * this.y
+	logger.debug(`rotate(angleInDegrees=${angleInDegrees}): radians → ${radians}`);
+	logger.debug(`rotate(angleInDegrees=${angleInDegrees}): ca → ${ca}`);
+	logger.debug(`rotate(angleInDegrees=${angleInDegrees}): sa → ${sa}`);
     const y = sa * this.x + ca * this.y
+	logger.debug(`<<< Exiting rotate(angleInDegrees=${angleInDegrees})`);
     return new Vector2(x, y)
   }
 }
@@ -82,11 +98,13 @@ export class Vector2 {
  * @returns The transformed vectors after the iteration-steps.
  */
 export function iterate(initialVectors, steps) {
+logger.debug(`>>> Entering iterate(initialVectors=${initialVectors},steps=${steps})`);
   let vectors = initialVectors
   for (let i = 0; i < steps; i++) {
     vectors = iterationStep(vectors)
   }
 
+logger.debug(`<<< Exiting iterate(initialVectors=${initialVectors},steps=${steps})`);
   return vectors
 }
 
@@ -100,6 +118,7 @@ export function iterate(initialVectors, steps) {
  * @returns The transformed vectors after the iteration-step.
  */
 function iterationStep(vectors) {
+logger.debug(`>>> Entering iterationStep(vectors=${vectors})`);
   const newVectors = []
   for (let i = 0; i < vectors.length - 1; i++) {
     const startVector = vectors[i]
@@ -114,5 +133,6 @@ function iterationStep(vectors) {
   }
 
   newVectors.push(vectors[vectors.length - 1])
+logger.debug(`<<< Exiting iterationStep(vectors=${vectors})`);
   return newVectors
 }

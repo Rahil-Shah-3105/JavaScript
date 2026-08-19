@@ -1,3 +1,4 @@
+const logger = console;
 const values = {
   I: 1,
   V: 5,
@@ -9,14 +10,17 @@ const values = {
 }
 
 export function romanToDecimal(romanNumber) {
+logger.debug(`>>> Entering romanToDecimal(romanNumber=${romanNumber})`);
   let prev = ' '
 
+logger.debug(`romanToDecimal(romanNumber=${romanNumber}): prev → ${prev}`);
   let sum = 0
 
   let newPrev = 0
   for (let i = romanNumber.length - 1; i >= 0; i--) {
     const c = romanNumber.charAt(i)
 
+	logger.debug(`romanToDecimal(romanNumber=${romanNumber}): c → ${c}`);
     if (prev !== ' ') {
       newPrev = values[prev] > newPrev ? values[prev] : newPrev
     }
@@ -30,5 +34,6 @@ export function romanToDecimal(romanNumber) {
 
     prev = c
   }
+logger.debug(`<<< Exiting romanToDecimal(romanNumber=${romanNumber})`);
   return sum
 }

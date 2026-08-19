@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * Flood fill.
  *
@@ -21,22 +22,28 @@ const neighborOffsets = [
 ]
 
 function isInside(rgbData, location) {
+logger.debug(`>>> Entering isInside(rgbData=${rgbData},location=${location})`);
   const x = location[0]
   const y = location[1]
+logger.debug(`<<< Exiting isInside(rgbData=${rgbData},location=${location})`);
   return x >= 0 && x < rgbData.length && y >= 0 && y < rgbData[0].length
 }
 
 function checkLocation(rgbData, location) {
+logger.debug(`>>> Entering checkLocation(rgbData=${rgbData},location=${location})`);
   if (!isInside(rgbData, location)) {
+	logger.debug(`<<< Exiting checkLocation(rgbData=${rgbData},location=${location})`);
     throw new Error('location should point to a pixel within the rgbData')
   }
 }
 
 function* neighbors(rgbData, location) {
+logger.debug(`>>> Entering neighbors(rgbData=${rgbData},location=${location})`);
   for (const offset of neighborOffsets) {
     const neighborLocation = [location[0] + offset[0], location[1] + offset[1]]
     if (isInside(rgbData, neighborLocation)) {
       yield neighborLocation
+	logger.debug(`<<< Exiting neighbors(rgbData=${rgbData},location=${location})`);
     }
   }
 }
@@ -120,10 +127,12 @@ function breadthFirstFill(
  * @param replacementColor The new color to replace the old one.
  */
 function depthFirstFill(rgbData, location, targetColor, replacementColor) {
+logger.debug(`>>> Entering depthFirstFill(rgbData=${rgbData},location=${location},targetColor=${targetColor},replacementColor=${replacementColor})`);
   if (rgbData[location[0]][location[1]] === targetColor) {
     rgbData[location[0]][location[1]] = replacementColor
     for (const neighborLocation of neighbors(rgbData, location)) {
       depthFirstFill(rgbData, neighborLocation, targetColor, replacementColor)
+	logger.debug(`<<< Exiting depthFirstFill(rgbData=${rgbData},location=${location},targetColor=${targetColor},replacementColor=${replacementColor})`);
     }
   }
 }

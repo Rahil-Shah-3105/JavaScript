@@ -1,3 +1,4 @@
+const logger = console;
 import { PrimeCheck } from '../Maths/PrimeCheck.js'
 
 /**
@@ -11,11 +12,13 @@ import { PrimeCheck } from '../Maths/PrimeCheck.js'
  * @returns {Number} returns the nth prime number
  */
 export const nthPrime = (n) => {
+logger.debug(`>>> Entering nthPrime(n=${n})`);
   if (n < 1) {
     throw new Error('Invalid Input')
   }
 
   let count = 0
+logger.debug(`nthPrime(n=${n}): count → ${count}`);
   let candidateValue = 1
   while (count < n) {
     candidateValue++
@@ -23,5 +26,6 @@ export const nthPrime = (n) => {
       count++
     }
   }
+logger.debug(`<<< Exiting nthPrime(n=${n})`);
   return candidateValue
 }

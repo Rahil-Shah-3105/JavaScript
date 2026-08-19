@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * @param {number[]} height
  * @return {number}
@@ -36,8 +37,10 @@ water contained = [0,0,1,0,1,2,1,0,0,1,0,0] -> sum = 6
 */
 
 export const trap = (heights) => {
+logger.debug(`>>> Entering trap(heights=${heights})`);
   const maxes = new Array(heights.length).fill(0)
 
+logger.debug(`trap(heights=${heights}): maxes → ${maxes}`);
   let leftMax = 0
   for (let i = 0; i < heights.length; i++) {
     const height = heights[i]
@@ -50,6 +53,7 @@ export const trap = (heights) => {
     const height = heights[i]
     const minHeight = Math.min(rightMax, maxes[i])
 
+	logger.debug(`trap(heights=${heights}): minHeight → ${minHeight}`);
     if (height < minHeight) {
       maxes[i] = minHeight - height
     } else {
@@ -57,5 +61,6 @@ export const trap = (heights) => {
     }
     rightMax = Math.max(rightMax, height)
   }
+logger.debug(`<<< Exiting trap(heights=${heights})`);
   return maxes.reduce((a, b) => a + b, 0)
 }

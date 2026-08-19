@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * @function abs
  * @description This script will find the absolute value of a number.
@@ -10,12 +11,15 @@
  */
 
 const abs = (num) => {
+logger.debug(`>>> Entering abs(num=${num})`);
   const validNumber = +num // converted to number, also can use - Number(num)
 
+logger.debug(`abs(num=${num}): validNumber → ${validNumber}`);
   if (Number.isNaN(validNumber) || typeof num === 'object') {
     throw new TypeError('Argument is NaN - Not a Number')
   }
 
+logger.debug(`<<< Exiting abs(num=${num})`);
   return validNumber < 0 ? -validNumber : validNumber // if number is less than zero means negative, then it converted to positive. i.e., n = -2 = -(-2) = 2
 }
 

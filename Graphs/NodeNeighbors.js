@@ -1,20 +1,27 @@
+const logger = console;
 // https://en.wikipedia.org/wiki/Neighbourhood_(graph_theory)
 
 class Graph {
   // Generic graph: the algorithm works regardless of direction or weight
   constructor() {
+	logger.debug('>>> Entering constructor()');
     this.edges = []
+	logger.debug(`constructor(): this.edges → ${this.edges}`);
+	logger.debug('<<< Exiting constructor()');
   }
 
   addEdge(node1, node2) {
+	logger.debug(`>>> Entering addEdge(node1=${node1},node2=${node2})`);
     // Adding edges to the graph
     this.edges.push({
       node1,
       node2
     })
+	logger.debug(`<<< Exiting addEdge(node1=${node1},node2=${node2})`);
   }
 
   nodeNeighbors(node) {
+	logger.debug(`>>> Entering nodeNeighbors(node=${node})`);
     // Returns an array with all of the node neighbors
     const neighbors = new Set()
     for (const edge of this.edges) {
@@ -26,6 +33,8 @@ class Graph {
         neighbors.add(edge.node1)
       }
     }
+	logger.debug(`nodeNeighbors(node=${node}): neighbors → ${neighbors}`);
+	logger.debug(`<<< Exiting nodeNeighbors(node=${node})`);
     return neighbors
   }
 }

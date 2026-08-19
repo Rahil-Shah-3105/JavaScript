@@ -1,3 +1,4 @@
+const logger = console;
 const isValid = (board, row, col, k) => {
   for (let i = 0; i < 9; i++) {
     const m = 3 * Math.floor(row / 3) + Math.floor(i / 3)
@@ -10,6 +11,7 @@ const isValid = (board, row, col, k) => {
 }
 
 const sudokuSolver = (data) => {
+logger.debug(`>>> Entering sudokuSolver(data=${data})`);
   for (let i = 0; i < 9; i++) {
     for (let j = 0; j < 9; j++) {
       if (data[i][j] === '.') {
@@ -27,6 +29,7 @@ const sudokuSolver = (data) => {
       }
     }
   }
+logger.debug(`<<< Exiting sudokuSolver(data=${data})`);
   return true
 }
 

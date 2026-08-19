@@ -1,3 +1,4 @@
+const logger = console;
 /*
   Returns the sum of a geometric progression
   Article on Geometric Progression: https://en.wikipedia.org/wiki/Geometric_series
@@ -17,6 +18,7 @@
  * @param {Number} numOfTerms The number of terms in the progression
  */
 function sumOfGeometricProgression(firstTerm, commonRatio, numOfTerms) {
+logger.debug(`>>> Entering sumOfGeometricProgression(firstTerm=${firstTerm},commonRatio=${commonRatio},numOfTerms=${numOfTerms})`);
   if (!Number.isFinite(numOfTerms)) {
     /*
       If the number of Terms is Infinity, the common ratio needs to be less than 1 to be a convergent geometric progression
@@ -30,6 +32,7 @@ function sumOfGeometricProgression(firstTerm, commonRatio, numOfTerms) {
 
   if (commonRatio === 1) return firstTerm * numOfTerms
 
+logger.debug(`<<< Exiting sumOfGeometricProgression(firstTerm=${firstTerm},commonRatio=${commonRatio},numOfTerms=${numOfTerms})`);
   return (
     (firstTerm * (Math.pow(commonRatio, numOfTerms) - 1)) / (commonRatio - 1)
   )

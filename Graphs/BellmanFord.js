@@ -1,6 +1,7 @@
 /*
 The Bellman–Ford algorithm is an algorithm that computes shortest paths
 from a single source vertex to all of the other vertices in a weighted digraph.
+const logger = console;
 It also detects negative weight cycle.
 
 Complexity:
@@ -26,9 +27,11 @@ Reference:
  * @returns Shortest distance from source to destination
  */
 function BellmanFord(graph, V, E, src, dest) {
+logger.debug(`>>> Entering BellmanFord(graph=${graph},V=${V},E=${E},src=${src},dest=${dest})`);
   // Initialize distance of all vertices as infinite.
   const dis = Array(V).fill(Infinity)
   // initialize distance of source as 0
+logger.debug(`BellmanFord(graph=${graph},V=${V},E=${E},src=${src},dest=${dest}): dis → ${dis}`);
   dis[src] = 0
 
   // Relax all edges |V| - 1 times. A simple
@@ -53,6 +56,7 @@ function BellmanFord(graph, V, E, src, dest) {
   for (let i = 0; i < V; i++) {
     if (i === dest) return dis[i]
   }
+logger.debug(`<<< Exiting BellmanFord(graph=${graph},V=${V},E=${E},src=${src},dest=${dest})`);
 }
 
 export { BellmanFord }

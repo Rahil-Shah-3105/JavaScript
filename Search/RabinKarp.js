@@ -1,3 +1,4 @@
+const logger = console;
 /*
  * Implements the Rabin-Karp algorithm for pattern searching.
  *
@@ -17,6 +18,7 @@ const BASE = 256 // The number of characters in the alphabet
 const MOD = 997 // A prime number used for the hash function
 
 function rabinKarpSearch(text, pattern) {
+logger.debug(`>>> Entering rabinKarpSearch(text=${text},pattern=${pattern})`);
   const patternLength = pattern.length
   const textLength = text.length
   const hashPattern = hash(pattern, patternLength)
@@ -28,6 +30,7 @@ function rabinKarpSearch(text, pattern) {
 
   // Precompute BASE^(patternLength-1) % MOD
   const basePow = Math.pow(BASE, patternLength - 1) % MOD
+logger.debug(`rabinKarpSearch(text=${text},pattern=${pattern}): basePow → ${basePow}`);
 
   for (let i = 1; i <= textLength - patternLength + 1; i++) {
     // Update the rolling hash by removing the first character
@@ -50,14 +53,17 @@ function rabinKarpSearch(text, pattern) {
     }
   }
 
+logger.debug(`<<< Exiting rabinKarpSearch(text=${text},pattern=${pattern})`);
   return indices
 }
 
 function hash(str, length) {
+logger.debug(`>>> Entering hash(str=${str},length=${length})`);
   let hashValue = 0
   for (let i = 0; i < length; i++) {
     hashValue = (hashValue * BASE + str.charCodeAt(i)) % MOD
   }
+logger.debug(`<<< Exiting hash(str=${str},length=${length})`);
   return hashValue
 }
 

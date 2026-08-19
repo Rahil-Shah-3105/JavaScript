@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * KeyPriorityQueue is a priority queue based on a Minimum Binary Heap.
  *
@@ -25,8 +26,11 @@ const getChildrenPositions = (position) => [2 * position + 1, 2 * position + 2]
 class KeyPriorityQueue {
   // Priority Queue class using Minimum Binary Heap
   constructor() {
+	logger.debug('>>> Entering constructor()');
     this._heap = []
     this.priorities = new Map()
+	logger.debug(`constructor(): this._heap → ${this._heap}`);
+	logger.debug('<<< Exiting constructor()');
   }
 
   /**
@@ -34,6 +38,8 @@ class KeyPriorityQueue {
    * @returns boolean
    */
   isEmpty() {
+	logger.debug('>>> Entering isEmpty()');
+	logger.debug('<<< Exiting isEmpty()');
     return this._heap.length === 0
   }
 
@@ -43,9 +49,11 @@ class KeyPriorityQueue {
    * @param {number} priority
    */
   push(key, priority) {
+	logger.debug(`>>> Entering push(key=${key},priority=${priority})`);
     this._heap.push(key)
     this.priorities.set(key, priority)
     this._shiftUp(this._heap.length - 1)
+	logger.debug(`<<< Exiting push(key=${key},priority=${priority})`);
   }
 
   /**
@@ -53,10 +61,13 @@ class KeyPriorityQueue {
    * @returns the key of the element with least priority
    */
   pop() {
+	logger.debug('>>> Entering pop()');
     this._swap(0, this._heap.length - 1)
     const key = this._heap.pop()
     this.priorities.delete(key)
     this._shiftDown(0)
+	logger.warn(`pop(): key → ${key}`);
+	logger.debug('<<< Exiting pop()');
     return key
   }
 
@@ -66,6 +77,8 @@ class KeyPriorityQueue {
    * @returns boolean
    */
   contains(key) {
+	logger.debug(`>>> Entering contains(key=${key})`);
+	logger.debug(`<<< Exiting contains(key=${key})`);
     return this.priorities.has(key)
   }
 
@@ -76,9 +89,11 @@ class KeyPriorityQueue {
    * @param {number} priority new priority of the element
    */
   update(key, priority) {
+	logger.debug(`>>> Entering update(key=${key},priority=${priority})`);
     const currPos = this._heap.indexOf(key)
     // if the key does not exist yet, add it
     if (currPos === -1) return this.push(key, priority)
+	logger.debug(`<<< Exiting update(key=${key},priority=${priority})`);
     // else update priority
     this.priorities.set(key, priority)
     const parentPos = getParentPosition(currPos)
@@ -88,6 +103,10 @@ class KeyPriorityQueue {
     const child1Priority = this._getPriorityOrInfinite(child1Pos)
     const child2Priority = this._getPriorityOrInfinite(child2Pos)
 
+	logger.debug(`update(key=${key},priority=${priority}): currPos → ${currPos}`);
+	logger.debug(`update(key=${key},priority=${priority}): parentPos → ${parentPos}`);
+	logger.debug(`update(key=${key},priority=${priority}): currPriority → ${currPriority}`);
+	logger.debug(`update(key=${key},priority=${priority}): parentPriority → ${parentPriority}`);
     if (parentPos >= 0 && parentPriority > currPriority) {
       this._shiftUp(currPos)
     } else if (child1Priority < currPriority || child2Priority < currPriority) {
@@ -96,19 +115,25 @@ class KeyPriorityQueue {
   }
 
   _getPriorityOrInfinite(position) {
+	logger.debug(`>>> Entering _getPriorityOrInfinite(position=${position})`);
     // Helper function, returns priority of the node, or Infinite if no node corresponds to this position
     if (position >= 0 && position < this._heap.length)
       return this.priorities.get(this._heap[position])
     else return Infinity
+	logger.debug(`<<< Exiting _getPriorityOrInfinite(position=${position})`);
   }
 
   _shiftUp(position) {
+	logger.debug(`>>> Entering _shiftUp(position=${position})`);
     // Helper function to shift up a node to proper position (equivalent to bubbleUp)
     let currPos = position
     let parentPos = getParentPosition(currPos)
     let currPriority = this._getPriorityOrInfinite(currPos)
     let parentPriority = this._getPriorityOrInfinite(parentPos)
 
+	logger.debug(`_shiftUp(position=${position}): parentPos → ${parentPos}`);
+	logger.debug(`_shiftUp(position=${position}): currPriority → ${currPriority}`);
+	logger.debug(`_shiftUp(position=${position}): parentPriority → ${parentPriority}`);
     while (parentPos >= 0 && parentPriority > currPriority) {
       this._swap(currPos, parentPos)
       currPos = parentPos
@@ -116,9 +141,11 @@ class KeyPriorityQueue {
       currPriority = this._getPriorityOrInfinite(currPos)
       parentPriority = this._getPriorityOrInfinite(parentPos)
     }
+	logger.debug(`<<< Exiting _shiftUp(position=${position})`);
   }
 
   _shiftDown(position) {
+	logger.debug(`>>> Entering _shiftDown(position=${position})`);
     // Helper function to shift down a node to proper position (equivalent to bubbleDown)
     let currPos = position
     let [child1Pos, child2Pos] = getChildrenPositions(currPos)
@@ -126,6 +153,8 @@ class KeyPriorityQueue {
     let child2Priority = this._getPriorityOrInfinite(child2Pos)
     let currPriority = this._getPriorityOrInfinite(currPos)
 
+	logger.debug(`_shiftDown(position=${position}): child1Priority → ${child1Priority}`);
+	logger.debug(`_shiftDown(position=${position}): child2Priority → ${child2Priority}`);
     if (currPriority === Infinity) {
       return
     }
@@ -143,14 +172,17 @@ class KeyPriorityQueue {
       child2Priority = this._getPriorityOrInfinite(child2Pos)
       currPriority = this._getPriorityOrInfinite(currPos)
     }
+	logger.debug(`<<< Exiting _shiftDown(position=${position})`);
   }
 
   _swap(position1, position2) {
+	logger.debug(`>>> Entering _swap(position1=${position1},position2=${position2})`);
     // Helper function to swap 2 nodes
     ;[this._heap[position1], this._heap[position2]] = [
       this._heap[position2],
       this._heap[position1]
     ]
+	logger.debug(`<<< Exiting _swap(position1=${position1},position2=${position2})`);
   }
 }
 

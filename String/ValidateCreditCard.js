@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * Validate a given credit card number
  *

@@ -1,3 +1,4 @@
+const logger = console;
 // Implementing KMP Search Algorithm to search all the instances of pattern in
 // given text
 // Reference Book: Introduction to Algorithms, CLRS
@@ -5,8 +6,10 @@
 // Explanation: https://www.topcoder.com/community/competitive-programming/tutorials/introduction-to-string-searching-algorithms/
 
 const computeLPS = (pattern) => {
+logger.debug(`>>> Entering computeLPS(pattern=${pattern})`);
   const lps = Array(pattern.length)
   lps[0] = 0
+logger.debug(`computeLPS(pattern=${pattern}): lps → ${lps}`);
   for (let i = 1; i < pattern.length; i++) {
     let matched = lps[i - 1]
     while (matched > 0 && pattern[i] !== pattern[matched]) {
@@ -17,6 +20,7 @@ const computeLPS = (pattern) => {
     }
     lps[i] = matched
   }
+logger.debug(`<<< Exiting computeLPS(pattern=${pattern})`);
   return lps
 }
 
@@ -26,6 +30,7 @@ const computeLPS = (pattern) => {
  * @param {*} pattern the string to find
  */
 const KMPSearch = (text, pattern) => {
+logger.debug(`>>> Entering KMPSearch(text=${text},pattern=${pattern})`);
   if (!pattern || !text) {
     return [] // no results
   }
@@ -34,6 +39,8 @@ const KMPSearch = (text, pattern) => {
   //          which is also proper suffix of it
   const lps = computeLPS(pattern)
   const result = []
+logger.debug(`KMPSearch(text=${text},pattern=${pattern}): lps → ${lps}`);
+logger.debug(`KMPSearch(text=${text},pattern=${pattern}): result → ${result}`);
 
   let matched = 0
   for (let i = 0; i < text.length; i++) {
@@ -49,6 +56,7 @@ const KMPSearch = (text, pattern) => {
     }
   }
 
+logger.debug(`<<< Exiting KMPSearch(text=${text},pattern=${pattern})`);
   return result
 }
 

@@ -1,3 +1,4 @@
+const logger = console;
 /*
     Quicksort is the most popular sorting algorithm and there have
     lots of different implementations but the "recursive" or "Partition in place"
@@ -22,6 +23,7 @@
  * @param {number} high higher index for partition.
  */
 const quickSort = (inputList, low, high) => {
+logger.debug(`>>> Entering quickSort(inputList=${inputList},low=${low},high=${high})`);
   if (!Array.isArray(inputList)) {
     throw new TypeError('Please input a valid list or array.')
   }
@@ -32,6 +34,7 @@ const quickSort = (inputList, low, high) => {
     quickSort(inputList, low, pIndex - 1)
     quickSort(inputList, pIndex + 1, high)
   }
+logger.debug(`<<< Exiting quickSort(inputList=${inputList},low=${low},high=${high})`);
   return inputList
 }
 
@@ -43,6 +46,7 @@ const quickSort = (inputList, low, high) => {
  * @returns {number} `pIndex` pivot index value.
  */
 const partition = (partitionList, low, high) => {
+logger.debug(`>>> Entering partition(partitionList=${partitionList},low=${low},high=${high})`);
   const pivot = partitionList[high]
   let pIndex = low
   for (let index = low; index <= high - 1; index++) {
@@ -59,6 +63,7 @@ const partition = (partitionList, low, high) => {
     partitionList[high],
     partitionList[pIndex]
   ]
+logger.debug(`<<< Exiting partition(partitionList=${partitionList},low=${low},high=${high})`);
   return pIndex
 }
 

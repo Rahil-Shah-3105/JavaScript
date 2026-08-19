@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * [NumberOfLocalMaximumPoints](https://www.geeksforgeeks.org/find-indices-of-all-local-maxima-and-local-minima-in-an-array/) is an algorithm to find relative bigger numbers compared to their neighbors
  *
@@ -12,6 +13,7 @@
 
 // check if returned index is a local maxima
 const IsMaximumPoint = (array, index) => {
+logger.debug(`>>> Entering IsMaximumPoint(array=${array},index=${index})`);
   // handle array bounds
   // array start
   if (index === 0) {
@@ -21,11 +23,13 @@ const IsMaximumPoint = (array, index) => {
     return array[index] > array[index - 1]
     // handle index inside array bounds
   } else {
+logger.debug(`<<< Exiting IsMaximumPoint(array=${array},index=${index})`);
     return array[index] > array[index + 1] && array[index] > array[index - 1]
   }
 }
 
 const CountLocalMaximumPoints = (array, startIndex, endIndex) => {
+logger.debug(`>>> Entering CountLocalMaximumPoints(array=${array},startIndex=${startIndex},endIndex=${endIndex})`);
   // stop check in divide and conquer recursion
   if (startIndex === endIndex) {
     return IsMaximumPoint(array, startIndex) ? 1 : 0
@@ -33,6 +37,8 @@ const CountLocalMaximumPoints = (array, startIndex, endIndex) => {
 
   // handle the two halves
   const middleIndex = parseInt((startIndex + endIndex) / 2)
+logger.debug(`CountLocalMaximumPoints(array=${array},startIndex=${startIndex},endIndex=${endIndex}): middleIndex → ${middleIndex}`);
+logger.debug(`<<< Exiting CountLocalMaximumPoints(array=${array},startIndex=${startIndex},endIndex=${endIndex})`);
   return (
     CountLocalMaximumPoints(array, startIndex, middleIndex) +
     CountLocalMaximumPoints(array, middleIndex + 1, endIndex)

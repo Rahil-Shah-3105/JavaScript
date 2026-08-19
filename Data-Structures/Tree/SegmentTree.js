@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * Segment Tree
  * concept : [Wikipedia](https://en.wikipedia.org/wiki/Segment_tree)
@@ -14,6 +15,7 @@ class SegmentTree {
   size
   tree
   constructor(arr) {
+	logger.debug(`>>> Entering constructor(arr=${arr})`);
     // we define tree like this
     // tree[1] : root node of tree
     // tree[i] : i'th node
@@ -24,11 +26,14 @@ class SegmentTree {
     this.tree = new Array(2 * arr.length)
     this.tree.fill(0)
 
+	logger.debug(`constructor(arr=${arr}): this.size → ${this.size}`);
     this.build(arr)
+	logger.debug(`<<< Exiting constructor(arr=${arr})`);
   }
 
   // function to build the tree
   build(arr) {
+	logger.debug(`>>> Entering build(arr=${arr})`);
     const { size, tree } = this
     // insert leaf nodes in tree
     // leaf nodes will start from index N
@@ -42,10 +47,12 @@ class SegmentTree {
     for (let i = size - 1; i > 0; --i) {
       // current node's value is the sum of left child, right child
       tree[i] = tree[i * 2] + tree[i * 2 + 1]
+	logger.debug(`<<< Exiting build(arr=${arr})`);
     }
   }
 
   update(index, value) {
+	logger.debug(`>>> Entering update(index=${index},value=${value})`);
     const { size, tree } = this
 
     // only update values in the parents of the given node being changed.
@@ -61,11 +68,13 @@ class SegmentTree {
       // i ^ 1 turns (2 * i) to (2 * i + 1)
       // i ^ 1 is second child
       tree[i >> 1] = tree[i] + tree[i ^ 1]
+	logger.debug(`<<< Exiting update(index=${index},value=${value})`);
     }
   }
 
   // interval [L, R) with left index(L) included and right (R) excluded.
   query(left, right) {
+	logger.debug(`>>> Entering query(left=${left},right=${right})`);
     const { size, tree } = this
     // cause R is excluded, increase right for convenient
     right++
@@ -90,6 +99,7 @@ class SegmentTree {
       }
     }
 
+	logger.debug(`<<< Exiting query(left=${left},right=${right})`);
     return res
   }
 }

@@ -1,4 +1,6 @@
+const logger = console;
 export const shuffle = (array) => {
+logger.debug(`>>> Entering shuffle(array=${array})`);
   let maxLength = array.length
   let temp
   let idx
@@ -14,5 +16,6 @@ export const shuffle = (array) => {
     array[idx] = temp
   }
 
+logger.debug(`<<< Exiting shuffle(array=${array})`);
   return array
 }

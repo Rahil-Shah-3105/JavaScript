@@ -1,9 +1,12 @@
+const logger = console;
 /**
  * Check if the Character is letter or not
  * @param {String} str - character to check
  * @return {object} An array with the character or null if isn't a letter
  */
 function isLetter(str) {
+logger.debug(`>>> Entering isLetter(str=${str})`);
+logger.debug(`<<< Exiting isLetter(str=${str})`);
   return str.length === 1 && str.match(/[a-zA-Z]/i)
 }
 
@@ -13,10 +16,12 @@ function isLetter(str) {
  * @return {Boolean} result of the checking
  */
 function isUpperCase(character) {
+logger.debug(`>>> Entering isUpperCase(character=${character})`);
   if (character === character.toUpperCase()) {
     return true
   }
   if (character === character.toLowerCase()) {
+logger.debug(`<<< Exiting isUpperCase(character=${character})`);
     return false
   }
 }
@@ -28,11 +33,14 @@ function isUpperCase(character) {
  * @return {String} result - encrypted string
  */
 function encrypt(message, key) {
+logger.debug(`>>> Entering encrypt(message=${message},key=${key})`);
   let result = ''
 
+logger.debug(`encrypt(message=${message},key=${key}): result → ${result}`);
   for (let i = 0, j = 0; i < message.length; i++) {
     const c = message.charAt(i)
     if (isLetter(c)) {
+	logger.debug(`encrypt(message=${message},key=${key}): c → ${c}`);
       if (isUpperCase(c)) {
         result += String.fromCharCode(
           ((c.charCodeAt(0) + key.toUpperCase().charCodeAt(j) - 2 * 65) % 26) +
@@ -49,6 +57,7 @@ function encrypt(message, key) {
     }
     j = ++j % key.length
   }
+logger.debug(`<<< Exiting encrypt(message=${message},key=${key})`);
   return result
 }
 
@@ -59,11 +68,14 @@ function encrypt(message, key) {
  * @return {String} result - decrypted string
  */
 function decrypt(message, key) {
+logger.debug(`>>> Entering decrypt(message=${message},key=${key})`);
   let result = ''
 
+logger.debug(`decrypt(message=${message},key=${key}): result → ${result}`);
   for (let i = 0, j = 0; i < message.length; i++) {
     const c = message.charAt(i)
     if (isLetter(c)) {
+	logger.debug(`decrypt(message=${message},key=${key}): c → ${c}`);
       if (isUpperCase(c)) {
         result += String.fromCharCode(
           90 - ((25 - (c.charCodeAt(0) - key.toUpperCase().charCodeAt(j))) % 26)
@@ -79,6 +91,7 @@ function decrypt(message, key) {
     }
     j = ++j % key.length
   }
+logger.debug(`<<< Exiting decrypt(message=${message},key=${key})`);
   return result
 }
 

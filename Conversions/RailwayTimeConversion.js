@@ -1,3 +1,4 @@
+const logger = console;
 /*
     The time conversion of normalized time to the railway is a simple algorithm
     because we know that if the time is in 'AM' value it means they only want
@@ -16,6 +17,7 @@
  * @returns {String} Railway time string.
  */
 const RailwayTimeConversion = (timeString) => {
+logger.debug(`>>> Entering RailwayTimeConversion(timeString=${timeString})`);
   // firstly, check that input is a string or not.
   if (typeof timeString !== 'string') {
     throw new TypeError('Argument is not a string.')
@@ -41,6 +43,7 @@ const RailwayTimeConversion = (timeString) => {
       return `${hour}:${minute}:${second}`
     }
   }
+logger.debug(`<<< Exiting RailwayTimeConversion(timeString=${timeString})`);
 }
 
 export { RailwayTimeConversion }

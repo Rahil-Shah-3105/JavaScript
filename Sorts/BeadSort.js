@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * Bead Sort, also known as Gravity sort.
  *
@@ -9,6 +10,7 @@
  * Wikipedia: https://en.wikipedia.org/wiki/Bead_sort
  */
 export function beadSort(sequence) {
+logger.debug(`>>> Entering beadSort(sequence=${sequence})`);
   /* Let's ensure our sequence has only Positive Integers */
   if (sequence.some((integer) => integer < 0)) {
     throw RangeError('Sequence must be a list of Positive integers Only!')
@@ -17,6 +19,7 @@ export function beadSort(sequence) {
   const sequenceLength = sequence.length
   const max = Math.max(...sequence)
 
+logger.debug(`beadSort(sequence=${sequence}): max → ${max}`);
   // Set initial Grid
   const grid = sequence.map((number) => {
     const maxArr = new Array(max)
@@ -25,6 +28,7 @@ export function beadSort(sequence) {
       maxArr[i] = '*'
     }
 
+logger.debug(`beadSort(sequence=${sequence}): grid → ${grid}`);
     return maxArr
   })
 
@@ -49,6 +53,7 @@ export function beadSort(sequence) {
   }
 
   /* Finally, let's turn our Bead rows into their Respective Numbers */
+logger.debug(`<<< Exiting beadSort(sequence=${sequence})`);
   return grid.map((beadArray) => {
     const beadsArray = beadArray.filter((bead) => bead === '*')
     return beadsArray.length
