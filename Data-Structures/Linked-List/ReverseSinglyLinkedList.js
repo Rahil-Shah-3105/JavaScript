@@ -1,15 +1,19 @@
+const logger = console;
 /** A LinkedList based solution to reverse a number
 Problem Statement: Given a number such that each of its digit is stored in a singly linked list. Reverse the linked list and return the head of the linked list Link for the Problem: https://leetcode.com/problems/reverse-linked-list/ */
 class ReverseSinglyLinkedList {
   solution(head) {
+	logger.debug(`>>> Entering solution(head=${head})`);
     let prev = null
     let next = null
     while (head) {
       next = head.next
       head.next = prev
+	logger.debug(`solution(head=${head}): head.next → ${head.next}`);
       prev = head
       head = next
     }
+	logger.debug(`<<< Exiting solution(head=${head})`);
     return prev
   }
 }

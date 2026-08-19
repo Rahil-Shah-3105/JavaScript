@@ -1,3 +1,4 @@
+const logger = console;
 /*
  * Author: Akshay Dubey (https://github.com/itsAkshayDubey)
  * Mobius Function: https://en.wikipedia.org/wiki/M%C3%B6bius_function
@@ -21,6 +22,7 @@
 
 import { PrimeFactors } from './PrimeFactors.js'
 export const mobiusFunction = (number) => {
+logger.debug(`>>> Entering mobiusFunction(number=${number})`);
   const primeFactorsArray = PrimeFactors(number)
   if (number <= 0) {
     throw new Error('Number must be greater than zero.')
@@ -30,4 +32,6 @@ export const mobiusFunction = (number) => {
     : primeFactorsArray.length % 2 === 0
     ? 1
     : -1
+	logger.debug(`<<< Exiting mobiusFunction(number=${number})`);
+	logger.debug(`mobiusFunction(number=${number}): primeFactorsArray → ${primeFactorsArray}`);
 }

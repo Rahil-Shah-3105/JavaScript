@@ -1,3 +1,4 @@
+const logger = console;
 /*
  * Problem Statement: Given a positive number `num`, find it's binary equivalent using recursion
  *
@@ -14,8 +15,10 @@
  */
 
 export const binaryEquivalent = (num) => {
+logger.debug(`>>> Entering binaryEquivalent(num=${num})`);
   if (num === 0 || num === 1) {
     return String(num)
   }
+logger.debug(`<<< Exiting binaryEquivalent(num=${num})`);
   return binaryEquivalent(Math.floor(num / 2)) + String(num % 2)
 }

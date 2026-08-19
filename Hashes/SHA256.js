@@ -1,3 +1,4 @@
+const logger = console;
 //= ===============================================================
 // SHA256.js
 //
@@ -33,10 +34,12 @@ const K = [
  *      pad("10011", 8); // "00010011"
  */
 function pad(str, bits) {
+logger.debug(`>>> Entering pad(str=${str},bits=${bits})`);
   let res = str
   while (res.length % bits !== 0) {
     res = '0' + res
   }
+logger.debug(`<<< Exiting pad(str=${str},bits=${bits})`);
   return res
 }
 
@@ -51,10 +54,12 @@ function pad(str, bits) {
  *      chunkify("this is a test", 2)
  */
 function chunkify(str, size) {
+logger.debug(`>>> Entering chunkify(str=${str},size=${size})`);
   const chunks = []
   for (let i = 0; i < str.length; i += size) {
     chunks.push(str.slice(i, i + size))
   }
+logger.debug(`<<< Exiting chunkify(str=${str},size=${size})`);
   return chunks
 }
 
@@ -69,6 +74,8 @@ function chunkify(str, size) {
  *      rotateRight("1011", 3); // "1101"
  */
 function rotateRight(bits, turns) {
+logger.debug(`>>> Entering rotateRight(bits=${bits},turns=${turns})`);
+logger.debug(`<<< Exiting rotateRight(bits=${bits},turns=${turns})`);
   return bits.substr(bits.length - turns) + bits.substr(0, bits.length - turns)
 }
 
@@ -79,6 +86,7 @@ function rotateRight(bits, turns) {
  * @return {string} - processed message
  */
 function preProcess(message) {
+logger.debug(`>>> Entering preProcess(message=${message})`);
   // convert message to binary representation padded to
   // 8 bits, and add 1
   let m =
@@ -99,7 +107,9 @@ function preProcess(message) {
   let ml = (message.length * CHAR_SIZE).toString(2)
   ml = pad(ml, 8)
   ml = '0'.repeat(64 - ml.length) + ml
+logger.debug(`preProcess(message=${message}): ml → ${ml}`);
 
+logger.debug(`<<< Exiting preProcess(message=${message})`);
   return m + ml
 }
 
@@ -110,6 +120,7 @@ function preProcess(message) {
  * @return {string} - message digest (hash value)
  */
 function SHA256(message) {
+logger.debug(`>>> Entering SHA256(message=${message})`);
   // initial hash variables
   let H0 = 0x6a09e667
   let H1 = 0xbb67ae85
@@ -124,10 +135,14 @@ function SHA256(message) {
   const bits = preProcess(message)
   const chunks = chunkify(bits, 512)
 
+logger.debug(`SHA256(message=${message}): bits → ${bits}`);
+logger.debug(`SHA256(message=${message}): chunks → ${chunks}`);
   chunks.forEach(function (chunk, i) {
+	logger.debug('>>> Entering forEach()');
     // break each chunk into 16 32-bit words
     const words = chunkify(chunk, 32)
 
+	logger.debug(`forEach(): words → ${words}`);
     // extend 16 32-bit words to 80 32-bit words
     for (let i = 16; i < 64; i++) {
       const W1 = words[i - 15]
@@ -140,6 +155,10 @@ function SHA256(message) {
       const S1 = parseInt(R3, 2) ^ parseInt(R4, 2) ^ (parseInt(W2, 2) >>> 10)
       const val =
         parseInt(words[i - 16], 2) + S0 + parseInt(words[i - 7], 2) + S1
+	logger.debug(`forEach(): R1 → ${R1}`);
+	logger.debug(`forEach(): R2 → ${R2}`);
+	logger.debug(`forEach(): R3 → ${R3}`);
+	logger.debug(`forEach(): R4 → ${R4}`);
       words[i] = pad((val >>> 0).toString(2), 32)
     }
 
@@ -153,6 +172,7 @@ function SHA256(message) {
           .map((bitstring) => parseInt(bitstring, 2))
           .reduce((acc, curr) => acc ^ curr, 0) >>> 0
       const CH = ((e & f) ^ (~e & g)) >>> 0
+	logger.debug(`forEach(): CH → ${CH}`);
       const temp1 = (h + S1 + CH + K[i] + parseInt(words[i], 2)) >>> 0
       const S0 =
         [2, 13, 22]
@@ -160,6 +180,7 @@ function SHA256(message) {
           .map((bitstring) => parseInt(bitstring, 2))
           .reduce((acc, curr) => acc ^ curr, 0) >>> 0
       const maj = ((a & b) ^ (a & c) ^ (b & c)) >>> 0
+	logger.debug(`forEach(): maj → ${maj}`);
       const temp2 = (S0 + maj) >>> 0
 
       h = g
@@ -189,6 +210,7 @@ function SHA256(message) {
     .map((e) => pad(e, 8))
     .join('')
 
+logger.debug(`<<< Exiting SHA256(message=${message})`);
   return HH
 }
 

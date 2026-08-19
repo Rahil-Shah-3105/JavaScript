@@ -1,3 +1,4 @@
+const logger = console;
 /*
  * MergeSort implementation.
  *
@@ -16,8 +17,10 @@
  * @return {Array} The merged list.
  */
 export function merge(list1, list2) {
+logger.debug(`>>> Entering merge(list1=${list1},list2=${list2})`);
   const results = []
   let i = 0
+logger.debug(`merge(list1=${list1},list2=${list2}): results → ${results}`);
   let j = 0
 
   while (i < list1.length && j < list2.length) {
@@ -28,6 +31,7 @@ export function merge(list1, list2) {
     }
   }
 
+logger.debug(`<<< Exiting merge(list1=${list1},list2=${list2})`);
   return results.concat(list1.slice(i), list2.slice(j))
 }
 
@@ -38,11 +42,16 @@ export function merge(list1, list2) {
  * @return {Array} The sorted list.
  */
 export function mergeSort(list) {
+logger.debug(`>>> Entering mergeSort(list=${list})`);
   if (list.length < 2) return list
 
   const listHalf = Math.floor(list.length / 2)
   const subList1 = list.slice(0, listHalf)
   const subList2 = list.slice(listHalf, list.length)
 
+logger.debug(`mergeSort(list=${list}): listHalf → ${listHalf}`);
+logger.debug(`mergeSort(list=${list}): subList1 → ${subList1}`);
+logger.debug(`mergeSort(list=${list}): subList2 → ${subList2}`);
+logger.debug(`<<< Exiting mergeSort(list=${list})`);
   return merge(mergeSort(subList1), mergeSort(subList2))
 }

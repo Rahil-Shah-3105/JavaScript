@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * Sliding Window:
  * This pattern involve creating a window which can either be
@@ -21,6 +22,7 @@
  */
 
 function slidingWindow(arr, num) {
+logger.debug(`>>> Entering slidingWindow(arr=${arr},num=${num})`);
   // Edge Case:
   // If the length of the array shorter than the window size (num) return null.
   if (arr.length < num) return null
@@ -41,6 +43,7 @@ function slidingWindow(arr, num) {
     // save the largest number between {maxNum} and {tempNum} in maxSum.
     maxSum = Math.max(maxSum, tempSum)
   }
+logger.debug(`<<< Exiting slidingWindow(arr=${arr},num=${num})`);
   return maxSum
 }
 

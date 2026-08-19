@@ -1,16 +1,22 @@
+const logger = console;
 class Sudoku {
   // Sudoku Class to hold the board and related functions
   constructor(board) {
+	logger.debug(`>>> Entering constructor(board=${board})`);
     this.board = board
+	logger.debug(`constructor(board=${board}): this.board → ${this.board}`);
+	logger.debug(`<<< Exiting constructor(board=${board})`);
   }
 
   findEmptyCell() {
+	logger.debug('>>> Entering findEmptyCell()');
     // Find a empty cell in the board (returns [-1, -1] if all cells are filled)
     for (let i = 0; i < 9; i++) {
       for (let j = 0; j < 9; j++) {
         if (this.board[i][j] === 0) return [i, j]
       }
     }
+	logger.debug('<<< Exiting findEmptyCell()');
     return [-1, -1]
   }
 
@@ -39,6 +45,7 @@ class Sudoku {
   }
 
   solve() {
+	logger.debug('>>> Entering solve()');
     const [y, x] = this.findEmptyCell()
 
     // checking if the board is complete
@@ -53,10 +60,13 @@ class Sudoku {
       }
     }
     // returning false the board cannot be solved using current configuration
+	logger.debug('<<< Exiting solve()');
     return false
   }
 
   getSection(row, [start, end]) {
+	logger.debug(`>>> Entering getSection(row=${row},end=${end})`);
+	logger.debug(`<<< Exiting getSection(row=${row},end=${end})`);
     return this.board[row].slice(start, end)
   }
 

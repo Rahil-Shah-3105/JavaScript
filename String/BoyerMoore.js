@@ -1,3 +1,4 @@
+const logger = console;
 /*
  *
  *
@@ -10,6 +11,7 @@
  *
  **/
 const buildBadMatchTable = (str) => {
+logger.debug(`>>> Entering buildBadMatchTable(str=${str})`);
   const tableObj = {}
   const strLength = str.length
   for (let i = 0; i < strLength - 1; i++) {
@@ -18,12 +20,15 @@ const buildBadMatchTable = (str) => {
   if (tableObj[str[strLength - 1]] === undefined) {
     tableObj[str[strLength - 1]] = strLength
   }
+logger.debug(`<<< Exiting buildBadMatchTable(str=${str})`);
   return tableObj
 }
 
 const boyerMoore = (str, pattern) => {
+logger.debug(`>>> Entering boyerMoore(str=${str},pattern=${pattern})`);
   const badMatchTable = buildBadMatchTable(pattern)
   let offset = 0
+logger.debug(`boyerMoore(str=${str},pattern=${pattern}): badMatchTable → ${badMatchTable}`);
   const patternLastIndex = pattern.length - 1
   const maxOffset = str.length - pattern.length
   // if the offset is bigger than maxOffset, cannot be found
@@ -44,6 +49,7 @@ const boyerMoore = (str, pattern) => {
       offset++
     }
   }
+logger.debug(`<<< Exiting boyerMoore(str=${str},pattern=${pattern})`);
   return -1
 }
 export { boyerMoore }

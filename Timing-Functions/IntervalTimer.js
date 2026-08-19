@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * @author Nandan V
  * Sunday, 26 July 2020 8:33 AM
@@ -13,12 +14,14 @@ class IntervalTimer {
    * @return {IntervalTimer} If exists, the existing object.
    */
   constructor(interval = 10, callBack = () => {}) {
+	logger.debug(`>>> Entering constructor(interval=${interval},callBack=${callBack})`);
     this.prevInterval = 0
     if (this.instance == null) {
       this.interval = interval
       this.callBack = callBack
       this.instance = this
     } else {
+	logger.debug(`<<< Exiting constructor(interval=${interval},callBack=${callBack})`);
       return this.instance
     }
   }
@@ -27,7 +30,9 @@ class IntervalTimer {
    * @description Starts the timer.
    */
   startTimer() {
+	logger.debug('>>> Entering startTimer()');
     this.timer = setInterval(this.callBack, this.interval)
+	logger.debug('<<< Exiting startTimer()');
   }
 
   /**
@@ -35,8 +40,10 @@ class IntervalTimer {
    * @return {number} Elapsed time in milliseconds.
    */
   resetTimer() {
+	logger.debug('>>> Entering resetTimer()');
     clearInterval(this.timer)
     this.callBack = () => {}
+	logger.debug('<<< Exiting resetTimer()');
     return this.getElapsedTime()
   }
 
@@ -44,8 +51,10 @@ class IntervalTimer {
    * @return {number} Elapsed time in milliseconds since reset.
    */
   getElapsedTime(offset = 0) {
+	logger.debug(`>>> Entering getElapsedTime(offset=${offset})`);
     this.timeElapsed = this.timer - this.prevInterval
     this.prevInterval = this.timer
+	logger.debug(`<<< Exiting getElapsedTime(offset=${offset})`);
     return this.timeElapsed - offset
   }
 
@@ -53,6 +62,8 @@ class IntervalTimer {
    * @return {number} Elapsed time since start.
    */
   getRunTime() {
+	logger.debug('>>> Entering getRunTime()');
+	logger.debug('<<< Exiting getRunTime()');
     return this.timer
   }
 }

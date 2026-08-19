@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * Given a color in RGB format, convert it to HSL format.
  *
@@ -18,6 +19,7 @@
 const checkRgbFormat = (colorRgb) => colorRgb.every((c) => c >= 0 && c <= 255)
 
 const rgbToHsl = (colorRgb) => {
+logger.debug(`>>> Entering rgbToHsl(colorRgb=${colorRgb})`);
   if (!checkRgbFormat(colorRgb)) {
     throw new Error('Input is not a valid RGB color.')
   }
@@ -28,6 +30,9 @@ const rgbToHsl = (colorRgb) => {
   let green = Math.round(colorRgb[1])
   let blue = Math.round(colorRgb[2])
 
+logger.debug(`rgbToHsl(colorRgb=${colorRgb}): red → ${red}`);
+logger.debug(`rgbToHsl(colorRgb=${colorRgb}): green → ${green}`);
+logger.debug(`rgbToHsl(colorRgb=${colorRgb}): blue → ${blue}`);
   const limit = 255
 
   colorHsl[0] = red / limit
@@ -37,6 +42,8 @@ const rgbToHsl = (colorRgb) => {
   let minValue = Math.min(...colorHsl)
   let maxValue = Math.max(...colorHsl)
 
+logger.debug(`rgbToHsl(colorRgb=${colorRgb}): minValue → ${minValue}`);
+logger.debug(`rgbToHsl(colorRgb=${colorRgb}): maxValue → ${maxValue}`);
   let channel = 0
 
   if (maxValue === colorHsl[1]) {
@@ -46,6 +53,7 @@ const rgbToHsl = (colorRgb) => {
   }
 
   let luminance = (minValue + maxValue) / 2
+logger.debug(`rgbToHsl(colorRgb=${colorRgb}): luminance → ${luminance}`);
 
   let saturation = 0
 
@@ -79,6 +87,7 @@ const rgbToHsl = (colorRgb) => {
   colorHsl[1] = Math.round(saturation * 100)
   colorHsl[2] = Math.round(luminance * 100)
 
+logger.debug(`<<< Exiting rgbToHsl(colorRgb=${colorRgb})`);
   return colorHsl
 }
 

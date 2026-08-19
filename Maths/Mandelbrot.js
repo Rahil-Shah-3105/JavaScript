@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * Method to generate the image of the Mandelbrot set.
  *
@@ -81,6 +82,8 @@ export function getRGBData(
  * @return {object} The RGB-value corresponding to the distance.
  */
 function blackAndWhiteColorMap(distance) {
+logger.debug(`>>> Entering blackAndWhiteColorMap(distance=${distance})`);
+logger.debug(`<<< Exiting blackAndWhiteColorMap(distance=${distance})`);
   return distance >= 1 ? [0, 0, 0] : [255, 255, 255]
 }
 
@@ -93,6 +96,7 @@ function blackAndWhiteColorMap(distance) {
  * @return {object} The RGB-value corresponding to the distance.
  */
 function colorCodedColorMap(distance) {
+logger.debug(`>>> Entering colorCodedColorMap(distance=${distance})`);
   if (distance >= 1) {
     return [0, 0, 0]
   } else {
@@ -102,17 +106,21 @@ function colorCodedColorMap(distance) {
     const saturation = 1
     const val = 255
     const hi = Math.floor(hue / 60) % 6
+	logger.debug(`colorCodedColorMap(distance=${distance}): hi → ${hi}`);
     const f = hue / 60 - Math.floor(hue / 60)
 
+	logger.debug(`colorCodedColorMap(distance=${distance}): f → ${f}`);
     const v = val
     const p = 0
     const q = Math.floor(val * (1 - f * saturation))
     const t = Math.floor(val * (1 - (1 - f) * saturation))
 
+	logger.debug(`colorCodedColorMap(distance=${distance}): q → ${q}`);
     switch (hi) {
       case 0:
         return [v, t, p]
       case 1:
+		logger.debug(`colorCodedColorMap(distance=${distance}): t → ${t}`);
         return [q, v, p]
       case 2:
         return [p, v, t]
@@ -124,6 +132,7 @@ function colorCodedColorMap(distance) {
         return [v, p, q]
     }
   }
+logger.debug(`<<< Exiting colorCodedColorMap(distance=${distance})`);
 }
 
 /**
@@ -138,6 +147,7 @@ function colorCodedColorMap(distance) {
  * @return {number} The relative distance as the ratio of steps taken to maxStep.
  */
 function getDistance(figureX, figureY, maxStep) {
+logger.debug(`>>> Entering getDistance(figureX=${figureX},figureY=${figureY},maxStep=${maxStep})`);
   let a = figureX
   let b = figureY
   let currentStep = 0
@@ -153,5 +163,6 @@ function getDistance(figureX, figureY, maxStep) {
       break
     }
   }
+logger.debug(`<<< Exiting getDistance(figureX=${figureX},figureY=${figureY},maxStep=${maxStep})`);
   return currentStep / (maxStep - 1)
 }

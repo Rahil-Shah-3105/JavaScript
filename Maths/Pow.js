@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * @function powLinear
  * @description - The powLinear function is a power function with Linear O(n) complexity
@@ -8,18 +9,21 @@
  * @example - powLinear(3, 3) => 27 --> 3 * 3 * 3
  */
 const powLinear = (base, exponent) => {
+logger.debug(`>>> Entering powLinear(base=${base},exponent=${exponent})`);
   if (exponent < 0) {
     base = 1 / base
     exponent = -exponent
   }
 
   let result = 1
+logger.debug(`powLinear(base=${base},exponent=${exponent}): result → ${result}`);
 
   while (exponent--) {
     // Break the execution while the exponent will 0
     result *= base
   }
 
+logger.debug(`<<< Exiting powLinear(base=${base},exponent=${exponent})`);
   return result
 }
 
@@ -33,6 +37,7 @@ const powLinear = (base, exponent) => {
  * @example - powFaster(3, 3) => 27 --> 3 * 3 * 3
  */
 const powFaster = (base, exponent) => {
+logger.debug(`>>> Entering powFaster(base=${base},exponent=${exponent})`);
   if (exponent < 2) {
     // explanation below - 1
     return base && ([1, base][exponent] || powFaster(1 / base, -exponent))
@@ -43,6 +48,7 @@ const powFaster = (base, exponent) => {
     return base * powFaster(base * base, exponent >> 1) // explanation below - 2
   }
 
+logger.debug(`<<< Exiting powFaster(base=${base},exponent=${exponent})`);
   return powFaster(base * base, exponent / 2)
 }
 

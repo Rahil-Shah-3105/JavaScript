@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * @function generateSubSets
  * @param {Array} inputArray
@@ -7,6 +8,7 @@
 
 // The time complexity of this algorithm is BigO(2^n) where n is the length of array
 function generateSubSets(inputArray) {
+logger.debug(`>>> Entering generateSubSets(inputArray=${inputArray})`);
   if (!Array.isArray(inputArray)) {
     throw new Error('Provided input is not an array')
   }
@@ -28,6 +30,7 @@ function generateSubSets(inputArray) {
     }
     subSets.push(subSet)
   }
+logger.debug(`<<< Exiting generateSubSets(inputArray=${inputArray})`);
   return subSets
 }
 

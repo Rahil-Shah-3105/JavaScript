@@ -1,3 +1,4 @@
+const logger = console;
 /*
     Problem statement and Explanation : https://en.wikipedia.org/wiki/Coprime_integers
 
@@ -19,10 +20,12 @@ import { GetEuclidGCD } from './GetEuclidGCD'
  * @returns return correspond boolean value, if both number are co-prime return `true`, else return `false`.
  */
 const CoPrimeCheck = (firstNumber, secondNumber) => {
+logger.debug(`>>> Entering CoPrimeCheck(firstNumber=${firstNumber},secondNumber=${secondNumber})`);
   /*
     This is the most efficient algorithm for checking co-primes
     if the GCD of both the numbers is 1 that means they are co-primes.
     */
+logger.debug(`<<< Exiting CoPrimeCheck(firstNumber=${firstNumber},secondNumber=${secondNumber})`);
   return GetEuclidGCD(firstNumber, secondNumber) === 1
 }
 

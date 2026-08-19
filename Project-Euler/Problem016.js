@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * Problem 16 - Power digit sum
  *
@@ -16,6 +17,7 @@
  * @returns {number}
  */
 const powerDigitSum = function (n = 2, pow = 1000) {
+logger.debug(`>>> Entering powerDigitSum(n=${n},pow=${pow})`);
   // The idea is to consider each digit (d*10^exp) separately, right-to-left.
   // digits = [units, tens, ...]
 
@@ -37,6 +39,7 @@ const powerDigitSum = function (n = 2, pow = 1000) {
 
   // (digits are reversed but we only want the sum so it doesn't matter)
 
+logger.debug(`<<< Exiting powerDigitSum(n=${n},pow=${pow})`);
   return digits.reduce((prev, current) => prev + current, 0)
 }
 

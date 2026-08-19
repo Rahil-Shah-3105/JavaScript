@@ -1,3 +1,4 @@
+const logger = console;
 /*
  * Author: IcarusTheFly (https://github.com/IcarusTheFly)
  * Minesweeper explanation can be found in: https://en.wikipedia.org/wiki/Minesweeper_(video_game)
@@ -16,6 +17,7 @@
  */
 
 export const minesweeper = (matrix) => {
+logger.debug(`>>> Entering minesweeper(matrix=${matrix})`);
   const arrResult = []
   for (let x = 0; x < matrix.length; x++) {
     const arrLine = []
@@ -34,5 +36,6 @@ export const minesweeper = (matrix) => {
     }
     arrResult.push(arrLine)
   }
+logger.debug(`<<< Exiting minesweeper(matrix=${matrix})`);
   return arrResult
 }

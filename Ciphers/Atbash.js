@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * @function Atbash - Decrypt a Atbash cipher
  * @description - The Atbash cipher is a particular type of monoalphabetic cipher formed by taking the alphabet and mapping it to its reverse, so that the first letter becomes the last letter, the second letter becomes the second to last letter, and so on.
@@ -6,10 +7,12 @@
  * @see - [wiki](https://en.wikipedia.org/wiki/Atbash)
  */
 const Atbash = (str) => {
+logger.debug(`>>> Entering Atbash(str=${str})`);
   if (typeof str !== 'string') {
     throw new TypeError('Argument should be string')
   }
 
+logger.debug(`<<< Exiting Atbash(str=${str})`);
   return str.replace(/[a-z]/gi, (char) => {
     const charCode = char.charCodeAt()
 

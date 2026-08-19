@@ -1,3 +1,4 @@
+const logger = console;
 /*
  *
  * @file
@@ -22,6 +23,7 @@
  */
 
 function integralEvaluation(N, a, b, func) {
+logger.debug(`>>> Entering integralEvaluation(N=${N},a=${a},b=${b},func=${func})`);
   // Check if N is an even integer
   let isNEven = true
   if (N % 2 !== 0) isNEven = false
@@ -44,6 +46,7 @@ function integralEvaluation(N, a, b, func) {
 
   // Calculate the step h
   const h = (b - a) / N
+logger.debug(`integralEvaluation(N=${N},a=${a},b=${b},func=${func}): h → ${h}`);
 
   // Find interpolation points
   let xi = a // initialize xi = x0
@@ -62,6 +65,7 @@ function integralEvaluation(N, a, b, func) {
 
   // Calculate the integral
   let result = h / 3
+logger.debug(`integralEvaluation(N=${N},a=${a},b=${b},func=${func}): result → ${result}`);
   temp = pointsArray.reduce((acc, currValue) => acc + currValue, 0)
 
   result *= temp
@@ -72,6 +76,7 @@ function integralEvaluation(N, a, b, func) {
     )
   }
 
+logger.debug(`<<< Exiting integralEvaluation(N=${N},a=${a},b=${b},func=${func})`);
   return result
 }
 

@@ -1,3 +1,4 @@
+const logger = console;
 // checkFlatCase method checks if the given string is in flatcase or not. Flatcase is a convention
 // where all letters are in lowercase, and there are no spaces between words.
 // thisvariable is an example of flatcase. In camelCase it would be thisVariable, snake_case this_variable and so on.
@@ -10,12 +11,14 @@
  * @returns {boolean} return true if the string is in flatcase, else return false.
  */
 const checkFlatCase = (varname) => {
+logger.debug(`>>> Entering checkFlatCase(varname=${varname})`);
   // firstly, check that input is a string or not.
   if (typeof varname !== 'string') {
     throw new TypeError('Argument is not a string.')
   }
 
   const pat = /^[a-z]*$/
+logger.debug(`<<< Exiting checkFlatCase(varname=${varname})`);
   return pat.test(varname)
 }
 

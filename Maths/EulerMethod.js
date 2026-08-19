@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * In mathematics and computational science, the Euler method (also called forward Euler method) is a first-order
  * numerical procedure for solving ordinary differential equations (ODEs) with a given initial value. It is the most
@@ -9,7 +10,9 @@
  * @see https://www.geeksforgeeks.org/euler-method-solving-differential-equation/
  */
 export function eulerStep(xCurrent, stepSize, yCurrent, differentialEquation) {
+logger.debug(`>>> Entering eulerStep(xCurrent=${xCurrent},stepSize=${stepSize},yCurrent=${yCurrent},differentialEquation=${differentialEquation})`);
   // calculates the next y-value based on the current value of x, y and the stepSize
+logger.debug(`<<< Exiting eulerStep(xCurrent=${xCurrent},stepSize=${stepSize},yCurrent=${yCurrent},differentialEquation=${differentialEquation})`);
   return yCurrent + stepSize * differentialEquation(xCurrent, yCurrent)
 }
 

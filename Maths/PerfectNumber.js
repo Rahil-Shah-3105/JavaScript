@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * Author: dephraiim
  * License: GPL-3.0 or later
@@ -16,14 +17,19 @@
  */
 
 const factorsExcludingNumber = (n) => {
+logger.debug(`>>> Entering factorsExcludingNumber(n=${n})`);
+logger.debug(`<<< Exiting factorsExcludingNumber(n=${n})`);
   return [...Array(n).keys()].filter((num) => n % num === 0)
 }
 
 const perfectNumber = (n) => {
+logger.debug(`>>> Entering perfectNumber(n=${n})`);
   const factorSum = factorsExcludingNumber(n).reduce((num, initialValue) => {
+logger.debug(`perfectNumber(n=${n}): factorSum → ${factorSum}`);
     return num + initialValue
   }, 0)
 
+logger.debug(`<<< Exiting perfectNumber(n=${n})`);
   return factorSum === n
 }
 
