@@ -1,12 +1,15 @@
+const logger = console;
 /*
  * String Search
  */
 
 function makeTable(str) {
+logger.debug(`>>> Entering makeTable(str=${str})`);
   // create a table of size equal to the length of `str`
   // table[i] will store the prefix of the longest prefix of the substring str[0..i]
   const table = new Array(str.length)
   let maxPrefix = 0
+logger.debug(`makeTable(str=${str}): table → ${table}`);
   // the longest prefix of the substring str[0] has length
   table[0] = 0
 
@@ -31,14 +34,17 @@ function makeTable(str) {
     }
     table[i] = maxPrefix
   }
+logger.debug(`<<< Exiting makeTable(str=${str})`);
   return table
 }
 
 // Find all the words that matches in a given string `str`
 export function stringSearch(str, word) {
+logger.debug(`>>> Entering stringSearch(str=${str},word=${word})`);
   // find the prefix table in O(n)
   const prefixes = makeTable(word)
   const matches = []
+logger.debug(`stringSearch(str=${str},word=${word}): prefixes → ${prefixes}`);
 
   // `j` is the index in `P`
   let j = 0
@@ -77,6 +83,7 @@ export function stringSearch(str, word) {
     }
   }
 
+logger.debug(`<<< Exiting stringSearch(str=${str},word=${word})`);
   return matches
 }
 

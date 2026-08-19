@@ -1,6 +1,8 @@
+const logger = console;
 // Wikipedia: https://en.wikipedia.org/wiki/Reverse_Polish_notation
 
 const calcRPN = (expression) => {
+logger.debug(`>>> Entering calcRPN(expression=${expression})`);
   const operators = {
     '+': (a, b) => a + b,
     '-': (a, b) => a - b,
@@ -27,6 +29,7 @@ const calcRPN = (expression) => {
     }
   })
 
+logger.debug(`<<< Exiting calcRPN(expression=${expression})`);
   return stack.pop()
 }
 

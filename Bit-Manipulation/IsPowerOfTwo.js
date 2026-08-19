@@ -1,3 +1,4 @@
+const logger = console;
 /*
     author: @Aayushi-Mittal
 
@@ -23,5 +24,7 @@
 */
 
 export const IsPowerOfTwo = (n) => {
+logger.debug(`>>> Entering IsPowerOfTwo(n=${n})`);
+logger.debug(`<<< Exiting IsPowerOfTwo(n=${n})`);
   return n > 0 && (n & (n - 1)) === 0
 }

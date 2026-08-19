@@ -1,3 +1,4 @@
+const logger = console;
 /*
     author: redfly1
     More about HCF:
@@ -5,6 +6,7 @@
  */
 
 const findHCF = (x, y) => {
+logger.debug(`>>> Entering findHCF(x=${x},y=${y})`);
   // If the input numbers are less than 1 return an error message.
   if (x < 1 || y < 1) {
     return 'Please enter values greater than zero.'
@@ -25,6 +27,7 @@ const findHCF = (x, y) => {
   }
 
   // When the while loop finishes the minimum of x and y is the HCF.
+logger.debug(`<<< Exiting findHCF(x=${x},y=${y})`);
   return Math.min(x, y)
 }
 

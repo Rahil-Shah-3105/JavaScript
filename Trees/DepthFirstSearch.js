@@ -1,3 +1,4 @@
+const logger = console;
 /*
  * Author: Surendra Kumar
  * DFS Algorithm implementation in JavaScript
@@ -6,6 +7,7 @@
 
 // traverses a give tree from specified root's value
 function traverseDFS(tree, rootValue) {
+logger.debug(`>>> Entering traverseDFS(tree=${tree},rootValue=${rootValue})`);
   const stack = []
   const res = []
   stack.push(searchDFS(tree, rootValue))
@@ -15,16 +17,19 @@ function traverseDFS(tree, rootValue) {
     const curr = stack.pop()
     res.push(curr.value)
     if (curr.left) {
+	logger.debug(`traverseDFS(tree=${tree},rootValue=${rootValue}): curr → ${curr}`);
       stack.push(tree[curr.left])
     }
     if (curr.right) {
       stack.push(tree[curr.right])
     }
   }
+logger.debug(`<<< Exiting traverseDFS(tree=${tree},rootValue=${rootValue})`);
   return res.reverse()
 }
 
 function searchDFS(tree, value) {
+logger.debug(`>>> Entering searchDFS(tree=${tree},value=${value})`);
   const stack = []
   stack.push(tree[0])
   while (stack.length !== 0) {
@@ -41,6 +46,7 @@ function searchDFS(tree, value) {
       }
     }
   }
+logger.debug(`<<< Exiting searchDFS(tree=${tree},value=${value})`);
   return null
 }
 

@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * @function BinarySearch
  * @description Search the integer inside the sorted integers array using Binary Search Algorithm.
@@ -10,11 +11,13 @@
  */
 
 const binarySearch = (arr, searchValue, low = 0, high = arr.length - 1) => {
+logger.debug(`>>> Entering binarySearch(arr=${arr},searchValue=${searchValue},low=${low},high=${high})`);
   // base case
   if (high < low || arr.length === 0) return -1
 
   const mid = low + Math.floor((high - low) / 2)
 
+logger.debug(`binarySearch(arr=${arr},searchValue=${searchValue},low=${low},high=${high}): mid → ${mid}`);
   // If the element is present at the middle
   if (arr[mid] === searchValue) {
     return mid
@@ -27,6 +30,7 @@ const binarySearch = (arr, searchValue, low = 0, high = arr.length - 1) => {
   }
 
   // Else the element can only be present in right subarray
+logger.debug(`<<< Exiting binarySearch(arr=${arr},searchValue=${searchValue},low=${low},high=${high})`);
   return binarySearch(arr, searchValue, mid + 1, high)
 }
 

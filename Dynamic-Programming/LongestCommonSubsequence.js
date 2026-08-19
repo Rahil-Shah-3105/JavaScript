@@ -1,3 +1,4 @@
+const logger = console;
 /*
 Problem:
 Given two sequences, find the length of longest subsequence present in both of them.
@@ -28,11 +29,14 @@ References:
  * @returns {number} Length of the longest common subsequence
  */
 function longestCommonSubsequence(str1, str2) {
+logger.debug(`>>> Entering longestCommonSubsequence(str1=${str1},str2=${str2})`);
   const memo = new Array(str1.length + 1)
     .fill(null)
     .map(() => new Array(str2.length + 1).fill(null))
 
+	logger.debug(`longestCommonSubsequence(str1=${str1},str2=${str2}): memo → ${memo}`);
   function recursive(end1, end2) {
+	logger.debug(`>>> Entering recursive(end1=${end1},end2=${end2})`);
     if (end1 === -1 || end2 === -1) {
       return 0
     }
@@ -49,10 +53,12 @@ function longestCommonSubsequence(str1, str2) {
         recursive(end1 - 1, end2),
         recursive(end1, end2 - 1)
       )
+	logger.debug(`<<< Exiting recursive(end1=${end1},end2=${end2})`);
       return memo[end1][end2]
     }
   }
 
+logger.debug(`<<< Exiting longestCommonSubsequence(str1=${str1},str2=${str2})`);
   return recursive(str1.length - 1, str2.length - 1)
 }
 

@@ -1,15 +1,22 @@
+const logger = console;
 class GraphUnweightedUndirected {
   // Unweighted Undirected Graph class
   constructor() {
+	logger.debug('>>> Entering constructor()');
     this.connections = {}
+	logger.debug(`constructor(): this.connections → ${this.connections}`);
+	logger.debug('<<< Exiting constructor()');
   }
 
   addNode(node) {
+	logger.debug(`>>> Entering addNode(node=${node})`);
     // Function to add a node to the graph (connection represented by set)
     this.connections[node] = new Set()
+	logger.debug(`<<< Exiting addNode(node=${node})`);
   }
 
   addEdge(node1, node2) {
+	logger.debug(`>>> Entering addEdge(node1=${node1},node2=${node2})`);
     // Function to add an edge (adds the node too if they are not present in the graph)
     if (!(node1 in this.connections)) {
       this.addNode(node1)
@@ -19,9 +26,11 @@ class GraphUnweightedUndirected {
     }
     this.connections[node1].add(node2)
     this.connections[node2].add(node1)
+	logger.debug(`<<< Exiting addEdge(node1=${node1},node2=${node2})`);
   }
 
   DFSRecursive(node, value, visited = new Set()) {
+	logger.debug(`>>> Entering DFSRecursive(node=${node},value=${value},visited=${visited})`);
     // DFS Function to search if a node with the given value is present in the graph
     // checking if the searching node has been found
     if (node === value) {
@@ -37,6 +46,7 @@ class GraphUnweightedUndirected {
         }
       }
     }
+	logger.debug(`<<< Exiting DFSRecursive(node=${node},value=${value},visited=${visited})`);
     return false
   }
 }

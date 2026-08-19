@@ -1,3 +1,4 @@
+const logger = console;
 /*
  * Juggler Sequence: https://en.wikipedia.org/wiki/Juggler_sequence
  * function jugglerSequence
@@ -11,6 +12,7 @@
  */
 
 function jugglerSequence(n) {
+logger.debug(`>>> Entering jugglerSequence(n=${n})`);
   const sequence = []
   sequence.push(n)
   // Calculate terms until last term is not 1
@@ -18,6 +20,7 @@ function jugglerSequence(n) {
     n = Math.floor(n ** ((n % 2) + 0.5))
     sequence.push(n)
   }
+logger.debug(`<<< Exiting jugglerSequence(n=${n})`);
   return sequence
 }
 

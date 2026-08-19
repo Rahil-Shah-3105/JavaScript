@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * @function maxConsecutiveOnesIII
  * @description Given a binary array nums and an integer k, return the maximum number of consecutive 1's in the array if you can flip at most k 0's.
@@ -7,6 +8,7 @@
  * @see [Leetcode link](https://leetcode.com/problems/max-consecutive-ones-iii/)
  */
 export const maxConsecutiveOnesIII = (nums, k) => {
+logger.debug(`>>> Entering maxConsecutiveOnesIII(nums=${nums},k=${k})`);
   if (!nums.length) return 0
 
   let result = 0
@@ -16,6 +18,7 @@ export const maxConsecutiveOnesIII = (nums, k) => {
     fastPointer < nums.length;
     fastPointer++
   ) {
+	logger.debug(`maxConsecutiveOnesIII(nums=${nums},k=${k}): result → ${result}`);
     if (nums[fastPointer] === 0) {
       k--
     }
@@ -28,5 +31,6 @@ export const maxConsecutiveOnesIII = (nums, k) => {
     }
     result = Math.max(result, fastPointer - slowPointer + 1)
   }
+logger.debug(`<<< Exiting maxConsecutiveOnesIII(nums=${nums},k=${k})`);
   return result
 }

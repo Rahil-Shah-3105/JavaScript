@@ -1,3 +1,4 @@
+const logger = console;
 /*
     Decimal To Roman
 
@@ -39,6 +40,7 @@ const orders = [
 ]
 
 function decimalToRoman(num) {
+logger.debug(`>>> Entering decimalToRoman(num=${num})`);
   let roman = ''
   for (const symbol of orders) {
     while (num >= values[symbol]) {
@@ -46,6 +48,8 @@ function decimalToRoman(num) {
       num -= values[symbol]
     }
   }
+logger.debug(`decimalToRoman(num=${num}): roman → ${roman}`);
+logger.debug(`<<< Exiting decimalToRoman(num=${num})`);
   return roman
 }
 

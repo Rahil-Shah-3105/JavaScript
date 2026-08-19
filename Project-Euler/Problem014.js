@@ -1,3 +1,4 @@
+const logger = console;
 /*
 Longest Collatz sequence
 
@@ -17,6 +18,7 @@ NOTE: Once the chain starts the terms are allowed to go above one million.
 */
 
 const getCollatzSequenceLength = (num, seqLength) => {
+logger.debug(`>>> Entering getCollatzSequenceLength(num=${num},seqLength=${seqLength})`);
   if (num === 1) {
     return seqLength
   } else {
@@ -27,11 +29,13 @@ const getCollatzSequenceLength = (num, seqLength) => {
       newElement = 3 * num + 1
     }
     seqLength++
+logger.debug(`<<< Exiting getCollatzSequenceLength(num=${num},seqLength=${seqLength})`);
     return getCollatzSequenceLength(newElement, seqLength)
   }
 }
 
 export const findLongestCollatzSequence = (limit = 1000000) => {
+logger.debug(`>>> Entering findLongestCollatzSequence(limit=${limit})`);
   let startingPointForLargestSequence = 1
   let largestSequenceLength = 1
   for (let i = 2; i < limit; i++) {
@@ -41,5 +45,6 @@ export const findLongestCollatzSequence = (limit = 1000000) => {
       largestSequenceLength = currentSequenceLength
     }
   }
+logger.debug(`<<< Exiting findLongestCollatzSequence(limit=${limit})`);
   return startingPointForLargestSequence
 }

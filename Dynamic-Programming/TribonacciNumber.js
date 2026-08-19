@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * @function Tribonacci
  * @description Tribonacci is the sum of previous three tribonacci numbers.
@@ -6,14 +7,17 @@
  * @see [Tribonacci_Numbers](https://www.geeksforgeeks.org/tribonacci-numbers/)
  */
 const tribonacci = (n) => {
+logger.debug(`>>> Entering tribonacci(n=${n})`);
   // creating array to store previous tribonacci numbers
   const dp = new Array(n + 1)
   dp[0] = 0
+logger.debug(`tribonacci(n=${n}): dp → ${dp}`);
   dp[1] = 1
   dp[2] = 1
   for (let i = 3; i <= n; i++) {
     dp[i] = dp[i - 1] + dp[i - 2] + dp[i - 3]
   }
+logger.debug(`<<< Exiting tribonacci(n=${n})`);
   return dp[n]
 }
 

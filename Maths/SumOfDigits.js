@@ -1,3 +1,4 @@
+const logger = console;
 /*
   Gets the sum of the digits of the numbers inputted
   sumOfDigits(10) will return 1 + 0 = 1
@@ -10,12 +11,14 @@
   This array is reduced to a number using the method <Array>.reduce
 */
 function sumOfDigitsUsingString(number) {
+logger.debug(`>>> Entering sumOfDigitsUsingString(number=${number})`);
   if (number < 0) number = -number
 
   return +number
     .toString()
     .split('')
     .reduce((a, b) => +a + +b)
+	logger.debug(`<<< Exiting sumOfDigitsUsingString(number=${number})`);
 }
 
 /*
@@ -23,6 +26,7 @@ function sumOfDigitsUsingString(number) {
   The sum of all the digits is returned (The res variable acts as a collector, taking the remainders on each iteration)
 */
 function sumOfDigitsUsingLoop(number) {
+logger.debug(`>>> Entering sumOfDigitsUsingLoop(number=${number})`);
   if (number < 0) number = -number
   let res = 0
 
@@ -31,6 +35,7 @@ function sumOfDigitsUsingLoop(number) {
     number = Math.floor(number / 10)
   }
 
+logger.debug(`<<< Exiting sumOfDigitsUsingLoop(number=${number})`);
   return res
 }
 
@@ -38,10 +43,12 @@ function sumOfDigitsUsingLoop(number) {
   We use the fact that the sum of the digits of a one digit number is itself, and check whether the number is less than 10. If so, then we return the number. Else, we take the number divided by 10 and floored, and recursively call the function, while adding it with the number mod 10
 */
 function sumOfDigitsUsingRecursion(number) {
+logger.debug(`>>> Entering sumOfDigitsUsingRecursion(number=${number})`);
   if (number < 0) number = -number
 
   if (number < 10) return number
 
+logger.debug(`<<< Exiting sumOfDigitsUsingRecursion(number=${number})`);
   return (number % 10) + sumOfDigitsUsingRecursion(Math.floor(number / 10))
 }
 

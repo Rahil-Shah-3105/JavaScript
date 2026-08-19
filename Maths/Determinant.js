@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * Given a square matrix, find its determinant using Laplace Expansion.
  * Time Complexity : O(n!)
@@ -20,6 +21,7 @@
  */
 
 const subMatrix = (matrix, i, j) => {
+logger.debug(`>>> Entering subMatrix(matrix=${matrix},i=${i},j=${j})`);
   let matrixSize = matrix[0].length
   if (matrixSize === 1) {
     return matrix[0][0]
@@ -37,20 +39,24 @@ const subMatrix = (matrix, i, j) => {
       subMatrix[subMatrix.length - 1].push(matrix[x][y])
     }
   }
+logger.debug(`<<< Exiting subMatrix(matrix=${matrix},i=${i},j=${j})`);
   return subMatrix
 }
 
 const isMatrixSquare = (matrix) => {
+logger.debug(`>>> Entering isMatrixSquare(matrix=${matrix})`);
   let numRows = matrix.length
   for (let i = 0; i < numRows; i++) {
     if (numRows !== matrix[i].length) {
       return false
     }
   }
+logger.debug(`<<< Exiting isMatrixSquare(matrix=${matrix})`);
   return true
 }
 
 const determinant = (matrix) => {
+logger.debug(`>>> Entering determinant(matrix=${matrix})`);
   if (
     !Array.isArray(matrix) ||
     matrix.length === 0 ||
@@ -66,6 +72,7 @@ const determinant = (matrix) => {
     return matrix[0][0]
   }
   let result = 0
+logger.debug(`determinant(matrix=${matrix}): result → ${result}`);
   let setIndex = 0
   for (let i = 0; i < numCols; i++) {
     result +=
@@ -73,6 +80,7 @@ const determinant = (matrix) => {
       matrix[setIndex][i] *
       determinant(subMatrix(matrix, setIndex, i))
   }
+logger.debug(`<<< Exiting determinant(matrix=${matrix})`);
   return result
 }
 export { determinant }

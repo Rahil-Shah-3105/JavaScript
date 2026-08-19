@@ -1,16 +1,23 @@
+const logger = console;
 import { KeyPriorityQueue } from '../Data-Structures/Heap/KeyPriorityQueue'
 class GraphWeightedUndirectedAdjacencyList {
   // Weighted Undirected Graph class
   constructor() {
+	logger.debug('>>> Entering constructor()');
     this.connections = {}
+	logger.debug(`constructor(): this.connections → ${this.connections}`);
+	logger.debug('<<< Exiting constructor()');
   }
 
   addNode(node) {
+	logger.debug(`>>> Entering addNode(node=${node})`);
     // Function to add a node to the graph (connection represented by set)
     this.connections[node] = {}
+	logger.debug(`<<< Exiting addNode(node=${node})`);
   }
 
   addEdge(node1, node2, weight) {
+	logger.debug(`>>> Entering addEdge(node1=${node1},node2=${node2},weight=${weight})`);
     // Function to add an edge (adds the node too if they are not present in the graph)
     if (!(node1 in this.connections)) {
       this.addNode(node1)
@@ -20,15 +27,18 @@ class GraphWeightedUndirectedAdjacencyList {
     }
     this.connections[node1][node2] = weight
     this.connections[node2][node1] = weight
+	logger.debug(`<<< Exiting addEdge(node1=${node1},node2=${node2},weight=${weight})`);
   }
 
   PrimMST(start) {
+	logger.debug(`>>> Entering PrimMST(start=${start})`);
     // Prim's Algorithm to generate a Minimum Spanning Tree (MST) of a graph
     // Details: https://en.wikipedia.org/wiki/Prim%27s_algorithm
     const distance = {}
     const parent = {}
     const priorityQueue = new KeyPriorityQueue()
     // Initialization
+	logger.debug(`PrimMST(start=${start}): priorityQueue → ${priorityQueue}`);
     for (const node in this.connections) {
       distance[node] = node === start.toString() ? 0 : Infinity
       parent[node] = null
@@ -38,6 +48,7 @@ class GraphWeightedUndirectedAdjacencyList {
     while (!priorityQueue.isEmpty()) {
       const node = priorityQueue.pop()
       Object.keys(this.connections[node]).forEach((neighbour) => {
+	logger.debug(`PrimMST(start=${start}): node → ${node}`);
         if (
           priorityQueue.contains(neighbour) &&
           distance[node] + this.connections[node][neighbour] <
@@ -58,6 +69,8 @@ class GraphWeightedUndirectedAdjacencyList {
         graph.addEdge(node, parent[node], this.connections[node][parent[node]])
       }
     })
+	logger.debug(`PrimMST(start=${start}): graph → ${graph}`);
+	logger.debug(`<<< Exiting PrimMST(start=${start})`);
     return graph
   }
 }

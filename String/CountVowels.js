@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * @function countVowels
  * @description Given a string of words or phrases, count the number of vowels.
@@ -8,13 +9,16 @@
  */
 
 const countVowels = (str) => {
+logger.debug(`>>> Entering countVowels(str=${str})`);
   if (typeof str !== 'string') {
     throw new TypeError('Input should be a string')
   }
 
   const vowelRegex = /[aeiou]/gi
   const vowelsArray = str.match(vowelRegex) || []
+logger.debug(`countVowels(str=${str}): vowelsArray → ${vowelsArray}`);
 
+logger.debug(`<<< Exiting countVowels(str=${str})`);
   return vowelsArray.length
 }
 

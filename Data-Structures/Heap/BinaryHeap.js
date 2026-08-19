@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * BinaryHeap class represents a binary heap data structure that can be configured as a Min Heap or Max Heap.
  *
@@ -12,17 +13,21 @@ class BinaryHeap {
    * @param {Function} comparatorFunction - The comparator function used to determine the order of elements (e.g., minHeapComparator or maxHeapComparator).
    */
   constructor(comparatorFunction) {
+	logger.debug(`>>> Entering constructor(comparatorFunction=${comparatorFunction})`);
     /**
      * The heap array that stores elements.
      * @member {Array}
      */
     this.heap = []
 
+	logger.debug(`constructor(comparatorFunction=${comparatorFunction}): this.heap → ${this.heap}`);
     /**
      * The comparator function used for ordering elements in the heap.
      * @member {Function}
      */
     this.comparator = comparatorFunction
+	logger.debug(`constructor(comparatorFunction=${comparatorFunction}): this.comparator → ${this.comparator}`);
+	logger.debug(`<<< Exiting constructor(comparatorFunction=${comparatorFunction})`);
   }
 
   /**
@@ -30,8 +35,10 @@ class BinaryHeap {
    * @param {*} value - The value to be inserted into the heap.
    */
   insert(value) {
+	logger.debug(`>>> Entering insert(value=${value})`);
     this.heap.push(value)
     this.#bubbleUp(this.heap.length - 1)
+	logger.debug(`<<< Exiting insert(value=${value})`);
   }
 
   /**
@@ -39,6 +46,8 @@ class BinaryHeap {
    * @returns {number} - The number of elements in the heap.
    */
   size() {
+	logger.debug('>>> Entering size()');
+	logger.debug('<<< Exiting size()');
     return this.heap.length
   }
 
@@ -47,6 +56,8 @@ class BinaryHeap {
    * @returns {boolean} - True if the heap is empty, false otherwise.
    */
   empty() {
+	logger.debug('>>> Entering empty()');
+	logger.debug('<<< Exiting empty()');
     return this.size() === 0
   }
 
@@ -56,16 +67,19 @@ class BinaryHeap {
    * @private
    */
   #bubbleUp(currIdx) {
+	logger.debug(`>>> Entering bubbleUp(currIdx=${currIdx})`);
     let parentIdx = Math.floor((currIdx - 1) / 2)
 
     while (
       currIdx > 0 &&
       this.comparator(this.heap[currIdx], this.heap[parentIdx])
     ) {
+	logger.debug(`bubbleUp(currIdx=${currIdx}): parentIdx → ${parentIdx}`);
       this.#swap(currIdx, parentIdx)
       currIdx = parentIdx
       parentIdx = Math.floor((currIdx - 1) / 2)
     }
+	logger.debug(`<<< Exiting bubbleUp(currIdx=${currIdx})`);
   }
 
   /**
@@ -74,10 +88,12 @@ class BinaryHeap {
    * @private
    */
   #sinkDown(currIdx) {
+	logger.debug(`>>> Entering sinkDown(currIdx=${currIdx})`);
     let childOneIdx = currIdx * 2 + 1
 
     while (childOneIdx < this.size()) {
       const childTwoIdx = childOneIdx + 1 < this.size() ? childOneIdx + 1 : -1
+	logger.debug(`sinkDown(currIdx=${currIdx}): childTwoIdx → ${childTwoIdx}`);
       const swapIdx =
         childTwoIdx !== -1 &&
         this.comparator(this.heap[childTwoIdx], this.heap[childOneIdx])
@@ -89,6 +105,7 @@ class BinaryHeap {
         currIdx = swapIdx
         childOneIdx = currIdx * 2 + 1
       } else {
+		logger.debug(`<<< Exiting sinkDown(currIdx=${currIdx})`);
         return
       }
     }
@@ -99,6 +116,8 @@ class BinaryHeap {
    * @returns {*} - The top element of the heap.
    */
   peek() {
+	logger.debug('>>> Entering peek()');
+	logger.debug('<<< Exiting peek()');
     return this.heap[0]
   }
 
@@ -107,14 +126,18 @@ class BinaryHeap {
    * @returns {*} - The top element of the heap.
    */
   extractTop() {
+	logger.debug('>>> Entering extractTop()');
     const top = this.peek()
     const last = this.heap.pop()
 
+	logger.debug(`extractTop(): top → ${top}`);
+	logger.debug(`extractTop(): last → ${last}`);
     if (!this.empty()) {
       this.heap[0] = last
       this.#sinkDown(0)
     }
 
+	logger.debug('<<< Exiting extractTop()');
     return top
   }
 
@@ -125,10 +148,12 @@ class BinaryHeap {
    * @private
    */
   #swap(index1, index2) {
+	logger.debug(`>>> Entering swap(index1=${index1},index2=${index2})`);
     ;[this.heap[index1], this.heap[index2]] = [
       this.heap[index2],
       this.heap[index1]
     ]
+	logger.debug(`<<< Exiting swap(index1=${index1},index2=${index2})`);
   }
 }
 

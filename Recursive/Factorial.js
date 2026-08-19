@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * @function Factorial
  * @description function to find factorial using recursion.
@@ -9,6 +10,7 @@
  */
 
 const factorial = (n) => {
+logger.debug(`>>> Entering factorial(n=${n})`);
   if (!Number.isInteger(n) || n < 0) {
     throw new RangeError('Input should be a non-negative whole number')
   }
@@ -17,6 +19,7 @@ const factorial = (n) => {
     return 1
   }
 
+logger.debug(`<<< Exiting factorial(n=${n})`);
   return n * factorial(n - 1)
 }
 

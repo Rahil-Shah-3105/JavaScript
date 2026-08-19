@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * This class represents a circular cone and can calculate its volume and surface area
  * https://en.wikipedia.org/wiki/Cone
@@ -7,8 +8,12 @@
  */
 export default class Cone {
   constructor(baseRadius, height) {
+	logger.debug(`>>> Entering constructor(baseRadius=${baseRadius},height=${height})`);
     this.baseRadius = baseRadius
     this.height = height
+	logger.debug(`constructor(baseRadius=${baseRadius},height=${height}): this.height → ${this.height}`);
+	logger.debug(`constructor(baseRadius=${baseRadius},height=${height}): this.baseRadius → ${this.baseRadius}`);
+	logger.debug(`<<< Exiting constructor(baseRadius=${baseRadius},height=${height})`);
   }
 
   baseArea = () => {

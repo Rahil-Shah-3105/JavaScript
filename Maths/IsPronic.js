@@ -1,3 +1,4 @@
+const logger = console;
 /*
  * Author: Akshay Dubey (https://github.com/itsAkshayDubey)
  * Pronic Number: https://en.wikipedia.org/wiki/Pronic_number
@@ -19,9 +20,12 @@
  */
 
 export const isPronic = (number) => {
+logger.debug(`>>> Entering isPronic(number=${number})`);
   if (number === 0) {
     return true
   }
   const sqrt = Math.sqrt(number)
+logger.debug(`isPronic(number=${number}): sqrt → ${sqrt}`);
+logger.debug(`<<< Exiting isPronic(number=${number})`);
   return sqrt % 1 !== 0 && Math.ceil(sqrt) * Math.floor(sqrt) === number
 }

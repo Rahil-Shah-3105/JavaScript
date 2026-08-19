@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * @details Calculates the number of permutations and combinations.
  * @external_link (Permutation And Combinations)[https://www.geeksforgeeks.org/permutation-and-combination/]
@@ -11,6 +12,7 @@
             NaN: if negative number is provided.
  */
 const factorial = (n) => {
+logger.debug(`>>> Entering factorial(n=${n})`);
   if (n >= 0) {
     if (n === 0) {
       return 1
@@ -18,6 +20,7 @@ const factorial = (n) => {
       return n * factorial(n - 1)
     }
   } else {
+logger.debug(`<<< Exiting factorial(n=${n})`);
     return NaN
   }
 }
@@ -31,6 +34,8 @@ const factorial = (n) => {
             NaN: if negative number is provided.
  */
 const permutation = (n, r) => {
+logger.debug(`>>> Entering permutation(n=${n},r=${r})`);
+logger.debug(`<<< Exiting permutation(n=${n},r=${r})`);
   return factorial(n) / factorial(n - r)
 }
 
@@ -43,6 +48,8 @@ const permutation = (n, r) => {
             NaN: if negative number is provided.
  */
 const combination = (n, r) => {
+logger.debug(`>>> Entering combination(n=${n},r=${r})`);
+logger.debug(`<<< Exiting combination(n=${n},r=${r})`);
   return factorial(n) / (factorial(r) * factorial(n - r))
 }
 

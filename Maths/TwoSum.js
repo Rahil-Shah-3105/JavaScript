@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * Given an array of integers, find two numbers that add up to a specific target.
  *
@@ -13,12 +14,15 @@
  */
 
 const TwoSum = (nums, target) => {
+logger.debug(`>>> Entering TwoSum(nums=${nums},target=${target})`);
   const numIndicesMap = new Map()
   for (let i = 0; i < nums.length; i++) {
     const complement = target - nums[i]
     if (numIndicesMap.has(complement)) return [numIndicesMap.get(complement), i]
     numIndicesMap.set(nums[i], i)
   }
+logger.debug(`TwoSum(nums=${nums},target=${target}): numIndicesMap → ${numIndicesMap}`);
+logger.debug(`<<< Exiting TwoSum(nums=${nums},target=${target})`);
   return []
 }
 export { TwoSum }

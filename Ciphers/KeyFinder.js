@@ -1,9 +1,11 @@
+const logger = console;
 /**
  * Find and retrieve the encryption key automatically.
  * @param {string} str - The input encrypted string.
  * @returns {number} - The encryption key found, or 0 if not found.
  */
 function keyFinder(str) {
+logger.debug(`>>> Entering keyFinder(str=${str})`);
   // str is used to get the input of encrypted string
   const wordBank = [
     'I ',
@@ -32,7 +34,9 @@ function keyFinder(str) {
     'Be '
   ]
   const inStr = str.toString() // convert the input to String
+logger.debug(`keyFinder(str=${str}): inStr → ${inStr}`);
   let outStr = '' // store the output value
+logger.debug(`keyFinder(str=${str}): outStr → ${outStr}`);
   let outStrElement = '' // temporary store the word inside the outStr, it is used for comparison
   for (let k = 0; k < 26; k++) {
     // try the number of key shifted, the sum of character from a-z or A-Z is 26
@@ -55,6 +59,8 @@ function keyFinder(str) {
       } // end for (let i=0; i < wordBank.length; i++)
     }
   }
+logger.debug(`keyFinder(str=${str}): outStrElement → ${outStrElement}`);
+logger.debug(`<<< Exiting keyFinder(str=${str})`);
   return 0 // return 0 if found nothing
 }
 
@@ -65,10 +71,12 @@ function keyFinder(str) {
  * @returns {string} - The decrypted string.
  */
 function caesarCipherEncodeAndDecodeEngine(inStr, numShifted) {
+logger.debug(`>>> Entering caesarCipherEncodeAndDecodeEngine(inStr=${inStr},numShifted=${numShifted})`);
   const shiftNum = numShifted
   let charCode = 0
   let shiftedCharCode = 0
   let result = 0
+logger.debug(`caesarCipherEncodeAndDecodeEngine(inStr=${inStr},numShifted=${numShifted}): result → ${result}`);
 
   return inStr
     .split('')
@@ -147,6 +155,7 @@ function caesarCipherEncodeAndDecodeEngine(inStr, numShifted) {
       return String.fromCharCode(parseInt(result))
     })
     .join('')
+	logger.debug(`<<< Exiting caesarCipherEncodeAndDecodeEngine(inStr=${inStr},numShifted=${numShifted})`);
 }
 
 export { keyFinder }

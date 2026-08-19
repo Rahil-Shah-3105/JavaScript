@@ -1,4 +1,6 @@
+const logger = console;
 const LinearSieve = (n) => {
+logger.debug(`>>> Entering LinearSieve(n=${n})`);
   /*
    * Calculates prime numbers till a number n
    * Time Complexity: O(n)
@@ -8,6 +10,7 @@ const LinearSieve = (n) => {
    */
   const isnPrime = new Array(n + 1)
   isnPrime[0] = isnPrime[1] = true
+logger.debug(`LinearSieve(n=${n}): isnPrime → ${isnPrime}`);
   const primes = []
   for (let i = 2; i <= n; i++) {
     if (!isnPrime[i]) primes.push(i)
@@ -18,6 +21,7 @@ const LinearSieve = (n) => {
       if (i % p === 0) break
     }
   }
+logger.debug(`<<< Exiting LinearSieve(n=${n})`);
   return primes
 }
 

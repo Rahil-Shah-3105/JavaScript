@@ -1,3 +1,4 @@
+const logger = console;
 /**
  *  @name The-Sliding-Window Algorithm is primarily used for the problems dealing with linear data structures like Arrays, Lists, Strings etc.
  *  These problems can easily be solved using Brute Force techniques which result in quadratic or exponential time complexity.
@@ -11,6 +12,7 @@
  * @param {String} s - The input string
  */
 export function LongestSubstringWithoutRepeatingCharacters(s) {
+logger.debug(`>>> Entering LongestSubstringWithoutRepeatingCharacters(s=${s})`);
   let maxLength = 0
   let start = 0
   let end = 0
@@ -29,6 +31,7 @@ export function LongestSubstringWithoutRepeatingCharacters(s) {
       start++
     }
   }
+logger.debug(`<<< Exiting LongestSubstringWithoutRepeatingCharacters(s=${s})`);
   return maxLength
 }
 

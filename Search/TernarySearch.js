@@ -1,3 +1,4 @@
+const logger = console;
 /* Ternary search is similar to binary search but it divides the sorted array
  * into three parts and determines which part the key lies in. The array will
  * be divided into three intervals by using two middle points, mid1 and mid2.
@@ -12,11 +13,14 @@
  */
 
 function ternarySearchRecursive(arr, key, low = 0, high = arr.length - 1) {
+logger.debug(`>>> Entering ternarySearchRecursive(arr=${arr},key=${key},low=${low},high=${high})`);
   if (high >= low) {
     // find the mid1 and mid2
     const mid1 = Math.floor(low + (high - low) / 3)
     const mid2 = Math.floor(high - (high - low) / 3)
 
+	logger.debug(`ternarySearchRecursive(arr=${arr},key=${key},low=${low},high=${high}): mid1 → ${mid1}`);
+	logger.debug(`ternarySearchRecursive(arr=${arr},key=${key},low=${low},high=${high}): mid2 → ${mid2}`);
     // check if key is found at any mid
     if (arr[mid1] === key) {
       // return index of key if found
@@ -43,16 +47,20 @@ function ternarySearchRecursive(arr, key, low = 0, high = arr.length - 1) {
     }
   } else {
     // if low > high => we have searched the whole array without finding the item
+logger.debug(`<<< Exiting ternarySearchRecursive(arr=${arr},key=${key},low=${low},high=${high})`);
     return -1
   }
 }
 
 function ternarySearchIterative(arr, key, low = 0, high = arr.length - 1) {
+logger.debug(`>>> Entering ternarySearchIterative(arr=${arr},key=${key},low=${low},high=${high})`);
   while (high >= low) {
     // find the mid1 and mid2
     const mid1 = Math.floor(low + (high - low) / 3)
     const mid2 = Math.floor(high - (high - low) / 3)
 
+	logger.debug(`ternarySearchIterative(arr=${arr},key=${key},low=${low},high=${high}): mid1 → ${mid1}`);
+	logger.debug(`ternarySearchIterative(arr=${arr},key=${key},low=${low},high=${high}): mid2 → ${mid2}`);
     // check if key is found at any mid
     if (arr[mid1] === key) {
       // return index of key if found
@@ -80,6 +88,7 @@ function ternarySearchIterative(arr, key, low = 0, high = arr.length - 1) {
     }
   }
   // the key was not found
+logger.debug(`<<< Exiting ternarySearchIterative(arr=${arr},key=${key},low=${low},high=${high})`);
   return -1
 }
 

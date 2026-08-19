@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * Generates a Gray code sequence for the given number of bits.
  * @param {number} n - The number of bits in the Gray code sequence.
@@ -23,6 +24,7 @@
  * // grayCodes will be [0, 1, 3, 2, 6, 7, 5, 4] for n=3.
  */
 function generateGrayCodes(n) {
+logger.debug(`>>> Entering generateGrayCodes(n=${n})`);
   if (n <= 0) {
     return [0]
   }

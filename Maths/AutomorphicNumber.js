@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * @function isAutomorphic
  * @author [SilverDragonOfR] (https://github.com/SilverDragonOfR)
@@ -16,6 +17,7 @@
 
 // n is the number to be checked
 export const isAutomorphic = (n) => {
+logger.debug(`>>> Entering isAutomorphic(n=${n})`);
   if (typeof n !== 'number') {
     throw new Error('Type of n must be number')
   }
@@ -36,5 +38,6 @@ export const isAutomorphic = (n) => {
     n_sq = Math.floor(n_sq / 10)
   }
 
+logger.debug(`<<< Exiting isAutomorphic(n=${n})`);
   return true
 }

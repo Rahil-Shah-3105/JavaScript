@@ -1,3 +1,4 @@
+const logger = console;
 /*
  * Author: IcarusTheFly (https://github.com/IcarusTheFly)
  * Catalan Numbers explanation can be found in the following links:
@@ -13,6 +14,7 @@
  */
 
 export const catalanNumbers = (n) => {
+logger.debug(`>>> Entering catalanNumbers(n=${n})`);
   if (n === 0) {
     return [1]
   }
@@ -26,5 +28,6 @@ export const catalanNumbers = (n) => {
     catList.push(newNumber)
   }
 
+logger.debug(`<<< Exiting catalanNumbers(n=${n})`);
   return catList
 }

@@ -1,3 +1,4 @@
+const logger = console;
 /*
                     DateToDay Method
                     ----------------
@@ -26,9 +27,11 @@ const daysNameArr = [
 ]
 
 const DateToDay = (date) => {
+logger.debug(`>>> Entering DateToDay(date=${date})`);
   // firstly, check that input is a string or not.
   const dateStruct = parseDate(date)
   let year = dateStruct.year
+logger.debug(`DateToDay(date=${date}): dateStruct → ${dateStruct}`);
   let month = dateStruct.month
   let day = dateStruct.day
 
@@ -45,6 +48,7 @@ const DateToDay = (date) => {
   const yearDigits = year % 100
   const century = Math.floor(year / 100)
 
+logger.debug(`DateToDay(date=${date}): century → ${century}`);
   /*
   In mathematics, remainders of divisions are usually defined to always be positive;
   As an example, -2 mod 7 = 5.
@@ -57,6 +61,7 @@ const DateToDay = (date) => {
   The following example shows the issue with modulo division:
   Without the adaption, the formula yields `weekDay = -6` for the date 2/3/2014;
   With the adaption, it yields the positive result `weekDay = 7 - 6 = 1` (Sunday), which is what we need to index the array
+logger.error(`Exception in DateToDay(date=${date}): (no error binding)`);
   */
   const weekDay =
     (day +
@@ -66,6 +71,7 @@ const DateToDay = (date) => {
       Math.floor(century / 4) +
       5 * century) %
     7
+logger.debug(`<<< Exiting DateToDay(date=${date})`);
   return daysNameArr[weekDay] // name of the weekday
 }
 

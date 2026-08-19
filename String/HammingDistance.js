@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * Hamming Distance: https://en.wikipedia.org/wiki/Hamming_distance
  *
@@ -16,6 +17,7 @@
  */
 
 export const hammingDistance = (a, b) => {
+logger.debug(`>>> Entering hammingDistance(a=${a},b=${b})`);
   if (a.length !== b.length) {
     throw new Error('Strings must be of the same length')
   }
@@ -28,5 +30,6 @@ export const hammingDistance = (a, b) => {
     }
   }
 
+logger.debug(`<<< Exiting hammingDistance(a=${a},b=${b})`);
   return distance
 }

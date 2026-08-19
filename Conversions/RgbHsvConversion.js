@@ -1,3 +1,4 @@
+const logger = console;
 /*
  * The RGB color model is an additive color model in which red, green, and blue light are added
  * together in various ways to reproduce a broad array of colors. The name of the model comes from
@@ -17,6 +18,7 @@
  * @return The tuple of RGB-components.
  */
 export function hsvToRgb(hue, saturation, value) {
+logger.debug(`>>> Entering hsvToRgb(hue=${hue},saturation=${saturation},value=${value})`);
   if (hue < 0 || hue > 360) {
     throw new Error('hue should be between 0 and 360')
   }
@@ -33,7 +35,9 @@ export function hsvToRgb(hue, saturation, value) {
   const hueSection = hue / 60
   const secondLargestComponent = chroma * (1 - Math.abs((hueSection % 2) - 1))
   const matchValue = value - chroma
+logger.debug(`hsvToRgb(hue=${hue},saturation=${saturation},value=${value}): secondLargestComponent → ${secondLargestComponent}`);
 
+logger.debug(`<<< Exiting hsvToRgb(hue=${hue},saturation=${saturation},value=${value})`);
   return getRgbBySection(hueSection, chroma, matchValue, secondLargestComponent)
 }
 
@@ -46,6 +50,7 @@ export function hsvToRgb(hue, saturation, value) {
  * @return The tuple of HSV-components.
  */
 export function rgbToHsv(red, green, blue) {
+logger.debug(`>>> Entering rgbToHsv(red=${red},green=${green},blue=${blue})`);
   if (red < 0 || red > 255) {
     throw new Error('red should be between 0 and 255')
   }
@@ -64,6 +69,8 @@ export function rgbToHsv(red, green, blue) {
   const value = Math.max(Math.max(dRed, dGreen), dBlue)
   const chroma = value - Math.min(Math.min(dRed, dGreen), dBlue)
   const saturation = value === 0 ? 0 : chroma / value
+logger.debug(`rgbToHsv(red=${red},green=${green},blue=${blue}): value → ${value}`);
+logger.debug(`rgbToHsv(red=${red},green=${green},blue=${blue}): chroma → ${chroma}`);
   let hue
 
   if (chroma === 0) {
@@ -78,14 +85,20 @@ export function rgbToHsv(red, green, blue) {
 
   hue = (hue + 360) % 360
 
+logger.debug(`<<< Exiting rgbToHsv(red=${red},green=${green},blue=${blue})`);
   return [hue, saturation, value]
 }
 
 export function approximatelyEqualHsv(hsv1, hsv2) {
+logger.debug(`>>> Entering approximatelyEqualHsv(hsv1=${hsv1},hsv2=${hsv2})`);
   const bHue = Math.abs(hsv1[0] - hsv2[0]) < 0.2
   const bSaturation = Math.abs(hsv1[1] - hsv2[1]) < 0.002
+logger.debug(`approximatelyEqualHsv(hsv1=${hsv1},hsv2=${hsv2}): bHue → ${bHue}`);
+logger.debug(`approximatelyEqualHsv(hsv1=${hsv1},hsv2=${hsv2}): bSaturation → ${bSaturation}`);
   const bValue = Math.abs(hsv1[2] - hsv2[2]) < 0.002
 
+logger.debug(`approximatelyEqualHsv(hsv1=${hsv1},hsv2=${hsv2}): bValue → ${bValue}`);
+logger.debug(`<<< Exiting approximatelyEqualHsv(hsv1=${hsv1},hsv2=${hsv2})`);
   return bHue && bSaturation && bValue
 }
 
@@ -96,6 +109,8 @@ function getRgbBySection(
   secondLargestComponent
 ) {
   function convertToInt(input) {
+	logger.debug(`>>> Entering convertToInt(input=${input})`);
+	logger.debug(`<<< Exiting convertToInt(input=${input})`);
     return Math.round(255 * input)
   }
 

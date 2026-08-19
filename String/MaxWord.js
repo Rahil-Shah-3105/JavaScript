@@ -1,3 +1,4 @@
+const logger = console;
 // Given a sentence, return the most occurring word
 
 /**
@@ -8,6 +9,7 @@
  *     -  maxWord('lala lili lala'); // lala
  */
 const maxWord = (sentence = '') => {
+logger.debug(`>>> Entering maxWord(sentence=${sentence})`);
   if (typeof sentence !== 'string') {
     throw new TypeError('the param should be string')
   }
@@ -18,6 +20,7 @@ const maxWord = (sentence = '') => {
 
   const words = sentence.split(' ')
   if (words.length < 2) {
+logger.debug(`maxWord(sentence=${sentence}): words → ${words}`);
     return words[0]
   }
 
@@ -38,6 +41,8 @@ const maxWord = (sentence = '') => {
     { word: '', count: 0 }
   )
 
+logger.debug(`maxWord(sentence=${sentence}): max → ${max}`);
+logger.debug(`<<< Exiting maxWord(sentence=${sentence})`);
   return max.word
 }
 

@@ -1,9 +1,12 @@
+const logger = console;
 const pad = (num, padlen) => {
+logger.debug(`>>> Entering pad(num=${num},padlen=${padlen})`);
   const pad = new Array(1 + padlen).join(0)
   return (pad + num).slice(-pad.length)
 }
 
 const hexLookup = (bin) => {
+logger.debug(`>>> Entering hexLookup(bin=${bin})`);
   let binary = bin
   if (binary.length < 4) {
     binary = pad(binary, 4)
@@ -40,10 +43,12 @@ const hexLookup = (bin) => {
     case '1110':
       return 'E'
     case '1111':
+logger.debug(`<<< Exiting hexLookup(bin=${bin})`);
       return 'F'
   }
 }
 const binaryToHex = (binaryString) => {
+logger.debug(`>>> Entering binaryToHex(binaryString=${binaryString})`);
   /*
   Function for converting Binary to Hex
 
@@ -61,6 +66,7 @@ const binaryToHex = (binaryString) => {
   */
 
   let result = ''
+logger.debug(`binaryToHex(binaryString=${binaryString}): result → ${result}`);
   binaryString = binaryString.split('')
   for (let i = binaryString.length - 1; i >= 0; i = i - 4) {
     if (i >= 3) {
@@ -69,6 +75,7 @@ const binaryToHex = (binaryString) => {
       result += hexLookup(binaryString.slice(0, i + 1).join(''))
     }
   }
+logger.debug(`<<< Exiting binaryToHex(binaryString=${binaryString})`);
   return result.split('').reverse().join('')
 }
 

@@ -1,3 +1,4 @@
+const logger = console;
 /**
  *
  * @file
@@ -13,9 +14,13 @@
  */
 
 const findRoot = (a, b, func, numberOfIterations) => {
+logger.debug(`>>> Entering findRoot(a=${a},b=${b},func=${func},numberOfIterations=${numberOfIterations})`);
   // Check if a given  real value belongs to the function's domain
+logger.debug(`>>> Entering f(x=${x})`);
   const belongsToDomain = (x, f) => {
     const res = f(x)
+	logger.debug(`>>> Entering belongsToDomain(x=${x},f=${f})`);
+	logger.debug(`<<< Exiting belongsToDomain(x=${x},f=${f})`);
     return !Number.isNaN(res)
   }
   if (!belongsToDomain(a, func) || !belongsToDomain(b, func))
@@ -23,6 +28,8 @@ const findRoot = (a, b, func, numberOfIterations) => {
 
   // Bolzano theorem
   const hasRoot = (a, b, func) => {
+	logger.debug(`>>> Entering hasRoot(a=${a},b=${b},func=${func})`);
+	logger.debug(`<<< Exiting hasRoot(a=${a},b=${b},func=${func})`);
     return func(a) * func(b) <= 0
   }
   if (hasRoot(a, b, func) === false) {
@@ -33,6 +40,7 @@ const findRoot = (a, b, func, numberOfIterations) => {
 
   // Declare m
   const m = (a + b) / 2
+logger.debug(`findRoot(a=${a},b=${b},func=${func},numberOfIterations=${numberOfIterations}): m → ${m}`);
 
   // Recursion terminal condition
   if (numberOfIterations === 0) {
@@ -44,10 +52,15 @@ const findRoot = (a, b, func, numberOfIterations) => {
   const prod1 = fm * func(a)
   const prod2 = fm * func(b)
 
+logger.debug(`findRoot(a=${a},b=${b},func=${func},numberOfIterations=${numberOfIterations}): fm → ${fm}`);
+logger.debug(`findRoot(a=${a},b=${b},func=${func},numberOfIterations=${numberOfIterations}): prod1 → ${prod1}`);
+logger.debug(`findRoot(a=${a},b=${b},func=${func},numberOfIterations=${numberOfIterations}): prod2 → ${prod2}`);
   // Depending on the sign of the products above, decide which position will m fill (a's or b's)
   if (prod2 <= 0) return findRoot(m, b, func, --numberOfIterations)
 
+logger.debug(`<<< Exiting findRoot(a=${a},b=${b},func=${func},numberOfIterations=${numberOfIterations})`);
   return findRoot(a, m, func, --numberOfIterations)
 }
 
+logger.debug(`<<< Exiting f(x=${x})`);
 export { findRoot }

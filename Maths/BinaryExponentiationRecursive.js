@@ -1,3 +1,4 @@
+const logger = console;
 /*
   Modified from:
     https://github.com/TheAlgorithms/Python/blob/master/maths/binary_exponentiation.py
@@ -7,6 +8,7 @@
 */
 
 export const binaryExponentiation = (a, n) => {
+logger.debug(`>>> Entering binaryExponentiation(a=${a},n=${n})`);
   // input: a: int, n: int
   // returns: a^n: int
   if (n === 0) {
@@ -15,6 +17,8 @@ export const binaryExponentiation = (a, n) => {
     return binaryExponentiation(a, n - 1) * a
   } else {
     const b = binaryExponentiation(a, n / 2)
+	logger.debug(`binaryExponentiation(a=${a},n=${n}): b → ${b}`);
+logger.debug(`<<< Exiting binaryExponentiation(a=${a},n=${n})`);
     return b * b
   }
 }

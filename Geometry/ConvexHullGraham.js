@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * Author: Arnab Ray
  * ConvexHull using Graham Scan
@@ -7,25 +8,32 @@
  */
 
 function compare(a, b) {
+logger.debug(`>>> Entering compare(a=${a},b=${b})`);
   // Compare Function to Sort the points, a and b are points to compare
   if (a.x < b.x) return -1
   if (a.x === b.x && a.y < b.y) return -1
+logger.debug(`<<< Exiting compare(a=${a},b=${b})`);
   return 1
 }
 function orientation(a, b, c) {
+logger.debug(`>>> Entering orientation(a=${a},b=${b},c=${c})`);
   // Check orientation of Line(a, b) and Line(b, c)
   const alpha = (b.y - a.y) / (b.x - a.x)
   const beta = (c.y - b.y) / (c.x - b.x)
 
+logger.debug(`orientation(a=${a},b=${b},c=${c}): alpha → ${alpha}`);
+logger.debug(`orientation(a=${a},b=${b},c=${c}): beta → ${beta}`);
   // Clockwise
   if (alpha > beta) return 1
   // Anticlockwise
   else if (beta > alpha) return -1
   // Colinear
+logger.debug(`<<< Exiting orientation(a=${a},b=${b},c=${c})`);
   return 0
 }
 
 function convexHull(points) {
+logger.debug(`>>> Entering convexHull(points=${points})`);
   const pointsLen = points.length
   if (pointsLen <= 2) {
     throw new Error('Minimum of 3 points is required to form closed polygon!')
@@ -83,6 +91,7 @@ function convexHull(points) {
     hull.push(lowerPoints[i])
   }
 
+logger.debug(`<<< Exiting convexHull(points=${points})`);
   return hull
 }
 

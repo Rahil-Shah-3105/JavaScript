@@ -1,3 +1,4 @@
+const logger = console;
 /*
  * Median: https://en.wikipedia.org/wiki/Median
  *
@@ -9,12 +10,15 @@
  */
 
 const averageMedian = (sourceArrayOfNumbers) => {
+logger.debug(`>>> Entering averageMedian(sourceArrayOfNumbers=${sourceArrayOfNumbers})`);
   const numbers = [...sourceArrayOfNumbers].sort(sortNumbers)
   const numLength = numbers.length
+logger.debug(`averageMedian(sourceArrayOfNumbers=${sourceArrayOfNumbers}): numbers → ${numbers}`);
 
   return numLength % 2 === 0
     ? (numbers[numLength / 2 - 1] + numbers[numLength / 2]) / 2
     : numbers[Math.floor(numLength / 2)]
+	logger.debug(`<<< Exiting averageMedian(sourceArrayOfNumbers=${sourceArrayOfNumbers})`);
 }
 
 const sortNumbers = (num1, num2) => num1 - num2
