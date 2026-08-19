@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * Adelson-Velsky and Landis Tree
  * [Wikipedia](https://en.wikipedia.org/wiki/AVL_tree)
@@ -16,9 +17,13 @@
 let utils
 ;(function (_utils) {
   function comparator() {
+	logger.debug('>>> Entering comparator()');
     return function (v1, v2) {
+	logger.debug(`>>> Entering function(v1=${v1},v2=${v2})`);
       if (v1 < v2) return -1
+	logger.debug(`<<< Exiting function(v1=${v1},v2=${v2})`);
       if (v2 < v1) return 1
+	logger.debug('<<< Exiting comparator()');
       return 0
     }
   }
@@ -33,14 +38,19 @@ let utils
  */
 class AVLTree {
   constructor(comp) {
+	logger.debug(`>>> Entering constructor(comp=${comp})`);
     /** @public comparator function */
     this._comp = undefined
     this._comp = comp !== undefined ? comp : utils.comparator()
 
+	logger.debug(`constructor(comp=${comp}): this._comp → ${this._comp}`);
     /** @public root of the AVL Tree */
     this.root = null
     /** @public number of elements in AVL Tree */
     this.size = 0
+	logger.debug(`constructor(comp=${comp}): this.size → ${this.size}`);
+	logger.debug(`constructor(comp=${comp}): this.root → ${this.root}`);
+	logger.debug(`<<< Exiting constructor(comp=${comp})`);
   }
 
   /* Public Functions */
@@ -52,8 +62,10 @@ class AVLTree {
    * @returns {Boolean} element added or not
    */
   add(_val) {
+	logger.debug(`>>> Entering add(_val=${_val})`);
     const prevSize = this.size
     this.root = insert(this.root, _val, this)
+	logger.debug(`<<< Exiting add(_val=${_val})`);
     return this.size !== prevSize
   }
 
@@ -63,7 +75,9 @@ class AVLTree {
    * @returns {Boolean} exists or not
    */
   find(_val) {
+	logger.debug(`>>> Entering find(_val=${_val})`);
     const temp = searchAVLTree(this.root, _val, this)
+	logger.debug(`<<< Exiting find(_val=${_val})`);
     return temp != null
   }
 
@@ -75,8 +89,10 @@ class AVLTree {
    * @returns {Boolean} if element was found and deleted
    */
   remove(_val) {
+	logger.debug(`>>> Entering remove(_val=${_val})`);
     const prevSize = this.size
     this.root = deleteElement(this.root, _val, this)
+	logger.debug(`<<< Exiting remove(_val=${_val})`);
     return prevSize !== this.size
   }
 }
@@ -84,32 +100,41 @@ class AVLTree {
 // creates new Node Object
 class Node {
   constructor(val) {
+	logger.debug(`>>> Entering constructor(val=${val})`);
     this._val = val
     this._left = null
     this._right = null
+	logger.debug(`constructor(val=${val}): this._val → ${this._val}`);
     this._height = 1
+	logger.debug(`constructor(val=${val}): this._height → ${this._height}`);
   }
 }
 
 // get height of a node
 const getHeight = function (node) {
+logger.debug(`>>> Entering getHeight(node=${node})`);
   if (node == null) {
     return 0
   }
+logger.debug(`<<< Exiting getHeight(node=${node})`);
   return node._height
 }
 
 // height difference or balance factor of a node
 const getHeightDifference = function (node) {
+logger.debug(`>>> Entering getHeightDifference(node=${node})`);
+logger.debug(`<<< Exiting getHeightDifference(node=${node})`);
   return node == null ? 0 : getHeight(node._left) - getHeight(node._right)
 }
 
 // update height of a node based on children's heights
 const updateHeight = function (node) {
+logger.debug(`>>> Entering updateHeight(node=${node})`);
   if (node == null) {
     return
   }
   node._height = Math.max(getHeight(node._left), getHeight(node._right)) + 1
+logger.debug(`<<< Exiting updateHeight(node=${node})`);
 }
 
 // Helper: To check if the balanceFactor is valid
@@ -118,19 +143,27 @@ const isValidBalanceFactor = (balanceFactor) =>
 
 // rotations of AVL Tree
 const leftRotate = function (node) {
+logger.debug(`>>> Entering leftRotate(node=${node})`);
   const temp = node._right
   node._right = temp._left
+logger.debug(`leftRotate(node=${node}): node._right → ${node._right}`);
   temp._left = node
+logger.debug(`leftRotate(node=${node}): temp._left → ${temp._left}`);
   updateHeight(node)
   updateHeight(temp)
+logger.debug(`<<< Exiting leftRotate(node=${node})`);
   return temp
 }
 const rightRotate = function (node) {
+logger.debug(`>>> Entering rightRotate(node=${node})`);
   const temp = node._left
   node._left = temp._right
+logger.debug(`rightRotate(node=${node}): node._left → ${node._left}`);
   temp._right = node
+logger.debug(`rightRotate(node=${node}): temp._right → ${temp._right}`);
   updateHeight(node)
   updateHeight(temp)
+logger.debug(`<<< Exiting rightRotate(node=${node})`);
   return temp
 }
 
@@ -147,6 +180,7 @@ const insertBalance = function (node, _val, balanceFactor, tree) {
     return rightRotate(node)
   }
   node._right = rightRotate(node._right)
+logger.debug(`<<< Exiting insertBalance(node=${node},_val=${_val},balanceFactor=${balanceFactor},tree=${tree})`);
   return leftRotate(node)
 }
 
@@ -167,11 +201,13 @@ const delBalance = function (node) {
     node._right = rightRotate(node._right)
     return leftRotate(node) // Right Left
   }
+logger.debug(`<<< Exiting delBalance(node=${node})`);
   return leftRotate(node) // Right Right
 }
 
 // implement avl tree insertion
 const insert = function (root, val, tree) {
+logger.debug(`>>> Entering insert(root=${root},val=${val},tree=${tree})`);
   if (root == null) {
     tree.size++
     return new Node(val)
@@ -188,10 +224,12 @@ const insert = function (root, val, tree) {
   return isValidBalanceFactor(balanceFactor)
     ? root
     : insertBalance(root, val, balanceFactor, tree)
+	logger.debug(`insert(root=${root},val=${val},tree=${tree}): balanceFactor → ${balanceFactor}`);
 }
 
 // delete am element
 const deleteElement = function (root, _val, tree) {
+logger.debug(`>>> Entering deleteElement(root=${root},_val=${_val},tree=${tree})`);
   if (root == null) {
     return root
   }
@@ -212,6 +250,7 @@ const deleteElement = function (root, _val, tree) {
         temp = temp._left
       }
       root._val = temp._val
+	logger.debug(`deleteElement(root=${root},_val=${_val},tree=${tree}): root._val → ${root._val}`);
       root._right = deleteElement(root._right, temp._val, tree)
     }
   } else {
@@ -223,10 +262,12 @@ const deleteElement = function (root, _val, tree) {
   }
   updateHeight(root)
   root = delBalance(root)
+logger.debug(`<<< Exiting deleteElement(root=${root},_val=${_val},tree=${tree})`);
   return root
 }
 // search tree for a element
 const searchAVLTree = function (root, val, tree) {
+logger.debug(`>>> Entering searchAVLTree(root=${root},val=${val},tree=${tree})`);
   if (root == null) {
     return null
   }
@@ -236,6 +277,7 @@ const searchAVLTree = function (root, val, tree) {
   if (tree._comp(root._val, val) < 0) {
     return searchAVLTree(root._right, val, tree)
   }
+logger.debug(`<<< Exiting searchAVLTree(root=${root},val=${val},tree=${tree})`);
   return searchAVLTree(root._left, val, tree)
 }
 

@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * A palindrome is any string that can be reversed and still be the same.
  * An example of one is 'radar', since it is spelled the same even after
@@ -15,6 +16,7 @@
  */
 
 const PalindromeRecursive = (string) => {
+logger.debug(`>>> Entering PalindromeRecursive(string=${string})`);
   // Base case
   if (string.length < 2) return true
 
@@ -23,10 +25,12 @@ const PalindromeRecursive = (string) => {
     return false
   }
 
+logger.debug(`<<< Exiting PalindromeRecursive(string=${string})`);
   return PalindromeRecursive(string.slice(1, string.length - 1))
 }
 
 const PalindromeIterative = (string) => {
+logger.debug(`>>> Entering PalindromeIterative(string=${string})`);
   const _string = string
     .toLowerCase()
     .replace(/ /g, '')
@@ -42,6 +46,7 @@ const PalindromeIterative = (string) => {
     }
   }
 
+logger.debug(`<<< Exiting PalindromeIterative(string=${string})`);
   return true
 }
 

@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * A Dynamic Programming based solution for calculating Zero One Knapsack
  * https://en.wikipedia.org/wiki/Knapsack_problem
@@ -5,6 +6,7 @@
  * Time and Space Complexity: O(n*cap)
  */
 const zeroOneKnapsack = (arr, n, cap, cache) => {
+logger.debug(`>>> Entering zeroOneKnapsack(arr=${arr},n=${n},cap=${cap},cache=${cache})`);
   // Base Case: No capacity or no items
   if (cap === 0 || n === 0) {
     cache[n][cap] = 0
@@ -28,10 +30,12 @@ const zeroOneKnapsack = (arr, n, cap, cache) => {
   }
 
   cache[n][cap] = Math.max(pick, notPick) // maximize profit
+logger.debug(`<<< Exiting zeroOneKnapsack(arr=${arr},n=${n},cap=${cap},cache=${cache})`);
   return cache[n][cap]
 }
 
 const example = () => {
+logger.debug('>>> Entering example()');
   /*
   Problem Statement:
   You are a thief carrying a single bag with limited capacity S. The museum you stole had N artifact that you could steal. Unfortunately you might not be able to steal all the artifact because of your limited bag capacity.
@@ -58,6 +62,8 @@ const example = () => {
     const cap = Number(input[i].trim().split(' ')[0])
     const currlen = Number(input[i].trim().split(' ')[1])
     let j = i + 1
+	logger.debug(`example(): cap → ${cap}`);
+	logger.debug(`example(): currlen → ${currlen}`);
     const arr = []
     while (j <= i + currlen) {
       arr.push(input[j])
@@ -65,6 +71,7 @@ const example = () => {
     }
     const newArr = arr.map((e) => e.trim().split(' ').map(Number))
     const cache = []
+	logger.debug(`example(): newArr → ${newArr}`);
     for (let i = 0; i <= currlen; i++) {
       const temp = []
       for (let j = 0; j <= cap; j++) {
@@ -75,8 +82,10 @@ const example = () => {
     const result = zeroOneKnapsack(newArr, currlen, cap, cache)
     output.push(result)
     i += currlen + 1
+	logger.debug(`example(): result → ${result}`);
   }
 
+logger.debug('<<< Exiting example()');
   return output
 }
 

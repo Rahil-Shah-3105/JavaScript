@@ -1,9 +1,12 @@
+const logger = console;
 function decimalToBinary(num) {
+logger.debug(`>>> Entering decimalToBinary(num=${num})`);
   const bin = []
   while (num > 0) {
     bin.unshift(num % 2)
     num >>= 1 // basically /= 2 without remainder if any
   }
+logger.debug(`<<< Exiting decimalToBinary(num=${num})`);
   return bin.join('')
 }
 

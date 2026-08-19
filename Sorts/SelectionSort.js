@@ -1,3 +1,4 @@
+const logger = console;
 /* The selection sort algorithm sorts an array by repeatedly finding the minimum element
  *(considering ascending order) from unsorted part and putting it at the beginning. The
  *algorithm maintains two subarrays in a given array.
@@ -9,10 +10,12 @@
  */
 
 export const selectionSort = (list) => {
+logger.debug(`>>> Entering selectionSort(list=${list})`);
   if (!Array.isArray(list)) {
     throw new TypeError('Given input is not an array')
   }
   const items = [...list] // We don't want to modify the original array
+logger.debug(`selectionSort(list=${list}): items → ${items}`);
   const length = items.length
   for (let i = 0; i < length - 1; i++) {
     if (typeof items[i] !== 'number') {
@@ -33,5 +36,6 @@ export const selectionSort = (list) => {
       ;[items[i], items[min]] = [items[min], items[i]]
     }
   }
+logger.debug(`<<< Exiting selectionSort(list=${list})`);
   return items
 }

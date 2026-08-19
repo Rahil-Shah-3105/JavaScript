@@ -1,3 +1,4 @@
+const logger = console;
 /**
  Problem Statement and Explanation :
  Triangular  => https://en.wikipedia.org/wiki/Triangular_number
@@ -16,6 +17,7 @@
  * @returns
  */
 const isTriangular = (number) => {
+logger.debug(`>>> Entering isTriangular(number=${number})`);
   for (let i = 0; i <= number; i++) {
     if ((i * (i + 1)) / 2 === number) {
       return true
@@ -23,6 +25,7 @@ const isTriangular = (number) => {
       return false
     }
   }
+logger.debug(`<<< Exiting isTriangular(number=${number})`);
   return false
 }
 
@@ -32,6 +35,7 @@ const isTriangular = (number) => {
  * @returns
  */
 const isTetrahedral = (number) => {
+logger.debug(`>>> Entering isTetrahedral(number=${number})`);
   for (let i = 1; i <= number; i++) {
     if ((i * (i + 1) * (i + 2)) / 6 === number) {
       return true
@@ -39,6 +43,7 @@ const isTetrahedral = (number) => {
       return false
     }
   }
+logger.debug(`<<< Exiting isTetrahedral(number=${number})`);
   return false
 }
 /**
@@ -47,6 +52,7 @@ const isTetrahedral = (number) => {
  * @returns
  */
 const isPentatope = (number) => {
+logger.debug(`>>> Entering isPentatope(number=${number})`);
   for (let i = 1; i <= number; i++) {
     if ((i * (i + 1) * (i + 2) * (i + 3)) / 24 === number) {
       return true
@@ -54,6 +60,7 @@ const isPentatope = (number) => {
       return false
     }
   }
+logger.debug(`<<< Exiting isPentatope(number=${number})`);
   return false
 }
 
@@ -63,11 +70,13 @@ const isPentatope = (number) => {
  * @returns
  */
 const checkAll = (number) => {
+logger.debug(`>>> Entering checkAll(number=${number})`);
   return {
     isTriangular: isTriangular(number),
     isTetrahedral: isTetrahedral(number),
     isPentatope: isPentatope(number)
   }
+logger.debug(`<<< Exiting checkAll(number=${number})`);
 }
 export { isTriangular }
 export { isTetrahedral }

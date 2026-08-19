@@ -1,3 +1,4 @@
+const logger = console;
 /*
  *
  *  Letter Combinations of a Phone Number
@@ -17,8 +18,10 @@
  */
 
 const letterCombinations = (digits) => {
+logger.debug(`>>> Entering letterCombinations(digits=${digits})`);
   const length = digits?.length
   const result = []
+logger.debug(`letterCombinations(digits=${digits}): result → ${result}`);
   if (!length) {
     return result
   }
@@ -34,6 +37,7 @@ const letterCombinations = (digits) => {
   }
 
   const combinations = (index, combination) => {
+	logger.debug(`>>> Entering combinations(index=${index},combination=${combination})`);
     let letter
     let letterIndex
     if (index >= length) {
@@ -45,8 +49,10 @@ const letterCombinations = (digits) => {
     while ((letter = digit[letterIndex++])) {
       combinations(index + 1, combination + letter)
     }
+	logger.debug(`<<< Exiting combinations(index=${index},combination=${combination})`);
   }
   combinations(0, '')
+logger.debug(`<<< Exiting letterCombinations(digits=${digits})`);
   return result
 }
 

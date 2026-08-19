@@ -1,3 +1,4 @@
+const logger = console;
 /*
   A program to demonstrate the implementation of the signum function,
   also known as the sign function, in JavaScript.
@@ -15,10 +16,12 @@
  * @returns {-1 | 0 | 1 | NaN} sign of input (and NaN if the input is not a number)
  */
 function signum(input) {
+logger.debug(`>>> Entering signum(input=${input})`);
   if (input === 0) return 0
   if (input > 0) return 1
   if (input < 0) return -1
 
+logger.debug(`<<< Exiting signum(input=${input})`);
   return NaN
 }
 

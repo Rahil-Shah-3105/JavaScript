@@ -1,3 +1,4 @@
+const logger = console;
 /*
  * Author: Akshay Dubey (https://github.com/itsAkshayDubey)
  * Liouville Function: https://en.wikipedia.org/wiki/Liouville_function
@@ -18,8 +19,10 @@
 
 import { PrimeFactors } from './PrimeFactors.js'
 export const liouvilleFunction = (number) => {
+logger.debug(`>>> Entering liouvilleFunction(number=${number})`);
   if (number <= 0) {
     throw new Error('Number must be greater than zero.')
   }
+logger.debug(`<<< Exiting liouvilleFunction(number=${number})`);
   return PrimeFactors(number).length % 2 === 0 ? 1 : -1
 }

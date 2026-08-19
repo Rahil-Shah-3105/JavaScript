@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * [LocalMaxima](https://www.geeksforgeeks.org/find-indices-of-all-local-maxima-and-local-minima-in-an-array/) is an algorithm to find relative bigger numbers compared to their neighbors
  *
@@ -15,6 +16,7 @@ const findMaxPointIndex = (
   rangeEndIndex,
   originalLength
 ) => {
+logger.debug(`>>> Entering findMaxPointIndex(array=${array},rangeStartIndex=${rangeStartIndex},rangeEndIndex=${rangeEndIndex},originalLength=${originalLength})`);
   // find index range middle point
   const middleIndex =
     rangeStartIndex + parseInt((rangeEndIndex - rangeStartIndex) / 2)
@@ -35,6 +37,7 @@ const findMaxPointIndex = (
     )
   } else {
     // regular local max
+	logger.debug(`<<< Exiting findMaxPointIndex(array=${array},rangeStartIndex=${rangeStartIndex},rangeEndIndex=${rangeEndIndex},originalLength=${originalLength})`);
     return findMaxPointIndex(
       array,
       middleIndex + 1,

@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * Author: Samarth Jain
  * Dijkstra's Algorithm implementation in JavaScript
@@ -7,6 +8,7 @@
  */
 
 function createGraph(V, E) {
+logger.debug(`>>> Entering createGraph(V=${V},E=${E})`);
   // V - Number of vertices in graph
   // E - Number of edges in graph (u, v, w)
   const adjList = [] // Adjacency list
@@ -17,12 +19,15 @@ function createGraph(V, E) {
     adjList[E[i][0]].push([E[i][1], E[i][2]])
     adjList[E[i][1]].push([E[i][0], E[i][2]])
   }
+logger.debug(`<<< Exiting createGraph(V=${V},E=${E})`);
   return adjList
 }
 
 function djikstra(graph, V, src) {
+logger.debug(`>>> Entering djikstra(graph=${graph},V=${V},src=${src})`);
   const vis = Array(V).fill(0)
   const dist = []
+logger.debug(`djikstra(graph=${graph},V=${V},src=${src}): vis → ${vis}`);
   for (let i = 0; i < V; i++) dist.push([10000, -1])
   dist[src][0] = 0
 
@@ -44,6 +49,7 @@ function djikstra(graph, V, src) {
     }
   }
 
+logger.debug(`<<< Exiting djikstra(graph=${graph},V=${V},src=${src})`);
   return dist
 }
 

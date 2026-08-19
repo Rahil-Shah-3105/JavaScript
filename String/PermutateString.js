@@ -1,11 +1,14 @@
+const logger = console;
 'use strict'
 
 const permutate = (aString) => {
+logger.debug(`>>> Entering permutate(aString=${aString})`);
   if (typeof aString !== 'string' || !aString) {
     throw new Error('The arg must be a valid, non empty string')
   }
   const characters = aString.split('')
   let permutations = [[characters.shift()]]
+logger.debug(`permutate(aString=${aString}): characters → ${characters}`);
   while (characters.length) {
     const currentCharacter = characters.shift()
     permutations = calculateCurrentCharacterPermutation(
@@ -17,6 +20,7 @@ const permutate = (aString) => {
     .map((character) => character.join(''))
     .filter((item, index, self) => self.indexOf(item) === index)
     .sort()
+	logger.debug(`<<< Exiting permutate(aString=${aString})`);
 }
 
 const calculateCurrentCharacterPermutation = (
@@ -33,6 +37,7 @@ const calculateCurrentCharacterPermutation = (
       index++
     }
   })
+logger.debug(`<<< Exiting calculateCurrentCharacterPermutation(allPermutations=${allPermutations},currentCharacter=${currentCharacter})`);
   return currentPermutations
 }
 

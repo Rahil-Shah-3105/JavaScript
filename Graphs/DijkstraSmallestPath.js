@@ -1,5 +1,7 @@
+const logger = console;
 // starting at s
 function solve(graph, s) {
+logger.debug(`>>> Entering solve(graph=${graph},s=${s})`);
   const solutions = {}
   solutions[s] = []
   solutions[s].dist = 0
@@ -41,6 +43,7 @@ function solve(graph, s) {
     solutions[neighbor].dist = dist
   }
 
+logger.debug(`<<< Exiting solve(graph=${graph},s=${s})`);
   return solutions
 }
 

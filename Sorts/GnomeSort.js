@@ -1,9 +1,11 @@
+const logger = console;
 /*
  * Gnome sort is a sort algorithm that moving an element to its proper place is accomplished by a series of swap
  * more information: https://en.wikipedia.org/wiki/Gnome_sort
  *
  */
 export function gnomeSort(items) {
+logger.debug(`>>> Entering gnomeSort(items=${items})`);
   if (items.length <= 1) {
     return
   }
@@ -19,6 +21,7 @@ export function gnomeSort(items) {
       i = Math.max(1, i - 1)
     }
   }
+logger.debug(`<<< Exiting gnomeSort(items=${items})`);
   return items
 }
 

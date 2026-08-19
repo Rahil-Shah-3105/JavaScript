@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * Author: Jacoby Johnson (cobyj33)
  *
@@ -65,6 +66,7 @@
  * @returns {(0 | 1)[]} The next generation according to the inputted rule
  */
 export function getNextElementaryGeneration(generation, rule) {
+logger.debug(`>>> Entering getNextElementaryGeneration(generation=${generation},rule=${rule})`);
   const NUM_ELEMENTARY_NEIGHBORHOOD_STATES = 8
   const MIN_RULE = 0
   const MAX_RULE = 255
@@ -84,8 +86,10 @@ export function getNextElementaryGeneration(generation, rule) {
     .toString(2)
     .padStart(NUM_ELEMENTARY_NEIGHBORHOOD_STATES, '0')
   const ruleData = binaryRule.split('').map((bit) => Number.parseInt(bit)) // note that ruleData[0] represents "all alive" while ruleData[7] represents "all dead"
+logger.debug(`getNextElementaryGeneration(generation=${generation},rule=${rule}): ruleData → ${ruleData}`);
   const output = new Array(generation.length)
   const LEFT_DEAD = 4 // 100 in binary
+logger.debug(`getNextElementaryGeneration(generation=${generation},rule=${rule}): output → ${output}`);
   const MIDDLE_DEAD = 2 // 010 in binary
   const RIGHT_DEAD = 1 // 001 in binary
 
@@ -107,5 +111,6 @@ export function getNextElementaryGeneration(generation, rule) {
     output[i] = ruleData[neighborhoodValue]
   }
 
+logger.debug(`<<< Exiting getNextElementaryGeneration(generation=${generation},rule=${rule})`);
   return output
 }

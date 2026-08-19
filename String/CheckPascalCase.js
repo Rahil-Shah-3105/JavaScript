@@ -1,3 +1,4 @@
+const logger = console;
 // CheckPascalCase method checks the given string is in PascalCase or not.
 
 // Problem Source & Explanation: https://www.theserverside.com/definition/Pascal-case
@@ -8,12 +9,14 @@
  * @returns `Boolean` return true if the string is in PascalCase, else return false.
  */
 const CheckPascalCase = (VarName) => {
+logger.debug(`>>> Entering CheckPascalCase(VarName=${VarName})`);
   // firstly, check that input is a string or not.
   if (typeof VarName !== 'string') {
     throw new TypeError('Argument is not a string.')
   }
 
   const pat = /^[A-Z][A-Za-z]*$/
+logger.debug(`<<< Exiting CheckPascalCase(VarName=${VarName})`);
   return pat.test(VarName)
 }
 

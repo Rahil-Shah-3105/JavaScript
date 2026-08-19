@@ -1,3 +1,4 @@
+const logger = console;
 /*
   Calculate the area of various shapes
 */
@@ -11,7 +12,9 @@
  * @example surfaceAreaCube(1) = 6
  */
 const surfaceAreaCube = (side) => {
+logger.debug(`>>> Entering surfaceAreaCube(side=${side})`);
   validateNumericParam(side, 'side')
+logger.debug(`<<< Exiting surfaceAreaCube(side=${side})`);
   return 6 * side ** 2
 }
 
@@ -24,7 +27,9 @@ const surfaceAreaCube = (side) => {
  * @example surfaceAreaSphere(5) = 314.1592653589793
  */
 const surfaceAreaSphere = (radius) => {
+logger.debug(`>>> Entering surfaceAreaSphere(radius=${radius})`);
   validateNumericParam(radius, 'radius')
+logger.debug(`<<< Exiting surfaceAreaSphere(radius=${radius})`);
   return 4.0 * Math.PI * radius ** 2.0
 }
 
@@ -38,8 +43,10 @@ const surfaceAreaSphere = (radius) => {
  * @example areaRectangle(4) = 16
  */
 const areaRectangle = (length, width) => {
+logger.debug(`>>> Entering areaRectangle(length=${length},width=${width})`);
   validateNumericParam(length, 'Length')
   validateNumericParam(width, 'Width')
+logger.debug(`<<< Exiting areaRectangle(length=${length},width=${width})`);
   return width * length
 }
 
@@ -52,7 +59,9 @@ const areaRectangle = (length, width) => {
  * @example areaSquare(4) = 16
  */
 const areaSquare = (side) => {
+logger.debug(`>>> Entering areaSquare(side=${side})`);
   validateNumericParam(side, 'square side')
+logger.debug(`<<< Exiting areaSquare(side=${side})`);
   return side ** 2
 }
 
@@ -66,8 +75,10 @@ const areaSquare = (side) => {
  * @example areaTriangle(1.66, 3.44) = 2.8552
  */
 const areaTriangle = (base, height) => {
+logger.debug(`>>> Entering areaTriangle(base=${base},height=${height})`);
   validateNumericParam(base, 'Base')
   validateNumericParam(height, 'Height')
+logger.debug(`<<< Exiting areaTriangle(base=${base},height=${height})`);
   return (base * height) / 2.0
 }
 
@@ -82,6 +93,7 @@ const areaTriangle = (base, height) => {
  * @example areaTriangleWithAllThreeSides(5, 6, 7) = 14.7
  */
 const areaTriangleWithAllThreeSides = (side1, side2, side3) => {
+logger.debug(`>>> Entering areaTriangleWithAllThreeSides(side1=${side1},side2=${side2},side3=${side3})`);
   validateNumericParam(side1, 'side1')
   validateNumericParam(side2, 'side2')
   validateNumericParam(side3, 'side3')
@@ -94,11 +106,13 @@ const areaTriangleWithAllThreeSides = (side1, side2, side3) => {
   }
   // Finding Semi perimeter of the triangle using formula
   const semi = (side1 + side2 + side3) / 2
+logger.debug(`areaTriangleWithAllThreeSides(side1=${side1},side2=${side2},side3=${side3}): semi → ${semi}`);
 
   // Calculating the area of the triangle
   const area = Math.sqrt(
     semi * (semi - side1) * (semi - side2) * (semi - side3)
   )
+logger.debug(`<<< Exiting areaTriangleWithAllThreeSides(side1=${side1},side2=${side2},side3=${side3})`);
   return Number(area.toFixed(2))
 }
 
@@ -112,8 +126,10 @@ const areaTriangleWithAllThreeSides = (side1, side2, side3) => {
  * @example areaParallelogram(5, 6) = 24
  */
 const areaParallelogram = (base, height) => {
+logger.debug(`>>> Entering areaParallelogram(base=${base},height=${height})`);
   validateNumericParam(base, 'Base')
   validateNumericParam(height, 'Height')
+logger.debug(`<<< Exiting areaParallelogram(base=${base},height=${height})`);
   return base * height
 }
 
@@ -128,9 +144,11 @@ const areaParallelogram = (base, height) => {
  * @example areaTrapezium(5, 12, 10) = 85
  */
 const areaTrapezium = (base1, base2, height) => {
+logger.debug(`>>> Entering areaTrapezium(base1=${base1},base2=${base2},height=${height})`);
   validateNumericParam(base1, 'Base One')
   validateNumericParam(base2, 'Base Two')
   validateNumericParam(height, 'Height')
+logger.debug(`<<< Exiting areaTrapezium(base1=${base1},base2=${base2},height=${height})`);
   return (1 / 2) * (base1 + base2) * height
 }
 
@@ -143,7 +161,9 @@ const areaTrapezium = (base1, base2, height) => {
  * @example areaCircle(5, 12, 10) = 85
  */
 const areaCircle = (radius) => {
+logger.debug(`>>> Entering areaCircle(radius=${radius})`);
   validateNumericParam(radius, 'Radius')
+logger.debug(`<<< Exiting areaCircle(radius=${radius})`);
   return Math.PI * radius ** 2
 }
 
@@ -157,15 +177,19 @@ const areaCircle = (radius) => {
  * @example areaRhombus(12, 10) = 60
  */
 const areaRhombus = (diagonal1, diagonal2) => {
+logger.debug(`>>> Entering areaRhombus(diagonal1=${diagonal1},diagonal2=${diagonal2})`);
   validateNumericParam(diagonal1, 'diagonal one')
   validateNumericParam(diagonal2, 'diagonal two')
+logger.debug(`<<< Exiting areaRhombus(diagonal1=${diagonal1},diagonal2=${diagonal2})`);
   return (1 / 2) * diagonal1 * diagonal2
 }
 
 const validateNumericParam = (param, paramName = 'param') => {
+logger.debug(`>>> Entering validateNumericParam(param=${param},paramName=${paramName})`);
   if (typeof param !== 'number') {
     throw new TypeError('The ' + paramName + ' should be type Number')
   } else if (param < 0) {
+	logger.debug(`<<< Exiting validateNumericParam(param=${param},paramName=${paramName})`);
     throw new Error('The ' + paramName + ' only accepts non-negative values')
   }
 }

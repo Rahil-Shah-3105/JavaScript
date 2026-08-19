@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * Colors a graph using up to m colors such that no two adjacent vertices share the same color.
  * @param {number[][]} graph - Adjacency matrix of the graph, using 0 for no edge.
@@ -6,20 +7,25 @@
  * @see https://en.wikipedia.org/wiki/Graph_coloring
  */
 function mColoring(graph, m) {
+logger.debug(`>>> Entering mColoring(graph=${graph},m=${m})`);
   const colors = new Array(graph.length).fill(0)
 
+logger.debug(`mColoring(graph=${graph},m=${m}): colors → ${colors}`);
   // Check if it's safe to color a vertex with a given color.
   function isSafe(vertex, color) {
+	logger.debug(`>>> Entering isSafe(vertex=${vertex},color=${color})`);
     for (let i = 0; i < graph.length; i++) {
       if (graph[vertex][i] && colors[i] === color) {
         return false
       }
     }
+	logger.debug(`<<< Exiting isSafe(vertex=${vertex},color=${color})`);
     return true
   }
 
   // Use backtracking to try and color the graph.
   function solveColoring(vertex = 0) {
+	logger.debug(`>>> Entering solveColoring(vertex=${vertex})`);
     if (vertex === graph.length) {
       return true
     }
@@ -36,6 +42,7 @@ function mColoring(graph, m) {
         colors[vertex] = 0
       }
     }
+	logger.debug(`<<< Exiting solveColoring(vertex=${vertex})`);
     return false
   }
 
@@ -43,6 +50,7 @@ function mColoring(graph, m) {
   if (solveColoring()) {
     return colors
   }
+logger.debug(`<<< Exiting mColoring(graph=${graph},m=${m})`);
   return null
 }
 

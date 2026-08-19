@@ -1,3 +1,4 @@
+const logger = console;
 /*
  * Author: Akshay Dubey (https://github.com/itsAkshayDubey)
  * Square free integer: https://en.wikipedia.org/wiki/Square-free_integer
@@ -15,9 +16,12 @@
 
 import { PrimeFactors } from './PrimeFactors.js'
 export const isSquareFree = (number) => {
+logger.debug(`>>> Entering isSquareFree(number=${number})`);
   const primeFactorsArray = PrimeFactors(number)
   if (number <= 0) {
     throw new Error('Number must be greater than zero.')
   }
+logger.debug(`isSquareFree(number=${number}): primeFactorsArray → ${primeFactorsArray}`);
+logger.debug(`<<< Exiting isSquareFree(number=${number})`);
   return primeFactorsArray.length === new Set(primeFactorsArray).size
 }

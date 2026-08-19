@@ -1,3 +1,4 @@
+const logger = console;
 /*
  * Linear search or sequential search is a method for finding a target
  * value within a list. It sequentially checks each element of the list
@@ -17,11 +18,13 @@ function SearchArray(searchNum, ar, output = (v) => console.log(v)) {
 
 // Search “theArray” for the specified “key” value
 function Search(theArray, key) {
+logger.debug(`>>> Entering Search(theArray=${theArray},key=${key})`);
   for (let n = 0; n < theArray.length; n++) {
     if (theArray[n] === key) {
       return n
     }
   }
+logger.debug(`<<< Exiting Search(theArray=${theArray},key=${key})`);
   return -1
 }
 

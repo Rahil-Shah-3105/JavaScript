@@ -1,3 +1,4 @@
+const logger = console;
 // Alternative arrange the two given strings in one string in O(n) time complexity.
 
 // Problem Source & Explanation: https://www.geeksforgeeks.org/alternatively-merge-two-strings-in-java/
@@ -9,6 +10,7 @@
  * @returns `String` return one alternative arrange string.
  */
 const AlternativeStringArrange = (str1, str2) => {
+logger.debug(`>>> Entering AlternativeStringArrange(str1=${str1},str2=${str2})`);
   // firstly, check that both inputs are strings.
   if (typeof str1 !== 'string' || typeof str2 !== 'string') {
     return 'Not string(s)'
@@ -16,6 +18,7 @@ const AlternativeStringArrange = (str1, str2) => {
 
   // output string value.
   let outStr = ''
+logger.debug(`AlternativeStringArrange(str1=${str1},str2=${str2}): outStr → ${outStr}`);
 
   // get first string length.
   const firstStringLength = str1.length
@@ -41,6 +44,7 @@ const AlternativeStringArrange = (str1, str2) => {
   }
 
   // return the output string.
+logger.debug(`<<< Exiting AlternativeStringArrange(str1=${str1},str2=${str2})`);
   return outStr
 }
 

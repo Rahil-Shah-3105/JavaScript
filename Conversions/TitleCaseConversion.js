@@ -1,3 +1,4 @@
+const logger = console;
 /*
     Problem statement and Explanation : https://www.codeproject.com/Tips/162540/Letter-Case-Conversion-Algorithms-Title-Case-Toggl.
     [Title case](https://en.wikipedia.org/wiki/Title_case) is a style where all words are capitalized. Officially, title case
@@ -11,6 +12,7 @@
  * @returns {string} A string that is in title case.
  */
 const titleCaseConversion = (inputString) => {
+logger.debug(`>>> Entering titleCaseConversion(inputString=${inputString})`);
   if (inputString === '') return ''
   // Extract all space separated string.
   const stringCollections = inputString.split(' ').map((word) => {
@@ -43,6 +45,7 @@ const titleCaseConversion = (inputString) => {
     return firstChar + newWordChar.join('')
   })
   // Convert all words in a string and return it.
+logger.debug(`<<< Exiting titleCaseConversion(inputString=${inputString})`);
   return stringCollections.join(' ')
 }
 

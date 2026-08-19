@@ -1,5 +1,7 @@
+const logger = console;
 // https://en.wikipedia.org/wiki/Generalizations_of_Fibonacci_numbers#Extension_to_negative_integers
 const FibonacciIterative = (num) => {
+logger.debug(`>>> Entering FibonacciIterative(num=${num})`);
   const isNeg = num < 0
   if (isNeg) num *= -1
   const sequence = [0]
@@ -13,23 +15,28 @@ const FibonacciIterative = (num) => {
     )
   }
 
+logger.debug(`<<< Exiting FibonacciIterative(num=${num})`);
   return sequence
 }
 
 const FibonacciGenerator = function* (neg) {
+logger.debug(`>>> Entering FibonacciGenerator(neg=${neg})`);
   let a = 0
   let b = 1
   yield a
   while (true) {
     yield b
     ;[a, b] = neg ? [b, a - b] : [b, a + b]
+	logger.debug(`<<< Exiting FibonacciGenerator(neg=${neg})`);
   }
 }
 
 const list = []
 const FibonacciRecursive = (num) => {
+logger.debug(`>>> Entering FibonacciRecursive(num=${num})`);
   const isNeg = num < 0
   if (isNeg) num *= -1
+logger.debug(`<<< Exiting FibonacciRecursive(num=${num})`);
   return (() => {
     switch (list.length) {
       case 0:
@@ -49,6 +56,7 @@ const FibonacciRecursive = (num) => {
 
 const dict = new Map()
 const FibonacciRecursiveDP = (stairs) => {
+logger.debug(`>>> Entering FibonacciRecursiveDP(stairs=${stairs})`);
   const isNeg = stairs < 0
   if (isNeg) stairs *= -1
 
@@ -63,6 +71,7 @@ const FibonacciRecursiveDP = (stairs) => {
 
   dict.set(stairs, res)
 
+logger.debug(`<<< Exiting FibonacciRecursiveDP(stairs=${stairs})`);
   return (isNeg ? (-1) ** (stairs + 1) : 1) * res
 }
 
@@ -78,6 +87,7 @@ const FibonacciRecursiveDP = (stairs) => {
 // @Satzyakiz
 
 const FibonacciDpWithoutRecursion = (num) => {
+logger.debug(`>>> Entering FibonacciDpWithoutRecursion(num=${num})`);
   const isNeg = num < 0
   if (isNeg) num *= -1
   const table = [0]
@@ -86,18 +96,23 @@ const FibonacciDpWithoutRecursion = (num) => {
   for (let i = 2; i < num; ++i) {
     table.push(isNeg ? table[i - 1] - table[i] : table[i] + table[i - 1])
   }
+logger.debug(`<<< Exiting FibonacciDpWithoutRecursion(num=${num})`);
   return table
 }
 
 // Using Matrix exponentiation to find n-th fibonacci in O(log n) time
 
 const copyMatrix = (A) => {
+logger.debug(`>>> Entering copyMatrix(A=${A})`);
+logger.debug(`<<< Exiting copyMatrix(A=${A})`);
   return A.map((row) => row.map((cell) => cell))
 }
 
 const Identity = (size) => {
+logger.debug(`>>> Entering Identity(size=${size})`);
   const isBigInt = typeof size === 'bigint'
   const ZERO = isBigInt ? 0n : 0
+logger.debug(`Identity(size=${size}): isBigInt → ${isBigInt}`);
   const ONE = isBigInt ? 1n : 1
   size = Number(size)
   const I = Array(size)
@@ -105,6 +120,7 @@ const Identity = (size) => {
     .map(() => Array(size).fill())
   return I.map((row, rowIdx) =>
     row.map((_col, colIdx) => {
+logger.debug(`<<< Exiting Identity(size=${size})`);
       return rowIdx === colIdx ? ONE : ZERO
     })
   )
@@ -115,9 +131,11 @@ const Identity = (size) => {
 // both matrices must have same-type numeric values
 // either both BigInt or both Number
 const matrixMultiply = (A, B) => {
+logger.debug(`>>> Entering matrixMultiply(A=${A},B=${B})`);
   A = copyMatrix(A)
   B = copyMatrix(B)
   const isBigInt = typeof A[0][0] === 'bigint'
+logger.debug(`matrixMultiply(A=${A},B=${B}): isBigInt → ${isBigInt}`);
   const l = A.length
   const m = B.length
   const n = B[0].length // Assuming non-empty matrices
@@ -125,6 +143,7 @@ const matrixMultiply = (A, B) => {
     .fill(null)
     .map(() => Array(n).fill())
   for (let i = 0; i < l; i++) {
+	logger.debug(`matrixMultiply(A=${A},B=${B}): C → ${C}`);
     for (let j = 0; j < n; j++) {
       C[i][j] = isBigInt ? 0n : 0
       for (let k = 0; k < m; k++) {
@@ -132,6 +151,7 @@ const matrixMultiply = (A, B) => {
       }
     }
   }
+logger.debug(`<<< Exiting matrixMultiply(A=${A},B=${B})`);
   return C
 }
 
@@ -142,8 +162,10 @@ const matrixMultiply = (A, B) => {
  */
 // A is a square matrix
 const matrixExpo = (A, n) => {
+logger.debug(`>>> Entering matrixExpo(A=${A},n=${n})`);
   A = copyMatrix(A)
   const isBigInt = typeof n === 'bigint'
+logger.debug(`matrixExpo(A=${A},n=${n}): isBigInt → ${isBigInt}`);
   const ZERO = isBigInt ? 0n : 0
   const TWO = isBigInt ? 2n : 2
 
@@ -155,12 +177,16 @@ const matrixExpo = (A, n) => {
     if (!isBigInt) n = Math.floor(n)
     if (n > ZERO) A = matrixMultiply(A, A)
   }
+logger.debug(`matrixExpo(A=${A},n=${n}): result → ${result}`);
+logger.debug(`<<< Exiting matrixExpo(A=${A},n=${n})`);
   return result
 }
 
 const FibonacciMatrixExpo = (num) => {
+logger.debug(`>>> Entering FibonacciMatrixExpo(num=${num})`);
   const isBigInt = typeof num === 'bigint'
   const ZERO = isBigInt ? 0n : 0
+logger.debug(`FibonacciMatrixExpo(num=${num}): isBigInt → ${isBigInt}`);
   const ONE = isBigInt ? 1n : 1
   // F(0) = 0, F(1) = 1
   // F(n) = F(n-1) + F(n-2)
@@ -185,8 +211,10 @@ const FibonacciMatrixExpo = (num) => {
   ]
 
   const poweredA = matrixExpo(A, num - ONE) // A raised to the power n-1
+logger.debug(`FibonacciMatrixExpo(num=${num}): poweredA → ${poweredA}`);
   let F = [[ONE], [ZERO]]
   F = matrixMultiply(poweredA, F)
+logger.debug(`<<< Exiting FibonacciMatrixExpo(num=${num})`);
   return F[0][0] * (isNeg ? (-ONE) ** (num + ONE) : ONE)
 }
 
