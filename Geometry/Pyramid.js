@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * This class represents a regular pyramid and can calculate its volume and surface area
  * https://en.wikipedia.org/wiki/Pyramid_(geometry)
@@ -7,8 +8,10 @@
  */
 export default class Pyramid {
   constructor(bsl, height) {
+	logger.debug(`>>> Entering constructor(bsl=${bsl},height=${height})`);
     this.bsl = bsl
     this.height = height
+	logger.debug(`constructor(bsl=${bsl},height=${height}): this.height → ${this.height}`);
   }
 
   baseArea = () => {

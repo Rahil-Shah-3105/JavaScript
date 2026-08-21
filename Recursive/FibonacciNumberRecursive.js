@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * @function Fibonacci
  * @description Function to return the N-th Fibonacci number.
@@ -7,9 +8,11 @@
  */
 
 const fibonacci = (n) => {
+logger.debug(`>>> Entering fibonacci(n=${n})`);
   if (n < 2) {
     return n
   }
+logger.debug(`<<< Exiting fibonacci(n=${n})`);
   return fibonacci(n - 2) + fibonacci(n - 1)
 }
 

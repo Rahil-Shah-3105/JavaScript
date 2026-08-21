@@ -1,3 +1,4 @@
+const logger = console;
 /* Stack data-structure. It's work is based on the LIFO method (last-IN-first-OUT).
  * It means that elements added to the stack are placed on the top and only the
  * last element (from the top) can be reached. After we get access to the last
@@ -11,45 +12,59 @@
 // Class declaration
 class Stack {
   constructor() {
+	logger.debug('>>> Entering constructor()');
     this.stack = []
     this.top = 0
+	logger.debug(`constructor(): this.stack → ${this.stack}`);
   }
 
   // Adds a value to the end of the Stack
   push(newValue) {
+	logger.debug(`>>> Entering push(newValue=${newValue})`);
     this.stack.push(newValue)
     this.top += 1
+	logger.debug(`<<< Exiting push(newValue=${newValue})`);
   }
 
   // Returns and removes the last element of the Stack
   pop() {
+	logger.debug('>>> Entering pop()');
     if (this.top !== 0) {
       this.top -= 1
       return this.stack.pop()
     }
+	logger.debug('<<< Exiting pop()');
     throw new Error('Stack Underflow')
   }
 
   // Returns the number of elements in the Stack
   get length() {
+	logger.debug('>>> Entering length()');
+	logger.debug('<<< Exiting length()');
     return this.top
   }
 
   // Returns true if stack is empty, false otherwise
   get isEmpty() {
+	logger.debug('>>> Entering isEmpty()');
+	logger.debug('<<< Exiting isEmpty()');
     return this.top === 0
   }
 
   // Returns the last element without removing it
   get last() {
+	logger.debug('>>> Entering last()');
     if (this.top !== 0) {
       return this.stack[this.stack.length - 1]
     }
+	logger.debug('<<< Exiting last()');
     return null
   }
 
   // Checks if an object is the instance os the Stack class
   static isStack(el) {
+	logger.debug(`>>> Entering isStack(el=${el})`);
+	logger.debug(`<<< Exiting isStack(el=${el})`);
     return el instanceof Stack
   }
 }

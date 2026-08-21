@@ -1,3 +1,4 @@
+const logger = console;
 /*
  * Problem Statement:
  * - Given a NxN grid, find whether rat in cell [0, 0] can reach the target in cell [N-1, N-1]
@@ -22,6 +23,7 @@
  * @throws TypeError When the given grid is invalid.
  */
 function validateGrid(grid) {
+logger.debug(`>>> Entering validateGrid(grid=${grid})`);
   if (!Array.isArray(grid) || grid.length === 0)
     throw new TypeError('Grid must be a non-empty array')
 
@@ -38,7 +40,9 @@ function validateGrid(grid) {
 }
 
 function isSafe(grid, x, y) {
+logger.debug(`>>> Entering isSafe(grid=${grid},x=${x},y=${y})`);
   const n = grid.length
+logger.debug(`<<< Exiting isSafe(grid=${grid},x=${x},y=${y})`);
   return x >= 0 && x < n && y >= 0 && y < n && grid[y][x] === 1
 }
 
@@ -53,6 +57,7 @@ function isSafe(grid, x, y) {
  * @returns {string|boolean} Either the path to the target cell or false.
  */
 function getPathPart(grid, x, y, solution, path) {
+logger.debug(`>>> Entering getPathPart(grid=${grid},x=${x},y=${y},solution=${solution},path=${path})`);
   const n = grid.length
 
   // are we there yet?
@@ -75,25 +80,31 @@ function getPathPart(grid, x, y, solution, path) {
   // attempt to move right
   const right = getPathPart(grid, x + 1, y, solution, path + 'R')
   if (right) return right
+logger.debug(`getPathPart(grid=${grid},x=${x},y=${y},solution=${solution},path=${path}): right → ${right}`);
 
   // right didn't work: attempt to move down
   const down = getPathPart(grid, x, y + 1, solution, path + 'D')
   if (down) return down
+logger.debug(`getPathPart(grid=${grid},x=${x},y=${y},solution=${solution},path=${path}): down → ${down}`);
 
   // down didn't work: attempt to move up
   const up = getPathPart(grid, x, y - 1, solution, path + 'U')
   if (up) return up
+logger.debug(`getPathPart(grid=${grid},x=${x},y=${y},solution=${solution},path=${path}): up → ${up}`);
 
   // up didn't work: attempt to move left
   const left = getPathPart(grid, x - 1, y, solution, path + 'L')
   if (left) return left
+logger.debug(`getPathPart(grid=${grid},x=${x},y=${y},solution=${solution},path=${path}): left → ${left}`);
 
   // no direction was successful: remove this cell from the solution matrix and backtrack
   solution[y][x] = 0
+logger.debug(`<<< Exiting getPathPart(grid=${grid},x=${x},y=${y},solution=${solution},path=${path})`);
   return false
 }
 
 function getPath(grid) {
+logger.debug(`>>> Entering getPath(grid=${grid})`);
   // grid dimensions
   const n = grid.length
 
@@ -103,6 +114,7 @@ function getPath(grid) {
     const row = Array(n)
     row.fill(0)
     solution[i] = row
+	logger.debug(`getPath(grid=${grid}): row → ${row}`);
   }
 
   return getPathPart(grid, 0, 0, solution, '')
@@ -113,18 +125,22 @@ function getPath(grid) {
  */
 export class RatInAMaze {
   constructor(grid) {
+	logger.debug(`>>> Entering constructor(grid=${grid})`);
     // first, let's do some error checking on the input
     validateGrid(grid)
 
     // attempt to solve the maze now - all public methods only query the result state later
     const solution = getPath(grid)
 
+	logger.debug(`constructor(grid=${grid}): solution → ${solution}`);
     if (solution !== false) {
       this.path = solution
       this.solved = true
     } else {
       this.path = ''
       this.solved = false
+	logger.debug(`constructor(grid=${grid}): this.solved → ${this.solved}`);
+	logger.debug(`<<< Exiting constructor(grid=${grid})`);
     }
   }
 }

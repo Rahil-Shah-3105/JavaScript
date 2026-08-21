@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * @author mrmagic2020
  * @description Enciphers a combination of letters, numbers and symbols into morse code.
@@ -9,6 +10,7 @@
  * @example morse('Hello World!') = '**** * *-** *-** ---   *-- --- *-* *-** -** -*-*--'
  */
 const morse = (msg, dot = '*', dash = '-') => {
+logger.debug(`>>> Entering morse(msg=${msg},dot=${dot},dash=${dash})`);
   const key = {
     A: '*-',
     B: '-***',
@@ -66,7 +68,9 @@ const morse = (msg, dot = '*', dash = '-') => {
     '@': '*--*-*'
   }
 
+logger.warn(`morse(msg=${msg},dot=${dot},dash=${dash}): key → ${key}`);
   let newMsg = ''
+logger.debug(`morse(msg=${msg},dot=${dot},dash=${dash}): newMsg → ${newMsg}`);
 
   msg
     .toString()
@@ -84,6 +88,7 @@ const morse = (msg, dot = '*', dash = '-') => {
       newMsg += ' '
     })
 
+logger.debug(`<<< Exiting morse(msg=${msg},dot=${dot},dash=${dash})`);
   return newMsg.trim()
 }
 

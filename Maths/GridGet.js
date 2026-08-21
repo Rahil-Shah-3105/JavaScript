@@ -1,3 +1,4 @@
+const logger = console;
 /*
     author: TangibleDream
     license: GPL-3.0 or later
@@ -40,13 +41,17 @@
 */
 
 const gridGetX = (columns, index) => {
+logger.debug(`>>> Entering gridGetX(columns=${columns},index=${index})`);
   while (index + 1 > columns) {
     index = index - columns
   }
+logger.debug(`<<< Exiting gridGetX(columns=${columns},index=${index})`);
   return index + 1
 }
 
 const gridGetY = (columns, index) => {
+logger.debug(`>>> Entering gridGetY(columns=${columns},index=${index})`);
+logger.debug(`<<< Exiting gridGetY(columns=${columns},index=${index})`);
   return Math.floor(index / columns) + 1
 }
 

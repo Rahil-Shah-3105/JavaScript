@@ -1,4 +1,5 @@
 import Queue from '../Data-Structures/Queue/Queue'
+const logger = console;
 
 /**
  * Breadth-first search is an algorithm for traversing a graph.
@@ -10,17 +11,21 @@ import Queue from '../Data-Structures/Queue/Queue'
  * @see https://www.koderdojo.com/blog/breadth-first-search-and-shortest-path-in-csharp-and-net-core
  */
 export function breadthFirstSearch(graph, startingNode) {
+logger.debug(`>>> Entering breadthFirstSearch(graph=${graph},startingNode=${startingNode})`);
   // visited keeps track of all nodes visited
   const visited = new Set()
 
+logger.debug(`breadthFirstSearch(graph=${graph},startingNode=${startingNode}): visited → ${visited}`);
   // queue contains the nodes to be explored in the future
   const queue = new Queue()
   queue.enqueue(startingNode)
 
+logger.debug(`breadthFirstSearch(graph=${graph},startingNode=${startingNode}): queue → ${queue}`);
   while (!queue.isEmpty()) {
     // start with the queue's first node
     const node = queue.dequeue()
 
+	logger.debug(`breadthFirstSearch(graph=${graph},startingNode=${startingNode}): node → ${node}`);
     if (!visited.has(node)) {
       // mark the node as visited
       visited.add(node)
@@ -33,5 +38,6 @@ export function breadthFirstSearch(graph, startingNode) {
     }
   }
 
+logger.debug(`<<< Exiting breadthFirstSearch(graph=${graph},startingNode=${startingNode})`);
   return visited
 }

@@ -1,3 +1,4 @@
+const logger = console;
 /*
 Given an array of positive integers and a value sum,
 determine the total number of the subset with sum
@@ -7,6 +8,7 @@ equal to the given sum.
   Given solution is O(n*sum) Time complexity and O(sum) Space complexity
 */
 function NumberOfSubsetSum(array, sum) {
+logger.debug(`>>> Entering NumberOfSubsetSum(array=${array},sum=${sum})`);
   if (sum < 0) {
     throw new Error('The sum must be non-negative.')
   }
@@ -27,6 +29,7 @@ function NumberOfSubsetSum(array, sum) {
       }
     }
   }
+logger.debug(`<<< Exiting NumberOfSubsetSum(array=${array},sum=${sum})`);
   return dp[sum]
 }
 

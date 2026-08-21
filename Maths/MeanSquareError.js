@@ -1,6 +1,8 @@
+const logger = console;
 // Wikipedia: https://en.wikipedia.org/wiki/Mean_squared_error
 
 const meanSquaredError = (predicted, expected) => {
+logger.debug(`>>> Entering meanSquaredError(predicted=${predicted},expected=${expected})`);
   if (!Array.isArray(predicted) || !Array.isArray(expected)) {
     throw new TypeError('Argument must be an Array')
   }
@@ -15,6 +17,7 @@ const meanSquaredError = (predicted, expected) => {
     err += (expected[i] - predicted[i]) ** 2
   }
 
+logger.debug(`<<< Exiting meanSquaredError(predicted=${predicted},expected=${expected})`);
   return err / expected.length
 }
 

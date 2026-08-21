@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * BucketSort implementation.
  *
@@ -18,6 +19,7 @@
  * @return {number[]} An array of numbers sorted in increasing order.
  */
 export function bucketSort(list, size) {
+logger.debug(`>>> Entering bucketSort(list=${list},size=${size})`);
   if (undefined === size) {
     size = 5
   }
@@ -36,6 +38,7 @@ export function bucketSort(list, size) {
   }
   // how many buckets we need
   const count = Math.floor((max - min) / size) + 1
+logger.debug(`bucketSort(list=${list},size=${size}): count → ${count}`);
 
   // create buckets
   const buckets = []

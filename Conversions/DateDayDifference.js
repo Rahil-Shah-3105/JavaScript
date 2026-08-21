@@ -1,3 +1,4 @@
+const logger = console;
 /*
     DateDayDifference Method
     ------------------------
@@ -10,6 +11,8 @@ import { isLeapYear } from '../Maths/LeapYear'
 import { parseDate } from '../Timing-Functions/ParseDate'
 
 const DateToDay = (dd, mm, yyyy) => {
+logger.debug(`>>> Entering DateToDay(dd=${dd},mm=${mm},yyyy=${yyyy})`);
+logger.debug(`<<< Exiting DateToDay(dd=${dd},mm=${mm},yyyy=${yyyy})`);
   return (
     365 * (yyyy - 1) +
     Math.floor((yyyy - 1) / 4) -
@@ -22,9 +25,13 @@ const DateToDay = (dd, mm, yyyy) => {
 }
 
 const DateDayDifference = (date1, date2) => {
+logger.debug(`>>> Entering DateDayDifference(date1=${date1},date2=${date2})`);
   const firstDate = parseDate(date1)
   const secondDate = parseDate(date2)
 
+logger.debug(`DateDayDifference(date1=${date1},date2=${date2}): firstDate → ${firstDate}`);
+logger.debug(`DateDayDifference(date1=${date1},date2=${date2}): secondDate → ${secondDate}`);
+logger.debug(`<<< Exiting DateDayDifference(date1=${date1},date2=${date2})`);
   return Math.abs(
     DateToDay(secondDate.day, secondDate.month, secondDate.year) -
       DateToDay(firstDate.day, firstDate.month, firstDate.year)

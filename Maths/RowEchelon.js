@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * Given a two dimensional matrix, find its row echelon form.
  *
@@ -31,6 +32,7 @@ const tolerance = 0.000001
 
 // Check if all the rows have same length of elements
 const isMatrixValid = (matrix) => {
+logger.debug(`>>> Entering isMatrixValid(matrix=${matrix})`);
   let numRows = matrix.length
   let numCols = matrix[0].length
   for (let i = 0; i < numRows; i++) {
@@ -47,10 +49,12 @@ const isMatrixValid = (matrix) => {
   ) {
     return false
   }
+logger.debug(`<<< Exiting isMatrixValid(matrix=${matrix})`);
   return true
 }
 
 const checkNonZero = (currentRow, currentCol, matrix) => {
+logger.debug(`>>> Entering checkNonZero(currentRow=${currentRow},currentCol=${currentCol},matrix=${matrix})`);
   let numRows = matrix.length
   for (let i = currentRow; i < numRows; i++) {
     // Checks if the current element is not very near to zero.
@@ -58,16 +62,19 @@ const checkNonZero = (currentRow, currentCol, matrix) => {
       return true
     }
   }
+logger.debug(`<<< Exiting checkNonZero(currentRow=${currentRow},currentCol=${currentCol},matrix=${matrix})`);
   return false
 }
 
 const swapRows = (currentRow, withRow, matrix) => {
+logger.debug(`>>> Entering swapRows(currentRow=${currentRow},withRow=${withRow},matrix=${matrix})`);
   let numCols = matrix[0].length
   let tempValue = 0
   for (let j = 0; j < numCols; j++) {
     tempValue = matrix[currentRow][j]
     matrix[currentRow][j] = matrix[withRow][j]
     matrix[withRow][j] = tempValue
+	logger.debug(`<<< Exiting swapRows(currentRow=${currentRow},withRow=${withRow},matrix=${matrix})`);
   }
 }
 
@@ -75,6 +82,7 @@ const swapRows = (currentRow, withRow, matrix) => {
 // Pivot element is the first non-zero element found from the current row
 // down to the last row.
 const selectPivot = (currentRow, currentCol, matrix) => {
+logger.debug(`>>> Entering selectPivot(currentRow=${currentRow},currentCol=${currentCol},matrix=${matrix})`);
   let numRows = matrix.length
   for (let i = currentRow; i < numRows; i++) {
     if (matrix[i][currentCol] !== 0) {
@@ -82,31 +90,39 @@ const selectPivot = (currentRow, currentCol, matrix) => {
       return
     }
   }
+logger.debug(`<<< Exiting selectPivot(currentRow=${currentRow},currentCol=${currentCol},matrix=${matrix})`);
 }
 
 // Multiply each element of the given row with a factor.
 const scalarMultiplication = (currentRow, factor, matrix) => {
+logger.debug(`>>> Entering scalarMultiplication(currentRow=${currentRow},factor=${factor},matrix=${matrix})`);
   let numCols = matrix[0].length
   for (let j = 0; j < numCols; j++) {
     matrix[currentRow][j] *= factor
+	logger.debug(`<<< Exiting scalarMultiplication(currentRow=${currentRow},factor=${factor},matrix=${matrix})`);
   }
 }
 
 // Subtract one row from another row
 const subtractRow = (currentRow, fromRow, matrix) => {
+logger.debug(`>>> Entering subtractRow(currentRow=${currentRow},fromRow=${fromRow},matrix=${matrix})`);
   let numCols = matrix[0].length
   for (let j = 0; j < numCols; j++) {
     matrix[fromRow][j] -= matrix[currentRow][j]
+	logger.debug(`<<< Exiting subtractRow(currentRow=${currentRow},fromRow=${fromRow},matrix=${matrix})`);
   }
 }
 
 // Check if two numbers are equal within a given tolerance
 const isTolerant = (a, b, tolerance) => {
+logger.debug(`>>> Entering isTolerant(a=${a},b=${b},tolerance=${tolerance})`);
   const absoluteDifference = Math.abs(a - b)
+logger.debug(`isTolerant(a=${a},b=${b},tolerance=${tolerance}): absoluteDifference → ${absoluteDifference}`);
   return absoluteDifference <= tolerance
 }
 
 const rowEchelon = (matrix) => {
+logger.debug(`>>> Entering rowEchelon(matrix=${matrix})`);
   // Check if the input matrix is valid; if not, throw an error.
   if (!isMatrixValid(matrix)) {
     throw new Error('Input is not a valid 2D matrix.')
@@ -115,6 +131,7 @@ const rowEchelon = (matrix) => {
   let numRows = matrix.length
   let numCols = matrix[0].length
   let result = matrix
+logger.debug(`rowEchelon(matrix=${matrix}): result → ${result}`);
 
   // Iterate through the rows (i) and columns (j) of the matrix.
   for (let i = 0, j = 0; i < numRows && j < numCols; ) {
@@ -144,6 +161,7 @@ const rowEchelon = (matrix) => {
     }
     i++
   }
+logger.debug(`<<< Exiting rowEchelon(matrix=${matrix})`);
   return result
 }
 

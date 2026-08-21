@@ -1,3 +1,4 @@
+const logger = console;
 import { aliquotSum } from '../Maths/AliquotSum.js'
 
 /**
@@ -15,6 +16,7 @@ import { aliquotSum } from '../Maths/AliquotSum.js'
  */
 
 function problem21(n) {
+logger.debug(`>>> Entering problem21(n=${n})`);
   if (n < 2) {
     throw new Error('Invalid Input')
   }
@@ -22,11 +24,13 @@ function problem21(n) {
   let result = 0
   for (let a = 2; a < n; ++a) {
     const b = aliquotSum(a) // Sum of all proper divisors of a
+	logger.debug(`problem21(n=${n}): b → ${b}`);
     // Check if b > a to ensure each pair isn't counted twice, and check if sum of proper divisors of b is equal to a
     if (b > a && aliquotSum(b) === a) {
       result += a + b
     }
   }
+logger.debug(`problem21(n=${n}): result → ${result}`);
   return result
 }
 

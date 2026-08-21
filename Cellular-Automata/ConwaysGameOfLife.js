@@ -1,3 +1,4 @@
+const logger = console;
 /*
 Conway's Game of Life
 The Game of Life is a cellular automaton devised by the British mathematician John Horton Conway in 1970. The universe of the Game of Life is an infinite, two-dimensional orthogonal grid of square cells, each of which is in one of two possible states, live or dead, (or populated and unpopulated, respectively). Every cell interacts with its eight neighbours, which are the cells that are horizontally, vertically, or diagonally adjacent. At each step in time, the following transitions occur:
@@ -12,6 +13,7 @@ The Game of Life is a cellular automaton devised by the British mathematician Jo
  * Generates the next generation for a given state of Conway's Game of Life.
  */
 export function newGeneration(cells) {
+logger.debug(`>>> Entering newGeneration(cells=${cells})`);
   const nextGeneration = []
   for (let i = 0; i < cells.length; i++) {
     const nextGenerationRow = []
@@ -40,5 +42,6 @@ export function newGeneration(cells) {
     }
     nextGeneration.push(nextGenerationRow)
   }
+logger.debug(`<<< Exiting newGeneration(cells=${cells})`);
   return nextGeneration
 }

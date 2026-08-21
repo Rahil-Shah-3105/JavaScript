@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * @function maxConsecutiveOnes
  * @description Given a binary array nums, return the maximum number of consecutive 1's in the array.
@@ -6,9 +7,11 @@
  * @see [Leetcode link](https://leetcode.com/problems/max-consecutive-ones/)
  */
 export const maxConsecutiveOnes = (nums) => {
+logger.debug(`>>> Entering maxConsecutiveOnes(nums=${nums})`);
   if (!nums.length) return 0
 
   let result = 0
+logger.debug(`maxConsecutiveOnes(nums=${nums}): result → ${result}`);
   let k = 0
 
   for (
@@ -26,5 +29,6 @@ export const maxConsecutiveOnes = (nums) => {
     }
     result = Math.max(result, fastPointer - slowPointer + 1)
   }
+logger.debug(`<<< Exiting maxConsecutiveOnes(nums=${nums})`);
   return result
 }

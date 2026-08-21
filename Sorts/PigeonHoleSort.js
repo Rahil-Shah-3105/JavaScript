@@ -1,3 +1,4 @@
+const logger = console;
 /*
 https://en.wikipedia.org/wiki/Pigeonhole_sort
 
@@ -7,6 +8,7 @@ https://en.wikipedia.org/wiki/Pigeonhole_sort
 * are approximately the same.
  */
 export function pigeonHoleSort(arr) {
+logger.debug(`>>> Entering pigeonHoleSort(arr=${arr})`);
   let min = arr[0]
   let max = arr[0]
 
@@ -22,6 +24,7 @@ export function pigeonHoleSort(arr) {
   const range = max - min + 1
   const pigeonhole = Array(range).fill(0)
 
+logger.debug(`pigeonHoleSort(arr=${arr}): pigeonhole → ${pigeonhole}`);
   for (let i = 0; i < arr.length; i++) {
     pigeonhole[arr[i] - min]++
   }
@@ -33,5 +36,6 @@ export function pigeonHoleSort(arr) {
       arr[index++] = j + min
     }
   }
+logger.debug(`<<< Exiting pigeonHoleSort(arr=${arr})`);
   return arr
 }

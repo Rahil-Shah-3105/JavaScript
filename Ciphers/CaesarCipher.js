@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * @function caesarsCipher
  * @description - In cryptography, a Caesar cipher, also known as Caesar's cipher, the shift cipher, Caesar's code or Caesar shift, is one of the simplest and most widely known encryption techniques. It is a type of substitution cipher in which each letter in the plaintext is replaced by a letter some fixed number of positions down the alphabet. For example, with a left shift of 3, D would be replaced by A, E would become B, and so on. The method is named after Julius Caesar, who used it in his private correspondence.
@@ -7,6 +8,7 @@
  * @return {string} - decrypted string
  */
 const caesarCipher = (str, rotation) => {
+logger.debug(`>>> Entering caesarCipher(str=${str},rotation=${rotation})`);
   if (typeof str !== 'string' || !Number.isInteger(rotation) || rotation < 0) {
     throw new TypeError('Arguments are invalid')
   }
@@ -20,6 +22,8 @@ const caesarCipher = (str, rotation) => {
     new Map()
   )
 
+logger.debug(`caesarCipher(str=${str},rotation=${rotation}): alphabets → ${alphabets}`);
+logger.debug(`<<< Exiting caesarCipher(str=${str},rotation=${rotation})`);
   return str.replace(/[a-z]/gi, (char) => {
     if (/[A-Z]/.test(char)) {
       return cipherMap.get(char.toLowerCase()).toUpperCase()

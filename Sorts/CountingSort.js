@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * Counting sort is an algorithm for sorting a collection
  * of objects according to keys that are small integers.
@@ -9,11 +10,13 @@
  */
 
 export const countingSort = (arr, min, max) => {
+logger.debug(`>>> Entering countingSort(arr=${arr},min=${min},max=${max})`);
   // Create an auxiliary resultant array
   const res = []
   // Create and initialize the frequency[count] array
   const count = new Array(max - min + 1).fill(0)
   // Populate the freq array
+logger.debug(`countingSort(arr=${arr},min=${min},max=${max}): count → ${count}`);
   for (let i = 0; i < arr.length; i++) {
     count[arr[i] - min]++
   }
@@ -27,6 +30,7 @@ export const countingSort = (arr, min, max) => {
     res[count[arr[i] - min]] = arr[i]
     count[arr[i] - min]--
   }
+logger.debug(`<<< Exiting countingSort(arr=${arr},min=${min},max=${max})`);
   return res
 }
 

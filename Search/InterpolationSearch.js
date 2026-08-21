@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * Interpolation Search
  *
@@ -10,6 +11,7 @@
  */
 
 export function interpolationSearch(arr, key) {
+logger.debug(`>>> Entering interpolationSearch(arr=${arr},key=${key})`);
   const length = arr.length - 1
   let low = 0
   let high = length
@@ -35,5 +37,6 @@ export function interpolationSearch(arr, key) {
     }
   }
 
+logger.debug(`<<< Exiting interpolationSearch(arr=${arr},key=${key})`);
   return -1
 }

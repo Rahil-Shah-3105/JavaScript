@@ -1,3 +1,4 @@
+const logger = console;
 /*
     Explanation :- a user gives a String (it can be incomplete uppercase or
         partial uppercase) and then the program would convert it into a
@@ -16,6 +17,7 @@
  * @returns {String} lower case string
  */
 const LowerCaseConversion = (inputString) => {
+logger.debug(`>>> Entering LowerCaseConversion(inputString=${inputString})`);
   // Take a string and split it into characters.
   const newString = inputString.split('').map((char) => {
     // Get a character code by the use charCodeAt method.
@@ -29,6 +31,7 @@ const LowerCaseConversion = (inputString) => {
     return char
   })
   // After modification, with the help of the join method, join all the characters and return them.
+logger.debug(`<<< Exiting LowerCaseConversion(inputString=${inputString})`);
   return newString.join('')
 }
 

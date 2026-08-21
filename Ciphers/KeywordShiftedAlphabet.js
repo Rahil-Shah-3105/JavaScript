@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * Keyword shifted alphabet is a simple cipher using a translation table created with a help of a keyword.
  * Keyword must be a word where each character can occur only once.
@@ -46,26 +47,32 @@ const alphabet = [
 ]
 
 function checkKeywordValidity(keyword) {
+logger.debug(`>>> Entering checkKeywordValidity(keyword=${keyword})`);
   keyword.split('').forEach((char, index) => {
     const rest = keyword.slice(0, index) + keyword.slice(index + 1)
     if (rest.indexOf(char) !== -1) {
       return false
     }
   })
+logger.debug(`<<< Exiting checkKeywordValidity(keyword=${keyword})`);
   return true
 }
 
 function getEncryptedAlphabet(keyword) {
+logger.debug(`>>> Entering getEncryptedAlphabet(keyword=${keyword})`);
   const encryptedAlphabet = keyword.split('')
   alphabet.forEach((char) => {
     if (encryptedAlphabet.indexOf(char) === -1) {
       encryptedAlphabet.push(char)
     }
   })
+logger.debug(`getEncryptedAlphabet(keyword=${keyword}): encryptedAlphabet → ${encryptedAlphabet}`);
   return encryptedAlphabet
 }
 
 function translate(sourceAlphabet, targetAlphabet, message) {
+logger.debug(`>>> Entering translate(sourceAlphabet=${sourceAlphabet},targetAlphabet=${targetAlphabet},message=${message})`);
+logger.debug(`<<< Exiting translate(sourceAlphabet=${sourceAlphabet},targetAlphabet=${targetAlphabet},message=${message})`);
   return message.split('').reduce((encryptedMessage, char) => {
     const isUpperCase = char === char.toUpperCase()
     const encryptedCharIndex = sourceAlphabet.indexOf(char.toLowerCase())
@@ -79,17 +86,21 @@ function translate(sourceAlphabet, targetAlphabet, message) {
 }
 
 function checkInputs(keyword, message) {
+logger.debug(`>>> Entering checkInputs(keyword=${keyword},message=${message})`);
   if (!keyword || !message) {
     throw new Error('Both keyword and message must be specified')
   }
 
   if (!checkKeywordValidity(keyword)) {
+	logger.debug(`<<< Exiting checkInputs(keyword=${keyword},message=${message})`);
     throw new Error('Invalid keyword!')
   }
 }
 
 function encrypt(keyword, message) {
+logger.debug(`>>> Entering encrypt(keyword=${keyword},message=${message})`);
   checkInputs(keyword, message)
+logger.debug(`<<< Exiting encrypt(keyword=${keyword},message=${message})`);
   return translate(
     alphabet,
     getEncryptedAlphabet(keyword.toLowerCase()),
@@ -98,7 +109,9 @@ function encrypt(keyword, message) {
 }
 
 function decrypt(keyword, message) {
+logger.debug(`>>> Entering decrypt(keyword=${keyword},message=${message})`);
   checkInputs(keyword, message)
+logger.debug(`<<< Exiting decrypt(keyword=${keyword},message=${message})`);
   return translate(
     getEncryptedAlphabet(keyword.toLowerCase()),
     alphabet,

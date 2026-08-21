@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * Problem 17 - Number letter counts
  *
@@ -26,8 +27,10 @@ const andLength = 3
  * This function is called recursively to handle thousand and its sub part
  */
 const numberToWordLength = (n) => {
+logger.debug(`>>> Entering numberToWordLength(n=${n})`);
   let count = 0
 
+logger.debug(`numberToWordLength(n=${n}): count → ${count}`);
   // If number is < 20 then return its corresponding value from ones
   if (n < 20) {
     return ones[n]
@@ -56,8 +59,10 @@ const numberToWordLength = (n) => {
 
   // Find thousand, hundred and sub part
   const hundred = Math.floor(n / 100) % 10
+logger.debug(`numberToWordLength(n=${n}): hundred → ${hundred}`);
   const thousand = Math.floor(n / 1000)
   const sub = n % 100
+logger.debug(`numberToWordLength(n=${n}): thousand → ${thousand}`);
 
   // Find ones for thousand part number
   // e.g., thousand = 2 => inWord = twothousand
@@ -78,6 +83,7 @@ const numberToWordLength = (n) => {
   }
 
   // return number in word format
+logger.debug(`<<< Exiting numberToWordLength(n=${n})`);
   return count
 }
 
@@ -93,8 +99,10 @@ const numberToWordLength = (n) => {
  * @returns {number}
  */
 const countNumberWordLength = (number) => {
+logger.debug(`>>> Entering countNumberWordLength(number=${number})`);
   let count = 0
 
+logger.debug(`countNumberWordLength(number=${number}): count → ${count}`);
   // Not a number check
   if (Number.isNaN(parseInt(number))) {
     throw new Error('Invalid input, please provide valid number')
@@ -111,6 +119,7 @@ const countNumberWordLength = (number) => {
   }
 
   // return final count for number word length
+logger.debug(`<<< Exiting countNumberWordLength(number=${number})`);
   return count
 }
 

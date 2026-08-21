@@ -1,3 +1,4 @@
+const logger = console;
 /*
  * Build a max heap out of the array. A heap is a specialized tree like
  * data structure that satisfies the heap property. The heap property
@@ -7,6 +8,7 @@
  */
 /* eslint no-extend-native: ["off", { "exceptions": ["Object"] }] */
 Array.prototype.heapify = function (index, heapSize) {
+logger.debug(`>>> Entering function(index=${index},heapSize=${heapSize})`);
   let largest = index
   const leftIndex = 2 * index + 1
   const rightIndex = 2 * index + 2
@@ -26,6 +28,7 @@ Array.prototype.heapify = function (index, heapSize) {
 
     this.heapify(largest, heapSize)
   }
+	logger.debug(`<<< Exiting function(index=${index},heapSize=${heapSize})`);
 }
 
 /*
@@ -34,6 +37,7 @@ Array.prototype.heapify = function (index, heapSize) {
  * For more information see: https://en.wikipedia.org/wiki/Heapsort
  */
 export function heapSort(items) {
+logger.debug(`>>> Entering heapSort(items=${items})`);
   const length = items.length
 
   for (let i = Math.floor(length / 2) - 1; i > -1; i--) {
@@ -45,6 +49,7 @@ export function heapSort(items) {
     items[j] = tmp
     items.heapify(0, j)
   }
+logger.debug(`<<< Exiting heapSort(items=${items})`);
   return items
 }
 

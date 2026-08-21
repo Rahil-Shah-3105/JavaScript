@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * union find data structure for javascript
  *
@@ -15,6 +16,7 @@
  * you can learn more on disjoint-set / union–find data structure at https://en.wikipedia.org/wiki/Disjoint-set_data_structure
  */
 function UnionFind(n, key) {
+logger.debug(`>>> Entering UnionFind(n=${n},key=${key})`);
   if (!(this instanceof UnionFind)) return new UnionFind(n)
   if (key && typeof key !== 'function') {
     throw new Error('key has to be a function or else left undefined')
@@ -25,6 +27,8 @@ function UnionFind(n, key) {
   key =
     key ||
     function (a) {
+	logger.debug(`>>> Entering function(a=${a})`);
+	logger.debug('<<< Exiting function()');
       return a
     }
   cnt = length = n
@@ -76,14 +80,17 @@ function UnionFind(n, key) {
     cnt--
   }
   function ensureIndexWithinBounds(args) {
+	logger.debug(`>>> Entering ensureIndexWithinBounds(args=${args})`);
     for (let i = arguments.length - 1; i >= 0; i--) {
       const p = arguments[i]
+	logger.debug(`<<< Exiting ensureIndexWithinBounds(args=${args})`);
       if (p >= length)
         throw new Error(
           'Index out of bounds. The maximum index can be length-1'
         )
     }
   }
+logger.debug(`<<< Exiting UnionFind(n=${n},key=${key})`);
 }
 
 export { UnionFind }

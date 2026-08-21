@@ -1,9 +1,11 @@
+const logger = console;
 /**
  * @function FindMinIterator
  * @description Function to find the minimum number given in an array.
  */
 
 const FindMinIterator = (_iterable, _selector = undefined) => {
+logger.debug(`>>> Entering FindMinIterator(_iterable=${_iterable},_selector=${_selector})`);
   let min
 
   const iterator = _iterable[Symbol.iterator]()
@@ -25,6 +27,7 @@ const FindMinIterator = (_iterable, _selector = undefined) => {
   } else {
     let current = iterator.next()
     if (current.done) {
+	logger.debug(`FindMinIterator(_iterable=${_iterable},_selector=${_selector}): current → ${current}`);
       return undefined
     }
     min = _selector(current.value)
@@ -33,11 +36,13 @@ const FindMinIterator = (_iterable, _selector = undefined) => {
     while (!current.done) {
       const x = _selector(current.value)
       if (x < min) {
+	logger.debug(`FindMinIterator(_iterable=${_iterable},_selector=${_selector}): x → ${x}`);
         min = x
       }
       current = iterator.next()
     }
   }
+logger.debug(`FindMinIterator(_iterable=${_iterable},_selector=${_selector}): iterator → ${iterator}`);
   return min
 }
 

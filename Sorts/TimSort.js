@@ -1,3 +1,4 @@
+const logger = console;
 /**
  *  @function Timsort is a hybrid stable sorting algorithm, derived from merge sort and insertion sort,
  *  designed to perform well on many kinds of real-world data.
@@ -11,6 +12,7 @@
  */
 
 const Timsort = (array) => {
+logger.debug(`>>> Entering Timsort(array=${array})`);
   // Default size of a partition
   const RUN = 32
   const n = array.length
@@ -25,6 +27,7 @@ const Timsort = (array) => {
       Merge(array, left, mid, right)
     }
   }
+logger.debug(`<<< Exiting Timsort(array=${array})`);
   return array
 }
 
@@ -45,6 +48,7 @@ const InsertionSort = (array, left, right) => {
     }
     array[j + 1] = key
   }
+logger.debug(`<<< Exiting InsertionSort(array=${array},left=${left},right=${right})`);
 }
 
 /**
@@ -56,12 +60,15 @@ const InsertionSort = (array, left, right) => {
  */
 
 const Merge = (array, left, mid, right) => {
+logger.debug(`>>> Entering Merge(array=${array},left=${left},mid=${mid},right=${right})`);
   if (mid >= right) return
   const len1 = mid - left + 1
   const len2 = right - mid
   const larr = Array(len1)
   const rarr = Array(len2)
   for (let i = 0; i < len1; i++) {
+logger.debug(`Merge(array=${array},left=${left},mid=${mid},right=${right}): larr → ${larr}`);
+logger.debug(`Merge(array=${array},left=${left},mid=${mid},right=${right}): rarr → ${rarr}`);
     larr[i] = array[left + i]
   }
   for (let i = 0; i < len2; i++) {
@@ -82,6 +89,7 @@ const Merge = (array, left, mid, right) => {
   }
   while (j < rarr.length) {
     array[k++] = rarr[j++]
+	logger.debug(`<<< Exiting Merge(array=${array},left=${left},mid=${mid},right=${right})`);
   }
 }
 
@@ -92,22 +100,27 @@ const Merge = (array, left, mid, right) => {
  * otherwise "FAULTY"
  */
 const demo = () => {
+logger.debug('>>> Entering demo()');
   const size = 1000000
   const data = Array(size)
   for (let i = 0; i < size; i++) {
+logger.debug(`demo(): data → ${data}`);
     data[i] = Math.random() * Number.MAX_SAFE_INTEGER
   }
   const isSorted = function (array) {
+	logger.debug(`>>> Entering isSorted(array=${array})`);
     const n = array.length
     for (let i = 0; i < n - 1; i++) {
       if (array[i] > array[i + 1]) return false
     }
+	logger.debug(`<<< Exiting isSorted(array=${array})`);
     return true
   }
   Timsort(data)
   if (isSorted(data)) {
     return 'RIGHT'
   } else {
+logger.debug('<<< Exiting demo()');
     return 'FAULTY'
   }
 }

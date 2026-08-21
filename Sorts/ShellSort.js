@@ -1,9 +1,11 @@
+const logger = console;
 /*
  * Shell Sort sorts an array based on  insertion sort algorithm
  * more information: https://en.wikipedia.org/wiki/Shellsort
  *
  */
 export function shellSort(items) {
+logger.debug(`>>> Entering shellSort(items=${items})`);
   let interval = 1
 
   while (interval < items.length / 3) {
@@ -23,5 +25,6 @@ export function shellSort(items) {
     }
     interval = (interval - 1) / 3
   }
+logger.debug(`<<< Exiting shellSort(items=${items})`);
   return items
 }

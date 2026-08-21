@@ -1,3 +1,4 @@
+const logger = console;
 /* In insertion sort, we divide the initial unsorted array into two parts;
  * sorted part and unsorted part. Initially the sorted part just has one
  * element (Array of only 1 element is a sorted array). We then pick up
@@ -6,6 +7,7 @@
  */
 
 export function insertionSort(unsortedList) {
+logger.debug(`>>> Entering insertionSort(unsortedList=${unsortedList})`);
   const len = unsortedList.length
   for (let i = 1; i < len; i++) {
     let j
@@ -18,6 +20,7 @@ export function insertionSort(unsortedList) {
     // Insert the copied number at the correct position
     // in sorted part.
     unsortedList[j + 1] = tmp
+	logger.debug(`<<< Exiting insertionSort(unsortedList=${unsortedList})`);
   }
 }
 
@@ -39,6 +42,7 @@ export function insertionSort(unsortedList) {
 */
 
 export function insertionSortAlternativeImplementation(array) {
+logger.debug(`>>> Entering insertionSortAlternativeImplementation(array=${array})`);
   const length = array.length
   if (length < 2) return array
 
@@ -58,5 +62,6 @@ export function insertionSortAlternativeImplementation(array) {
     array[j + 1] = currentItem
   }
   // Return array sorted in ascending order
+logger.debug(`<<< Exiting insertionSortAlternativeImplementation(array=${array})`);
   return array
 }

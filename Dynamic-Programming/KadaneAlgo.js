@@ -1,3 +1,4 @@
+const logger = console;
 /* Kadane's algorithm is one of the most efficient ways to
  * calculate the maximum contiguous subarray sum for a given array.
  * Below is the implementation of Kadane's algorithm along with
@@ -10,6 +11,7 @@
  */
 
 export function kadaneAlgo(array) {
+logger.debug(`>>> Entering kadaneAlgo(array=${array})`);
   let cumulativeSum = 0
   let maxSum = Number.NEGATIVE_INFINITY // maxSum has the least possible value
   for (let i = 0; i < array.length; i++) {
@@ -20,6 +22,7 @@ export function kadaneAlgo(array) {
       cumulativeSum = 0
     }
   }
+logger.debug(`<<< Exiting kadaneAlgo(array=${array})`);
   return maxSum
   // This function returns largest sum contiguous sum in a array
 }

@@ -1,3 +1,4 @@
+const logger = console;
 import { extendedEuclideanGCD } from './ExtendedEuclideanGCD'
 
 /**
@@ -9,7 +10,9 @@ import { extendedEuclideanGCD } from './ExtendedEuclideanGCD'
 
 export class ModRing {
   constructor(MOD) {
+	logger.debug(`>>> Entering constructor(MOD=${MOD})`);
     this.MOD = MOD
+	logger.debug(`constructor(MOD=${MOD}): this.MOD → ${this.MOD}`);
   }
 
   isInputValid = (arg1, arg2) => {

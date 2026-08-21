@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * @function alphaNumericPalindrome
  * @description alphaNumericPalindrome should return true if the string has alphanumeric characters that are palindrome irrespective of special characters and the letter case.
@@ -15,6 +16,7 @@
  * and the case of the characters doesn't matter
  */
 const alphaNumericPalindrome = (str) => {
+logger.debug('>>> Entering alphaNumericPalindrome()');
   if (typeof str !== 'string') {
     throw new TypeError('Argument should be string')
   }
@@ -23,6 +25,10 @@ const alphaNumericPalindrome = (str) => {
   const newStr = str.replace(/[^a-z0-9]+/gi, '').toLowerCase()
   const midIndex = newStr.length >> 1 // x >> y = floor(x / 2^y)
 
+logger.debug(`alphaNumericPalindrome(): newStr → ${newStr}`);
+logger.debug(`alphaNumericPalindrome(str=${str}): newStr → ${newStr}`);
+logger.debug(`alphaNumericPalindrome(): midIndex → ${midIndex}`);
+logger.debug(`alphaNumericPalindrome(str=${str}): midIndex → ${midIndex}`);
   for (let i = 0; i < midIndex; i++) {
     if (newStr.at(i) !== newStr.at(~i)) {
       // ~n = -(n + 1)
@@ -30,6 +36,7 @@ const alphaNumericPalindrome = (str) => {
     }
   }
 
+logger.debug('<<< Exiting alphaNumericPalindrome()');
   return true
 }
 

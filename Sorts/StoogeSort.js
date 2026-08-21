@@ -1,3 +1,4 @@
+const logger = console;
 /*
  * Stooge Sort sorts an array based on divide and conquer principle
  * note the exceptionally bad time complexity
@@ -5,6 +6,7 @@
  *
  */
 export function stoogeSort(items, leftEnd, rightEnd) {
+logger.debug(`>>> Entering stoogeSort(items=${items},leftEnd=${leftEnd},rightEnd=${rightEnd})`);
   if (items[rightEnd - 1] < items[leftEnd]) {
     const temp = items[leftEnd]
     items[leftEnd] = items[rightEnd - 1]
@@ -17,5 +19,7 @@ export function stoogeSort(items, leftEnd, rightEnd) {
     stoogeSort(items, leftEnd + third, rightEnd)
     stoogeSort(items, leftEnd, rightEnd - third)
   }
+	logger.debug(`stoogeSort(items=${items},leftEnd=${leftEnd},rightEnd=${rightEnd}): third → ${third}`);
+logger.debug(`<<< Exiting stoogeSort(items=${items},leftEnd=${leftEnd},rightEnd=${rightEnd})`);
   return items
 }

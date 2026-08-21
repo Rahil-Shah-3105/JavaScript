@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * Pure Implementation of Binary Search Algorithm
  *
@@ -19,6 +20,7 @@
  * @return {Number} Position of the key element
  */
 function binarySearch(array, key, start, end) {
+logger.debug(`>>> Entering binarySearch(array=${array},key=${key},start=${start},end=${end})`);
   if (start === end) {
     if (array[start] > key) {
       return start
@@ -33,6 +35,7 @@ function binarySearch(array, key, start, end) {
 
   const mid = Math.floor((start + end) / 2)
 
+logger.debug(`binarySearch(array=${array},key=${key},start=${start},end=${end}): mid → ${mid}`);
   if (array[mid] < key) {
     return binarySearch(array, key, mid + 1, end)
   } else if (array[mid] > key) {
@@ -40,6 +43,7 @@ function binarySearch(array, key, start, end) {
   } else {
     return mid
   }
+logger.debug(`<<< Exiting binarySearch(array=${array},key=${key},start=${start},end=${end})`);
 }
 
 /**
@@ -49,12 +53,15 @@ function binarySearch(array, key, start, end) {
  * @return {Array} The sorted list.
  */
 export function binaryInsertionSort(array) {
+logger.debug(`>>> Entering binaryInsertionSort(array=${array})`);
   const totalLength = array.length
   for (let i = 1; i < totalLength; i += 1) {
     const key = array[i]
+	logger.warn(`binaryInsertionSort(array=${array}): key → ${key}`);
     const indexPosition = binarySearch(array, key, 0, i - 1)
     array.splice(i, 1)
     array.splice(indexPosition, 0, key)
   }
+logger.debug(`<<< Exiting binaryInsertionSort(array=${array})`);
   return array
 }
