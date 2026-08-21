@@ -1,3 +1,4 @@
+const logger = console;
 /*
 a permutation of a set is, loosely speaking, an arrangement of its members into a sequence or linear order, or if the set is already ordered, a rearrangement of its elements.
 The word "permutation" also refers to the act or process of changing the linear order of an ordered set
@@ -5,9 +6,11 @@ More at : https://en.wikipedia.org/wiki/Permutation
 */
 
 const createPermutations = (str) => {
+logger.debug(`>>> Entering createPermutations(str=${str})`);
   // convert string to array
   const arr = str.split('')
 
+logger.debug(`createPermutations(str=${str}): arr → ${arr}`);
   // get array length
   const strLen = arr.length
   // this will hold all the permutations
@@ -33,6 +36,7 @@ const createPermutations = (str) => {
       perms.push(next.join(''))
     }
   }
+logger.debug(`<<< Exiting createPermutations(str=${str})`);
   return perms
 }
 export { createPermutations }

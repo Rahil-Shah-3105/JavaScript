@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * @function XORCipher
  * @description - Encrypt using an XOR cipher
@@ -10,10 +11,12 @@
  * @return {string} encrypted string
  */
 const XORCipher = (str, key) => {
+logger.debug(`>>> Entering XORCipher(str=${str},key=${key})`);
   if (typeof str !== 'string' || !Number.isInteger(key)) {
     throw new TypeError('Arguments type are invalid')
   }
 
+logger.debug(`<<< Exiting XORCipher(str=${str},key=${key})`);
   return str.replace(/./g, (char) =>
     String.fromCharCode(char.charCodeAt() ^ key)
   )

@@ -1,13 +1,19 @@
+const logger = console;
 class TrieNode {
   constructor(key, parent) {
+	logger.debug(`>>> Entering constructor(key=${key},parent=${parent})`);
+	logger.debug('>>> Entering constructor()');
     this.key = key
     this.count = 0
     this.children = Object.create(null)
     if (parent === undefined) {
+	logger.debug(`constructor(key=${key},parent=${parent}): this.key → ${this.key}`);
       this.parent = null
     } else {
       this.parent = parent
+	logger.debug(`<<< Exiting constructor(key=${key},parent=${parent})`);
     }
+	logger.debug('<<< Exiting constructor()');
   }
 }
 
@@ -19,6 +25,7 @@ class Trie {
 
   // Recursively finds the occurrence of all words in a given node
   static findAllWords(root, word, output) {
+	logger.debug(`>>> Entering findAllWords(root=${root},word=${word},output=${output})`);
     if (root === null) return
     if (root.count > 0) {
       if (typeof output === 'object') {
@@ -31,9 +38,11 @@ class Trie {
       this.findAllWords(root.children[key], word, output)
       word = word.slice(0, -1)
     }
+	logger.debug(`<<< Exiting findAllWords(root=${root},word=${word},output=${output})`);
   }
 
   insert(word) {
+	logger.debug(`>>> Entering insert(word=${word})`);
     if (typeof word !== 'string') return
     if (word === '') {
       this.root.count += 1
@@ -49,9 +58,11 @@ class Trie {
       node = node.children[word.charAt(i)]
     }
     node.count += 1
+	logger.debug(`<<< Exiting insert(word=${word})`);
   }
 
   findPrefix(word) {
+	logger.debug(`>>> Entering findPrefix(word=${word})`);
     if (typeof word !== 'string') return null
     let node = this.root
     const len = word.length
@@ -61,10 +72,12 @@ class Trie {
       if (node.children[word.charAt(i)] === undefined) return null // No such prefix exists
       node = node.children[word.charAt(i)]
     }
+	logger.debug(`<<< Exiting findPrefix(word=${word})`);
     return node
   }
 
   remove(word, count) {
+	logger.debug(`>>> Entering remove(word=${word},count=${count})`);
     if (typeof word !== 'string') return
     if (typeof count !== 'number') count = 1
     else if (count <= 0) return
@@ -101,30 +114,40 @@ class Trie {
     ) {
       child.parent.children[child.key] = undefined
     }
+	logger.debug(`<<< Exiting remove(word=${word},count=${count})`);
   }
 
   findAllWords(prefix) {
+	logger.debug(`>>> Entering findAllWords(prefix=${prefix})`);
     const output = []
     // find the node with provided prefix
     const node = this.findPrefix(prefix)
     // No such prefix exists
+	logger.debug(`findAllWords(prefix=${prefix}): node → ${node}`);
     if (node === null) return output
     Trie.findAllWords(node, prefix, output)
+	logger.debug(`<<< Exiting findAllWords(prefix=${prefix})`);
     return output
   }
 
   contains(word) {
+	logger.debug(`>>> Entering contains(word=${word})`);
     // find the node with given prefix
     const node = this.findPrefix(word)
     // No such word exists
+	logger.debug(`contains(word=${word}): node → ${node}`);
+	logger.debug(`<<< Exiting contains(word=${word})`);
     return node !== null && node.count !== 0
   }
 
   findOccurrences(word) {
+	logger.debug(`>>> Entering findOccurrences(word=${word})`);
     // find the node with given prefix
     const node = this.findPrefix(word)
     // No such word exists
+	logger.debug(`findOccurrences(word=${word}): node → ${node}`);
     if (node === null) return 0
+	logger.debug(`<<< Exiting findOccurrences(word=${word})`);
     return node.count
   }
 }

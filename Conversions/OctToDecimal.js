@@ -1,4 +1,6 @@
+const logger = console;
 function octalToDecimal(num) {
+logger.debug(`>>> Entering octalToDecimal(num=${num})`);
   let dec = 0
   let base = 1
   while (num > 0) {
@@ -7,6 +9,7 @@ function octalToDecimal(num) {
     dec = dec + r * base
     base = base * 8
   }
+logger.debug(`<<< Exiting octalToDecimal(num=${num})`);
   return dec
 }
 

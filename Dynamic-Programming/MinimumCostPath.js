@@ -1,6 +1,8 @@
+const logger = console;
 // Problem Statement => https://www.youtube.com/watch?v=lBRtnuxg-gU
 
 const minCostPath = (matrix) => {
+logger.debug(`>>> Entering minCostPath(matrix=${matrix})`);
   /*
         Find the min cost path from top-left to bottom-right in matrix
         >>> minCostPath([[2, 1], [3, 1], [4, 2]])
@@ -25,6 +27,7 @@ const minCostPath = (matrix) => {
     }
   }
 
+logger.debug(`<<< Exiting minCostPath(matrix=${matrix})`);
   return moves[n - 1][m - 1]
 }
 

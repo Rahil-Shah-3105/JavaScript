@@ -1,3 +1,4 @@
+const logger = console;
 /**
   function that takes month number and its year and returns the number of days within it
   * @param monthNumber.
@@ -9,6 +10,7 @@
 import { isLeapYear } from '../Maths/LeapYear'
 
 const getMonthDays = (monthNumber, year) => {
+logger.debug(`>>> Entering getMonthDays(monthNumber=${monthNumber},year=${year})`);
   const the31DaysMonths = [1, 3, 5, 7, 8, 10, 12]
   const the30DaysMonths = [4, 6, 9, 11]
 
@@ -32,6 +34,7 @@ const getMonthDays = (monthNumber, year) => {
     return 29
   }
 
+logger.debug(`<<< Exiting getMonthDays(monthNumber=${monthNumber},year=${year})`);
   return 28
 }
 

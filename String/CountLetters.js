@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * @function countLetters
  * @description Given a string, count the number of each letter.
@@ -7,6 +8,7 @@
  */
 
 const countLetters = (str) => {
+logger.debug(`>>> Entering countLetters(str=${str})`);
   const specialChars = /\W/g
 
   if (typeof str !== 'string') {
@@ -25,6 +27,7 @@ const countLetters = (str) => {
   for (let i = 0; i < str.toLowerCase().length; i++) {
     const char = str.toLowerCase().charAt(i)
     obj[char] = (obj[char] || 0) + 1
+	logger.debug(`countLetters(str=${str}): char → ${char}`);
   }
 
   return obj

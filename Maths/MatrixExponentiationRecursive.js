@@ -1,3 +1,4 @@
+const logger = console;
 /*
   Source:
     https://en.wikipedia.org/wiki/Exponentiation_by_squaring
@@ -19,10 +20,12 @@ const Identity = (n) => {
       res[i][j] = i === j ? 1 : 0
     }
   }
+logger.debug(`<<< Exiting Identity(n=${n})`);
   return res
 }
 
 const MatMult = (matrixA, matrixB) => {
+logger.debug(`>>> Entering MatMult(matrixA=${matrixA},matrixB=${matrixB})`);
   // Input: matrixA: 2D Array of Numbers of size n x n
   //        matrixB: 2D Array of Numbers of size n x n
   // Output: matrixA x matrixB: 2D Array of Numbers of size n x n
@@ -42,10 +45,12 @@ const MatMult = (matrixA, matrixB) => {
       }
     }
   }
+logger.debug(`<<< Exiting MatMult(matrixA=${matrixA},matrixB=${matrixB})`);
   return matrixC
 }
 
 export const MatrixExponentiationRecursive = (mat, m) => {
+logger.debug(`>>> Entering MatrixExponentiationRecursive(mat=${mat},m=${m})`);
   // Input: mat: 2D Array of Numbers of size n x n
   // Output: mat^n: 2D Array of Numbers of size n x n
   // Complexity: O(n^3 log m)
@@ -61,6 +66,7 @@ export const MatrixExponentiationRecursive = (mat, m) => {
     // tmp = mat ^ m/2
     const tmp = MatrixExponentiationRecursive(mat, m >> 1)
     // return tmp * tmp = (mat ^ m/2) ^ 2 = mat ^ m
+logger.debug(`<<< Exiting MatrixExponentiationRecursive(mat=${mat},m=${m})`);
     return MatMult(tmp, tmp)
   }
 }

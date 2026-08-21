@@ -1,3 +1,4 @@
+const logger = console;
 /*
     author: PatOnTheBack
     license: GPL-3.0 or later
@@ -14,10 +15,13 @@
 'use strict'
 
 const calcRange = (num) => {
+logger.debug(`>>> Entering calcRange(num=${num})`);
+logger.debug(`<<< Exiting calcRange(num=${num})`);
   return [...Array(num).keys()].map((i) => i + 1)
 }
 
 const calcFactorial = (num) => {
+logger.debug(`>>> Entering calcFactorial(num=${num})`);
   if (num === 0) {
     return 1
   }
@@ -32,6 +36,7 @@ const calcFactorial = (num) => {
   if (num > 0) {
     const range = calcRange(num)
     const factorial = range.reduce((a, c) => a * c, 1)
+	logger.debug(`calcFactorial(num=${num}): range → ${range}`);
     return factorial
   }
 }

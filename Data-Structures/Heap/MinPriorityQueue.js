@@ -1,3 +1,4 @@
+const logger = console;
 /* Minimum Priority Queue
  * It is a part of heap data structure
  * A heap is a specific tree based data structure
@@ -13,14 +14,17 @@
 class MinPriorityQueue {
   // calls the constructor and initializes the capacity
   constructor(c) {
+	logger.debug(`>>> Entering constructor(c=${c})`);
     this.heap = []
     this.capacity = c
     this.size = 0
+	logger.debug(`constructor(c=${c}): this.size → ${this.size}`);
   }
 
   // inserts the key at the end and rearranges it
   // so that the binary heap is in appropriate order
   insert(key) {
+	logger.debug(`>>> Entering insert(key=${key})`);
     if (this.isFull()) return
     this.heap[this.size + 1] = key
     let k = this.size + 1
@@ -37,16 +41,22 @@ class MinPriorityQueue {
 
   // returns the highest priority value
   peek() {
+	logger.debug('>>> Entering peek()');
+	logger.debug('<<< Exiting peek()');
     return this.heap[1]
   }
 
   // returns boolean value whether the heap is empty or not
   isEmpty() {
+	logger.debug('>>> Entering isEmpty()');
+	logger.debug('<<< Exiting isEmpty()');
     return this.size === 0
   }
 
   // returns boolean value whether the heap is full or not
   isFull() {
+	logger.debug('>>> Entering isFull()');
+	logger.debug('<<< Exiting isFull()');
     return this.size === this.capacity
   }
 
@@ -59,6 +69,7 @@ class MinPriorityQueue {
   // element with the last, removing the last element to
   // new array and calling sink function.
   heapReverse() {
+	logger.debug('>>> Entering heapReverse()');
     const heapSort = []
     while (this.size > 0) {
       // swap first element with last element
@@ -74,10 +85,12 @@ class MinPriorityQueue {
     // structure with 1 as index of the first element
     this.heap = [undefined, ...heapSort.reverse()]
     this.size = heapSort.length
+	logger.debug(`heapReverse(): this.size → ${this.size}`);
   }
 
   // this function reorders the heap after every delete function
   sink() {
+	logger.debug('>>> Entering sink()');
     let k = 1
     while (2 * k <= this.size || 2 * k + 1 <= this.size) {
       let minIndex
@@ -104,12 +117,14 @@ class MinPriorityQueue {
       this.heap[k] = this.heap[minIndex]
       this.heap[minIndex] = temp
       k = minIndex
+	logger.debug('<<< Exiting sink()');
     }
   }
 
   // deletes the highest priority value from the heap. The last
   // element goes to ahead to first position and reorder heap
   delete() {
+	logger.debug('>>> Entering delete()');
     // checks empty and one element array conditions
     if (this.isEmpty()) return
     if (this.size === 1) {
@@ -120,6 +135,7 @@ class MinPriorityQueue {
     this.heap[1] = this.heap.pop()
     this.size--
     this.sink()
+	logger.debug('<<< Exiting delete()');
     return min
   }
 }

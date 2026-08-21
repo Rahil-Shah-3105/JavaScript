@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * @function mean
  * @description This script will find the mean value of a array of numbers.
@@ -10,6 +11,7 @@
  * @example mean([10, 40, 100, 20]) = 42.5
  */
 const mean = (numbers) => {
+logger.debug(`>>> Entering mean(numbers=${numbers})`);
   if (!Array.isArray(numbers)) {
     throw new TypeError('Invalid Input')
   } else if (numbers.length === 0) {
@@ -17,6 +19,7 @@ const mean = (numbers) => {
   }
 
   let total = 0
+logger.debug(`mean(numbers=${numbers}): total → ${total}`);
   numbers.forEach((num) => {
     if (typeof num !== 'number') {
       throw new TypeError('Invalid Input')
@@ -24,6 +27,7 @@ const mean = (numbers) => {
     total += num
   })
 
+logger.debug(`<<< Exiting mean(numbers=${numbers})`);
   return total / numbers.length
 }
 

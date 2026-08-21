@@ -1,3 +1,4 @@
+const logger = console;
 /*
  * Problem Statement: Find all distinct, non-empty subsequence of given string in lexicographical order using recursive approach.
  *
@@ -20,11 +21,13 @@
  */
 
 export const subsequence = (str, seq, low, output = []) => {
+logger.debug(`>>> Entering subsequence(str=${str},seq=${seq},low=${low},output=${output})`);
   if (low <= str.length && str.length !== 0) {
     output.push(seq)
   }
   for (let i = low; i < str.length; i++) {
     subsequence(str, seq + str[i], i + 1, output)
   }
+logger.debug(`<<< Exiting subsequence(str=${str},seq=${seq},low=${low},output=${output})`);
   return output
 }

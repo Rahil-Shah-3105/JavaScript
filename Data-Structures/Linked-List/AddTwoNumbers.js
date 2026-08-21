@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * A LinkedList based solution for Add Two Numbers
  *
@@ -15,10 +16,13 @@ Link for the Problem: https://leetcode.com/problems/add-two-numbers/
 
 class AddTwoNumbers {
   constructor() {
+	logger.debug('>>> Entering constructor()');
     this.dummyNode = new Node(0)
+	logger.debug('<<< Exiting constructor()');
   }
 
   solution(firstList, secondList) {
+	logger.debug(`>>> Entering solution(firstList=${firstList},secondList=${secondList})`);
     let firstRunner = firstList
     let secondRunner = secondList
     let tail = this.dummyNode
@@ -41,10 +45,12 @@ class AddTwoNumbers {
       tail.next = new Node(carry % 10)
     }
 
+	logger.debug(`<<< Exiting solution(firstList=${firstList},secondList=${secondList})`);
     return this.dummyNode.next
   }
 
   solutionToArray() {
+	logger.debug('>>> Entering solutionToArray()');
     const list = []
     let currentNode = this.dummyNode.next
     while (currentNode) {
@@ -52,6 +58,7 @@ class AddTwoNumbers {
       currentNode = currentNode.next
     }
 
+	logger.debug('<<< Exiting solutionToArray()');
     return list
   }
 }

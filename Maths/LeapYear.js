@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * isLeapYear :: Number -> Boolean
  *
@@ -14,5 +15,7 @@
  * @returns {boolean} true if this is a leap year, false otherwise.
  */
 export const isLeapYear = (year) => {
+logger.debug(`>>> Entering isLeapYear(year=${year})`);
+logger.debug(`<<< Exiting isLeapYear(year=${year})`);
   return year % 400 === 0 || (year % 100 !== 0 && year % 4 === 0)
 }

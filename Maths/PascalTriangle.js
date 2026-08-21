@@ -1,4 +1,6 @@
+const logger = console;
 const addRow = (triangle) => {
+logger.debug(`>>> Entering addRow(triangle=${triangle})`);
   const previous = triangle[triangle.length - 1]
   const newRow = [1]
   for (let i = 0; i < previous.length - 1; i++) {
@@ -7,10 +9,12 @@ const addRow = (triangle) => {
     newRow.push(current + next)
   }
   newRow.push(1)
+logger.debug(`<<< Exiting addRow(triangle=${triangle})`);
   return triangle.push(newRow)
 }
 
 const generate = (numRows) => {
+logger.debug(`>>> Entering generate(numRows=${numRows})`);
   const triangle = [[1], [1, 1]]
 
   if (numRows === 0) {
@@ -22,6 +26,7 @@ const generate = (numRows) => {
       addRow(triangle)
     }
   }
+logger.debug(`<<< Exiting generate(numRows=${numRows})`);
   return triangle
 }
 

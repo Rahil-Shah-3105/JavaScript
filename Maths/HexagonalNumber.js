@@ -1,3 +1,4 @@
+const logger = console;
 /*
  * Author: Akshay Dubey (https://github.com/itsAkshayDubey)
  * Hexagonal Number: https://en.wikipedia.org/wiki/Hexagonal_number
@@ -14,8 +15,10 @@
  */
 
 export const hexagonalNumber = (number) => {
+logger.debug(`>>> Entering hexagonalNumber(number=${number})`);
   if (number <= 0) {
     throw new Error('Number must be greater than zero.')
   }
+logger.debug(`<<< Exiting hexagonalNumber(number=${number})`);
   return number * (2 * number - 1)
 }

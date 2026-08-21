@@ -1,3 +1,4 @@
+const logger = console;
 /*
  * Setting Bit: https://www.geeksforgeeks.org/set-k-th-bit-given-number/
  *
@@ -27,5 +28,7 @@
  */
 
 export const setBit = (number, bitPosition) => {
+logger.debug(`>>> Entering setBit(number=${number},bitPosition=${bitPosition})`);
+logger.debug(`<<< Exiting setBit(number=${number},bitPosition=${bitPosition})`);
   return number | (1 << bitPosition)
 }

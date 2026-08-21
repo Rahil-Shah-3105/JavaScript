@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * @function FindMin
  * @description Function to find the minimum number given in an array of integers.
@@ -6,6 +7,7 @@
  */
 
 const findMin = (...nums) => {
+logger.debug(`>>> Entering findMin(nums=${nums})`);
   if (nums.length === 0) {
     throw new TypeError('Array is empty')
   }
@@ -17,6 +19,7 @@ const findMin = (...nums) => {
     }
   }
 
+logger.debug(`<<< Exiting findMin(nums=${nums})`);
   return min
 }
 

@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * @description
  * Given two strings, `source` and `target`, determine if it's possible to make `source` equal
@@ -13,6 +14,7 @@
  * @see https://www.hackerrank.com/challenges/abbr/problem - Related problem on HackerRank.
  */
 export const isAbbreviation = (source, target) => {
+logger.debug(`>>> Entering isAbbreviation(source=${source},target=${target})`);
   const sourceLength = source.length
   const targetLength = target.length
 
@@ -22,6 +24,7 @@ export const isAbbreviation = (source, target) => {
   )
   // Empty strings are trivially abbreviatable
   canAbbreviate[0][0] = true
+logger.debug(`isAbbreviation(source=${source},target=${target}): canAbbreviate → ${canAbbreviate}`);
 
   for (let sourceIndex = 0; sourceIndex < sourceLength; sourceIndex++) {
     for (let targetIndex = 0; targetIndex <= targetLength; targetIndex++) {
@@ -43,5 +46,6 @@ export const isAbbreviation = (source, target) => {
     }
   }
 
+logger.debug(`<<< Exiting isAbbreviation(source=${source},target=${target})`);
   return canAbbreviate[sourceLength][targetLength]
 }

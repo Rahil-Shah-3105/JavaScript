@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * In mathematics and physics, a vector is an element of a vector space.
  *
@@ -7,8 +8,10 @@
 
 class Vector2 {
   constructor(x, y) {
+	logger.debug(`>>> Entering constructor(x=${x},y=${y})`);
     this.x = x
     this.y = y
+	logger.debug(`constructor(x=${x},y=${y}): this.y → ${this.y}`);
   }
 
   /**
@@ -18,6 +21,8 @@ class Vector2 {
    * @returns Whether they are exactly equal or not.
    */
   equalsExactly(vector) {
+	logger.debug(`>>> Entering equalsExactly(vector=${vector})`);
+	logger.debug(`<<< Exiting equalsExactly(vector=${vector})`);
     return this.x === vector.x && this.y === vector.y
   }
 
@@ -29,6 +34,8 @@ class Vector2 {
    * @returns Whether they are approximately equal or not.
    */
   equalsApproximately(vector, epsilon) {
+	logger.debug(`>>> Entering equalsApproximately(vector=${vector},epsilon=${epsilon})`);
+	logger.debug(`<<< Exiting equalsApproximately(vector=${vector},epsilon=${epsilon})`);
     return (
       Math.abs(this.x - vector.x) < epsilon &&
       Math.abs(this.y - vector.y) < epsilon
@@ -41,6 +48,8 @@ class Vector2 {
    * @returns The length of the vector.
    */
   length() {
+	logger.debug('>>> Entering length()');
+	logger.debug('<<< Exiting length()');
     return Math.sqrt(this.x * this.x + this.y * this.y)
   }
 
@@ -50,10 +59,12 @@ class Vector2 {
    * @returns The normalized vector.
    */
   normalize() {
+	logger.debug('>>> Entering normalize()');
     const length = this.length()
     if (length === 0) {
       throw new Error('Cannot normalize vectors of length 0')
     }
+	logger.debug('<<< Exiting normalize()');
     return new Vector2(this.x / length, this.y / length)
   }
 
@@ -64,8 +75,10 @@ class Vector2 {
    * @returns The sum-vector.
    */
   add(vector) {
+	logger.debug(`>>> Entering add(vector=${vector})`);
     const x = this.x + vector.x
     const y = this.y + vector.y
+	logger.debug(`<<< Exiting add(vector=${vector})`);
     return new Vector2(x, y)
   }
 
@@ -76,8 +89,10 @@ class Vector2 {
    * @returns The difference-vector.
    */
   subtract(vector) {
+	logger.debug(`>>> Entering subtract(vector=${vector})`);
     const x = this.x - vector.x
     const y = this.y - vector.y
+	logger.debug(`<<< Exiting subtract(vector=${vector})`);
     return new Vector2(x, y)
   }
 
@@ -88,8 +103,10 @@ class Vector2 {
    * @returns The scaled vector.
    */
   multiply(scalar) {
+	logger.debug(`>>> Entering multiply(scalar=${scalar})`);
     const x = this.x * scalar
     const y = this.y * scalar
+	logger.debug(`<<< Exiting multiply(scalar=${scalar})`);
     return new Vector2(x, y)
   }
 
@@ -100,7 +117,9 @@ class Vector2 {
    * @returns The distance.
    */
   distance(vector) {
+	logger.debug(`>>> Entering distance(vector=${vector})`);
     const difference = vector.subtract(this)
+	logger.debug(`distance(vector=${vector}): difference → ${difference}`);
     return difference.length()
   }
 
@@ -111,6 +130,8 @@ class Vector2 {
    * @returns The resulting dot product.
    */
   dotProduct(vector) {
+	logger.debug(`>>> Entering dotProduct(vector=${vector})`);
+	logger.debug(`<<< Exiting dotProduct(vector=${vector})`);
     return this.x * vector.x + this.y * vector.y
   }
 
@@ -121,10 +142,14 @@ class Vector2 {
    * @returns The rotated vector.
    */
   rotate(angleInRadians) {
+	logger.debug(`>>> Entering rotate(angleInRadians=${angleInRadians})`);
     const ca = Math.cos(angleInRadians)
     const sa = Math.sin(angleInRadians)
     const x = ca * this.x - sa * this.y
+	logger.debug(`rotate(angleInRadians=${angleInRadians}): ca → ${ca}`);
+	logger.debug(`rotate(angleInRadians=${angleInRadians}): sa → ${sa}`);
     const y = sa * this.x + ca * this.y
+	logger.debug(`<<< Exiting rotate(angleInRadians=${angleInRadians})`);
     return new Vector2(x, y)
   }
 
@@ -135,6 +160,8 @@ class Vector2 {
    * @returns The angle in radians.
    */
   angleBetween(vector) {
+	logger.debug(`>>> Entering angleBetween(vector=${vector})`);
+	logger.debug(`<<< Exiting angleBetween(vector=${vector})`);
     return Math.atan2(vector.y, vector.x) - Math.atan2(this.y, this.x)
   }
 }

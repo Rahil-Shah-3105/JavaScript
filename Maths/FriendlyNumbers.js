@@ -1,3 +1,4 @@
+const logger = console;
 /*
   'In number theory, friendly numbers are two or more natural numbers with a common abundancy index, the
   ratio between the sum of divisors of a number and the number itself.'
@@ -6,6 +7,7 @@
 */
 
 export const FriendlyNumbers = (firstNumber, secondNumber) => {
+logger.debug(`>>> Entering FriendlyNumbers(firstNumber=${firstNumber},secondNumber=${secondNumber})`);
   // input: two integers
   // output: true if the two integers are friendly numbers, false if they are not friendly numbers
 
@@ -20,19 +22,24 @@ export const FriendlyNumbers = (firstNumber, secondNumber) => {
     throw new Error('The two parameters must be distinct, non-null integers')
   }
 
+logger.debug(`<<< Exiting FriendlyNumbers(firstNumber=${firstNumber},secondNumber=${secondNumber})`);
   return abundancyIndex(firstNumber) === abundancyIndex(secondNumber)
 }
 
 function abundancyIndex(number) {
+logger.debug(`>>> Entering abundancyIndex(number=${number})`);
+logger.debug(`<<< Exiting abundancyIndex(number=${number})`);
   return sumDivisors(number) / number
 }
 
 function sumDivisors(number) {
+logger.debug(`>>> Entering sumDivisors(number=${number})`);
   let runningSumDivisors = number
   for (let i = 0; i < number / 2; i++) {
     if (Number.isInteger(number / i)) {
       runningSumDivisors += i
     }
   }
+logger.debug(`<<< Exiting sumDivisors(number=${number})`);
   return runningSumDivisors
 }

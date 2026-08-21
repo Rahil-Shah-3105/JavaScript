@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * @function firstUniqChar
  * @description Given a string str, find the first non-repeating character in it and return its index. If it does not exist, return -1.
@@ -9,11 +10,13 @@
  */
 
 const firstUniqChar = (str) => {
+logger.debug(`>>> Entering firstUniqChar(str=${str})`);
   if (typeof str !== 'string') {
     throw new TypeError('Argument should be string')
   }
   const count = new Map()
 
+logger.debug(`firstUniqChar(str=${str}): count → ${count}`);
   for (const char of str) {
     if (!count[char]) {
       count[char] = 1
@@ -24,6 +27,7 @@ const firstUniqChar = (str) => {
   for (let i = 0; i < str.length; i++) {
     if (count[str[i]] === 1) return i
   }
+logger.debug(`<<< Exiting firstUniqChar(str=${str})`);
   return -1
 }
 

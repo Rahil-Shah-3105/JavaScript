@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * @function dutchNationalFlagSort
  * @description Dutch National Flag Sort is an algorithm to sort an array containing 0s, 1s, and 2s in linear time.
@@ -8,6 +9,7 @@
  * @see [Dutch National Flag Sort](https://en.wikipedia.org/wiki/Dutch_national_flag_problem)
  */
 export function dutchNationalFlagSort(nums) {
+logger.debug(`>>> Entering dutchNationalFlagSort(nums=${nums})`);
   let low = 0
   let mid = 0
   let high = nums.length - 1
@@ -29,5 +31,6 @@ export function dutchNationalFlagSort(nums) {
     }
   }
 
+logger.debug(`<<< Exiting dutchNationalFlagSort(nums=${nums})`);
   return nums
 }

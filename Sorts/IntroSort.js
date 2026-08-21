@@ -1,5 +1,7 @@
+const logger = console;
 /**
  * @function Introsort (As implemented in STD C++ Lib)
+logger.debug(`>>> Entering Introsort(Lib=${Lib})`);
  * The function performs introsort which is used in
  * C++ Standard LIbrary, the implementation is inspired from]
  * library routine itself.
@@ -16,6 +18,7 @@
  * @author [Lakhan Nad](https://github.com/Lakhan-Nad)
  */
 function introsort(array, compare) {
+logger.debug(`>>> Entering introsort(array=${array},compare=${compare})`);
   /**
    * @function Default Comparison Function
    * This function is same as implemented by
@@ -35,7 +38,10 @@ function introsort(array, compare) {
     const xString = toString(x)
     const yString = toString(y)
     if (xString < yString) return -1
+	logger.debug(`defaultComparator(x=${x},y=${y}): xString → ${xString}`);
+	logger.debug(`defaultComparator(x=${x},y=${y}): yString → ${yString}`);
     if (xString > yString) return 1
+	logger.debug(`<<< Exiting defaultComparator(x=${x},y=${y})`);
     return 0
   }
   /**
@@ -46,6 +52,7 @@ function introsort(array, compare) {
    * @returns {String} String representation of given object
    */
   const toString = function (obj) {
+	logger.debug(`>>> Entering toString(obj=${obj})`);
     if (obj === null) return 'null'
     if (typeof obj === 'boolean' || typeof obj === 'number') {
       return obj.toString()
@@ -75,10 +82,14 @@ function introsort(array, compare) {
    * [IIFE](https://en.wikipedia.org/wiki/Immediately_invoked_function_expression)
    */
   return (function (array, comparator) {
+logger.debug(`>>> Entering return(swap=${swap})`);
     const swap = function (index1, index2) {
       const temp = array[index1]
+	logger.debug(`<<< Exiting return(swap=${swap})`);
       array[index1] = array[index2]
+	logger.debug(`>>> Entering swap(index1=${index1},index2=${index2})`);
       array[index2] = temp
+	logger.debug(`<<< Exiting swap(index1=${index1},index2=${index2})`);
     }
     /**
      * @constant THRESHOLD
@@ -126,6 +137,7 @@ function introsort(array, compare) {
      * @param {Number} depth this measures how many recursive calls are done
      */
     function quickSort(start, last, depth) {
+	logger.debug(`>>> Entering quickSort(start=${start},last=${last},depth=${depth})`);
       if (last - start <= THRESHOLD) {
         insertionSort(start, last)
         return
@@ -135,8 +147,10 @@ function introsort(array, compare) {
       }
       let pivot = (last + start) >> 1
       pivot = partition(start, last, pivot)
+	logger.debug(`quickSort(start=${start},last=${last},depth=${depth}): pivot → ${pivot}`);
       quickSort(start, pivot, depth - 1)
       quickSort(pivot + 1, last, depth - 1)
+	logger.debug(`<<< Exiting quickSort(start=${start},last=${last},depth=${depth})`);
     }
     /**
      * @function Helper function to quicksort
@@ -146,6 +160,7 @@ function introsort(array, compare) {
      * @returns {Number} the index of pivot after partition
      */
     function partition(start, last, pivot) {
+	logger.debug(`>>> Entering partition(start=${start},last=${last},pivot=${pivot})`);
       swap(start, pivot)
       pivot = start
       let lo = start
@@ -165,6 +180,7 @@ function introsort(array, compare) {
         swap(lo, hi)
       }
       swap(start, hi)
+	logger.debug(`<<< Exiting partition(start=${start},last=${last},pivot=${pivot})`);
       return hi
     }
     /**
@@ -175,6 +191,7 @@ function introsort(array, compare) {
      * @param {Number} last  one more than last index of array to be sorted
      */
     function insertionSort(start, last) {
+	logger.debug(`>>> Entering insertionSort(start=${start},last=${last})`);
       let i, j
       for (i = start + 1; i < last; i++) {
         j = i - 1
@@ -183,6 +200,7 @@ function introsort(array, compare) {
           j--
         }
       }
+	logger.debug(`<<< Exiting insertionSort(start=${start},last=${last})`);
     }
     /**
      * @function
@@ -192,8 +210,10 @@ function introsort(array, compare) {
      * @param {Number} last  one more than last index of array to be sorted
      */
     function heapSort(start, last) {
+	logger.debug(`>>> Entering heapSort(start=${start},last=${last})`);
       let x = (last + start) >> 1
       while (x - start >= 0) {
+		logger.debug(`heapSort(start=${start},last=${last}): x → ${x}`);
         heapify(x, start, last)
         x--
       }
@@ -203,6 +223,7 @@ function introsort(array, compare) {
         heapify(start, start, x)
         x--
       }
+		logger.debug(`<<< Exiting heapSort(start=${start},last=${last})`);
     }
     /**
      * @function Helper function to heapsort routine
@@ -211,6 +232,7 @@ function introsort(array, compare) {
      * @param {Number} last  one more than last index of segment that cur belongs to
      */
     function heapify(cur, start, last) {
+	logger.debug(`>>> Entering heapify(cur=${cur},start=${start},last=${last})`);
       const size = last - start
       let max, lt, rt
       cur = cur - start
@@ -234,11 +256,13 @@ function introsort(array, compare) {
           swap(start + cur, start + max)
           cur = max
         } else {
+		logger.debug(`<<< Exiting heapify(cur=${cur},start=${start},last=${last})`);
           break
         }
       }
     }
   })(array, compare)
+logger.debug(`<<< Exiting introsort(array=${array},compare=${compare})`);
 }
 
 /**
@@ -248,11 +272,15 @@ function introsort(array, compare) {
  *         'WRONG!!' otherwise
  */
 function demo1() {
+logger.debug('>>> Entering demo1()');
   const data = []
   const size = 1000000
+logger.debug(`demo1(): data → ${data}`);
   let i = 0
   let temp
   const c = function (a, b) {
+	logger.debug(`>>> Entering c(a=${a},b=${b})`);
+	logger.debug(`<<< Exiting c(a=${a},b=${b})`);
     return a - b
   }
   for (i = 0; i < size; i++) {
@@ -270,6 +298,7 @@ function demo1() {
   if (faulty) {
     return 'WRONG!!'
   } else {
+logger.debug('<<< Exiting demo1()');
     return 'RIGHT:)'
   }
 }
@@ -280,8 +309,11 @@ function demo1() {
  * comparing the results with Array.sort
  */
 function demo2() {
+logger.debug('>>> Entering demo2()');
   const data = []
   const data2 = []
+logger.debug(`demo2(): data → ${data}`);
+logger.debug(`demo2(): data2 → ${data2}`);
   const size = 1000000
   let i = 0
   let temp
@@ -302,6 +334,7 @@ function demo2() {
   if (faulty) {
     return 'WRONG Implemented Comparator!!'
   } else {
+logger.debug('<<< Exiting demo2()');
     return 'Comparator Works Fine:)'
   }
 }

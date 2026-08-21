@@ -1,3 +1,4 @@
+const logger = console;
 /**
  *
  * @title Midpoint rule for definite integral evaluation
@@ -18,6 +19,7 @@
  */
 
 function integralEvaluation(N, a, b, func) {
+logger.debug(`>>> Entering integralEvaluation(N=${N},a=${a},b=${b},func=${func})`);
   // Check if all restrictions are satisfied for the given N, a, b
   if (!Number.isInteger(N) || Number.isNaN(a) || Number.isNaN(b)) {
     throw new TypeError('Expected integer N and finite a, b')
@@ -32,6 +34,7 @@ function integralEvaluation(N, a, b, func) {
 
   // Calculate the step h
   const h = (b - a) / N
+logger.debug(`integralEvaluation(N=${N},a=${a},b=${b},func=${func}): h → ${h}`);
 
   // Find interpolation points
   let xi = a // initialize xi = x0
@@ -47,6 +50,7 @@ function integralEvaluation(N, a, b, func) {
 
   // Calculate the integral
   let result = h
+logger.debug(`integralEvaluation(N=${N},a=${a},b=${b},func=${func}): result → ${result}`);
   temp = pointsArray.reduce((acc, currValue) => acc + currValue, 0)
 
   result *= temp
@@ -57,6 +61,7 @@ function integralEvaluation(N, a, b, func) {
     )
   }
 
+logger.debug(`<<< Exiting integralEvaluation(N=${N},a=${a},b=${b},func=${func})`);
   return result
 }
 

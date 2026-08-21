@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * @function countSubstrings
  * @description Given a string of words or phrases, count the occurrences of a substring
@@ -9,6 +10,7 @@
  */
 
 const countSubstrings = (str, substring) => {
+logger.debug(`>>> Entering countSubstrings(str=${str},substring=${substring})`);
   if (typeof str !== 'string' || typeof substring !== 'string') {
     throw new TypeError('Argument should be string')
   }
@@ -16,13 +18,16 @@ const countSubstrings = (str, substring) => {
   if (substring.length === 0) return str.length + 1
 
   let count = 0
+logger.debug(`countSubstrings(str=${str},substring=${substring}): count → ${count}`);
   let position = str.indexOf(substring)
 
+logger.debug(`countSubstrings(str=${str},substring=${substring}): position → ${position}`);
   while (position > -1) {
     count++
     position = str.indexOf(substring, position + 1)
   }
 
+logger.debug(`<<< Exiting countSubstrings(str=${str},substring=${substring})`);
   return count
 }
 

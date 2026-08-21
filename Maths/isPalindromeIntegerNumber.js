@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * @function isPalindromeIntegerNumber
  * @param { Number } x
@@ -7,6 +8,7 @@
  * space complexity : O(1)
  */
 export function isPalindromeIntegerNumber(x) {
+logger.debug(`>>> Entering isPalindromeIntegerNumber(x=${x})`);
   if (typeof x !== 'number') {
     throw new TypeError('Input must be a integer number')
   }
@@ -29,5 +31,6 @@ export function isPalindromeIntegerNumber(x) {
   }
 
   // compare origin x and reversed are same
+logger.debug(`<<< Exiting isPalindromeIntegerNumber(x=${x})`);
   return x === reversed
 }

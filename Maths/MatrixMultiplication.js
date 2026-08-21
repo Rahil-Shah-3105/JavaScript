@@ -1,3 +1,4 @@
+const logger = console;
 // Wikipedia URL for General Matrix Multiplication Concepts: https://en.wikipedia.org/wiki/Matrix_multiplication
 
 // This algorithm has multiple functions that ultimately check if the inputs are actually matrices and if two Matrices (that can be different sizes) can be multiplied together.
@@ -5,6 +6,7 @@
 
 // MatrixCheck tests to see if all of the rows of the matrix inputted have similar size columns
 const matrixCheck = (matrix) => {
+logger.debug(`>>> Entering matrixCheck(matrix=${matrix})`);
   let columnNumb
   for (let index = 0; index < matrix.length; index++) {
     if (index === 0) {
@@ -15,10 +17,12 @@ const matrixCheck = (matrix) => {
       return columnNumb
     }
   }
+logger.debug(`<<< Exiting matrixCheck(matrix=${matrix})`);
 }
 
 // tests to see if the matrices have a like side, i.e., the row length on the first matrix matches the column length on the second matrix, or vice versa.
 const twoMatricesCheck = (first, second) => {
+logger.debug(`>>> Entering twoMatricesCheck(first=${first},second=${second})`);
   const [firstRowLength, secondRowLength, firstColLength, secondColLength] = [
     first.length,
     second.length,
@@ -27,6 +31,7 @@ const twoMatricesCheck = (first, second) => {
   ]
 
   // These matrices do not have a common side
+logger.debug(`<<< Exiting twoMatricesCheck(first=${first},second=${second})`);
   return (
     firstRowLength === secondColLength && secondRowLength === firstColLength
   )
@@ -35,12 +40,15 @@ const twoMatricesCheck = (first, second) => {
 // returns an empty array that has the same number of rows as the left matrix being multiplied.
 // Uses Array.prototype.map() to loop over the first (or left) matrix and returns an empty array on each iteration.
 const initiateEmptyArray = (first, second) => {
+logger.debug(`>>> Entering initiateEmptyArray(first=${first},second=${second})`);
   if (twoMatricesCheck(first, second)) {
     const emptyArray = first.map(() => {
       return ['']
     })
+	logger.debug(`initiateEmptyArray(first=${first},second=${second}): emptyArray → ${emptyArray}`);
     return emptyArray
   } else {
+logger.debug(`<<< Exiting initiateEmptyArray(first=${first},second=${second})`);
     return false
   }
 }
@@ -49,6 +57,7 @@ const initiateEmptyArray = (first, second) => {
 // Dot product, takes the row of the first matrix and multiplies it by the column of the second matrix, the `twoMatricesCheck` tested to see if they were the same size already.
 // The dot product for each iteration is then saved to its respective index into `multMatrix`.
 export const matrixMult = (firstArray, secondArray) => {
+logger.debug(`>>> Entering matrixMult(firstArray=${firstArray},secondArray=${secondArray})`);
   const multMatrix = initiateEmptyArray(firstArray, secondArray)
   for (let rm = 0; rm < firstArray.length; rm++) {
     const rowMult = []
@@ -67,6 +76,7 @@ export const matrixMult = (firstArray, secondArray) => {
       multMatrix[rm][cm] = newNumb
     }
   }
+logger.debug(`matrixMult(firstArray=${firstArray},secondArray=${secondArray}): multMatrix → ${multMatrix}`);
   return multMatrix
 }
 

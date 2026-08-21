@@ -1,3 +1,4 @@
+const logger = console;
 /*
  *  This algorithm accepts a month in the format mm/yyyy.
  *  And prints out the month's calendar.
@@ -7,11 +8,14 @@ import { isLeapYear } from '../Maths/LeapYear'
 
 class Month {
   constructor() {
+	logger.debug('>>> Entering constructor()');
     this.Days = ['M', 'T', 'W', 'Th', 'F', 'S', 'Su']
     this.BDays = ['M', 'Su', 'S', 'F', 'Th', 'W', 'T']
     this.epoch = { month: 1, year: 1900 }
+	logger.debug(`constructor(): this.Days → ${this.Days}`);
     this.monthDays = [31, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
     this.monthDaysLeap = [31, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+	logger.debug(`constructor(): this.BDays → ${this.BDays}`);
   }
 
   printCal(days, startDay, output = (value) => console.log(value)) {
@@ -38,8 +42,10 @@ class Month {
   }
 
   parseDate(date) {
+	logger.debug(`>>> Entering parseDate(date=${date})`);
     const dateAr = []
     let block = ''
+	logger.debug(`parseDate(date=${date}): block → ${block}`);
     let i
     for (i = 0; i < date.length; i++) {
       if (date[i] === '/') {
@@ -52,10 +58,12 @@ class Month {
     dateAr.push(parseInt(block))
     if (dateAr.length !== 2) throw new Error('Improper string encoding')
     const dateOb = { month: dateAr[0], year: dateAr[1] }
+	logger.debug(`<<< Exiting parseDate(date=${date})`);
     return dateOb
   }
 
   isGreater(startDate, endDate) {
+	logger.debug(`>>> Entering isGreater(startDate=${startDate},endDate=${endDate})`);
     if (startDate.year > endDate.year) {
       return true
     } else if (startDate.year < endDate.year) {
@@ -65,10 +73,12 @@ class Month {
     } else if (startDate.month < endDate.month) {
       return false
     }
+	logger.debug(`<<< Exiting isGreater(startDate=${startDate},endDate=${endDate})`);
     return true
   }
 
   getDayDiff(startDate, endDate) {
+	logger.debug(`>>> Entering getDayDiff(startDate=${startDate},endDate=${endDate})`);
     if (this.isGreater(startDate, endDate) === null) {
       return 0
     } else if (this.isGreater(startDate, endDate) === true) {
@@ -80,6 +90,7 @@ class Month {
     while (startDate.year !== endDate.year) {
       diff += isLeapYear(startDate.year) ? 366 : 365
       startDate.year = startDate.year + 1
+	logger.debug(`getDayDiff(startDate=${startDate},endDate=${endDate}): startDate.year → ${startDate.year}`);
     }
     while (startDate.month !== endDate.month) {
       if (startDate.month < endDate.month) {
@@ -94,14 +105,19 @@ class Month {
         startDate.month = startDate.month - 1
       }
     }
+	logger.debug(`<<< Exiting getDayDiff(startDate=${startDate},endDate=${endDate})`);
     return diff
   }
 
   generateMonthCal(date) {
+	logger.debug(`>>> Entering generateMonthCal(date=${date})`);
     const Month = this.parseDate(date)
     let day = ''
+	logger.debug(`generateMonthCal(date=${date}): Month → ${Month}`);
+	logger.debug(`generateMonthCal(date=${date}): day → ${day}`);
     let difference = this.getDayDiff(this.epoch, Month)
     difference = difference % 7
+	logger.debug(`generateMonthCal(date=${date}): difference → ${difference}`);
     let Month2 = this.parseDate(date)
     day = this.isGreater(Month2, this.epoch)
       ? this.Days[difference]
@@ -110,6 +126,7 @@ class Month {
     if (isLeapYear(Month2.year))
       this.printCal(this.monthDaysLeap[Month2.month], day)
     else this.printCal(this.monthDays[Month2.month], day)
+	logger.debug(`<<< Exiting generateMonthCal(date=${date})`);
   }
 }
 

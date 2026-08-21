@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * Author: dephraiim
  * License: GPL-3.0 or later
@@ -9,12 +10,14 @@
  */
 
 const armstrongNumber = (num) => {
+logger.debug(`>>> Entering armstrongNumber(num=${num})`);
   if (typeof num !== 'number' || num < 0) return false
   const numStr = num.toString()
   const sum = [...numStr].reduce(
     (acc, digit) => acc + parseInt(digit) ** numStr.length,
     0
   )
+logger.debug(`armstrongNumber(num=${num}): numStr → ${numStr}`);
   return sum === num
 }
 

@@ -1,3 +1,4 @@
+const logger = console;
 /*
  * Places the `k` smallest elements in `array` in the first `k` indices: `[0..k-1]`
  * Modifies the passed in array *in place*
@@ -12,6 +13,7 @@
  * [Reference](http://en.wikipedia.org/wiki/Quickselect)
  */
 export function quickSelectSearch(array, k) {
+logger.debug(`>>> Entering quickSelectSearch(array=${array},k=${k})`);
   if (!array || array.length <= k) {
     throw new Error('Invalid arguments')
   }
@@ -22,6 +24,7 @@ export function quickSelectSearch(array, k) {
     let left = from
     let right = to
     const pivot = array[Math.ceil((left + right) * 0.5)]
+	logger.debug(`quickSelectSearch(array=${array},k=${k}): pivot → ${pivot}`);
 
     while (left < right) {
       if (array[left] >= pivot) {
@@ -44,6 +47,7 @@ export function quickSelectSearch(array, k) {
       from = left + 1
     }
   }
+logger.debug(`<<< Exiting quickSelectSearch(array=${array},k=${k})`);
   return array
 }
 

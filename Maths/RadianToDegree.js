@@ -1,3 +1,4 @@
+const logger = console;
 /*
  * Radian : https://en.wikipedia.org/wiki/Radian
  * Degree : https://en.wikipedia.org/wiki/Degree_(angle)
@@ -19,5 +20,7 @@
  * @return {number}
  */
 export const radianToDegree = (radian) => {
+logger.debug(`>>> Entering radianToDegree(radian=${radian})`);
+logger.debug(`<<< Exiting radianToDegree(radian=${radian})`);
   return radian * (180 / Math.PI)
 }

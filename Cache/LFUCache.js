@@ -1,9 +1,13 @@
+const logger = console;
 class CacheNode {
   constructor(key, value, frequency) {
+	logger.debug(`>>> Entering constructor(key=${key},value=${value},frequency=${frequency})`);
     this.key = key
     this.value = value
     this.frequency = frequency
+	logger.debug(`constructor(key=${key},value=${value},frequency=${frequency}): this.key → ${this.key}`);
 
+	logger.debug(`<<< Exiting constructor(key=${key},value=${value},frequency=${frequency})`);
     return Object.seal(this)
   }
 }
@@ -23,13 +27,16 @@ class FrequencyMap extends Map {
    * @param {CacheNode} node
    */
   refresh(node) {
+	logger.debug(`>>> Entering refresh(node=${node})`);
     const { frequency } = node
     const freqSet = this.get(frequency)
     freqSet.delete(node)
 
+	logger.debug(`refresh(node=${node}): freqSet → ${freqSet}`);
     node.frequency++
 
     this.insert(node)
+	logger.debug(`<<< Exiting refresh(node=${node})`);
   }
 
   /**
@@ -38,6 +45,7 @@ class FrequencyMap extends Map {
    * @param {CacheNode} node
    */
   insert(node) {
+	logger.debug(`>>> Entering insert(node=${node})`);
     const { frequency } = node
 
     if (!this.has(frequency)) {
@@ -45,6 +53,7 @@ class FrequencyMap extends Map {
     }
 
     this.get(frequency).add(node)
+	logger.debug(`<<< Exiting insert(node=${node})`);
   }
 }
 
@@ -57,12 +66,15 @@ class LFUCache {
    * @returns {LFUCache} - sealed
    */
   constructor(capacity) {
+	logger.debug(`>>> Entering constructor(capacity=${capacity})`);
     this.#capacity = capacity
     this.#frequencyMap = new FrequencyMap()
     this.misses = 0
     this.hits = 0
+	logger.debug(`constructor(capacity=${capacity}): this.misses → ${this.misses}`);
     this.cache = new Map()
 
+	logger.debug(`constructor(capacity=${capacity}): this.hits → ${this.hits}`);
     return Object.seal(this)
   }
 
@@ -71,6 +83,8 @@ class LFUCache {
    * @returns {number}
    */
   get capacity() {
+	logger.debug('>>> Entering capacity()');
+	logger.debug('<<< Exiting capacity()');
     return this.#capacity
   }
 
@@ -79,6 +93,8 @@ class LFUCache {
    * @returns {number}
    */
   get size() {
+	logger.debug('>>> Entering size()');
+	logger.debug('<<< Exiting size()');
     return this.cache.size
   }
 
@@ -86,6 +102,7 @@ class LFUCache {
    * Set the capacity of the LFUCache if you decrease the capacity its removed CacheNodes following the LFU - least frequency used
    */
   set capacity(newCapacity) {
+	logger.debug(`>>> Entering capacity(newCapacity=${newCapacity})`);
     if (this.#capacity > newCapacity) {
       let diff = this.#capacity - newCapacity // get the decrement number of capacity
 
@@ -100,6 +117,8 @@ class LFUCache {
   }
 
   get info() {
+	logger.debug('>>> Entering info()');
+	logger.debug('<<< Exiting info()');
     return Object.freeze({
       misses: this.misses,
       hits: this.hits,
@@ -110,23 +129,30 @@ class LFUCache {
   }
 
   get leastFrequency() {
+	logger.debug('>>> Entering leastFrequency()');
     const freqCacheIterator = this.#frequencyMap.keys()
     let leastFrequency = freqCacheIterator.next().value || null
+	logger.debug(`leastFrequency(): freqCacheIterator → ${freqCacheIterator}`);
 
     // select the non-empty frequency Set
     while (this.#frequencyMap.get(leastFrequency)?.size === 0) {
       leastFrequency = freqCacheIterator.next().value
     }
 
+	logger.debug('<<< Exiting leastFrequency()');
     return leastFrequency
   }
 
   #removeCacheNode() {
+	logger.debug('>>> Entering removeCacheNode()');
     const leastFreqSet = this.#frequencyMap.get(this.leastFrequency)
     // Select the least recently used node from the least Frequency set
     const LFUNode = leastFreqSet.values().next().value
+	logger.debug(`removeCacheNode(): leastFreqSet → ${leastFreqSet}`);
+	logger.debug(`removeCacheNode(): LFUNode → ${LFUNode}`);
 
     leastFreqSet.delete(LFUNode)
+	logger.debug('<<< Exiting removeCacheNode()');
     this.cache.delete(LFUNode.key)
   }
 
@@ -136,8 +162,10 @@ class LFUCache {
    * @returns {boolean}
    */
   has(key) {
+	logger.debug(`>>> Entering has(key=${key})`);
     key = String(key) // converted to string
 
+	logger.debug(`<<< Exiting has(key=${key})`);
     return this.cache.has(key)
   }
 
@@ -148,18 +176,21 @@ class LFUCache {
    * @returns {any}
    */
   get(key) {
+	logger.debug(`>>> Entering get(key=${key})`);
     key = String(key) // converted to string
 
     if (this.cache.has(key)) {
       const oldNode = this.cache.get(key)
       this.#frequencyMap.refresh(oldNode)
 
+	logger.debug(`get(key=${key}): oldNode → ${oldNode}`);
       this.hits++
 
       return oldNode.value
     }
 
     this.misses++
+	logger.debug(`<<< Exiting get(key=${key})`);
     return null
   }
 
@@ -172,6 +203,7 @@ class LFUCache {
    * @returns {LFUCache}
    */
   set(key, value, frequency = 1) {
+	logger.debug(`>>> Entering set(key=${key},value=${value},frequency=${frequency})`);
     key = String(key) // converted to string
 
     if (this.#capacity === 0) {
@@ -181,9 +213,13 @@ class LFUCache {
     if (this.cache.has(key)) {
       const node = this.cache.get(key)
       node.value = value
+	logger.debug(`set(key=${key},value=${value},frequency=${frequency}): node → ${node}`);
+	const __log_start = Date.now();
 
       this.#frequencyMap.refresh(node)
 
+	logger.debug(`set(key=${key},value=${value},frequency=${frequency}): node.value → ${node.value}`);
+	logger.info(`set(key,value,frequency)=${key},${value},${frequency}: database operation took ${Date.now() - __log_start} ms`);
       return this
     }
 
@@ -194,9 +230,11 @@ class LFUCache {
 
     const newNode = new CacheNode(key, value, frequency)
 
+	logger.debug(`set(key=${key},value=${value},frequency=${frequency}): newNode → ${newNode}`);
     this.cache.set(key, newNode)
     this.#frequencyMap.insert(newNode)
 
+	logger.debug(`<<< Exiting set(key=${key},value=${value},frequency=${frequency})`);
     return this
   }
 
@@ -207,6 +245,7 @@ class LFUCache {
    * @returns {LFUCache} - merged
    */
   parse(json) {
+	logger.debug(`>>> Entering parse(json=${json})`);
     const { misses, hits, cache } = JSON.parse(json)
 
     this.misses += misses ?? 0
@@ -217,6 +256,7 @@ class LFUCache {
       this.set(key, value, frequency)
     }
 
+	logger.debug(`<<< Exiting parse(json=${json})`);
     return this
   }
 
@@ -226,9 +266,11 @@ class LFUCache {
    * @returns {LFUCache}
    */
   clear() {
+	logger.debug('>>> Entering clear()');
     this.cache.clear()
     this.#frequencyMap.clear()
 
+	logger.debug('<<< Exiting clear()');
     return this
   }
 
@@ -239,7 +281,9 @@ class LFUCache {
    * @returns {string} - JSON
    */
   toString(indent) {
+	logger.debug(`>>> Entering toString(indent=${indent})`);
     const replacer = (_, value) => {
+	logger.debug(`>>> Entering replacer(_=${_},value=${value})`);
       if (value instanceof Set) {
         return [...value]
       }
@@ -248,9 +292,11 @@ class LFUCache {
         return Object.fromEntries(value)
       }
 
+	logger.debug(`<<< Exiting replacer(_=${_},value=${value})`);
       return value
     }
 
+	logger.debug(`<<< Exiting toString(indent=${indent})`);
     return JSON.stringify(this, replacer, indent)
   }
 }

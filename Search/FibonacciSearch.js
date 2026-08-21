@@ -1,3 +1,4 @@
+const logger = console;
 /****************************************************************************
  * Fibonacci Search JavaScript Implementation
  * Author   Alhassan Atama Isiaka
@@ -20,13 +21,18 @@
  ****************************************************************************/
 
 export const fibonacciSearch = (arr, x, n) => {
+logger.debug('>>> Entering fibonacciSearch()');
   let fib2 = 0 // (K-2)'th Fibonacci Number
   let fib1 = 1 // (K-1)'th Fibonacci Number.
   let fibK = fib2 + fib1 // Kth Fibonacci
+logger.debug(`fibonacciSearch(): fib2 → ${fib2}`);
+logger.debug(`fibonacciSearch(arr=${arr},x=${x},n=${n}): fib2 → ${fib2}`);
 
   /* We want to store the smallest fibonacci number smaller such that
     number is greater than or equal to n, we use fibK for this */
   while (fibK < n) {
+	logger.debug(`fibonacciSearch(): fib1 → ${fib1}`);
+	logger.debug(`fibonacciSearch(arr=${arr},x=${x},n=${n}): fib1 → ${fib1}`);
     fib2 = fib1
     fib1 = fibK
     fibK = fib2 + fib1
@@ -67,6 +73,7 @@ export const fibonacciSearch = (arr, x, n) => {
     return offset + 1
   }
   //    element not found. return -1
+logger.debug('<<< Exiting fibonacciSearch()');
   return -1
 }
 

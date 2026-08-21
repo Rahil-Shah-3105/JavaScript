@@ -1,3 +1,4 @@
+const logger = console;
 /*
   Breadth First Tree Traversal or level order traversal implementation in javascript
   Author: @GerardUbuntu
@@ -5,9 +6,12 @@
 
 class Node {
   constructor(data) {
+	logger.debug(`>>> Entering constructor(data=${data})`);
+	logger.debug('>>> Entering constructor()');
     this.data = data
     this.left = null
     this.right = null
+	logger.debug(`constructor(): this.root → ${this.root}`);
   }
 }
 
@@ -17,6 +21,7 @@ class BinaryTree {
   }
 
   breadthFirstIterative() {
+	logger.debug('>>> Entering breadthFirstIterative()');
     const traversal = []
     if (this.root) {
       traversal.push(this.root)
@@ -31,20 +36,24 @@ class BinaryTree {
       }
       traversal[i] = currentNode.data
     }
+	logger.debug('<<< Exiting breadthFirstIterative()');
     return traversal
   }
 
   breadthFirstRecursive() {
+	logger.debug('>>> Entering breadthFirstRecursive()');
     const traversal = []
     const h = this.getHeight(this.root)
     for (let i = 0; i !== h; i++) {
       this.traverseLevel(this.root, i, traversal)
     }
+	logger.debug(`breadthFirstRecursive(): h → ${h}`);
     return traversal
   }
 
   // Computing the height of the tree
   getHeight(node) {
+	logger.debug(`>>> Entering getHeight(node=${node})`);
     if (node === null) {
       return 0
     }
@@ -54,6 +63,7 @@ class BinaryTree {
   }
 
   traverseLevel(node, levelRemaining, traversal) {
+	logger.debug(`>>> Entering traverseLevel(node=${node},levelRemaining=${levelRemaining},traversal=${traversal})`);
     if (node === null) {
       return
     }
@@ -63,6 +73,7 @@ class BinaryTree {
       this.traverseLevel(node.left, levelRemaining - 1, traversal)
       this.traverseLevel(node.right, levelRemaining - 1, traversal)
     }
+	logger.debug(`<<< Exiting traverseLevel(node=${node},levelRemaining=${levelRemaining},traversal=${traversal})`);
   }
 }
 

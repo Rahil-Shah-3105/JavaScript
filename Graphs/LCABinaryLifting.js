@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * Author: Adrito Mukherjee
  * Finding Lowest Common Ancestor By Binary Lifting implementation in JavaScript
@@ -11,22 +12,28 @@ import { BinaryLifting } from './BinaryLifting'
 class LCABinaryLifting extends BinaryLifting {
   constructor(root, tree) {
     super(root, tree)
+    super(root, tree)
     this.depth = new Map() // depth[node] stores the depth of node from root
+	logger.debug(`>>> Entering constructor(root=${root},tree=${tree})`);
     this.depth.set(root, 1)
     this.dfsDepth(root, root)
+	logger.debug(`<<< Exiting constructor(root=${root},tree=${tree})`);
   }
 
   dfsDepth(node, parent) {
+	logger.debug(`>>> Entering dfsDepth(node=${node},parent=${parent})`);
     // DFS to find depth of every node in the tree
     for (const child of this.connections.get(node)) {
       if (child !== parent) {
         this.depth.set(child, this.depth.get(node) + 1)
         this.dfsDepth(child, node)
       }
+		logger.debug(`<<< Exiting dfsDepth(node=${node},parent=${parent})`);
     }
   }
 
   getLCA(node1, node2) {
+	logger.debug(`>>> Entering getLCA(node1=${node1},node2=${node2})`);
     // We make sure that node1 is the deeper node among node1 and node2
     if (this.depth.get(node1) < this.depth.get(node2)) {
       ;[node1, node2] = [node2, node1]
@@ -44,17 +51,21 @@ class LCABinaryLifting extends BinaryLifting {
         node2 = this.up.get(node2).get(i)
       }
     }
+	logger.debug(`<<< Exiting getLCA(node1=${node1},node2=${node2})`);
     return this.up.get(node1).get(0)
   }
 }
 
 function lcaBinaryLifting(root, tree, queries) {
+logger.debug(`>>> Entering lcaBinaryLifting(root=${root},tree=${tree},queries=${queries})`);
   const graphObject = new LCABinaryLifting(root, tree)
   const lowestCommonAncestors = []
+logger.debug(`lcaBinaryLifting(root=${root},tree=${tree},queries=${queries}): graphObject → ${graphObject}`);
   for (const [node1, node2] of queries) {
     const lca = graphObject.getLCA(node1, node2)
     lowestCommonAncestors.push(lca)
   }
+logger.debug(`<<< Exiting lcaBinaryLifting(root=${root},tree=${tree},queries=${queries})`);
   return lowestCommonAncestors
 }
 

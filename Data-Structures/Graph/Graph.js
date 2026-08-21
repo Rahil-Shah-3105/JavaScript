@@ -1,21 +1,30 @@
+const logger = console;
 class Graph {
   constructor() {
+	logger.debug('>>> Entering constructor()');
     this.adjacencyMap = {}
+	logger.debug(`constructor(): this.adjacencyMap → ${this.adjacencyMap}`);
   }
 
   addVertex(vertex) {
+	logger.debug(`>>> Entering addVertex(vertex=${vertex})`);
     this.adjacencyMap[vertex] = []
+	logger.debug(`<<< Exiting addVertex(vertex=${vertex})`);
   }
 
   containsVertex(vertex) {
+	logger.debug(`>>> Entering containsVertex(vertex=${vertex})`);
+	logger.debug(`<<< Exiting containsVertex(vertex=${vertex})`);
     return typeof this.adjacencyMap[vertex] !== 'undefined'
   }
 
   addEdge(vertex1, vertex2) {
+	logger.debug(`>>> Entering addEdge(vertex1=${vertex1},vertex2=${vertex2})`);
     if (this.containsVertex(vertex1) && this.containsVertex(vertex2)) {
       this.adjacencyMap[vertex1].push(vertex2)
       this.adjacencyMap[vertex2].push(vertex1)
     }
+	logger.debug(`<<< Exiting addEdge(vertex1=${vertex1},vertex2=${vertex2})`);
   }
 
   printGraph(output = (value) => console.log(value)) {
@@ -72,6 +81,7 @@ class Graph {
 }
 
 const example = () => {
+logger.debug('>>> Entering example()');
   const g = new Graph()
   g.addVertex(1)
   g.addVertex(2)
@@ -83,6 +93,7 @@ const example = () => {
   g.addEdge(2, 4)
   g.addEdge(2, 5)
 
+logger.debug(`example(): g → ${g}`);
   // Graph
   // 1 -> 2 3
   // 2 -> 1 4 5
@@ -98,6 +109,7 @@ const example = () => {
 
   // Depth first search at node 1
   g.dfs(1)
+logger.debug('<<< Exiting example()');
 }
 
 export { Graph, example }

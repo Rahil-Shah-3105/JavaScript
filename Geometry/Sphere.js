@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * This class represents a sphere and can calculate its volume and surface area
  * @constructor
@@ -6,7 +7,9 @@
  */
 export default class Sphere {
   constructor(radius) {
+	logger.debug(`>>> Entering constructor(radius=${radius})`);
     this.radius = radius
+	logger.debug(`constructor(radius=${radius}): this.radius → ${this.radius}`);
   }
 
   volume = () => {
