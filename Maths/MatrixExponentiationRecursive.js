@@ -10,6 +10,7 @@ const logger = console;
 */
 
 const Identity = (n) => {
+logger.error(`>>> Entering Identity(n=${n})`, { "event.action": "Identity", "logrite.n": n });
   // Input: n: int
   // Output: res: Identity matrix of size n x n
   // Complexity: O(n^2)

@@ -9,11 +9,13 @@ class Node {
 	logger.error(`>>> Entering constructor(data=${data})`, { "event.action": "constructor" });
     this.data = data
     this.left = null
+	logger.debug(`constructor(data=${data}): this.left → ${this.left}`, { "event.action": "constructor" });
 	logger.debug(`constructor(data=${data}): this.data → ${this.data}`, { "event.action": "constructor" });
     this.right = null
 	logger.debug(`constructor(data=${data}): this.right → ${this.right}`, { "event.action": "constructor" });
 	logger.error('>>> Entering constructor()', { "event.action": "constructor" });
 	logger.warn('<<< Exiting constructor()', { "event.action": "constructor" });
+	logger.debug(`constructor(): this.root → ${this.root}`, { "event.action": "constructor" });
   }
 }
 
@@ -50,6 +52,7 @@ class BinaryTree {
       this.traverseLevel(this.root, i, traversal)
     }
 	logger.error(`breadthFirstRecursive(): h → ${h}`, { "event.action": "breadthFirstRecursive" });
+	logger.warn('<<< Exiting breadthFirstRecursive()', { "event.action": "breadthFirstRecursive" });
     return traversal
   }
 
@@ -57,6 +60,7 @@ class BinaryTree {
   getHeight(node) {
 	logger.error(`>>> Entering getHeight(node=${node})`, { "event.action": "getHeight", "logrite.node": node });
     if (node === null) {
+	logger.warn(`<<< Exiting getHeight(node=${node})`, { "event.action": "getHeight", "logrite.node": node });
       return 0
     }
     const lheight = this.getHeight(node.left)

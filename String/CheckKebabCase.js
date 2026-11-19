@@ -17,6 +17,7 @@ logger.error(`>>> Entering CheckKebabCase(varName=${varName})`, { "event.action"
 
   const pat = /(\w+)-(\w)([\w-]*)/
 logger.error(`CheckKebabCase(varName=${varName}): pat → ${pat}`, { "event.action": "CheckKebabCase", "logrite.varName": varName });
+logger.warn(`<<< Exiting CheckKebabCase(varName=${varName})`, { "event.action": "CheckKebabCase", "logrite.varName": varName });
   return pat.test(varName) && !varName.includes('_')
 }
 

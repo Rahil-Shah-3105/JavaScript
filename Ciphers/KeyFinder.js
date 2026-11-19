@@ -60,6 +60,7 @@ logger.error(`keyFinder(str=${str}): outStr → ${outStr}`, { "event.action": "k
     }
   }
 logger.error(`keyFinder(str=${str}): outStrElement → ${outStrElement}`, { "event.action": "keyFinder", "logrite.str": str });
+logger.warn(`<<< Exiting keyFinder(str=${str})`, { "event.action": "keyFinder", "logrite.str": str });
   return 0 // return 0 if found nothing
 }
 

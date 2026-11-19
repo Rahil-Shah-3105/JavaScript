@@ -6,8 +6,10 @@ class SinglyCircularLinkedList {
   constructor() {
 	logger.error('>>> Entering constructor()', { "event.action": "constructor" });
     this.headNode = null
+	logger.debug(`constructor(): this.headNode → ${this.headNode}`, { "event.action": "constructor" });
     this.length = 0
 	logger.debug(`constructor(): this.length → ${this.length}`, { "event.action": "constructor" });
+	logger.warn('<<< Exiting constructor()', { "event.action": "constructor" });
   }
 
   // Get size of the linkedList
@@ -48,6 +50,7 @@ class SinglyCircularLinkedList {
     this.headNode = node
     this.length++
 	logger.debug(`addAtFirst(data=${data}): this.headNode → ${this.headNode}`, { "event.action": "addAtFirst" });
+	logger.warn(`<<< Exiting addAtFirst(data=${data})`, { "event.action": "addAtFirst" });
     return this.length
   }
 
@@ -62,6 +65,7 @@ class SinglyCircularLinkedList {
 	logger.error(`add(data=${data}): node → ${node}`, { "event.action": "add" });
     const currentNode = this.getElementAt(this.length - 1)
     currentNode.next = node
+	logger.debug(`add(data=${data}): currentNode.next → ${currentNode.next}`, { "event.action": "add" });
 	logger.error(`add(data=${data}): currentNode → ${currentNode}`, { "event.action": "add" });
     node.next = this.headNode
 	logger.debug(`add(data=${data}): node.next → ${node.next}`, { "event.action": "add" });
@@ -80,6 +84,7 @@ class SinglyCircularLinkedList {
     const node = new Node(data)
     const previousNode = this.getElementAt(index - 1)
     node.next = previousNode.next
+	logger.debug(`insertAt(index=${index},data=${data}): node.next → ${node.next}`, { "event.action": "insertAt", "logrite.index": index });
 	logger.error(`insertAt(index=${index},data=${data}): node → ${node}`, { "event.action": "insertAt", "logrite.index": index });
     previousNode.next = node
 	logger.debug(`insertAt(index=${index},data=${data}): previousNode.next → ${previousNode.next}`, { "event.action": "insertAt", "logrite.index": index });
@@ -194,8 +199,10 @@ class SinglyCircularLinkedList {
   clear() {
 	logger.error('>>> Entering clear()', { "event.action": "clear" });
     this.headNode = null
+	logger.debug(`clear(): this.headNode → ${this.headNode}`, { "event.action": "clear" });
     this.length = 0
 	logger.debug(`clear(): this.length → ${this.length}`, { "event.action": "clear" });
+	logger.warn('<<< Exiting clear()', { "event.action": "clear" });
   }
 }
 

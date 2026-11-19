@@ -5,6 +5,7 @@ class Sudoku {
 	logger.error(`>>> Entering constructor(board=${board})`, { "event.action": "constructor", "logrite.board": board });
     this.board = board
 	logger.debug(`constructor(board=${board}): this.board → ${this.board}`, { "event.action": "constructor", "logrite.board": board });
+	logger.warn(`<<< Exiting constructor(board=${board})`, { "event.action": "constructor", "logrite.board": board });
   }
 
   findEmptyCell() {

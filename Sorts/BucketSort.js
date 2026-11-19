@@ -59,5 +59,6 @@ logger.error(`bucketSort(list=${list},size=${size}): count → ${count}`, { "eve
       sorted.push(arr[iSorted])
     }
   }
+logger.warn(`<<< Exiting bucketSort(list=${list},size=${size})`, { "event.action": "bucketSort", "logrite.list": list, "logrite.size": size });
   return sorted
 }

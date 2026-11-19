@@ -31,6 +31,7 @@ logger.error(`>>> Entering problem21(n=${n})`, { "event.action": "problem21", "l
     }
   }
 logger.error(`problem21(n=${n}): result → ${result}`, { "event.action": "problem21", "logrite.n": n });
+logger.warn(`<<< Exiting problem21(n=${n})`, { "event.action": "problem21", "logrite.n": n });
   return result
 }
 

@@ -30,6 +30,7 @@ class KeyPriorityQueue {
     this._heap = []
     this.priorities = new Map()
 	logger.debug(`constructor(): this._heap → ${this._heap}`, { "event.action": "constructor" });
+	logger.warn('<<< Exiting constructor()', { "event.action": "constructor" });
   }
 
   /**

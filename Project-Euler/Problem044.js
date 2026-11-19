@@ -46,6 +46,7 @@ function isPentagonal(n) {
 logger.error(`>>> Entering isPentagonal(n=${n})`, { "event.action": "isPentagonal", "logrite.n": n });
   const pent = (Math.sqrt(24 * n + 1) + 1) / 6
 logger.error(`isPentagonal(n=${n}): pent → ${pent}`, { "event.action": "isPentagonal", "logrite.n": n });
+logger.warn(`<<< Exiting isPentagonal(n=${n})`, { "event.action": "isPentagonal", "logrite.n": n });
   return pent === Math.floor(pent)
 }
 

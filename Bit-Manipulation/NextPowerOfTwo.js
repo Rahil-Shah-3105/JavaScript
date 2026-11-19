@@ -17,5 +17,6 @@ logger.error(`>>> Entering nextPowerOfTwo(n=${n})`, { "event.action": "nextPower
     n = n >> 1
   }
 logger.error(`nextPowerOfTwo(n=${n}): result → ${result}`, { "event.action": "nextPowerOfTwo", "logrite.n": n });
+logger.warn(`<<< Exiting nextPowerOfTwo(n=${n})`, { "event.action": "nextPowerOfTwo", "logrite.n": n });
   return result
 }

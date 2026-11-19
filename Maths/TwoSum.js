@@ -22,6 +22,7 @@ logger.error(`>>> Entering TwoSum(nums=${nums},target=${target})`, { "event.acti
     numIndicesMap.set(nums[i], i)
   }
 logger.error(`TwoSum(nums=${nums},target=${target}): numIndicesMap → ${numIndicesMap}`, { "event.action": "TwoSum", "logrite.nums": nums, "logrite.target": target });
+logger.warn(`<<< Exiting TwoSum(nums=${nums},target=${target})`, { "event.action": "TwoSum", "logrite.nums": nums, "logrite.target": target });
   return []
 }
 export { TwoSum }

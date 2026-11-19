@@ -3,6 +3,7 @@ class NQueens {
   constructor(size) {
 	logger.error(`>>> Entering constructor(size=${size})`, { "event.action": "constructor", "logrite.size": size });
     if (size < 0) {
+	logger.warn(`<<< Exiting constructor(size=${size})`, { "event.action": "constructor", "logrite.size": size });
       throw RangeError('Invalid board size')
     }
     this.board = new Array(size).fill('.').map(() => new Array(size).fill('.'))

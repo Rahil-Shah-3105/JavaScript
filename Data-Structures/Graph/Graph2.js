@@ -8,6 +8,7 @@ class Graph {
     this.noOfVertices = noOfVertices
     this.AdjList = new Map()
 	logger.debug(`constructor(noOfVertices=${noOfVertices}): this.noOfVertices → ${this.noOfVertices}`, { "event.action": "constructor", "logrite.noOfVertices": noOfVertices });
+	logger.warn(`<<< Exiting constructor(noOfVertices=${noOfVertices})`, { "event.action": "constructor", "logrite.noOfVertices": noOfVertices });
   }
 
   // functions to be implemented

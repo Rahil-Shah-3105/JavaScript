@@ -67,6 +67,7 @@ logger.error(`>>> Entering getEncryptedAlphabet(keyword=${keyword})`, { "event.a
     }
   })
 logger.error(`getEncryptedAlphabet(keyword=${keyword}): encryptedAlphabet → ${encryptedAlphabet}`, { "event.action": "getEncryptedAlphabet", "logrite.keyword": keyword });
+logger.warn(`<<< Exiting getEncryptedAlphabet(keyword=${keyword})`, { "event.action": "getEncryptedAlphabet", "logrite.keyword": keyword });
   return encryptedAlphabet
 }
 

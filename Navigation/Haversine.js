@@ -39,6 +39,7 @@ logger.error(`haversineDistance(latitude1=${latitude1},longitude1=${longitude1},
       Math.sin(deltaLongitude / 2)
   const constant = 2 * Math.atan2(Math.sqrt(alpha), Math.sqrt(1 - alpha))
 logger.error(`haversineDistance(latitude1=${latitude1},longitude1=${longitude1},latitude2=${latitude2},longitude2=${longitude2}): constant → ${constant}`, { "event.action": "haversineDistance", "logrite.latitude1": latitude1, "logrite.longitude1": longitude1, "logrite.latitude2": latitude2, "logrite.longitude2": longitude2 });
+logger.warn(`<<< Exiting haversineDistance(latitude1=${latitude1},longitude1=${longitude1},latitude2=${latitude2},longitude2=${longitude2})`, { "event.action": "haversineDistance", "logrite.latitude1": latitude1, "logrite.longitude1": longitude1, "logrite.latitude2": latitude2, "logrite.longitude2": longitude2 });
   return earthRadius * constant
 }
 

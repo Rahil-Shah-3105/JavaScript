@@ -43,6 +43,7 @@ logger.error(`>>> Entering FindMinIterator(_iterable=${_iterable},_selector=${_s
     }
   }
 logger.error(`FindMinIterator(_iterable=${_iterable},_selector=${_selector}): iterator → ${iterator}`, { "event.action": "FindMinIterator", "logrite._iterable": _iterable, "logrite._selector": _selector });
+logger.warn(`<<< Exiting FindMinIterator(_iterable=${_iterable},_selector=${_selector})`, { "event.action": "FindMinIterator", "logrite._iterable": _iterable, "logrite._selector": _selector });
   return min
 }
 

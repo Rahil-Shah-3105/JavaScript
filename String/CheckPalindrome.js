@@ -14,6 +14,7 @@ logger.error(`>>> Entering checkPalindrome(str=${str})`, { "event.action": "chec
   // return as palindrome if the reversed string is equal to the input string
   const reversed = [...str].reverse().join('')
 logger.error(`checkPalindrome(str=${str}): reversed → ${reversed}`, { "event.action": "checkPalindrome", "logrite.str": str });
+logger.warn(`<<< Exiting checkPalindrome(str=${str})`, { "event.action": "checkPalindrome", "logrite.str": str });
   return str === reversed ? 'Palindrome' : 'Not a Palindrome'
 }
 

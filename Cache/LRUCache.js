@@ -37,6 +37,7 @@ class LRUCache {
 
   get size() {
 	logger.error('>>> Entering size()', { "event.action": "size" });
+	logger.warn('<<< Exiting size()', { "event.action": "size" });
     return this.cache.size
   }
 
@@ -47,6 +48,7 @@ class LRUCache {
   }
 
   set capacity(newCapacity) {
+	logger.error(`>>> Entering capacity(newCapacity=${newCapacity})`, { "event.action": "capacity", "logrite.newCapacity": newCapacity });
     if (newCapacity < 0) {
       throw new RangeError('Capacity should be greater than 0')
     }
@@ -150,6 +152,7 @@ class LRUCache {
   toString(indent) {
 	logger.error(`>>> Entering toString(indent=${indent})`, { "event.action": "toString", "logrite.indent": indent });
     const replacer = (_, value) => {
+	logger.error(`>>> Entering replacer(_=${_},value=${value})`, { "event.action": "replacer", "logrite._": _, "logrite.value": value });
       if (value instanceof Set) {
         return [...value]
       }

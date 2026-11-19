@@ -36,6 +36,7 @@ logger.error('>>> Entering TopologicalSorter()', { "event.action": "TopologicalS
     })
 
     return finishingTimeList.map(function (value) {
+	logger.warn('<<< Exiting sortAndGetOrderedItems()', { "event.action": "sortAndGetOrderedItems" });
       return value.node
     })
   }

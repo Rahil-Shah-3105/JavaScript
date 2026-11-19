@@ -10,12 +10,15 @@ export default class Cone {
   constructor(baseRadius, height) {
 	logger.error(`>>> Entering constructor(baseRadius=${baseRadius},height=${height})`, { "event.action": "constructor", "logrite.baseRadius": baseRadius, "logrite.height": height });
     this.baseRadius = baseRadius
+	logger.debug(`constructor(baseRadius=${baseRadius},height=${height}): this.baseRadius → ${this.baseRadius}`, { "event.action": "constructor", "logrite.baseRadius": baseRadius, "logrite.height": height });
     this.height = height
 	logger.debug(`constructor(baseRadius=${baseRadius},height=${height}): this.height → ${this.height}`, { "event.action": "constructor", "logrite.baseRadius": baseRadius, "logrite.height": height });
+	logger.warn(`<<< Exiting constructor(baseRadius=${baseRadius},height=${height})`, { "event.action": "constructor", "logrite.baseRadius": baseRadius, "logrite.height": height });
   }
 
   baseArea = () => {
 	logger.error('>>> Entering baseArea()', { "event.action": "baseArea" });
+	logger.warn('<<< Exiting baseArea()', { "event.action": "baseArea" });
     return Math.pow(this.baseRadius, 2) * Math.PI
   }
 

@@ -4,9 +4,11 @@ class Node {
 	logger.error(`>>> Entering constructor(element=${element})`, { "event.action": "constructor", "logrite.element": element });
     this.element = element
     this.next = null
+	logger.debug(`constructor(element=${element}): this.next → ${this.next}`, { "event.action": "constructor", "logrite.element": element });
 	logger.debug(`constructor(element=${element}): this.element → ${this.element}`, { "event.action": "constructor", "logrite.element": element });
 	logger.debug(`constructor(): this.head → ${this.head}`, { "event.action": "constructor" });
     this.prev = null
+	logger.debug(`constructor(element=${element}): this.prev → ${this.prev}`, { "event.action": "constructor", "logrite.element": element });
 	logger.error('>>> Entering constructor()', { "event.action": "constructor" });
 	logger.debug(`constructor(): this.tail → ${this.tail}`, { "event.action": "constructor" });
   }

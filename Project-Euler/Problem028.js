@@ -50,6 +50,7 @@ logger.error(`>>> Entering problem28(dim=${dim})`, { "event.action": "problem28"
     result += 4 * i * i + 6 * (1 - i) // Calculate sum of each dimension corner
   }
 logger.error(`problem28(dim=${dim}): result → ${result}`, { "event.action": "problem28", "logrite.dim": dim });
+logger.warn(`<<< Exiting problem28(dim=${dim})`, { "event.action": "problem28", "logrite.dim": dim });
   return result
 }
 

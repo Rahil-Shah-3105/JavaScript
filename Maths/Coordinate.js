@@ -19,6 +19,7 @@ logger.error(`>>> Entering manhattanDistance(longitude1=${longitude1},latitude1=
   const height = Math.abs(latitude2 - latitude1)
 logger.error(`manhattanDistance(longitude1=${longitude1},latitude1=${latitude1},longitude2=${longitude2},latitude2=${latitude2}): width → ${width}`, { "event.action": "manhattanDistance", "logrite.longitude1": longitude1, "logrite.latitude1": latitude1, "logrite.longitude2": longitude2, "logrite.latitude2": latitude2 });
 logger.error(`manhattanDistance(longitude1=${longitude1},latitude1=${latitude1},longitude2=${longitude2},latitude2=${latitude2}): height → ${height}`, { "event.action": "manhattanDistance", "logrite.longitude1": longitude1, "logrite.latitude1": latitude1, "logrite.longitude2": longitude2, "logrite.latitude2": latitude2 });
+logger.warn(`<<< Exiting manhattanDistance(longitude1=${longitude1},latitude1=${latitude1},longitude2=${longitude2},latitude2=${latitude2})`, { "event.action": "manhattanDistance", "logrite.longitude1": longitude1, "logrite.latitude1": latitude1, "logrite.longitude2": longitude2, "logrite.latitude2": latitude2 });
   return width + height
 }
 

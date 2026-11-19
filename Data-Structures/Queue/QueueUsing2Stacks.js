@@ -6,8 +6,10 @@ class Queue {
   constructor() {
 	logger.error('>>> Entering constructor()', { "event.action": "constructor" });
     this.inputStack = []
+	logger.debug(`constructor(): this.inputStack → ${this.inputStack}`, { "event.action": "constructor" });
     this.outputStack = []
 	logger.debug(`constructor(): this.outputStack → ${this.outputStack}`, { "event.action": "constructor" });
+	logger.warn('<<< Exiting constructor()', { "event.action": "constructor" });
   }
 
   // Push item into the inputstack

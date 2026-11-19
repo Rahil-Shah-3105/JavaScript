@@ -45,5 +45,6 @@ logger.error(`>>> Entering findLongestCollatzSequence(limit=${limit})`, { "event
       largestSequenceLength = currentSequenceLength
     }
   }
+logger.warn(`<<< Exiting findLongestCollatzSequence(limit=${limit})`, { "event.action": "findLongestCollatzSequence", "logrite.limit": limit });
   return startingPointForLargestSequence
 }

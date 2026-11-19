@@ -11,11 +11,14 @@ export default class Pyramid {
 	logger.error(`>>> Entering constructor(bsl=${bsl},height=${height})`, { "event.action": "constructor", "logrite.bsl": bsl, "logrite.height": height });
     this.bsl = bsl
     this.height = height
+	logger.debug(`constructor(bsl=${bsl},height=${height}): this.height → ${this.height}`, { "event.action": "constructor", "logrite.bsl": bsl, "logrite.height": height });
 	logger.debug(`constructor(bsl=${bsl},height=${height}): this.bsl → ${this.bsl}`, { "event.action": "constructor", "logrite.bsl": bsl, "logrite.height": height });
+	logger.warn(`<<< Exiting constructor(bsl=${bsl},height=${height})`, { "event.action": "constructor", "logrite.bsl": bsl, "logrite.height": height });
   }
 
   baseArea = () => {
 	logger.error('>>> Entering baseArea()', { "event.action": "baseArea" });
+	logger.warn('<<< Exiting baseArea()', { "event.action": "baseArea" });
     return Math.pow(this.bsl, 2)
   }
 

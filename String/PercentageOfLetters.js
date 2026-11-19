@@ -24,6 +24,7 @@ logger.error(`>>> Entering percentageOfLetter(str=${str},letter=${letter})`, { "
   }
   const percentage = Math.floor((100 * letterCount) / str.length)
 logger.error(`percentageOfLetter(str=${str},letter=${letter}): percentage → ${percentage}`, { "event.action": "percentageOfLetter", "logrite.str": str, "logrite.letter": letter });
+logger.warn(`<<< Exiting percentageOfLetter(str=${str},letter=${letter})`, { "event.action": "percentageOfLetter", "logrite.str": str, "logrite.letter": letter });
   return percentage
 }
 

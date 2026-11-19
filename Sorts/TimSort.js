@@ -39,6 +39,7 @@ logger.warn(`<<< Exiting Timsort(array=${array})`, { "event.action": "Timsort", 
  */
 
 const InsertionSort = (array, left, right) => {
+logger.error(`>>> Entering InsertionSort(array=${array},left=${left},right=${right})`, { "event.action": "InsertionSort", "logrite.array": array, "logrite.left": left, "logrite.right": right });
   for (let i = left + 1; i <= right; i++) {
     const key = array[i]
     let j = i - 1

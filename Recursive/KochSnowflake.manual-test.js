@@ -32,6 +32,7 @@ logger.error(`getKochSnowflake(canvasWidth=${canvasWidth},steps=${steps}): vecto
   initialVectors.push(vector1)
   const vectors = iterate(initialVectors, steps)
 logger.error(`getKochSnowflake(canvasWidth=${canvasWidth},steps=${steps}): vectors → ${vectors}`, { "event.action": "getKochSnowflake", "logrite.canvasWidth": canvasWidth, "logrite.steps": steps });
+logger.warn(`<<< Exiting getKochSnowflake(canvasWidth=${canvasWidth},steps=${steps})`, { "event.action": "getKochSnowflake", "logrite.canvasWidth": canvasWidth, "logrite.steps": steps });
   return drawToCanvas(vectors, canvasWidth, canvasWidth)
 }
 

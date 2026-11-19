@@ -5,11 +5,14 @@ class DisjointSetTreeNode {
 	logger.error(`>>> Entering constructor(key=${key})`, { "event.action": "constructor", "logrite.key": key });
     this.key = key
     this.parent = this
+	logger.debug(`constructor(key=${key}): this.parent → ${this.parent}`, { "event.action": "constructor", "logrite.key": key });
 	logger.debug(`constructor(key=${key}): this.key → ${this.key}`, { "event.action": "constructor", "logrite.key": key });
     this.rank = 0
 	logger.debug(`constructor(key=${key}): this.rank → ${this.rank}`, { "event.action": "constructor", "logrite.key": key });
 	logger.error('>>> Entering constructor()', { "event.action": "constructor" });
 	logger.debug(`constructor(): this.map → ${this.map}`, { "event.action": "constructor" });
+	logger.debug(`constructor(): this.connections → ${this.connections}`, { "event.action": "constructor" });
+	logger.warn(`<<< Exiting constructor(key=${key})`, { "event.action": "constructor" });
   }
 }
 

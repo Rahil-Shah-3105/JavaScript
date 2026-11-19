@@ -13,6 +13,7 @@ class Node {
   constructor(data) {
 	logger.error(`>>> Entering constructor(data=${data})`, { "event.action": "constructor" });
     this.data = data
+	logger.debug(`constructor(data=${data}): this.data → ${this.data}`, { "event.action": "constructor" });
 	logger.warn(`<<< Exiting constructor(data=${data})`, { "event.action": "constructor" });
     this.next = null
 	logger.debug(`constructor(data=${data}): this.next → ${this.next}`, { "event.action": "constructor" });
@@ -202,6 +203,7 @@ class LinkedList {
   elementAt(index) {
 	logger.error(`>>> Entering elementAt(index=${index})`, { "event.action": "elementAt", "logrite.index": index });
     if (index >= this.length || index < 0) {
+	logger.warn(`<<< Exiting elementAt(index=${index})`, { "event.action": "elementAt", "logrite.index": index });
       throw new RangeError('Out of Range index')
     }
     let { currentIndex, currentNode } = this.initiateNodeAndIndex()
@@ -218,6 +220,7 @@ class LinkedList {
 	logger.error(`>>> Entering addAt(index=${index},element=${element})`, { "event.action": "addAt", "logrite.index": index, "logrite.element": element });
     // Check if index is out of bounds of list
     if (index > this.length || index < 0) {
+	logger.debug(`addAt(index=${index},element=${element}): currentNode → ${currentNode}`, { "event.action": "addAt", "logrite.index": index, "logrite.element": element });
       throw new RangeError('Out of Range index')
     }
     if (index === 0) return this.addFirst(element)
@@ -248,6 +251,7 @@ class LinkedList {
 	logger.error(`>>> Entering removeAt(index=${index})`, { "event.action": "removeAt", "logrite.index": index });
     // Check if index is present in list
     if (index < 0 || index >= this.length) {
+	logger.debug(`removeAt(index=${index}): currentNode.next → ${currentNode.next}`, { "event.action": "removeAt", "logrite.index": index });
       throw new RangeError('Out of Range index')
     }
     if (index === 0) return this.removeFirst()
@@ -289,6 +293,7 @@ class LinkedList {
 	logger.debug(`clean(): this.headNode → ${this.headNode}`, { "event.action": "clean" });
 	logger.debug(`clean(): this.tailNode → ${this.tailNode}`, { "event.action": "clean" });
     this.length = 0
+	logger.debug(`clean(): this.length → ${this.length}`, { "event.action": "clean" });
   }
 
   // Method to get the LinkedList
@@ -371,6 +376,7 @@ class LinkedList {
 	logger.debug(`reverse(): this.tailNode → ${this.tailNode}`, { "event.action": "reverse" });
     this.headNode = prev
 	logger.debug(`reverse(): this.headNode → ${this.headNode}`, { "event.action": "reverse" });
+	logger.warn('<<< Exiting reverse()', { "event.action": "reverse" });
   }
 }
 

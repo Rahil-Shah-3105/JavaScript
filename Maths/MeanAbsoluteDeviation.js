@@ -18,6 +18,7 @@ logger.error(`>>> Entering meanAbsoluteDeviation(data=${data})`, { "event.action
     absoluteSum += Math.abs(dataPoint - meanValue)
   }
 logger.error(`meanAbsoluteDeviation(data=${data}): meanValue → ${meanValue}`, { "event.action": "meanAbsoluteDeviation" });
+logger.warn(`<<< Exiting meanAbsoluteDeviation(data=${data})`, { "event.action": "meanAbsoluteDeviation" });
   return absoluteSum / data.length
 }
 

@@ -48,6 +48,7 @@ logger.error(`>>> Entering getNumOfDivisors(num=${num})`, { "event.action": "get
     }
   }
 logger.error(`getNumOfDivisors(num=${num}): sqrtNum → ${sqrtNum}`, { "event.action": "getNumOfDivisors", "logrite.num": num });
+logger.warn(`<<< Exiting getNumOfDivisors(num=${num})`, { "event.action": "getNumOfDivisors", "logrite.num": num });
   return numberOfDivisors
 }
 

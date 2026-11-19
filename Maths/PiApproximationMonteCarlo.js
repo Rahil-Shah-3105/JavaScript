@@ -19,6 +19,7 @@ logger.error(`>>> Entering piEstimation(iterations=${iterations})`, { "event.act
   // formula for pi = (ratio of number inside circle and total iteration) x 4
   const pi = (circleCounter / iterations) * 4
 logger.error(`piEstimation(iterations=${iterations}): pi → ${pi}`, { "event.action": "piEstimation", "logrite.iterations": iterations });
+logger.warn(`<<< Exiting piEstimation(iterations=${iterations})`, { "event.action": "piEstimation", "logrite.iterations": iterations });
   return pi
 }
 

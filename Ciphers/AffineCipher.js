@@ -89,6 +89,7 @@ logger.error(`>>> Entering encrypt(str=${str},a=${a},b=${b})`, { "event.action":
     }
   }
 logger.error(`encrypt(str=${str},a=${a},b=${b}): result → ${result}`, { "event.action": "encrypt", "logrite.str": str, "logrite.a": a, "logrite.b": b });
+logger.warn(`<<< Exiting encrypt(str=${str},a=${a},b=${b})`, { "event.action": "encrypt", "logrite.str": str, "logrite.a": a, "logrite.b": b });
   return result.trim()
 }
 

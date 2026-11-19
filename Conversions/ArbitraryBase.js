@@ -125,6 +125,7 @@ logger.error(`convertArbitraryBaseBigIntVersion(stringInBaseOne=${stringInBaseOn
     value = divisionResult
   }
 logger.error(`convertArbitraryBaseBigIntVersion(stringInBaseOne=${stringInBaseOne},baseOneCharacterString=${baseOneCharacterString},baseTwoCharacterString=${baseTwoCharacterString}): stringTwoBase → ${stringTwoBase}`, { "event.action": "convertArbitraryBaseBigIntVersion", "logrite.stringInBaseOne": stringInBaseOne, "logrite.baseOneCharacterString": baseOneCharacterString, "logrite.baseTwoCharacterString": baseTwoCharacterString });
+logger.warn(`<<< Exiting convertArbitraryBaseBigIntVersion(stringInBaseOne=${stringInBaseOne},baseOneCharacterString=${baseOneCharacterString},baseTwoCharacterString=${baseTwoCharacterString})`, { "event.action": "convertArbitraryBaseBigIntVersion", "logrite.stringInBaseOne": stringInBaseOne, "logrite.baseOneCharacterString": baseOneCharacterString, "logrite.baseTwoCharacterString": baseTwoCharacterString });
   return outputChars.reverse().join('') || baseTwoCharacters[0]
 }
 

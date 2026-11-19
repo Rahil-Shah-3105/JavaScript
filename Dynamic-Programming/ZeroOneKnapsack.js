@@ -63,6 +63,7 @@ logger.error('>>> Entering example()', { "event.action": "example" });
     const cap = Number(input[i].trim().split(' ')[0])
     const currlen = Number(input[i].trim().split(' ')[1])
     let j = i + 1
+	logger.error(`example(): currlen → ${currlen}`, { "event.action": "example" });
 	logger.error(`example(): cap → ${cap}`, { "event.action": "example" });
     const arr = []
     while (j <= i + currlen) {

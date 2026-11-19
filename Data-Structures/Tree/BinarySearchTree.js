@@ -19,9 +19,12 @@ const Node = (function Node() {
 	logger.error(`>>> Entering constructor(val=${val})`, { "event.action": "constructor", "logrite.val": val });
       this.value = val
       this.left = null
+	logger.debug(`constructor(val=${val}): this.left → ${this.left}`, { "event.action": "constructor", "logrite.val": val });
 	logger.debug(`constructor(val=${val}): this.value → ${this.value}`, { "event.action": "constructor", "logrite.val": val });
       this.right = null
+	logger.debug(`Node(): this.right → ${this.right}`, { "event.action": "Node" });
 	logger.warn(`<<< Exiting constructor(val=${val})`, { "event.action": "constructor", "logrite.val": val });
+	logger.debug(`constructor(val=${val}): this.right → ${this.right}`, { "event.action": "constructor", "logrite.val": val });
 	logger.error('>>> Entering constructor()', { "event.action": "constructor" });
 	logger.debug(`constructor(): this.root → ${this.root}`, { "event.action": "constructor" });
     }
@@ -88,6 +91,7 @@ const Node = (function Node() {
             const leftMax = maxVal(this.left)
             this.value = leftMax
 			logger.error(`removeNode(val=${val}): leftMax → ${leftMax}`, { "event.action": "removeNode", "logrite.val": val });
+			logger.debug(`removeNode(val=${val}): this.value → ${this.value}`, { "event.action": "removeNode", "logrite.val": val });
             this.left = this.left.removeNode(leftMax)
           } else {
             const rightMin = minVal(this.right)

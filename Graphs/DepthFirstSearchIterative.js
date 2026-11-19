@@ -5,6 +5,7 @@ class GraphUnweightedUndirected {
 	logger.error('>>> Entering constructor()', { "event.action": "constructor" });
     this.connections = {}
 	logger.debug(`constructor(): this.connections → ${this.connections}`, { "event.action": "constructor" });
+	logger.warn('<<< Exiting constructor()', { "event.action": "constructor" });
   }
 
   addNode(node) {
@@ -50,6 +51,7 @@ class GraphUnweightedUndirected {
       }
     }
 	logger.error(`DFSIterative(node=${node},value=${value}): visited → ${visited}`, { "event.action": "DFSIterative", "logrite.node": node, "logrite.value": value });
+	logger.warn(`<<< Exiting DFSIterative(node=${node},value=${value})`, { "event.action": "DFSIterative", "logrite.node": node, "logrite.value": value });
     return false
   }
 }
