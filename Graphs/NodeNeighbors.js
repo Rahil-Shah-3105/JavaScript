@@ -7,6 +7,7 @@ class Graph {
 	logger.error('>>> Entering constructor()', { "event.action": "constructor" });
     this.edges = []
 	logger.debug(`constructor(): this.edges → ${this.edges}`, { "event.action": "constructor" });
+	logger.warn('<<< Exiting constructor()', { "event.action": "constructor" });
   }
 
   addEdge(node1, node2) {
@@ -33,6 +34,7 @@ class Graph {
       }
     }
 	logger.error(`nodeNeighbors(node=${node}): neighbors → ${neighbors}`, { "event.action": "nodeNeighbors", "logrite.node": node });
+	logger.warn(`<<< Exiting nodeNeighbors(node=${node})`, { "event.action": "nodeNeighbors", "logrite.node": node });
     return neighbors
   }
 }

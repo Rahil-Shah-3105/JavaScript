@@ -6,6 +6,7 @@ class GraphWeightedUndirectedAdjacencyList {
 	logger.error('>>> Entering constructor()', { "event.action": "constructor" });
     this.connections = {}
 	logger.debug(`constructor(): this.connections → ${this.connections}`, { "event.action": "constructor" });
+	logger.warn('<<< Exiting constructor()', { "event.action": "constructor" });
   }
 
   addNode(node) {
@@ -69,6 +70,7 @@ class GraphWeightedUndirectedAdjacencyList {
       }
     })
 	logger.error(`PrimMST(start=${start}): graph → ${graph}`, { "event.action": "PrimMST", "logrite.start": start });
+	logger.warn(`<<< Exiting PrimMST(start=${start})`, { "event.action": "PrimMST", "logrite.start": start });
     return graph
   }
 }

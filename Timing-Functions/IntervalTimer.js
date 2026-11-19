@@ -59,6 +59,7 @@ class IntervalTimer {
     this.prevInterval = this.timer
 	logger.debug(`getElapsedTime(offset=${offset}): this.timeElapsed → ${this.timeElapsed}`, { "event.action": "getElapsedTime", "logrite.offset": offset });
 	logger.debug(`getElapsedTime(offset=${offset}): this.prevInterval → ${this.prevInterval}`, { "event.action": "getElapsedTime", "logrite.offset": offset });
+	logger.warn(`<<< Exiting getElapsedTime(offset=${offset})`, { "event.action": "getElapsedTime", "logrite.offset": offset });
     return this.timeElapsed - offset
   }
 

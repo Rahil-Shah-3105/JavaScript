@@ -18,6 +18,7 @@ logger.error(`>>> Entering armstrongNumber(num=${num})`, { "event.action": "arms
     0
   )
 logger.error(`armstrongNumber(num=${num}): numStr → ${numStr}`, { "event.action": "armstrongNumber", "logrite.num": num });
+logger.warn(`<<< Exiting armstrongNumber(num=${num})`, { "event.action": "armstrongNumber", "logrite.num": num });
   return sum === num
 }
 

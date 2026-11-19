@@ -12,8 +12,10 @@ class CircularQueue {
 	logger.debug(`constructor(maxLength=${maxLength}): this.queue → ${this.queue}`, { "event.action": "constructor", "logrite.maxLength": maxLength });
 	logger.debug(`constructor(maxLength=${maxLength}): this.front → ${this.front}`, { "event.action": "constructor", "logrite.maxLength": maxLength });
     this.rear = 0
+	logger.debug(`constructor(maxLength=${maxLength}): this.rear → ${this.rear}`, { "event.action": "constructor", "logrite.maxLength": maxLength });
     this.maxLength = maxLength
 	logger.debug(`constructor(maxLength=${maxLength}): this.maxLength → ${this.maxLength}`, { "event.action": "constructor", "logrite.maxLength": maxLength });
+	logger.warn(`<<< Exiting constructor(maxLength=${maxLength})`, { "event.action": "constructor", "logrite.maxLength": maxLength });
   }
 
   // ADD ELEMENTS TO QUEUE

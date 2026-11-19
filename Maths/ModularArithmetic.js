@@ -13,6 +13,7 @@ export class ModRing {
 	logger.error(`>>> Entering constructor(MOD=${MOD})`, { "event.action": "constructor", "logrite.MOD": MOD });
     this.MOD = MOD
 	logger.debug(`constructor(MOD=${MOD}): this.MOD → ${this.MOD}`, { "event.action": "constructor", "logrite.MOD": MOD });
+	logger.warn(`<<< Exiting constructor(MOD=${MOD})`, { "event.action": "constructor", "logrite.MOD": MOD });
   }
 
   isInputValid = (arg1, arg2) => {

@@ -15,9 +15,11 @@ class Month {
 	logger.debug(`constructor(): this.BDays → ${this.BDays}`, { "event.action": "constructor" });
     this.epoch = { month: 1, year: 1900 }
     this.monthDays = [31, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+	logger.debug(`constructor(): this.monthDays → ${this.monthDays}`, { "event.action": "constructor" });
 	logger.debug(`constructor(): this.epoch → ${this.epoch}`, { "event.action": "constructor" });
     this.monthDaysLeap = [31, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 	logger.debug(`constructor(): this.monthDaysLeap → ${this.monthDaysLeap}`, { "event.action": "constructor" });
+	logger.warn('<<< Exiting constructor()', { "event.action": "constructor" });
   }
 
   printCal(days, startDay, output = (value) => console.log(value)) {
@@ -87,6 +89,7 @@ class Month {
       const midDate = startDate
       startDate = endDate
       endDate = midDate
+	logger.debug(`getDayDiff(startDate=${startDate},endDate=${endDate}): startDate.month → ${startDate.month}`, { "event.action": "getDayDiff", "logrite.startDate": startDate, "logrite.endDate": endDate });
     }
     let diff = 0
     while (startDate.year !== endDate.year) {

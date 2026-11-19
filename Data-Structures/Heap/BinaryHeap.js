@@ -27,6 +27,7 @@ class BinaryHeap {
      */
     this.comparator = comparatorFunction
 	logger.debug(`constructor(comparatorFunction=${comparatorFunction}): this.comparator → ${this.comparator}`, { "event.action": "constructor", "logrite.comparatorFunction": comparatorFunction });
+	logger.warn(`<<< Exiting constructor(comparatorFunction=${comparatorFunction})`, { "event.action": "constructor", "logrite.comparatorFunction": comparatorFunction });
   }
 
   /**

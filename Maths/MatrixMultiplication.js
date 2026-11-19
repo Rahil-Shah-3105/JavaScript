@@ -77,6 +77,7 @@ logger.error(`>>> Entering matrixMult(firstArray=${firstArray},secondArray=${sec
     }
   }
 logger.error(`matrixMult(firstArray=${firstArray},secondArray=${secondArray}): multMatrix → ${multMatrix}`, { "event.action": "matrixMult", "logrite.firstArray": firstArray, "logrite.secondArray": secondArray });
+logger.warn(`<<< Exiting matrixMult(firstArray=${firstArray},secondArray=${secondArray})`, { "event.action": "matrixMult", "logrite.firstArray": firstArray, "logrite.secondArray": secondArray });
   return multMatrix
 }
 

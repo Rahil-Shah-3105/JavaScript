@@ -49,6 +49,7 @@ logger.error(`>>> Entering decimalToRoman(num=${num})`, { "event.action": "decim
     }
   }
 logger.error(`decimalToRoman(num=${num}): roman → ${roman}`, { "event.action": "decimalToRoman", "logrite.num": num });
+logger.warn(`<<< Exiting decimalToRoman(num=${num})`, { "event.action": "decimalToRoman", "logrite.num": num });
   return roman
 }
 

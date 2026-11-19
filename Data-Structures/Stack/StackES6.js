@@ -15,7 +15,9 @@ class Stack {
 	logger.error('>>> Entering constructor()', { "event.action": "constructor" });
     this.stack = []
     this.top = 0
+	logger.debug(`constructor(): this.top → ${this.top}`, { "event.action": "constructor" });
 	logger.debug(`constructor(): this.stack → ${this.stack}`, { "event.action": "constructor" });
+	logger.warn('<<< Exiting constructor()', { "event.action": "constructor" });
   }
 
   // Adds a value to the end of the Stack

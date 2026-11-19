@@ -18,6 +18,7 @@ class Stack {
     // The array representation of the stack
     this.stack = []
 	logger.debug(`constructor(): this.stack → ${this.stack}`, { "event.action": "constructor" });
+	logger.warn('<<< Exiting constructor()', { "event.action": "constructor" });
   }
 
   // Adds a value onto the end of the stack

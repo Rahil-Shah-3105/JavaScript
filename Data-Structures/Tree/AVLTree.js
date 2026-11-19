@@ -48,6 +48,7 @@ class AVLTree {
     /** @public number of elements in AVL Tree */
     this.size = 0
 	logger.debug(`constructor(comp=${comp}): this.size → ${this.size}`, { "event.action": "constructor", "logrite.comp": comp });
+	logger.warn(`<<< Exiting constructor(comp=${comp})`, { "event.action": "constructor", "logrite.comp": comp });
   }
 
   /* Public Functions */
@@ -103,8 +104,10 @@ class Node {
 	logger.debug(`constructor(val=${val}): this._val → ${this._val}`, { "event.action": "constructor", "logrite.val": val });
 	logger.debug(`constructor(val=${val}): this._left → ${this._left}`, { "event.action": "constructor", "logrite.val": val });
     this._right = null
+	logger.debug(`constructor(val=${val}): this._right → ${this._right}`, { "event.action": "constructor", "logrite.val": val });
     this._height = 1
 	logger.debug(`constructor(val=${val}): this._height → ${this._height}`, { "event.action": "constructor", "logrite.val": val });
+	logger.warn(`<<< Exiting constructor(val=${val})`, { "event.action": "constructor", "logrite.val": val });
   }
 }
 
@@ -167,6 +170,7 @@ logger.warn(`<<< Exiting rightRotate(node=${node})`, { "event.action": "rightRot
 
 // check if tree is balanced else balance it for insertion
 const insertBalance = function (node, _val, balanceFactor, tree) {
+logger.error(`>>> Entering insertBalance(node=${node},_val=${_val},balanceFactor=${balanceFactor},tree=${tree})`, { "event.action": "insertBalance", "logrite.node": node, "logrite._val": _val, "logrite.balanceFactor": balanceFactor, "logrite.tree": tree });
   if (balanceFactor > 1 && tree._comp(_val, node._left._val) < 0) {
     return rightRotate(node) // Left Left Case
   }
@@ -218,6 +222,7 @@ logger.error(`>>> Entering insert(root=${root},val=${val},tree=${tree})`, { "eve
   }
   updateHeight(root)
   const balanceFactor = getHeightDifference(root)
+logger.warn(`<<< Exiting insert(root=${root},val=${val},tree=${tree})`, { "event.action": "insert", "logrite.root": root, "logrite.val": val, "logrite.tree": tree });
   return isValidBalanceFactor(balanceFactor)
     ? root
     : insertBalance(root, val, balanceFactor, tree)

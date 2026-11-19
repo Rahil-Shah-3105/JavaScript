@@ -24,6 +24,7 @@ logger.error(`>>> Entering lengthOfLongestSubstring(s=${s})`, { "event.action": 
     maxLength = Math.max(maxLength, end - start + 1)
   }
 logger.error(`lengthOfLongestSubstring(s=${s}): charMap → ${charMap}`, { "event.action": "lengthOfLongestSubstring", "logrite.s": s });
+logger.warn(`<<< Exiting lengthOfLongestSubstring(s=${s})`, { "event.action": "lengthOfLongestSubstring", "logrite.s": s });
   return maxLength
 }
 

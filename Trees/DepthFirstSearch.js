@@ -46,6 +46,7 @@ logger.error(`>>> Entering searchDFS(tree=${tree},value=${value})`, { "event.act
       }
     }
   }
+logger.warn(`<<< Exiting searchDFS(tree=${tree},value=${value})`, { "event.action": "searchDFS", "logrite.tree": tree, "logrite.value": value });
   return null
 }
 

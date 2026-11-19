@@ -118,6 +118,7 @@ const isTolerant = (a, b, tolerance) => {
 logger.error(`>>> Entering isTolerant(a=${a},b=${b},tolerance=${tolerance})`, { "event.action": "isTolerant", "logrite.a": a, "logrite.b": b, "logrite.tolerance": tolerance });
   const absoluteDifference = Math.abs(a - b)
 logger.error(`isTolerant(a=${a},b=${b},tolerance=${tolerance}): absoluteDifference → ${absoluteDifference}`, { "event.action": "isTolerant", "logrite.a": a, "logrite.b": b, "logrite.tolerance": tolerance });
+logger.warn(`<<< Exiting isTolerant(a=${a},b=${b},tolerance=${tolerance})`, { "event.action": "isTolerant", "logrite.a": a, "logrite.b": b, "logrite.tolerance": tolerance });
   return absoluteDifference <= tolerance
 }
 

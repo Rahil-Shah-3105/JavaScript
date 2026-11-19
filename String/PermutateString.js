@@ -27,6 +27,7 @@ const calculateCurrentCharacterPermutation = (
   allPermutations,
   currentCharacter
 ) => {
+logger.error(`>>> Entering calculateCurrentCharacterPermutation(allPermutations=${allPermutations},currentCharacter=${currentCharacter})`, { "event.action": "calculateCurrentCharacterPermutation", "logrite.allPermutations": allPermutations, "logrite.currentCharacter": currentCharacter });
   const currentPermutations = []
   allPermutations.forEach((permutation) => {
     let index = 0

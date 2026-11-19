@@ -8,6 +8,7 @@ class OpenKnightTour {
     this.board = new Array(size).fill(0).map(() => new Array(size).fill(0))
     this.size = size
 	logger.debug(`constructor(size=${size}): this.size → ${this.size}`, { "event.action": "constructor", "logrite.size": size });
+	logger.warn(`<<< Exiting constructor(size=${size})`, { "event.action": "constructor", "logrite.size": size });
   }
 
   getMoves([i, j]) {

@@ -26,5 +26,6 @@ logger.error(`>>> Entering isPronic(number=${number})`, { "event.action": "isPro
   }
   const sqrt = Math.sqrt(number)
 logger.error(`isPronic(number=${number}): sqrt → ${sqrt}`, { "event.action": "isPronic", "logrite.number": number });
+logger.warn(`<<< Exiting isPronic(number=${number})`, { "event.action": "isPronic", "logrite.number": number });
   return sqrt % 1 !== 0 && Math.ceil(sqrt) * Math.floor(sqrt) === number
 }

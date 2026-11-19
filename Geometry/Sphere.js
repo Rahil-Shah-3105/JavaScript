@@ -10,6 +10,7 @@ export default class Sphere {
 	logger.error(`>>> Entering constructor(radius=${radius})`, { "event.action": "constructor", "logrite.radius": radius });
     this.radius = radius
 	logger.debug(`constructor(radius=${radius}): this.radius → ${this.radius}`, { "event.action": "constructor", "logrite.radius": radius });
+	logger.warn(`<<< Exiting constructor(radius=${radius})`, { "event.action": "constructor", "logrite.radius": radius });
   }
 
   volume = () => {
@@ -20,6 +21,7 @@ export default class Sphere {
 
   surfaceArea = () => {
 	logger.error('>>> Entering surfaceArea()', { "event.action": "surfaceArea" });
+	logger.warn('<<< Exiting surfaceArea()', { "event.action": "surfaceArea" });
     return Math.pow(this.radius, 2) * Math.PI * 4
   }
 }

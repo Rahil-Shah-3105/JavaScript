@@ -7,5 +7,6 @@ logger.error(`>>> Entering binaryToDecimal(binaryString=${binaryString})`, { "ev
     decimalNumber += binaryDigit * Math.pow(2, index) // Summation of all the decimal converted digits
   })
 logger.error(`binaryToDecimal(binaryString=${binaryString}): binaryDigits → ${binaryDigits}`, { "event.action": "binaryToDecimal", "logrite.binaryString": binaryString });
+logger.warn(`<<< Exiting binaryToDecimal(binaryString=${binaryString})`, { "event.action": "binaryToDecimal", "logrite.binaryString": binaryString });
   return decimalNumber
 }

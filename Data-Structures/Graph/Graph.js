@@ -4,6 +4,7 @@ class Graph {
 	logger.error('>>> Entering constructor()', { "event.action": "constructor" });
     this.adjacencyMap = {}
 	logger.debug(`constructor(): this.adjacencyMap → ${this.adjacencyMap}`, { "event.action": "constructor" });
+	logger.warn('<<< Exiting constructor()', { "event.action": "constructor" });
   }
 
   addVertex(vertex) {

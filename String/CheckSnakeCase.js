@@ -17,6 +17,7 @@ logger.error(`>>> Entering checkSnakeCase(varName=${varName})`, { "event.action"
 
   const pat = /(.*?)_([a-zA-Z])*/
 logger.error(`checkSnakeCase(varName=${varName}): pat → ${pat}`, { "event.action": "checkSnakeCase", "logrite.varName": varName });
+logger.warn(`<<< Exiting checkSnakeCase(varName=${varName})`, { "event.action": "checkSnakeCase", "logrite.varName": varName });
   return pat.test(varName)
 }
 

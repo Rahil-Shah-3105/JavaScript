@@ -54,6 +54,7 @@ logger.error(`SetHash(): set → ${set}`, { "event.action": "SetHash" });
     set[alphabets[i]] = 0
   }
 logger.error(`SetHash(): alphabets → ${alphabets}`, { "event.action": "SetHash" });
+logger.warn('<<< Exiting SetHash()', { "event.action": "SetHash" });
   return set
 }
 

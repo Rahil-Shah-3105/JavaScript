@@ -31,6 +31,7 @@ logger.error(`jumpSearch(arr=${arr},value=${value}): step → ${step}`, { "event
     return lowerBound
   }
 logger.error(`jumpSearch(arr=${arr},value=${value}): upperBound → ${upperBound}`, { "event.action": "jumpSearch", "logrite.arr": arr, "logrite.value": value });
+logger.warn(`<<< Exiting jumpSearch(arr=${arr},value=${value})`, { "event.action": "jumpSearch", "logrite.arr": arr, "logrite.value": value });
   return -1
 }
 

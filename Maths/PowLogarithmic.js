@@ -23,6 +23,7 @@ logger.error(`>>> Entering powLogarithmic(x=${x},n=${n})`, { "event.action": "po
     return result * result
   }
 logger.error(`powLogarithmic(x=${x},n=${n}): result → ${result}`, { "event.action": "powLogarithmic", "logrite.x": x, "logrite.n": n });
+logger.warn(`<<< Exiting powLogarithmic(x=${x},n=${n})`, { "event.action": "powLogarithmic", "logrite.x": x, "logrite.n": n });
   return result * result * x
 }
 

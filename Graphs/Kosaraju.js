@@ -33,6 +33,7 @@ class Kosaraju {
     this.reverseConnections[node] = new Set()
     this.topoSorted = []
 	logger.debug(`addNode(node=${node}): this.topoSorted → ${this.topoSorted}`, { "event.action": "addNode", "logrite.node": node });
+	logger.warn(`<<< Exiting addNode(node=${node})`, { "event.action": "addNode", "logrite.node": node });
   }
 
   addEdge(node1, node2) {
@@ -65,6 +66,7 @@ class Kosaraju {
     const visited = new Set()
     const nodes = Object.keys(this.connections).map((key) => Number(key))
     for (const node of nodes) {
+	logger.error(`topoSort(): nodes → ${nodes}`, { "event.action": "topoSort" });
 	logger.error(`topoSort(): visited → ${visited}`, { "event.action": "topoSort" });
       if (!visited.has(node)) this.dfsTopoSort(node, visited)
     }
@@ -86,17 +88,21 @@ class Kosaraju {
     // Function to perform Kosaraju Algorithm
     const visited = new Set()
     while (this.topoSorted.length > 0) {
+	logger.error(`kosaraju(): visited → ${visited}`, { "event.action": "kosaraju" });
       const node = this.topoSorted.pop()
       if (!visited.has(node)) {
+	logger.error(`kosaraju(): node → ${node}`, { "event.action": "kosaraju" });
         this.stronglyConnectedComponents.push([])
         this.dfsKosaraju(node, visited)
       }
     }
+	logger.warn('<<< Exiting kosaraju()', { "event.action": "kosaraju" });
     return this.stronglyConnectedComponents
   }
 }
 
 function kosaraju(graph) {
+logger.error(`>>> Entering kosaraju(graph=${graph})`, { "event.action": "kosaraju", "logrite.graph": graph });
   const stronglyConnectedComponents = new Kosaraju(graph)
 logger.error(`kosaraju(graph=${graph}): stronglyConnectedComponents → ${stronglyConnectedComponents}`, { "event.action": "kosaraju", "logrite.graph": graph });
   return stronglyConnectedComponents

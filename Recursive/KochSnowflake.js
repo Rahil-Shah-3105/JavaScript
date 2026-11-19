@@ -19,8 +19,10 @@ export class Vector2 {
   constructor(x, y) {
 	logger.error(`>>> Entering constructor(x=${x},y=${y})`, { "event.action": "constructor", "logrite.x": x, "logrite.y": y });
     this.x = x
+	logger.debug(`constructor(x=${x},y=${y}): this.x → ${this.x}`, { "event.action": "constructor", "logrite.x": x, "logrite.y": y });
     this.y = y
 	logger.debug(`constructor(x=${x},y=${y}): this.y → ${this.y}`, { "event.action": "constructor", "logrite.x": x, "logrite.y": y });
+	logger.warn(`<<< Exiting constructor(x=${x},y=${y})`, { "event.action": "constructor", "logrite.x": x, "logrite.y": y });
   }
 
   /**

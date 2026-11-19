@@ -31,6 +31,7 @@ logger.error(`>>> Entering introsort(array=${array},compare=${compare})`, { "eve
    *  1 if a greater than b
    */
   const defaultComparator = function (x, y) {
+	logger.error(`>>> Entering defaultComparator(x=${x},y=${y})`, { "event.action": "defaultComparator", "logrite.x": x, "logrite.y": y });
     if (x === undefined && y === undefined) return 0
     if (x === undefined) return 1
     if (y === undefined) return -1

@@ -39,6 +39,7 @@ logger.error(`>>> Entering calcFactorial(num=${num})`, { "event.action": "calcFa
 	logger.error(`calcFactorial(num=${num}): range → ${range}`, { "event.action": "calcFactorial", "logrite.num": num });
     return factorial
   }
+logger.warn(`<<< Exiting calcFactorial(num=${num})`, { "event.action": "calcFactorial", "logrite.num": num });
 }
 
 export { calcFactorial }

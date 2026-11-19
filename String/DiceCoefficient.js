@@ -18,6 +18,7 @@ logger.error(`>>> Entering mapBigrams(string=${string})`, { "event.action": "map
     bigrams.set(bigram, (count || 0) + 1)
   }
 logger.error(`mapBigrams(string=${string}): bigrams → ${bigrams}`, { "event.action": "mapBigrams", "logrite.string": string });
+logger.warn(`<<< Exiting mapBigrams(string=${string})`, { "event.action": "mapBigrams", "logrite.string": string });
   return bigrams
 }
 
@@ -32,6 +33,7 @@ logger.error(`>>> Entering countCommonBigrams(bigrams=${bigrams},string=${string
 	logger.error(`countCommonBigrams(bigrams=${bigrams},string=${string}): bigram → ${bigram}`, { "event.action": "countCommonBigrams", "logrite.bigrams": bigrams, "logrite.string": string });
   }
 logger.error(`countCommonBigrams(bigrams=${bigrams},string=${string}): count → ${count}`, { "event.action": "countCommonBigrams", "logrite.bigrams": bigrams, "logrite.string": string });
+logger.warn(`<<< Exiting countCommonBigrams(bigrams=${bigrams},string=${string})`, { "event.action": "countCommonBigrams", "logrite.bigrams": bigrams, "logrite.string": string });
   return count
 }
 

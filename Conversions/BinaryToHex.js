@@ -75,6 +75,7 @@ logger.error(`binaryToHex(binaryString=${binaryString}): result → ${result}`, 
       result += hexLookup(binaryString.slice(0, i + 1).join(''))
     }
   }
+logger.warn(`<<< Exiting binaryToHex(binaryString=${binaryString})`, { "event.action": "binaryToHex", "logrite.binaryString": binaryString });
   return result.split('').reverse().join('')
 }
 

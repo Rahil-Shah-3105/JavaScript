@@ -27,6 +27,7 @@ logger.error(`>>> Entering mobiusFunction(number=${number})`, { "event.action": 
   if (number <= 0) {
     throw new Error('Number must be greater than zero.')
   }
+logger.warn(`<<< Exiting mobiusFunction(number=${number})`, { "event.action": "mobiusFunction", "logrite.number": number });
   return primeFactorsArray.length !== new Set(primeFactorsArray).size
     ? 0
     : primeFactorsArray.length % 2 === 0

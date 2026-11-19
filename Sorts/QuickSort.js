@@ -27,6 +27,7 @@ logger.error(`>>> Entering quickSort(items=${items})`, { "event.action": "quickS
 
   const sorted = [...quickSort(LESSER), PIVOT, ...quickSort(GREATER)]
 logger.error(`quickSort(items=${items}): sorted → ${sorted}`, { "event.action": "quickSort", "logrite.items": items });
+logger.warn(`<<< Exiting quickSort(items=${items})`, { "event.action": "quickSort", "logrite.items": items });
   return sorted
 }
 

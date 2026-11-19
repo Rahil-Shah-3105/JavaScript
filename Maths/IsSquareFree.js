@@ -22,5 +22,6 @@ logger.error(`>>> Entering isSquareFree(number=${number})`, { "event.action": "i
     throw new Error('Number must be greater than zero.')
   }
 logger.error(`isSquareFree(number=${number}): primeFactorsArray → ${primeFactorsArray}`, { "event.action": "isSquareFree", "logrite.number": number });
+logger.warn(`<<< Exiting isSquareFree(number=${number})`, { "event.action": "isSquareFree", "logrite.number": number });
   return primeFactorsArray.length === new Set(primeFactorsArray).size
 }

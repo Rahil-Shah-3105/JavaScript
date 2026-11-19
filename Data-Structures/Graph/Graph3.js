@@ -4,6 +4,7 @@ class Graph {
 	logger.error('>>> Entering constructor()', { "event.action": "constructor" });
     this.adjacencyObject = {}
 	logger.debug(`constructor(): this.adjacencyObject → ${this.adjacencyObject}`, { "event.action": "constructor" });
+	logger.warn('<<< Exiting constructor()', { "event.action": "constructor" });
   }
 
   addVertex(vertex) {
@@ -35,6 +36,7 @@ class Graph {
     while (this.adjacencyObject[vertex].length) {
       const adjacentVertex = this.adjacencyObject[vertex].pop()
       this.removeEdge(vertex, adjacentVertex)
+	logger.warn(`<<< Exiting removeVertex(vertex=${vertex})`, { "event.action": "removeVertex", "logrite.vertex": vertex });
     }
   }
 
@@ -64,6 +66,7 @@ class Graph {
     }
 
     dfs(start)
+	logger.warn(`<<< Exiting DFS(start=${start})`, { "event.action": "DFS", "logrite.start": start });
     return result
   }
 

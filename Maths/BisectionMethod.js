@@ -20,6 +20,7 @@ logger.error(`>>> Entering findRoot(a=${a},b=${b},func=${func},numberOfIteration
 	logger.error(`>>> Entering belongsToDomain(x=${x},f=${f})`, { "event.action": "belongsToDomain", "logrite.x": x, "logrite.f": f });
     const res = f(x)
 	logger.error(`belongsToDomain(x=${x},f=${f}): res → ${res}`, { "event.action": "belongsToDomain", "logrite.x": x, "logrite.f": f });
+	logger.warn(`<<< Exiting belongsToDomain(x=${x},f=${f})`, { "event.action": "belongsToDomain", "logrite.x": x, "logrite.f": f });
     return !Number.isNaN(res)
   }
   if (!belongsToDomain(a, func) || !belongsToDomain(b, func))

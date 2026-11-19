@@ -10,8 +10,10 @@ class Vector2 {
   constructor(x, y) {
 	logger.error(`>>> Entering constructor(x=${x},y=${y})`, { "event.action": "constructor", "logrite.x": x, "logrite.y": y });
     this.x = x
+	logger.debug(`constructor(x=${x},y=${y}): this.x → ${this.x}`, { "event.action": "constructor", "logrite.x": x, "logrite.y": y });
     this.y = y
 	logger.debug(`constructor(x=${x},y=${y}): this.y → ${this.y}`, { "event.action": "constructor", "logrite.x": x, "logrite.y": y });
+	logger.warn(`<<< Exiting constructor(x=${x},y=${y})`, { "event.action": "constructor", "logrite.x": x, "logrite.y": y });
   }
 
   /**
@@ -120,6 +122,7 @@ class Vector2 {
 	logger.error(`>>> Entering distance(vector=${vector})`, { "event.action": "distance", "logrite.vector": vector });
     const difference = vector.subtract(this)
 	logger.error(`distance(vector=${vector}): difference → ${difference}`, { "event.action": "distance", "logrite.vector": vector });
+	logger.warn(`<<< Exiting distance(vector=${vector})`, { "event.action": "distance", "logrite.vector": vector });
     return difference.length()
   }
 

@@ -61,6 +61,7 @@ logger.error(`>>> Entering UnionFind(n=${n},key=${key})`, { "event.action": "Uni
   }
   // Returns true if p and p are both in same group, false otherwise.
   this.connected = function (p, q) {
+	logger.error(`>>> Entering connected(p=${p},q=${q})`, { "event.action": "connected", "logrite.p": p, "logrite.q": q });
     p = key(p)
     q = key(q)
     ensureIndexWithinBounds(p, q)

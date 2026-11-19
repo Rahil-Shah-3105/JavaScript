@@ -20,6 +20,7 @@ class MinPriorityQueue {
 	logger.debug(`constructor(c=${c}): this.heap → ${this.heap}`, { "event.action": "constructor", "logrite.c": c });
 	logger.debug(`constructor(c=${c}): this.capacity → ${this.capacity}`, { "event.action": "constructor", "logrite.c": c });
     this.size = 0
+	logger.debug(`constructor(c=${c}): this.size → ${this.size}`, { "event.action": "constructor", "logrite.c": c });
   }
 
   // inserts the key at the end and rearranges it
@@ -87,6 +88,7 @@ class MinPriorityQueue {
     this.heap = [undefined, ...heapSort.reverse()]
     this.size = heapSort.length
 	logger.debug(`heapReverse(): this.size → ${this.size}`, { "event.action": "heapReverse" });
+	logger.warn('<<< Exiting heapReverse()', { "event.action": "heapReverse" });
   }
 
   // this function reorders the heap after every delete function

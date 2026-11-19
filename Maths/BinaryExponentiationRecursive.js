@@ -18,6 +18,7 @@ logger.error(`>>> Entering binaryExponentiation(a=${a},n=${n})`, { "event.action
   } else {
     const b = binaryExponentiation(a, n / 2)
 	logger.error(`binaryExponentiation(a=${a},n=${n}): b → ${b}`, { "event.action": "binaryExponentiation", "logrite.a": a, "logrite.n": n });
+logger.warn(`<<< Exiting binaryExponentiation(a=${a},n=${n})`, { "event.action": "binaryExponentiation", "logrite.a": a, "logrite.n": n });
     return b * b
   }
 }

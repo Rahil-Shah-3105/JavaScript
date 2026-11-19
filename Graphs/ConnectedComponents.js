@@ -5,6 +5,7 @@ class GraphUnweightedUndirectedAdjacencyList {
 	logger.error('>>> Entering constructor()', { "event.action": "constructor" });
     this.connections = {}
 	logger.debug(`constructor(): this.connections → ${this.connections}`, { "event.action": "constructor" });
+	logger.warn('<<< Exiting constructor()', { "event.action": "constructor" });
   }
 
   addNode(node) {
