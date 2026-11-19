@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * A LinkedList based solution for Add Two Numbers
  *
@@ -15,10 +16,13 @@ Link for the Problem: https://leetcode.com/problems/add-two-numbers/
 
 class AddTwoNumbers {
   constructor() {
+	logger.error('>>> Entering constructor()', { "event.action": "constructor" });
     this.dummyNode = new Node(0)
+	logger.warn('<<< Exiting constructor()', { "event.action": "constructor" });
   }
 
   solution(firstList, secondList) {
+	logger.error(`>>> Entering solution(firstList=${firstList},secondList=${secondList})`, { "event.action": "solution", "logrite.firstList": firstList, "logrite.secondList": secondList });
     let firstRunner = firstList
     let secondRunner = secondList
     let tail = this.dummyNode
@@ -41,10 +45,12 @@ class AddTwoNumbers {
       tail.next = new Node(carry % 10)
     }
 
+	logger.warn(`<<< Exiting solution(firstList=${firstList},secondList=${secondList})`, { "event.action": "solution", "logrite.firstList": firstList, "logrite.secondList": secondList });
     return this.dummyNode.next
   }
 
   solutionToArray() {
+	logger.error('>>> Entering solutionToArray()', { "event.action": "solutionToArray" });
     const list = []
     let currentNode = this.dummyNode.next
     while (currentNode) {
@@ -52,6 +58,7 @@ class AddTwoNumbers {
       currentNode = currentNode.next
     }
 
+	logger.warn('<<< Exiting solutionToArray()', { "event.action": "solutionToArray" });
     return list
   }
 }

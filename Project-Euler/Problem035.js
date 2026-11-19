@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * Problem 35 - Circular primes
  *
@@ -12,6 +13,7 @@
 import { sieveOfEratosthenes } from '../Maths/SieveOfEratosthenes'
 
 function problem35(n) {
+logger.error(`>>> Entering problem35(n=${n})`, { "event.action": "problem35", "logrite.n": n });
   if (n < 2) {
     throw new Error('Invalid input')
   }
@@ -20,6 +22,7 @@ function problem35(n) {
     (prime) => !prime.toString().match(/[024568]/)
   )
 
+logger.error(`problem35(n=${n}): list → ${list}`, { "event.action": "problem35", "logrite.n": n });
   const result = list.filter((number, _idx, arr) => {
     const str = String(number)
     for (let i = 0; i < str.length; i++) {
@@ -30,9 +33,11 @@ function problem35(n) {
         return false
       }
     }
+logger.error(`problem35(n=${n}): result → ${result}`, { "event.action": "problem35", "logrite.n": n });
     return true // If all rotations are prime, then the number is circular prime
   })
 
+logger.warn(`<<< Exiting problem35(n=${n})`, { "event.action": "problem35", "logrite.n": n });
   return result.length + 2 // Add 2 to the result because the circular primes 2 & 5 were discarded
 }
 

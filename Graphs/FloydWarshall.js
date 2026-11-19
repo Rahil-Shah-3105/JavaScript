@@ -1,3 +1,4 @@
+const logger = console;
 /*
   Source:
     https://en.wikipedia.org/wiki/Floyd%E2%80%93Warshall_algorithm
@@ -7,6 +8,7 @@
 */
 
 const FloydWarshall = (dist) => {
+logger.error(`>>> Entering FloydWarshall(dist=${dist})`, { "event.action": "FloydWarshall", "logrite.dist": dist });
   // Input:- dist: 2D Array where dist[i][j] = edge weight b/w i and j
   // Output:- dist: 2D Array where dist[i][j] = shortest dist b/w i and j
   const n = dist.length
@@ -20,6 +22,7 @@ const FloydWarshall = (dist) => {
       }
     }
   }
+logger.warn(`<<< Exiting FloydWarshall(dist=${dist})`, { "event.action": "FloydWarshall", "logrite.dist": dist });
   return dist
 }
 

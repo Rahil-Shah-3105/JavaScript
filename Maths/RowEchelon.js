@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * Given a two dimensional matrix, find its row echelon form.
  *
@@ -31,6 +32,7 @@ const tolerance = 0.000001
 
 // Check if all the rows have same length of elements
 const isMatrixValid = (matrix) => {
+logger.error(`>>> Entering isMatrixValid(matrix=${matrix})`, { "event.action": "isMatrixValid", "logrite.matrix": matrix });
   let numRows = matrix.length
   let numCols = matrix[0].length
   for (let i = 0; i < numRows; i++) {
@@ -47,10 +49,12 @@ const isMatrixValid = (matrix) => {
   ) {
     return false
   }
+logger.warn(`<<< Exiting isMatrixValid(matrix=${matrix})`, { "event.action": "isMatrixValid", "logrite.matrix": matrix });
   return true
 }
 
 const checkNonZero = (currentRow, currentCol, matrix) => {
+logger.error(`>>> Entering checkNonZero(currentRow=${currentRow},currentCol=${currentCol},matrix=${matrix})`, { "event.action": "checkNonZero", "logrite.currentRow": currentRow, "logrite.currentCol": currentCol, "logrite.matrix": matrix });
   let numRows = matrix.length
   for (let i = currentRow; i < numRows; i++) {
     // Checks if the current element is not very near to zero.
@@ -58,16 +62,19 @@ const checkNonZero = (currentRow, currentCol, matrix) => {
       return true
     }
   }
+logger.warn(`<<< Exiting checkNonZero(currentRow=${currentRow},currentCol=${currentCol},matrix=${matrix})`, { "event.action": "checkNonZero", "logrite.currentRow": currentRow, "logrite.currentCol": currentCol, "logrite.matrix": matrix });
   return false
 }
 
 const swapRows = (currentRow, withRow, matrix) => {
+logger.error(`>>> Entering swapRows(currentRow=${currentRow},withRow=${withRow},matrix=${matrix})`, { "event.action": "swapRows", "logrite.currentRow": currentRow, "logrite.withRow": withRow, "logrite.matrix": matrix });
   let numCols = matrix[0].length
   let tempValue = 0
   for (let j = 0; j < numCols; j++) {
     tempValue = matrix[currentRow][j]
     matrix[currentRow][j] = matrix[withRow][j]
     matrix[withRow][j] = tempValue
+	logger.warn(`<<< Exiting swapRows(currentRow=${currentRow},withRow=${withRow},matrix=${matrix})`, { "event.action": "swapRows", "logrite.currentRow": currentRow, "logrite.withRow": withRow, "logrite.matrix": matrix });
   }
 }
 
@@ -75,6 +82,7 @@ const swapRows = (currentRow, withRow, matrix) => {
 // Pivot element is the first non-zero element found from the current row
 // down to the last row.
 const selectPivot = (currentRow, currentCol, matrix) => {
+logger.error(`>>> Entering selectPivot(currentRow=${currentRow},currentCol=${currentCol},matrix=${matrix})`, { "event.action": "selectPivot", "logrite.currentRow": currentRow, "logrite.currentCol": currentCol, "logrite.matrix": matrix });
   let numRows = matrix.length
   for (let i = currentRow; i < numRows; i++) {
     if (matrix[i][currentCol] !== 0) {
@@ -82,31 +90,39 @@ const selectPivot = (currentRow, currentCol, matrix) => {
       return
     }
   }
+logger.warn(`<<< Exiting selectPivot(currentRow=${currentRow},currentCol=${currentCol},matrix=${matrix})`, { "event.action": "selectPivot", "logrite.currentRow": currentRow, "logrite.currentCol": currentCol, "logrite.matrix": matrix });
 }
 
 // Multiply each element of the given row with a factor.
 const scalarMultiplication = (currentRow, factor, matrix) => {
+logger.error(`>>> Entering scalarMultiplication(currentRow=${currentRow},factor=${factor},matrix=${matrix})`, { "event.action": "scalarMultiplication", "logrite.currentRow": currentRow, "logrite.factor": factor, "logrite.matrix": matrix });
   let numCols = matrix[0].length
   for (let j = 0; j < numCols; j++) {
     matrix[currentRow][j] *= factor
+	logger.warn(`<<< Exiting scalarMultiplication(currentRow=${currentRow},factor=${factor},matrix=${matrix})`, { "event.action": "scalarMultiplication", "logrite.currentRow": currentRow, "logrite.factor": factor, "logrite.matrix": matrix });
   }
 }
 
 // Subtract one row from another row
 const subtractRow = (currentRow, fromRow, matrix) => {
+logger.error(`>>> Entering subtractRow(currentRow=${currentRow},fromRow=${fromRow},matrix=${matrix})`, { "event.action": "subtractRow", "logrite.currentRow": currentRow, "logrite.fromRow": fromRow, "logrite.matrix": matrix });
   let numCols = matrix[0].length
   for (let j = 0; j < numCols; j++) {
     matrix[fromRow][j] -= matrix[currentRow][j]
+	logger.warn(`<<< Exiting subtractRow(currentRow=${currentRow},fromRow=${fromRow},matrix=${matrix})`, { "event.action": "subtractRow", "logrite.currentRow": currentRow, "logrite.fromRow": fromRow, "logrite.matrix": matrix });
   }
 }
 
 // Check if two numbers are equal within a given tolerance
 const isTolerant = (a, b, tolerance) => {
+logger.error(`>>> Entering isTolerant(a=${a},b=${b},tolerance=${tolerance})`, { "event.action": "isTolerant", "logrite.a": a, "logrite.b": b, "logrite.tolerance": tolerance });
   const absoluteDifference = Math.abs(a - b)
+logger.error(`isTolerant(a=${a},b=${b},tolerance=${tolerance}): absoluteDifference → ${absoluteDifference}`, { "event.action": "isTolerant", "logrite.a": a, "logrite.b": b, "logrite.tolerance": tolerance });
   return absoluteDifference <= tolerance
 }
 
 const rowEchelon = (matrix) => {
+logger.error(`>>> Entering rowEchelon(matrix=${matrix})`, { "event.action": "rowEchelon", "logrite.matrix": matrix });
   // Check if the input matrix is valid; if not, throw an error.
   if (!isMatrixValid(matrix)) {
     throw new Error('Input is not a valid 2D matrix.')
@@ -115,6 +131,7 @@ const rowEchelon = (matrix) => {
   let numRows = matrix.length
   let numCols = matrix[0].length
   let result = matrix
+logger.error(`rowEchelon(matrix=${matrix}): result → ${result}`, { "event.action": "rowEchelon", "logrite.matrix": matrix });
 
   // Iterate through the rows (i) and columns (j) of the matrix.
   for (let i = 0, j = 0; i < numRows && j < numCols; ) {
@@ -144,6 +161,7 @@ const rowEchelon = (matrix) => {
     }
     i++
   }
+logger.warn(`<<< Exiting rowEchelon(matrix=${matrix})`, { "event.action": "rowEchelon", "logrite.matrix": matrix });
   return result
 }
 

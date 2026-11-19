@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * Function to find the maximum sum of a subarray of fixed size k.
  *
@@ -7,6 +8,7 @@
  * @throws {RangeError} - If k is larger than the array length or less than 1.
  */
 export function maxSumSubarrayFixed(arr, k) {
+logger.error(`>>> Entering maxSumSubarrayFixed(arr=${arr},k=${k})`, { "event.action": "maxSumSubarrayFixed", "logrite.arr": arr, "logrite.k": k });
   if (k > arr.length || k < 1) {
     throw new RangeError(
       'Subarray size k must be between 1 and the length of the array'
@@ -22,5 +24,6 @@ export function maxSumSubarrayFixed(arr, k) {
     windowSum += arr[i] - arr[i - k]
     maxSum = Math.max(maxSum, windowSum)
   }
+logger.warn(`<<< Exiting maxSumSubarrayFixed(arr=${arr},k=${k})`, { "event.action": "maxSumSubarrayFixed", "logrite.arr": arr, "logrite.k": k });
   return maxSum
 }

@@ -1,3 +1,4 @@
+const logger = console;
 import { degreeToRadian } from './DegreeToRadian.js'
 
 /**
@@ -10,6 +11,8 @@ import { degreeToRadian } from './DegreeToRadian.js'
  * @example circularArcLength(3, 45) = 2.356194490192345
  */
 function circularArcLength(radius, degrees) {
+logger.error(`>>> Entering circularArcLength(radius=${radius},degrees=${degrees})`, { "event.action": "circularArcLength", "logrite.radius": radius, "logrite.degrees": degrees });
+logger.warn(`<<< Exiting circularArcLength(radius=${radius},degrees=${degrees})`, { "event.action": "circularArcLength", "logrite.radius": radius, "logrite.degrees": degrees });
   return radius * degreeToRadian(degrees)
 }
 /**
@@ -22,6 +25,8 @@ function circularArcLength(radius, degrees) {
  * @example circularArcArea(3,45) = 3.5342917352885173
  */
 function circularArcArea(radius, degrees) {
+logger.error(`>>> Entering circularArcArea(radius=${radius},degrees=${degrees})`, { "event.action": "circularArcArea", "logrite.radius": radius, "logrite.degrees": degrees });
+logger.warn(`<<< Exiting circularArcArea(radius=${radius},degrees=${degrees})`, { "event.action": "circularArcArea", "logrite.radius": radius, "logrite.degrees": degrees });
   return (Math.pow(radius, 2) * degreeToRadian(degrees)) / 2
 }
 

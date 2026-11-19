@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * @file Provides solution for Project Euler Problem 18 - Maximum path sum I
  * @author Eric Lavault {@link https://github.com/lvlte}
@@ -62,6 +63,7 @@ const triangle = `
 `
 
 export const maxPathSum = function (grid = triangle) {
+logger.error(`>>> Entering maxPathSum(grid=${grid})`, { "event.action": "maxPathSum", "logrite.grid": grid });
   /**
    * If we reduce the problem to its simplest form, considering :
    *
@@ -111,5 +113,6 @@ export const maxPathSum = function (grid = triangle) {
     }
   }
 
+logger.warn(`<<< Exiting maxPathSum(grid=${grid})`, { "event.action": "maxPathSum", "logrite.grid": grid });
   return grid[0][0]
 }

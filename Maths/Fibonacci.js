@@ -1,5 +1,7 @@
+const logger = console;
 // https://en.wikipedia.org/wiki/Generalizations_of_Fibonacci_numbers#Extension_to_negative_integers
 const FibonacciIterative = (num) => {
+logger.error(`>>> Entering FibonacciIterative(num=${num})`, { "event.action": "FibonacciIterative", "logrite.num": num });
   const isNeg = num < 0
   if (isNeg) num *= -1
   const sequence = [0]
@@ -13,23 +15,28 @@ const FibonacciIterative = (num) => {
     )
   }
 
+logger.warn(`<<< Exiting FibonacciIterative(num=${num})`, { "event.action": "FibonacciIterative", "logrite.num": num });
   return sequence
 }
 
 const FibonacciGenerator = function* (neg) {
+logger.error(`>>> Entering FibonacciGenerator(neg=${neg})`, { "event.action": "FibonacciGenerator", "logrite.neg": neg });
   let a = 0
   let b = 1
   yield a
   while (true) {
     yield b
     ;[a, b] = neg ? [b, a - b] : [b, a + b]
+	logger.warn(`<<< Exiting FibonacciGenerator(neg=${neg})`, { "event.action": "FibonacciGenerator", "logrite.neg": neg });
   }
 }
 
 const list = []
 const FibonacciRecursive = (num) => {
+logger.error(`>>> Entering FibonacciRecursive(num=${num})`, { "event.action": "FibonacciRecursive", "logrite.num": num });
   const isNeg = num < 0
   if (isNeg) num *= -1
+logger.warn(`<<< Exiting FibonacciRecursive(num=${num})`, { "event.action": "FibonacciRecursive", "logrite.num": num });
   return (() => {
     switch (list.length) {
       case 0:
@@ -49,6 +56,7 @@ const FibonacciRecursive = (num) => {
 
 const dict = new Map()
 const FibonacciRecursiveDP = (stairs) => {
+logger.error(`>>> Entering FibonacciRecursiveDP(stairs=${stairs})`, { "event.action": "FibonacciRecursiveDP", "logrite.stairs": stairs });
   const isNeg = stairs < 0
   if (isNeg) stairs *= -1
 
@@ -63,6 +71,7 @@ const FibonacciRecursiveDP = (stairs) => {
 
   dict.set(stairs, res)
 
+logger.warn(`<<< Exiting FibonacciRecursiveDP(stairs=${stairs})`, { "event.action": "FibonacciRecursiveDP", "logrite.stairs": stairs });
   return (isNeg ? (-1) ** (stairs + 1) : 1) * res
 }
 
@@ -78,6 +87,7 @@ const FibonacciRecursiveDP = (stairs) => {
 // @Satzyakiz
 
 const FibonacciDpWithoutRecursion = (num) => {
+logger.error(`>>> Entering FibonacciDpWithoutRecursion(num=${num})`, { "event.action": "FibonacciDpWithoutRecursion", "logrite.num": num });
   const isNeg = num < 0
   if (isNeg) num *= -1
   const table = [0]
@@ -86,18 +96,23 @@ const FibonacciDpWithoutRecursion = (num) => {
   for (let i = 2; i < num; ++i) {
     table.push(isNeg ? table[i - 1] - table[i] : table[i] + table[i - 1])
   }
+logger.warn(`<<< Exiting FibonacciDpWithoutRecursion(num=${num})`, { "event.action": "FibonacciDpWithoutRecursion", "logrite.num": num });
   return table
 }
 
 // Using Matrix exponentiation to find n-th fibonacci in O(log n) time
 
 const copyMatrix = (A) => {
+logger.error(`>>> Entering copyMatrix(A=${A})`, { "event.action": "copyMatrix", "logrite.A": A });
+logger.warn(`<<< Exiting copyMatrix(A=${A})`, { "event.action": "copyMatrix", "logrite.A": A });
   return A.map((row) => row.map((cell) => cell))
 }
 
 const Identity = (size) => {
+logger.error(`>>> Entering Identity(size=${size})`, { "event.action": "Identity", "logrite.size": size });
   const isBigInt = typeof size === 'bigint'
   const ZERO = isBigInt ? 0n : 0
+logger.error(`Identity(size=${size}): isBigInt → ${isBigInt}`, { "event.action": "Identity", "logrite.size": size });
   const ONE = isBigInt ? 1n : 1
   size = Number(size)
   const I = Array(size)
@@ -105,6 +120,7 @@ const Identity = (size) => {
     .map(() => Array(size).fill())
   return I.map((row, rowIdx) =>
     row.map((_col, colIdx) => {
+logger.warn(`<<< Exiting Identity(size=${size})`, { "event.action": "Identity", "logrite.size": size });
       return rowIdx === colIdx ? ONE : ZERO
     })
   )
@@ -115,9 +131,11 @@ const Identity = (size) => {
 // both matrices must have same-type numeric values
 // either both BigInt or both Number
 const matrixMultiply = (A, B) => {
+logger.error(`>>> Entering matrixMultiply(A=${A},B=${B})`, { "event.action": "matrixMultiply", "logrite.A": A, "logrite.B": B });
   A = copyMatrix(A)
   B = copyMatrix(B)
   const isBigInt = typeof A[0][0] === 'bigint'
+logger.error(`matrixMultiply(A=${A},B=${B}): isBigInt → ${isBigInt}`, { "event.action": "matrixMultiply", "logrite.A": A, "logrite.B": B });
   const l = A.length
   const m = B.length
   const n = B[0].length // Assuming non-empty matrices
@@ -125,6 +143,7 @@ const matrixMultiply = (A, B) => {
     .fill(null)
     .map(() => Array(n).fill())
   for (let i = 0; i < l; i++) {
+	logger.error(`matrixMultiply(A=${A},B=${B}): C → ${C}`, { "event.action": "matrixMultiply", "logrite.A": A, "logrite.B": B });
     for (let j = 0; j < n; j++) {
       C[i][j] = isBigInt ? 0n : 0
       for (let k = 0; k < m; k++) {
@@ -132,6 +151,7 @@ const matrixMultiply = (A, B) => {
       }
     }
   }
+logger.warn(`<<< Exiting matrixMultiply(A=${A},B=${B})`, { "event.action": "matrixMultiply", "logrite.A": A, "logrite.B": B });
   return C
 }
 
@@ -159,8 +179,10 @@ const matrixExpo = (A, n) => {
 }
 
 const FibonacciMatrixExpo = (num) => {
+logger.error(`>>> Entering FibonacciMatrixExpo(num=${num})`, { "event.action": "FibonacciMatrixExpo", "logrite.num": num });
   const isBigInt = typeof num === 'bigint'
   const ZERO = isBigInt ? 0n : 0
+logger.error(`FibonacciMatrixExpo(num=${num}): isBigInt → ${isBigInt}`, { "event.action": "FibonacciMatrixExpo", "logrite.num": num });
   const ONE = isBigInt ? 1n : 1
   // F(0) = 0, F(1) = 1
   // F(n) = F(n-1) + F(n-2)
@@ -185,8 +207,10 @@ const FibonacciMatrixExpo = (num) => {
   ]
 
   const poweredA = matrixExpo(A, num - ONE) // A raised to the power n-1
+logger.error(`FibonacciMatrixExpo(num=${num}): poweredA → ${poweredA}`, { "event.action": "FibonacciMatrixExpo", "logrite.num": num });
   let F = [[ONE], [ZERO]]
   F = matrixMultiply(poweredA, F)
+logger.warn(`<<< Exiting FibonacciMatrixExpo(num=${num})`, { "event.action": "FibonacciMatrixExpo", "logrite.num": num });
   return F[0][0] * (isNeg ? (-ONE) ** (num + ONE) : ONE)
 }
 

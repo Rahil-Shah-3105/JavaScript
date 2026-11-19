@@ -1,3 +1,4 @@
+const logger = console;
 /**
  *  @function Timsort is a hybrid stable sorting algorithm, derived from merge sort and insertion sort,
  *  designed to perform well on many kinds of real-world data.
@@ -11,6 +12,7 @@
  */
 
 const Timsort = (array) => {
+logger.error(`>>> Entering Timsort(array=${array})`, { "event.action": "Timsort", "logrite.array": array });
   // Default size of a partition
   const RUN = 32
   const n = array.length
@@ -25,6 +27,7 @@ const Timsort = (array) => {
       Merge(array, left, mid, right)
     }
   }
+logger.warn(`<<< Exiting Timsort(array=${array})`, { "event.action": "Timsort", "logrite.array": array });
   return array
 }
 
@@ -45,6 +48,7 @@ const InsertionSort = (array, left, right) => {
     }
     array[j + 1] = key
   }
+logger.warn(`<<< Exiting InsertionSort(array=${array},left=${left},right=${right})`, { "event.action": "InsertionSort", "logrite.array": array, "logrite.left": left, "logrite.right": right });
 }
 
 /**
@@ -56,12 +60,14 @@ const InsertionSort = (array, left, right) => {
  */
 
 const Merge = (array, left, mid, right) => {
+logger.error(`>>> Entering Merge(array=${array},left=${left},mid=${mid},right=${right})`, { "event.action": "Merge", "logrite.array": array, "logrite.left": left, "logrite.mid": mid, "logrite.right": right });
   if (mid >= right) return
   const len1 = mid - left + 1
   const len2 = right - mid
   const larr = Array(len1)
   const rarr = Array(len2)
   for (let i = 0; i < len1; i++) {
+logger.error(`Merge(array=${array},left=${left},mid=${mid},right=${right}): larr → ${larr}`, { "event.action": "Merge", "logrite.array": array, "logrite.left": left, "logrite.mid": mid, "logrite.right": right });
     larr[i] = array[left + i]
   }
   for (let i = 0; i < len2; i++) {
@@ -82,6 +88,7 @@ const Merge = (array, left, mid, right) => {
   }
   while (j < rarr.length) {
     array[k++] = rarr[j++]
+	logger.warn(`<<< Exiting Merge(array=${array},left=${left},mid=${mid},right=${right})`, { "event.action": "Merge", "logrite.array": array, "logrite.left": left, "logrite.mid": mid, "logrite.right": right });
   }
 }
 
@@ -92,22 +99,27 @@ const Merge = (array, left, mid, right) => {
  * otherwise "FAULTY"
  */
 const demo = () => {
+logger.error('>>> Entering demo()', { "event.action": "demo" });
   const size = 1000000
   const data = Array(size)
   for (let i = 0; i < size; i++) {
+logger.error(`demo(): data → ${data}`, { "event.action": "demo" });
     data[i] = Math.random() * Number.MAX_SAFE_INTEGER
   }
   const isSorted = function (array) {
+	logger.error(`>>> Entering isSorted(array=${array})`, { "event.action": "isSorted", "logrite.array": array });
     const n = array.length
     for (let i = 0; i < n - 1; i++) {
       if (array[i] > array[i + 1]) return false
     }
+	logger.warn(`<<< Exiting isSorted(array=${array})`, { "event.action": "isSorted", "logrite.array": array });
     return true
   }
   Timsort(data)
   if (isSorted(data)) {
     return 'RIGHT'
   } else {
+logger.warn('<<< Exiting demo()', { "event.action": "demo" });
     return 'FAULTY'
   }
 }

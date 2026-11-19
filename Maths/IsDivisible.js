@@ -1,12 +1,15 @@
+const logger = console;
 // Checks if a number is divisible by another number.
 
 export const isDivisible = (num1, num2) => {
+logger.error(`>>> Entering isDivisible(num1=${num1},num2=${num2})`, { "event.action": "isDivisible", "logrite.num1": num1, "logrite.num2": num2 });
   if (!Number.isFinite(num1) || !Number.isFinite(num2)) {
     throw new TypeError('Expected a valid real number')
   }
   if (num2 === 0) {
     return false
   }
+logger.warn(`<<< Exiting isDivisible(num1=${num1},num2=${num2})`, { "event.action": "isDivisible", "logrite.num1": num1, "logrite.num2": num2 });
   return num1 % num2 === 0
 }
 

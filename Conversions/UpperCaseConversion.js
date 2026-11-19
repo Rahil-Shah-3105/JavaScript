@@ -1,3 +1,4 @@
+const logger = console;
 /*
     Explanation :- A user gives a string (it can be incomplete lowercase or
         partially in lowercase) and then the program converts it into a
@@ -16,6 +17,7 @@
  * @returns {string} Uppercase string
  */
 const upperCaseConversion = (inputString) => {
+logger.error(`>>> Entering upperCaseConversion(inputString=${inputString})`, { "event.action": "upperCaseConversion", "logrite.inputString": inputString });
   // Take a string and split it into characters.
   const newString = inputString.split('').map((char) => {
     // Get a character code by the use charCodeAt method.
@@ -29,6 +31,7 @@ const upperCaseConversion = (inputString) => {
     return char
   })
   // After modification, with the help of the join method, join all the characters and return them.
+logger.warn(`<<< Exiting upperCaseConversion(inputString=${inputString})`, { "event.action": "upperCaseConversion", "logrite.inputString": inputString });
   return newString.join('')
 }
 

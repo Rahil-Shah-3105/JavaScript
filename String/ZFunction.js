@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * @author: Adrito Mukherjee
  * Implementation of ZFunction in JavaScript
@@ -9,9 +10,11 @@
  */
 
 function zFunction(text) {
+logger.error(`>>> Entering zFunction(text=${text})`, { "event.action": "zFunction", "logrite.text": text });
   const length = text.length
   const zArray = Array(length).fill(0)
   // Initializing left and right variable to zero
+logger.error(`zFunction(text=${text}): zArray → ${zArray}`, { "event.action": "zFunction", "logrite.text": text });
   let left = 0
   let right = 0
   for (let index = 0; index < length; index++) {
@@ -35,6 +38,7 @@ function zFunction(text) {
       right = index + zArray[index] - 1
     }
   }
+logger.warn(`<<< Exiting zFunction(text=${text})`, { "event.action": "zFunction", "logrite.text": text });
   return zArray
 }
 

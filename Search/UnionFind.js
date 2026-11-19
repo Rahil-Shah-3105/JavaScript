@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * union find data structure for javascript
  *
@@ -15,6 +16,7 @@
  * you can learn more on disjoint-set / union–find data structure at https://en.wikipedia.org/wiki/Disjoint-set_data_structure
  */
 function UnionFind(n, key) {
+logger.error(`>>> Entering UnionFind(n=${n},key=${key})`, { "event.action": "UnionFind", "logrite.n": n, "logrite.key": key });
   if (!(this instanceof UnionFind)) return new UnionFind(n)
   if (key && typeof key !== 'function') {
     throw new Error('key has to be a function or else left undefined')
@@ -36,19 +38,25 @@ function UnionFind(n, key) {
   }
   // Returns the number of elements of uf object.
   this.size = function () {
+	logger.error('>>> Entering size()', { "event.action": "size" });
+	logger.warn('<<< Exiting size()', { "event.action": "size" });
     return length
   }
   // Returns the number of distinct groups left inside the object.
   this.count = function () {
+	logger.error('>>> Entering count()', { "event.action": "count" });
+	logger.warn('<<< Exiting count()', { "event.action": "count" });
     return cnt
   }
   // Return the root (value) of the group in which p is.
   this.find = function (p) {
+	logger.error(`>>> Entering find(p=${p})`, { "event.action": "find", "logrite.p": p });
     p = key(p)
     while (p !== id[p]) {
       id[p] = id[id[p]]
       p = id[p]
     }
+	logger.warn(`<<< Exiting find(p=${p})`, { "event.action": "find", "logrite.p": p });
     return p
   }
   // Returns true if p and p are both in same group, false otherwise.
@@ -56,6 +64,7 @@ function UnionFind(n, key) {
     p = key(p)
     q = key(q)
     ensureIndexWithinBounds(p, q)
+	logger.warn(`<<< Exiting connected(p=${p},q=${q})`, { "event.action": "connected", "logrite.p": p, "logrite.q": q });
     return this.find(p) === this.find(q)
   }
   // Combine elements in groups p and q into a single group. In other words connect the two groups.
@@ -76,8 +85,10 @@ function UnionFind(n, key) {
     cnt--
   }
   function ensureIndexWithinBounds(args) {
+	logger.error(`>>> Entering ensureIndexWithinBounds(args=${args})`, { "event.action": "ensureIndexWithinBounds" });
     for (let i = arguments.length - 1; i >= 0; i--) {
       const p = arguments[i]
+	logger.warn(`<<< Exiting ensureIndexWithinBounds(args=${args})`, { "event.action": "ensureIndexWithinBounds" });
       if (p >= length)
         throw new Error(
           'Index out of bounds. The maximum index can be length-1'

@@ -1,3 +1,4 @@
+const logger = console;
 /*
  * Reference: https://en.wikipedia.org/wiki/Farey_sequence
  * Inspiration: https://www.youtube.com/watch?v=7LKy3lrkTRA
@@ -26,6 +27,7 @@
  */
 
 function fareyApproximation(decimal, repeat = 20) {
+logger.error(`>>> Entering fareyApproximation(decimal=${decimal},repeat=${repeat})`, { "event.action": "fareyApproximation", "logrite.decimal": decimal, "logrite.repeat": repeat });
   let a = 0
   let b = 1
   let c = 1
@@ -44,6 +46,7 @@ function fareyApproximation(decimal, repeat = 20) {
     }
   }
 
+logger.warn(`<<< Exiting fareyApproximation(decimal=${decimal},repeat=${repeat})`, { "event.action": "fareyApproximation", "logrite.decimal": decimal, "logrite.repeat": repeat });
   return { numerator, denominator }
 }
 

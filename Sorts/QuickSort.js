@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * @function QuickSort
  * @description Quick sort is a comparison sorting algorithm that uses a divide and conquer strategy.
@@ -6,6 +7,7 @@
  * @see [QuickSort](https://en.wikipedia.org/wiki/Quicksort)
  */
 function quickSort(items) {
+logger.error(`>>> Entering quickSort(items=${items})`, { "event.action": "quickSort", "logrite.items": items });
   const length = items.length
 
   if (length <= 1) {
@@ -24,6 +26,7 @@ function quickSort(items) {
   }
 
   const sorted = [...quickSort(LESSER), PIVOT, ...quickSort(GREATER)]
+logger.error(`quickSort(items=${items}): sorted → ${sorted}`, { "event.action": "quickSort", "logrite.items": items });
   return sorted
 }
 

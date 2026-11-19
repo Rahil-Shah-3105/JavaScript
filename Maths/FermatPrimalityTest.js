@@ -1,3 +1,4 @@
+const logger = console;
 /*
  * The Fermat primality test is a probabilistic test to determine whether a number
  * is a probable prime.
@@ -48,9 +49,11 @@
  * @param {number} modulus
  */
 const modularExponentiation = (base, exponent, modulus) => {
+logger.error(`>>> Entering modularExponentiation(base=${base},exponent=${exponent},modulus=${modulus})`, { "event.action": "modularExponentiation", "logrite.base": base, "logrite.exponent": exponent, "logrite.modulus": modulus });
   if (modulus === 1) return 0 // after all, any x % 1 = 0
 
   let result = 1
+logger.error(`modularExponentiation(base=${base},exponent=${exponent},modulus=${modulus}): result → ${result}`, { "event.action": "modularExponentiation", "logrite.base": base, "logrite.exponent": exponent, "logrite.modulus": modulus });
   base %= modulus // make sure that base < modulus
 
   while (exponent > 0) {
@@ -64,6 +67,7 @@ const modularExponentiation = (base, exponent, modulus) => {
     }
   }
 
+logger.warn(`<<< Exiting modularExponentiation(base=${base},exponent=${exponent},modulus=${modulus})`, { "event.action": "modularExponentiation", "logrite.base": base, "logrite.exponent": exponent, "logrite.modulus": modulus });
   return result
 }
 
@@ -75,6 +79,7 @@ const modularExponentiation = (base, exponent, modulus) => {
  * @returns True if prime, false otherwise
  */
 const fermatPrimeCheck = (n, numberOfIterations = 50) => {
+logger.error(`>>> Entering fermatPrimeCheck(n=${n},numberOfIterations=${numberOfIterations})`, { "event.action": "fermatPrimeCheck", "logrite.n": n, "logrite.numberOfIterations": numberOfIterations });
   // first check for edge cases
   if (n <= 1 || n === 4) return false
   if (n <= 3) return true // 2 and 3 are included here
@@ -83,6 +88,7 @@ const fermatPrimeCheck = (n, numberOfIterations = 50) => {
     // pick a random number a, with 2 <= a < n - 2
     const randomNumber = Math.floor(Math.random() * (n - 2) + 2)
 
+	logger.error(`fermatPrimeCheck(n=${n},numberOfIterations=${numberOfIterations}): randomNumber → ${randomNumber}`, { "event.action": "fermatPrimeCheck", "logrite.n": n, "logrite.numberOfIterations": numberOfIterations });
     // if a^(n - 1) % n is different than 1, n is composite
     if (modularExponentiation(randomNumber, n - 1, n) !== 1) {
       return false
@@ -91,6 +97,7 @@ const fermatPrimeCheck = (n, numberOfIterations = 50) => {
 
   // if we arrived here without finding a Fermat Witness, this is almost guaranteed
   // to be a prime number (or a Carmichael number, if you are unlucky)
+logger.warn(`<<< Exiting fermatPrimeCheck(n=${n},numberOfIterations=${numberOfIterations})`, { "event.action": "fermatPrimeCheck", "logrite.n": n, "logrite.numberOfIterations": numberOfIterations });
   return true
 }
 

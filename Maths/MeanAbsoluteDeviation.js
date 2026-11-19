@@ -1,3 +1,4 @@
+const logger = console;
 import { mean } from './AverageMean.js'
 /**
  *@function meanAbsoluteDeviation
@@ -7,6 +8,7 @@ import { mean } from './AverageMean.js'
  * @url https://en.wikipedia.org/wiki/Average_absolute_deviation
  */
 function meanAbsoluteDeviation(data) {
+logger.error(`>>> Entering meanAbsoluteDeviation(data=${data})`, { "event.action": "meanAbsoluteDeviation" });
   if (!Array.isArray(data)) {
     throw new TypeError('Invalid Input')
   }
@@ -15,6 +17,7 @@ function meanAbsoluteDeviation(data) {
   for (const dataPoint of data) {
     absoluteSum += Math.abs(dataPoint - meanValue)
   }
+logger.error(`meanAbsoluteDeviation(data=${data}): meanValue → ${meanValue}`, { "event.action": "meanAbsoluteDeviation" });
   return absoluteSum / data.length
 }
 

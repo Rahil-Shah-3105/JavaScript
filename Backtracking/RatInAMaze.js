@@ -1,3 +1,4 @@
+const logger = console;
 /*
  * Problem Statement:
  * - Given a NxN grid, find whether rat in cell [0, 0] can reach the target in cell [N-1, N-1]
@@ -22,6 +23,7 @@
  * @throws TypeError When the given grid is invalid.
  */
 function validateGrid(grid) {
+logger.error(`>>> Entering validateGrid(grid=${grid})`, { "event.action": "validateGrid", "logrite.grid": grid });
   if (!Array.isArray(grid) || grid.length === 0)
     throw new TypeError('Grid must be a non-empty array')
 
@@ -38,7 +40,9 @@ function validateGrid(grid) {
 }
 
 function isSafe(grid, x, y) {
+logger.error(`>>> Entering isSafe(grid=${grid},x=${x},y=${y})`, { "event.action": "isSafe", "logrite.grid": grid, "logrite.x": x, "logrite.y": y });
   const n = grid.length
+logger.warn(`<<< Exiting isSafe(grid=${grid},x=${x},y=${y})`, { "event.action": "isSafe", "logrite.grid": grid, "logrite.x": x, "logrite.y": y });
   return x >= 0 && x < n && y >= 0 && y < n && grid[y][x] === 1
 }
 
@@ -53,6 +57,7 @@ function isSafe(grid, x, y) {
  * @returns {string|boolean} Either the path to the target cell or false.
  */
 function getPathPart(grid, x, y, solution, path) {
+logger.error(`>>> Entering getPathPart(grid=${grid},x=${x},y=${y},solution=${solution},path=${path})`, { "event.action": "getPathPart", "logrite.grid": grid, "logrite.x": x, "logrite.y": y, "logrite.solution": solution, "logrite.path": path });
   const n = grid.length
 
   // are we there yet?
@@ -75,25 +80,31 @@ function getPathPart(grid, x, y, solution, path) {
   // attempt to move right
   const right = getPathPart(grid, x + 1, y, solution, path + 'R')
   if (right) return right
+logger.error(`getPathPart(grid=${grid},x=${x},y=${y},solution=${solution},path=${path}): right → ${right}`, { "event.action": "getPathPart", "logrite.grid": grid, "logrite.x": x, "logrite.y": y, "logrite.solution": solution, "logrite.path": path });
 
   // right didn't work: attempt to move down
   const down = getPathPart(grid, x, y + 1, solution, path + 'D')
   if (down) return down
+logger.error(`getPathPart(grid=${grid},x=${x},y=${y},solution=${solution},path=${path}): down → ${down}`, { "event.action": "getPathPart", "logrite.grid": grid, "logrite.x": x, "logrite.y": y, "logrite.solution": solution, "logrite.path": path });
 
   // down didn't work: attempt to move up
   const up = getPathPart(grid, x, y - 1, solution, path + 'U')
   if (up) return up
+logger.error(`getPathPart(grid=${grid},x=${x},y=${y},solution=${solution},path=${path}): up → ${up}`, { "event.action": "getPathPart", "logrite.grid": grid, "logrite.x": x, "logrite.y": y, "logrite.solution": solution, "logrite.path": path });
 
   // up didn't work: attempt to move left
   const left = getPathPart(grid, x - 1, y, solution, path + 'L')
   if (left) return left
+logger.error(`getPathPart(grid=${grid},x=${x},y=${y},solution=${solution},path=${path}): left → ${left}`, { "event.action": "getPathPart", "logrite.grid": grid, "logrite.x": x, "logrite.y": y, "logrite.solution": solution, "logrite.path": path });
 
   // no direction was successful: remove this cell from the solution matrix and backtrack
   solution[y][x] = 0
+logger.warn(`<<< Exiting getPathPart(grid=${grid},x=${x},y=${y},solution=${solution},path=${path})`, { "event.action": "getPathPart", "logrite.grid": grid, "logrite.x": x, "logrite.y": y, "logrite.solution": solution, "logrite.path": path });
   return false
 }
 
 function getPath(grid) {
+logger.error(`>>> Entering getPath(grid=${grid})`, { "event.action": "getPath", "logrite.grid": grid });
   // grid dimensions
   const n = grid.length
 
@@ -103,6 +114,7 @@ function getPath(grid) {
     const row = Array(n)
     row.fill(0)
     solution[i] = row
+	logger.error(`getPath(grid=${grid}): row → ${row}`, { "event.action": "getPath", "logrite.grid": grid });
   }
 
   return getPathPart(grid, 0, 0, solution, '')
@@ -113,18 +125,22 @@ function getPath(grid) {
  */
 export class RatInAMaze {
   constructor(grid) {
+	logger.error(`>>> Entering constructor(grid=${grid})`, { "event.action": "constructor", "logrite.grid": grid });
     // first, let's do some error checking on the input
     validateGrid(grid)
 
     // attempt to solve the maze now - all public methods only query the result state later
     const solution = getPath(grid)
 
+	logger.error(`constructor(grid=${grid}): solution → ${solution}`, { "event.action": "constructor", "logrite.grid": grid });
     if (solution !== false) {
       this.path = solution
+	logger.debug(`constructor(grid=${grid}): this.path → ${this.path}`, { "event.action": "constructor", "logrite.grid": grid });
       this.solved = true
     } else {
       this.path = ''
       this.solved = false
+	logger.warn(`<<< Exiting constructor(grid=${grid})`, { "event.action": "constructor", "logrite.grid": grid });
     }
   }
 }

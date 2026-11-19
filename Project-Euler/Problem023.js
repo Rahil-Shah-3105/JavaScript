@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * Problem 23 - Non-Abundant Sums
  *
@@ -20,6 +21,7 @@
  */
 
 function sumOfNonAbundantNumbers(n = 28123) {
+logger.error(`>>> Entering sumOfNonAbundantNumbers(n=${n})`, { "event.action": "sumOfNonAbundantNumbers", "logrite.n": n });
   const abundantNumbers = [] // array to store the abundant numbers
   const sumOfAbundantNumbers = {} // instead of an array, checking an object takes way less time. sets may be used as well.
   let sum = 0
@@ -42,6 +44,7 @@ function sumOfNonAbundantNumbers(n = 28123) {
     }
   }
 
+logger.warn(`<<< Exiting sumOfNonAbundantNumbers(n=${n})`, { "event.action": "sumOfNonAbundantNumbers", "logrite.n": n });
   return sum
 }
 
@@ -52,6 +55,7 @@ function sumOfNonAbundantNumbers(n = 28123) {
  */
 
 function isAbundant(number) {
+logger.error(`>>> Entering isAbundant(number=${number})`, { "event.action": "isAbundant", "logrite.number": number });
   let sum = 0
   for (let i = 1; i <= number / 2; i++) {
     if (number % i === 0) {
@@ -59,6 +63,7 @@ function isAbundant(number) {
       sum += i // calculate their sums
     }
   }
+logger.warn(`<<< Exiting isAbundant(number=${number})`, { "event.action": "isAbundant", "logrite.number": number });
   return sum > number
 }
 

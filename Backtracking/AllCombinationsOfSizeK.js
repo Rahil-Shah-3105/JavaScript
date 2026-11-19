@@ -1,9 +1,12 @@
+const logger = console;
 function generateCombinations(n, k) {
+logger.error(`>>> Entering generateCombinations(n=${n},k=${k})`, { "event.action": "generateCombinations", "logrite.n": n, "logrite.k": k });
   let currentCombination = []
   let allCombinations = [] // will be used for storing all combinations
   let currentValue = 1
 
   function findCombinations() {
+	logger.error('>>> Entering findCombinations()', { "event.action": "findCombinations" });
     if (currentCombination.length === k) {
       // Add the array of size k to the allCombinations array
       allCombinations.push([...currentCombination])
@@ -22,6 +25,7 @@ function generateCombinations(n, k) {
 
   findCombinations()
 
+logger.warn(`<<< Exiting generateCombinations(n=${n},k=${k})`, { "event.action": "generateCombinations", "logrite.n": n, "logrite.k": k });
   return allCombinations
 }
 

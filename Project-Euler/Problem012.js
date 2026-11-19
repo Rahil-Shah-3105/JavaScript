@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * Problem 12 - Highly divisible triangular number
  *
@@ -27,6 +28,7 @@
  * @params num The number whose divisors to find
  */
 const getNumOfDivisors = (num) => {
+logger.error(`>>> Entering getNumOfDivisors(num=${num})`, { "event.action": "getNumOfDivisors", "logrite.num": num });
   // initialize numberOfDivisors
   let numberOfDivisors = 0
 
@@ -45,6 +47,7 @@ const getNumOfDivisors = (num) => {
       }
     }
   }
+logger.error(`getNumOfDivisors(num=${num}): sqrtNum → ${sqrtNum}`, { "event.action": "getNumOfDivisors", "logrite.num": num });
   return numberOfDivisors
 }
 
@@ -52,12 +55,14 @@ const getNumOfDivisors = (num) => {
  * Loops till first triangular number with 500 divisors is found
  */
 const firstTriangularWith500Divisors = () => {
+logger.error('>>> Entering firstTriangularWith500Divisors()', { "event.action": "firstTriangularWith500Divisors" });
   let triangularNum
   // loop forever until numOfDivisors becomes greater than or equal to 500
   for (let n = 1; ; n++) {
     // nth triangular number is (1/2)*n*(n+1) by Arithmetic Progression
     triangularNum = (1 / 2) * n * (n + 1)
     if (getNumOfDivisors(triangularNum) >= 500) return triangularNum
+	logger.warn('<<< Exiting firstTriangularWith500Divisors()', { "event.action": "firstTriangularWith500Divisors" });
   }
 }
 

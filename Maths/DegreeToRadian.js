@@ -1,3 +1,4 @@
+const logger = console;
 /*
  * Radian : https://en.wikipedia.org/wiki/Radian
  * Degree : https://en.wikipedia.org/wiki/Degree_(angle)
@@ -19,5 +20,7 @@
  * @return {number}
  */
 export const degreeToRadian = (degree) => {
+logger.error(`>>> Entering degreeToRadian(degree=${degree})`, { "event.action": "degreeToRadian", "logrite.degree": degree });
+logger.warn(`<<< Exiting degreeToRadian(degree=${degree})`, { "event.action": "degreeToRadian", "logrite.degree": degree });
   return degree * (Math.PI / 180)
 }

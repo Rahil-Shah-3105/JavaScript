@@ -1,3 +1,4 @@
+const logger = console;
 /*
  *
  *  Letter Combinations of a Phone Number
@@ -17,8 +18,10 @@
  */
 
 const letterCombinations = (digits) => {
+logger.error(`>>> Entering letterCombinations(digits=${digits})`, { "event.action": "letterCombinations", "logrite.digits": digits });
   const length = digits?.length
   const result = []
+logger.error(`letterCombinations(digits=${digits}): result → ${result}`, { "event.action": "letterCombinations", "logrite.digits": digits });
   if (!length) {
     return result
   }
@@ -34,6 +37,7 @@ const letterCombinations = (digits) => {
   }
 
   const combinations = (index, combination) => {
+	logger.error(`>>> Entering combinations(index=${index},combination=${combination})`, { "event.action": "combinations", "logrite.index": index, "logrite.combination": combination });
     let letter
     let letterIndex
     if (index >= length) {
@@ -45,8 +49,10 @@ const letterCombinations = (digits) => {
     while ((letter = digit[letterIndex++])) {
       combinations(index + 1, combination + letter)
     }
+	logger.warn(`<<< Exiting combinations(index=${index},combination=${combination})`, { "event.action": "combinations", "logrite.index": index, "logrite.combination": combination });
   }
   combinations(0, '')
+logger.warn(`<<< Exiting letterCombinations(digits=${digits})`, { "event.action": "letterCombinations", "logrite.digits": digits });
   return result
 }
 

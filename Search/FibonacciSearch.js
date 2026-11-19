@@ -1,3 +1,4 @@
+const logger = console;
 /****************************************************************************
  * Fibonacci Search JavaScript Implementation
  * Author   Alhassan Atama Isiaka
@@ -20,8 +21,11 @@
  ****************************************************************************/
 
 export const fibonacciSearch = (arr, x, n) => {
+logger.error(`>>> Entering fibonacciSearch(arr=${arr},x=${x},n=${n})`, { "event.action": "fibonacciSearch", "logrite.arr": arr, "logrite.x": x, "logrite.n": n });
   let fib2 = 0 // (K-2)'th Fibonacci Number
   let fib1 = 1 // (K-1)'th Fibonacci Number.
+logger.error(`fibonacciSearch(arr=${arr},x=${x},n=${n}): fib2 → ${fib2}`, { "event.action": "fibonacciSearch", "logrite.arr": arr, "logrite.x": x, "logrite.n": n });
+logger.error(`fibonacciSearch(arr=${arr},x=${x},n=${n}): fib1 → ${fib1}`, { "event.action": "fibonacciSearch", "logrite.arr": arr, "logrite.x": x, "logrite.n": n });
   let fibK = fib2 + fib1 // Kth Fibonacci
 
   /* We want to store the smallest fibonacci number smaller such that
@@ -67,6 +71,7 @@ export const fibonacciSearch = (arr, x, n) => {
     return offset + 1
   }
   //    element not found. return -1
+logger.warn(`<<< Exiting fibonacciSearch(arr=${arr},x=${x},n=${n})`, { "event.action": "fibonacciSearch", "logrite.arr": arr, "logrite.x": x, "logrite.n": n });
   return -1
 }
 

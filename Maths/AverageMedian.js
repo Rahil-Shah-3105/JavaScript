@@ -1,3 +1,4 @@
+const logger = console;
 /*
  * Median: https://en.wikipedia.org/wiki/Median
  *
@@ -9,12 +10,15 @@
  */
 
 const averageMedian = (sourceArrayOfNumbers) => {
+logger.error(`>>> Entering averageMedian(sourceArrayOfNumbers=${sourceArrayOfNumbers})`, { "event.action": "averageMedian", "logrite.sourceArrayOfNumbers": sourceArrayOfNumbers });
   const numbers = [...sourceArrayOfNumbers].sort(sortNumbers)
   const numLength = numbers.length
+logger.error(`averageMedian(sourceArrayOfNumbers=${sourceArrayOfNumbers}): numbers → ${numbers}`, { "event.action": "averageMedian", "logrite.sourceArrayOfNumbers": sourceArrayOfNumbers });
 
   return numLength % 2 === 0
     ? (numbers[numLength / 2 - 1] + numbers[numLength / 2]) / 2
     : numbers[Math.floor(numLength / 2)]
+	logger.warn(`<<< Exiting averageMedian(sourceArrayOfNumbers=${sourceArrayOfNumbers})`, { "event.action": "averageMedian", "logrite.sourceArrayOfNumbers": sourceArrayOfNumbers });
 }
 
 const sortNumbers = (num1, num2) => num1 - num2

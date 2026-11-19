@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * Problem 28 - Number spiral diagonals
  *
@@ -18,6 +19,7 @@
  */
 
 function problem28(dim) {
+logger.error(`>>> Entering problem28(dim=${dim})`, { "event.action": "problem28", "logrite.dim": dim });
   if (dim % 2 === 0) {
     throw new Error('Dimension must be odd')
   }
@@ -47,6 +49,7 @@ function problem28(dim) {
      */
     result += 4 * i * i + 6 * (1 - i) // Calculate sum of each dimension corner
   }
+logger.error(`problem28(dim=${dim}): result → ${result}`, { "event.action": "problem28", "logrite.dim": dim });
   return result
 }
 

@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * @function ShorsAlgorithm
  * @description Classical implementation of Shor's Algorithm.
@@ -23,12 +24,15 @@
  * factor with N, which can then be found using Euclid's GCD algorithm.
  */
 function ShorsAlgorithm(num) {
+logger.error(`>>> Entering ShorsAlgorithm(num=${num})`, { "event.action": "ShorsAlgorithm", "logrite.num": num });
   const N = BigInt(num)
 
+logger.error(`ShorsAlgorithm(num=${num}): N → ${N}`, { "event.action": "ShorsAlgorithm", "logrite.num": num });
   while (true) {
     // generate random g such that 1 < g < N
     const g = BigInt(Math.floor(Math.random() * (num - 1)) + 2)
 
+	logger.error(`ShorsAlgorithm(num=${num}): g → ${g}`, { "event.action": "ShorsAlgorithm", "logrite.num": num });
     // check if g shares a factor with N
     // if it does, find and return the factor
     let K = gcd(g, N)
@@ -37,12 +41,15 @@ function ShorsAlgorithm(num) {
     // find p such that g^p = mN + 1
     const p = findP(g, N)
 
+	logger.error(`ShorsAlgorithm(num=${num}): p → ${p}`, { "event.action": "ShorsAlgorithm", "logrite.num": num });
     // p needs to be even for it's half to be an integer
     if (p % 2n === 1n) continue
 
     const base = g ** (p / 2n) // g^(p/2)
     const upper = base + 1n // g^(p/2) + 1
+	logger.error(`ShorsAlgorithm(num=${num}): base → ${base}`, { "event.action": "ShorsAlgorithm", "logrite.num": num });
     const lower = base - 1n // g^(p/2) - 1
+	logger.error(`ShorsAlgorithm(num=${num}): lower → ${lower}`, { "event.action": "ShorsAlgorithm", "logrite.num": num });
 
     // upper and lower can't be a multiple of N
     if (upper % N === 0n || lower % N === 0n) continue
@@ -50,6 +57,7 @@ function ShorsAlgorithm(num) {
     // either upper or lower must share a factor with N
     K = gcd(upper, N)
     if (K !== 1) return K // upper shares a factor
+logger.warn(`<<< Exiting ShorsAlgorithm(num=${num})`, { "event.action": "ShorsAlgorithm", "logrite.num": num });
     return gcd(lower, N) // otherwise lower shares a factor
   }
 }
@@ -62,8 +70,10 @@ function ShorsAlgorithm(num) {
  * @returns The value p.
  */
 function findP(A, B) {
+logger.error(`>>> Entering findP(A=${A},B=${B})`, { "event.action": "findP", "logrite.A": A, "logrite.B": B });
   let p = 1n
   while (!isValidP(A, B, p)) p++
+logger.warn(`<<< Exiting findP(A=${A},B=${B})`, { "event.action": "findP", "logrite.A": A, "logrite.B": B });
   return p
 }
 
@@ -88,10 +98,12 @@ function isValidP(A, B, p) {
  * @returns Greatest Common Divisor between A and B.
  */
 function gcd(A, B) {
+logger.error(`>>> Entering gcd(A=${A},B=${B})`, { "event.action": "gcd", "logrite.A": A, "logrite.B": B });
   while (B !== 0n) {
     ;[A, B] = [B, A % B]
   }
 
+logger.warn(`<<< Exiting gcd(A=${A},B=${B})`, { "event.action": "gcd", "logrite.A": A, "logrite.B": B });
   return Number(A)
 }
 

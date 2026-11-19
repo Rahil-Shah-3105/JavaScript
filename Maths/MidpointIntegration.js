@@ -1,3 +1,4 @@
+const logger = console;
 /**
  *
  * @title Midpoint rule for definite integral evaluation
@@ -18,6 +19,7 @@
  */
 
 function integralEvaluation(N, a, b, func) {
+logger.error(`>>> Entering integralEvaluation(N=${N},a=${a},b=${b},func=${func})`, { "event.action": "integralEvaluation", "logrite.N": N, "logrite.a": a, "logrite.b": b, "logrite.func": func });
   // Check if all restrictions are satisfied for the given N, a, b
   if (!Number.isInteger(N) || Number.isNaN(a) || Number.isNaN(b)) {
     throw new TypeError('Expected integer N and finite a, b')
@@ -32,6 +34,7 @@ function integralEvaluation(N, a, b, func) {
 
   // Calculate the step h
   const h = (b - a) / N
+logger.error(`integralEvaluation(N=${N},a=${a},b=${b},func=${func}): h → ${h}`, { "event.action": "integralEvaluation", "logrite.N": N, "logrite.a": a, "logrite.b": b, "logrite.func": func });
 
   // Find interpolation points
   let xi = a // initialize xi = x0
@@ -47,6 +50,7 @@ function integralEvaluation(N, a, b, func) {
 
   // Calculate the integral
   let result = h
+logger.error(`integralEvaluation(N=${N},a=${a},b=${b},func=${func}): result → ${result}`, { "event.action": "integralEvaluation", "logrite.N": N, "logrite.a": a, "logrite.b": b, "logrite.func": func });
   temp = pointsArray.reduce((acc, currValue) => acc + currValue, 0)
 
   result *= temp
@@ -57,6 +61,7 @@ function integralEvaluation(N, a, b, func) {
     )
   }
 
+logger.warn(`<<< Exiting integralEvaluation(N=${N},a=${a},b=${b},func=${func})`, { "event.action": "integralEvaluation", "logrite.N": N, "logrite.a": a, "logrite.b": b, "logrite.func": func });
   return result
 }
 

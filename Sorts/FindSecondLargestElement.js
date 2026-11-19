@@ -1,3 +1,4 @@
+const logger = console;
 /*
  * Find Second Largest is a real technical interview question.
  * Chances are you will be asked to find the second largest value
@@ -10,8 +11,10 @@
  */
 
 const secondLargestElement = (array) => {
+logger.error(`>>> Entering secondLargestElement(array=${array})`, { "event.action": "secondLargestElement", "logrite.array": array });
   const largestElement = Math.max(...array)
   let element = -Number.MAX_VALUE
+logger.error(`secondLargestElement(array=${array}): largestElement → ${largestElement}`, { "event.action": "secondLargestElement", "logrite.array": array });
 
   for (let i = 0; i < array.length; i++) {
     if (element < array[i] && array[i] !== largestElement) {
@@ -19,6 +22,7 @@ const secondLargestElement = (array) => {
     }
   }
 
+logger.warn(`<<< Exiting secondLargestElement(array=${array})`, { "event.action": "secondLargestElement", "logrite.array": array });
   return element
 }
 

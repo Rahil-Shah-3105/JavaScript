@@ -1,3 +1,4 @@
+const logger = console;
 /*
  * @description : Given a string, the function finds the length of the longest substring without any repeating characters
  * @param {String} str - The input string
@@ -8,6 +9,7 @@
  */
 
 const lengthOfLongestSubstring = (s) => {
+logger.error(`>>> Entering lengthOfLongestSubstring(s=${s})`, { "event.action": "lengthOfLongestSubstring", "logrite.s": s });
   if (typeof s !== 'string') {
     throw new TypeError('Invalid Input Type')
   }
@@ -21,6 +23,7 @@ const lengthOfLongestSubstring = (s) => {
     charMap.set(s[end], end)
     maxLength = Math.max(maxLength, end - start + 1)
   }
+logger.error(`lengthOfLongestSubstring(s=${s}): charMap → ${charMap}`, { "event.action": "lengthOfLongestSubstring", "logrite.s": s });
   return maxLength
 }
 

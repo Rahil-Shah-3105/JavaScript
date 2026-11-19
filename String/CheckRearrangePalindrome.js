@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * What is a palindrome? https://en.wikipedia.org/wiki/Palindrome
  * Receives a string and returns whether it can be rearranged to become a palindrome or not
@@ -7,6 +8,7 @@
  **/
 
 export const palindromeRearranging = (str) => {
+logger.error(`>>> Entering palindromeRearranging(str=${str})`, { "event.action": "palindromeRearranging", "logrite.str": str });
   // check that input is a string
   if (typeof str !== 'string') {
     return 'Not a string'
@@ -20,6 +22,7 @@ export const palindromeRearranging = (str) => {
   // Filter the object's values to only the odd character counts.
   const charCounts = [...str].reduce((counts, char) => {
     counts[char] = counts[char] ? counts[char] + 1 : 1
+logger.warn(`<<< Exiting palindromeRearranging(str=${str})`, { "event.action": "palindromeRearranging", "logrite.str": str });
     return counts
   }, {})
   // If the length of the resulting array is 0 or 1, the string can be a palindrome.

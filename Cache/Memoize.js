@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * @function memoize
  * @description ->
@@ -15,6 +16,7 @@
  */
 const memoize = (func, cache = new Map()) => {
   const jsonReplacer = (_, value) => {
+	logger.error(`>>> Entering jsonReplacer(_=${_},value=${value})`, { "event.action": "jsonReplacer", "logrite._": _, "logrite.value": value });
     if (value instanceof Set) {
       // if the value is Set it's converted to Array cause JSON.stringify can't convert Set
       return [...value]
@@ -25,6 +27,7 @@ const memoize = (func, cache = new Map()) => {
       return Object.fromEntries(value)
     }
 
+	logger.warn(`<<< Exiting jsonReplacer(_=${_},value=${value})`, { "event.action": "jsonReplacer", "logrite._": _, "logrite.value": value });
     return value
   }
 

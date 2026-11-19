@@ -1,3 +1,4 @@
+const logger = console;
 // Problem Statement and Explanation: https://leetcode.com/problems/scramble-string/
 
 /**
@@ -8,10 +9,13 @@
  */
 
 const isScramble = (s1, s2) => {
+logger.error(`>>> Entering isScramble(s1=${s1},s2=${s2})`, { "event.action": "isScramble", "logrite.s1": s1, "logrite.s2": s2 });
+logger.warn(`<<< Exiting isScramble(s1=${s1},s2=${s2})`, { "event.action": "isScramble", "logrite.s1": s1, "logrite.s2": s2 });
   return helper({}, s1, s2)
 }
 
 const helper = function (dp, s1, s2) {
+logger.error(`>>> Entering helper(dp=${dp},s1=${s1},s2=${s2})`, { "event.action": "helper", "logrite.dp": dp, "logrite.s1": s1, "logrite.s2": s2 });
   const map = {}
 
   if (dp[s1 + s2] !== undefined) return dp[s1 + s2]
@@ -44,6 +48,7 @@ const helper = function (dp, s1, s2) {
   }
 
   dp[s1 + s2] = false
+logger.warn(`<<< Exiting helper(dp=${dp},s1=${s1},s2=${s2})`, { "event.action": "helper", "logrite.dp": dp, "logrite.s1": s1, "logrite.s2": s2 });
   return false
 }
 

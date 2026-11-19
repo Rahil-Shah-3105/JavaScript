@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * @function calculateLevenshteinDp
  * @description A Dynamic Programming based solution for calculation of the Levenshtein Distance.
@@ -8,23 +9,29 @@
  */
 
 function minimum(a, b, c) {
+logger.error(`>>> Entering minimum(a=${a},b=${b},c=${c})`, { "event.action": "minimum", "logrite.a": a, "logrite.b": b, "logrite.c": c });
   if (a < b && a < c) {
     return a
   } else if (b < a && b < c) {
     return b
   } else {
+logger.warn(`<<< Exiting minimum(a=${a},b=${b},c=${c})`, { "event.action": "minimum", "logrite.a": a, "logrite.b": b, "logrite.c": c });
     return c
   }
 }
 
 function costOfSubstitution(x, y) {
+logger.error(`>>> Entering costOfSubstitution(x=${x},y=${y})`, { "event.action": "costOfSubstitution", "logrite.x": x, "logrite.y": y });
+logger.warn(`<<< Exiting costOfSubstitution(x=${x},y=${y})`, { "event.action": "costOfSubstitution", "logrite.x": x, "logrite.y": y });
   return x === y ? 0 : 1
 }
 
 // Levenshtein distance between x and y
 function calculateLevenshteinDp(x, y) {
+logger.error(`>>> Entering calculateLevenshteinDp(x=${x},y=${y})`, { "event.action": "calculateLevenshteinDp", "logrite.x": x, "logrite.y": y });
   const dp = new Array(x.length + 1)
   for (let i = 0; i < x.length + 1; i++) {
+	logger.error(`calculateLevenshteinDp(x=${x},y=${y}): dp → ${dp}`, { "event.action": "calculateLevenshteinDp", "logrite.x": x, "logrite.y": y });
     dp[i] = new Array(y.length + 1)
   }
 
@@ -45,6 +52,7 @@ function calculateLevenshteinDp(x, y) {
     }
   }
 
+logger.warn(`<<< Exiting calculateLevenshteinDp(x=${x},y=${y})`, { "event.action": "calculateLevenshteinDp", "logrite.x": x, "logrite.y": y });
   return dp[x.length][y.length]
 }
 

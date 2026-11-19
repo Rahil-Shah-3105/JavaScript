@@ -1,3 +1,4 @@
+const logger = console;
 /*
     author: PatOnTheBack
     license: GPL-3.0 or later
@@ -14,10 +15,13 @@
 'use strict'
 
 const calcRange = (num) => {
+logger.error(`>>> Entering calcRange(num=${num})`, { "event.action": "calcRange", "logrite.num": num });
+logger.warn(`<<< Exiting calcRange(num=${num})`, { "event.action": "calcRange", "logrite.num": num });
   return [...Array(num).keys()].map((i) => i + 1)
 }
 
 const calcFactorial = (num) => {
+logger.error(`>>> Entering calcFactorial(num=${num})`, { "event.action": "calcFactorial", "logrite.num": num });
   if (num === 0) {
     return 1
   }
@@ -32,6 +36,7 @@ const calcFactorial = (num) => {
   if (num > 0) {
     const range = calcRange(num)
     const factorial = range.reduce((a, c) => a * c, 1)
+	logger.error(`calcFactorial(num=${num}): range → ${range}`, { "event.action": "calcFactorial", "logrite.num": num });
     return factorial
   }
 }

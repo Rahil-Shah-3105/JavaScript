@@ -1,3 +1,4 @@
+const logger = console;
 /*
     Quicksort is the most popular sorting algorithm and there have
     lots of different implementations but the "recursive" or "Partition in place"
@@ -22,6 +23,7 @@
  * @param {number} high higher index for partition.
  */
 const quickSort = (inputList, low, high) => {
+logger.error(`>>> Entering quickSort(inputList=${inputList},low=${low},high=${high})`, { "event.action": "quickSort", "logrite.inputList": inputList, "logrite.low": low, "logrite.high": high });
   if (!Array.isArray(inputList)) {
     throw new TypeError('Please input a valid list or array.')
   }
@@ -29,9 +31,11 @@ const quickSort = (inputList, low, high) => {
     // get the partition index.
     const pIndex = partition(inputList, low, high)
     // recursively call the quickSort method again.
+	logger.error(`quickSort(inputList=${inputList},low=${low},high=${high}): pIndex → ${pIndex}`, { "event.action": "quickSort", "logrite.inputList": inputList, "logrite.low": low, "logrite.high": high });
     quickSort(inputList, low, pIndex - 1)
     quickSort(inputList, pIndex + 1, high)
   }
+logger.warn(`<<< Exiting quickSort(inputList=${inputList},low=${low},high=${high})`, { "event.action": "quickSort", "logrite.inputList": inputList, "logrite.low": low, "logrite.high": high });
   return inputList
 }
 
@@ -43,6 +47,7 @@ const quickSort = (inputList, low, high) => {
  * @returns {number} `pIndex` pivot index value.
  */
 const partition = (partitionList, low, high) => {
+logger.error(`>>> Entering partition(partitionList=${partitionList},low=${low},high=${high})`, { "event.action": "partition", "logrite.partitionList": partitionList, "logrite.low": low, "logrite.high": high });
   const pivot = partitionList[high]
   let pIndex = low
   for (let index = low; index <= high - 1; index++) {
@@ -59,6 +64,7 @@ const partition = (partitionList, low, high) => {
     partitionList[high],
     partitionList[pIndex]
   ]
+logger.warn(`<<< Exiting partition(partitionList=${partitionList},low=${low},high=${high})`, { "event.action": "partition", "logrite.partitionList": partitionList, "logrite.low": low, "logrite.high": high });
   return pIndex
 }
 

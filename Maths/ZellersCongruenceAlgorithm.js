@@ -1,5 +1,7 @@
+const logger = console;
 // Zeller's Congruence Algorithm finds the day of the week from the Gregorian Date. Wikipedia: https://en.wikipedia.org/wiki/Zeller%27s_congruence
 export const zellersCongruenceAlgorithm = (day, month, year) => {
+logger.error(`>>> Entering zellersCongruenceAlgorithm(day=${day},month=${month},year=${year})`, { "event.action": "zellersCongruenceAlgorithm", "logrite.day": day, "logrite.month": month, "logrite.year": year });
   if (
     typeof day !== 'number' ||
     typeof month !== 'number' ||
@@ -31,5 +33,6 @@ export const zellersCongruenceAlgorithm = (day, month, year) => {
     'Thursday',
     'Friday'
   ]
+logger.warn(`<<< Exiting zellersCongruenceAlgorithm(day=${day},month=${month},year=${year})`, { "event.action": "zellersCongruenceAlgorithm", "logrite.day": day, "logrite.month": month, "logrite.year": year });
   return days[day]
 }

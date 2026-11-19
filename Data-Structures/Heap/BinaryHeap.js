@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * BinaryHeap class represents a binary heap data structure that can be configured as a Min Heap or Max Heap.
  *
@@ -12,17 +13,20 @@ class BinaryHeap {
    * @param {Function} comparatorFunction - The comparator function used to determine the order of elements (e.g., minHeapComparator or maxHeapComparator).
    */
   constructor(comparatorFunction) {
+	logger.error(`>>> Entering constructor(comparatorFunction=${comparatorFunction})`, { "event.action": "constructor", "logrite.comparatorFunction": comparatorFunction });
     /**
      * The heap array that stores elements.
      * @member {Array}
      */
     this.heap = []
+	logger.debug(`constructor(comparatorFunction=${comparatorFunction}): this.heap → ${this.heap}`, { "event.action": "constructor", "logrite.comparatorFunction": comparatorFunction });
 
     /**
      * The comparator function used for ordering elements in the heap.
      * @member {Function}
      */
     this.comparator = comparatorFunction
+	logger.debug(`constructor(comparatorFunction=${comparatorFunction}): this.comparator → ${this.comparator}`, { "event.action": "constructor", "logrite.comparatorFunction": comparatorFunction });
   }
 
   /**
@@ -30,8 +34,10 @@ class BinaryHeap {
    * @param {*} value - The value to be inserted into the heap.
    */
   insert(value) {
+	logger.error(`>>> Entering insert(value=${value})`, { "event.action": "insert", "logrite.value": value });
     this.heap.push(value)
     this.#bubbleUp(this.heap.length - 1)
+	logger.warn(`<<< Exiting insert(value=${value})`, { "event.action": "insert", "logrite.value": value });
   }
 
   /**
@@ -39,6 +45,8 @@ class BinaryHeap {
    * @returns {number} - The number of elements in the heap.
    */
   size() {
+	logger.error('>>> Entering size()', { "event.action": "size" });
+	logger.warn('<<< Exiting size()', { "event.action": "size" });
     return this.heap.length
   }
 
@@ -47,6 +55,8 @@ class BinaryHeap {
    * @returns {boolean} - True if the heap is empty, false otherwise.
    */
   empty() {
+	logger.error('>>> Entering empty()', { "event.action": "empty" });
+	logger.warn('<<< Exiting empty()', { "event.action": "empty" });
     return this.size() === 0
   }
 
@@ -56,16 +66,19 @@ class BinaryHeap {
    * @private
    */
   #bubbleUp(currIdx) {
+	logger.error(`>>> Entering bubbleUp(currIdx=${currIdx})`, { "event.action": "bubbleUp", "logrite.currIdx": currIdx });
     let parentIdx = Math.floor((currIdx - 1) / 2)
 
     while (
       currIdx > 0 &&
       this.comparator(this.heap[currIdx], this.heap[parentIdx])
     ) {
+	logger.error(`bubbleUp(currIdx=${currIdx}): parentIdx → ${parentIdx}`, { "event.action": "bubbleUp", "logrite.currIdx": currIdx });
       this.#swap(currIdx, parentIdx)
       currIdx = parentIdx
       parentIdx = Math.floor((currIdx - 1) / 2)
     }
+	logger.warn(`<<< Exiting bubbleUp(currIdx=${currIdx})`, { "event.action": "bubbleUp", "logrite.currIdx": currIdx });
   }
 
   /**
@@ -74,10 +87,12 @@ class BinaryHeap {
    * @private
    */
   #sinkDown(currIdx) {
+	logger.error(`>>> Entering sinkDown(currIdx=${currIdx})`, { "event.action": "sinkDown", "logrite.currIdx": currIdx });
     let childOneIdx = currIdx * 2 + 1
 
     while (childOneIdx < this.size()) {
       const childTwoIdx = childOneIdx + 1 < this.size() ? childOneIdx + 1 : -1
+	logger.error(`sinkDown(currIdx=${currIdx}): childTwoIdx → ${childTwoIdx}`, { "event.action": "sinkDown", "logrite.currIdx": currIdx });
       const swapIdx =
         childTwoIdx !== -1 &&
         this.comparator(this.heap[childTwoIdx], this.heap[childOneIdx])
@@ -89,6 +104,7 @@ class BinaryHeap {
         currIdx = swapIdx
         childOneIdx = currIdx * 2 + 1
       } else {
+		logger.warn(`<<< Exiting sinkDown(currIdx=${currIdx})`, { "event.action": "sinkDown", "logrite.currIdx": currIdx });
         return
       }
     }
@@ -99,6 +115,8 @@ class BinaryHeap {
    * @returns {*} - The top element of the heap.
    */
   peek() {
+	logger.error('>>> Entering peek()', { "event.action": "peek" });
+	logger.warn('<<< Exiting peek()', { "event.action": "peek" });
     return this.heap[0]
   }
 
@@ -107,14 +125,18 @@ class BinaryHeap {
    * @returns {*} - The top element of the heap.
    */
   extractTop() {
+	logger.error('>>> Entering extractTop()', { "event.action": "extractTop" });
     const top = this.peek()
     const last = this.heap.pop()
 
+	logger.error(`extractTop(): top → ${top}`, { "event.action": "extractTop" });
+	logger.error(`extractTop(): last → ${last}`, { "event.action": "extractTop" });
     if (!this.empty()) {
       this.heap[0] = last
       this.#sinkDown(0)
     }
 
+	logger.warn('<<< Exiting extractTop()', { "event.action": "extractTop" });
     return top
   }
 
@@ -125,10 +147,12 @@ class BinaryHeap {
    * @private
    */
   #swap(index1, index2) {
+	logger.error(`>>> Entering swap(index1=${index1},index2=${index2})`, { "event.action": "swap", "logrite.index1": index1, "logrite.index2": index2 });
     ;[this.heap[index1], this.heap[index2]] = [
       this.heap[index2],
       this.heap[index1]
     ]
+	logger.warn(`<<< Exiting swap(index1=${index1},index2=${index2})`, { "event.action": "swap", "logrite.index1": index1, "logrite.index2": index2 });
   }
 }
 

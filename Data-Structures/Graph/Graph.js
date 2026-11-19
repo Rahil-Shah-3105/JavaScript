@@ -1,21 +1,30 @@
+const logger = console;
 class Graph {
   constructor() {
+	logger.error('>>> Entering constructor()', { "event.action": "constructor" });
     this.adjacencyMap = {}
+	logger.debug(`constructor(): this.adjacencyMap → ${this.adjacencyMap}`, { "event.action": "constructor" });
   }
 
   addVertex(vertex) {
+	logger.error(`>>> Entering addVertex(vertex=${vertex})`, { "event.action": "addVertex", "logrite.vertex": vertex });
     this.adjacencyMap[vertex] = []
+	logger.warn(`<<< Exiting addVertex(vertex=${vertex})`, { "event.action": "addVertex", "logrite.vertex": vertex });
   }
 
   containsVertex(vertex) {
+	logger.error(`>>> Entering containsVertex(vertex=${vertex})`, { "event.action": "containsVertex", "logrite.vertex": vertex });
+	logger.warn(`<<< Exiting containsVertex(vertex=${vertex})`, { "event.action": "containsVertex", "logrite.vertex": vertex });
     return typeof this.adjacencyMap[vertex] !== 'undefined'
   }
 
   addEdge(vertex1, vertex2) {
+	logger.error(`>>> Entering addEdge(vertex1=${vertex1},vertex2=${vertex2})`, { "event.action": "addEdge", "logrite.vertex1": vertex1, "logrite.vertex2": vertex2 });
     if (this.containsVertex(vertex1) && this.containsVertex(vertex2)) {
       this.adjacencyMap[vertex1].push(vertex2)
       this.adjacencyMap[vertex2].push(vertex1)
     }
+	logger.warn(`<<< Exiting addEdge(vertex1=${vertex1},vertex2=${vertex2})`, { "event.action": "addEdge", "logrite.vertex1": vertex1, "logrite.vertex2": vertex2 });
   }
 
   printGraph(output = (value) => console.log(value)) {
@@ -72,6 +81,7 @@ class Graph {
 }
 
 const example = () => {
+logger.error('>>> Entering example()', { "event.action": "example" });
   const g = new Graph()
   g.addVertex(1)
   g.addVertex(2)
@@ -83,6 +93,7 @@ const example = () => {
   g.addEdge(2, 4)
   g.addEdge(2, 5)
 
+logger.error(`example(): g → ${g}`, { "event.action": "example" });
   // Graph
   // 1 -> 2 3
   // 2 -> 1 4 5
@@ -98,6 +109,7 @@ const example = () => {
 
   // Depth first search at node 1
   g.dfs(1)
+logger.warn('<<< Exiting example()', { "event.action": "example" });
 }
 
 export { Graph, example }

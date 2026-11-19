@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * @function XORCipher
  * @description - Encrypt using an XOR cipher
@@ -10,10 +11,12 @@
  * @return {string} encrypted string
  */
 const XORCipher = (str, key) => {
+logger.error(`>>> Entering XORCipher(str=${str},key=${key})`, { "event.action": "XORCipher", "logrite.str": str, "logrite.key": key });
   if (typeof str !== 'string' || !Number.isInteger(key)) {
     throw new TypeError('Arguments type are invalid')
   }
 
+logger.warn(`<<< Exiting XORCipher(str=${str},key=${key})`, { "event.action": "XORCipher", "logrite.str": str, "logrite.key": key });
   return str.replace(/./g, (char) =>
     String.fromCharCode(char.charCodeAt() ^ key)
   )

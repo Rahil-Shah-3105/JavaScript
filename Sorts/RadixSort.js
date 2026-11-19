@@ -1,3 +1,4 @@
+const logger = console;
 /*
  * Radix sorts an integer array without comparing the integers.
  * It groups the integers by their digits which share the same
@@ -5,6 +6,7 @@
  * For more information see: https://en.wikipedia.org/wiki/Radix_sort
  */
 export function radixSort(items, RADIX) {
+logger.error(`>>> Entering radixSort(items=${items},RADIX=${RADIX})`, { "event.action": "radixSort", "logrite.items": items, "logrite.RADIX": RADIX });
   // default radix is then because we usually count to base 10
   if (RADIX === undefined || RADIX < 1) {
     RADIX = 10
@@ -39,5 +41,6 @@ export function radixSort(items, RADIX) {
     }
     placement *= RADIX
   }
+logger.warn(`<<< Exiting radixSort(items=${items},RADIX=${RADIX})`, { "event.action": "radixSort", "logrite.items": items, "logrite.RADIX": RADIX });
   return items
 }

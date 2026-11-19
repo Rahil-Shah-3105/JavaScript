@@ -1,3 +1,4 @@
+const logger = console;
 /* The selection sort algorithm sorts an array by repeatedly finding the minimum element
  *(considering ascending order) from unsorted part and putting it at the beginning. The
  *algorithm maintains two subarrays in a given array.
@@ -9,10 +10,12 @@
  */
 
 export const selectionSort = (list) => {
+logger.error(`>>> Entering selectionSort(list=${list})`, { "event.action": "selectionSort", "logrite.list": list });
   if (!Array.isArray(list)) {
     throw new TypeError('Given input is not an array')
   }
   const items = [...list] // We don't want to modify the original array
+logger.error(`selectionSort(list=${list}): items → ${items}`, { "event.action": "selectionSort", "logrite.list": list });
   const length = items.length
   for (let i = 0; i < length - 1; i++) {
     if (typeof items[i] !== 'number') {
@@ -33,5 +36,6 @@ export const selectionSort = (list) => {
       ;[items[i], items[min]] = [items[min], items[i]]
     }
   }
+logger.warn(`<<< Exiting selectionSort(list=${list})`, { "event.action": "selectionSort", "logrite.list": list });
   return items
 }

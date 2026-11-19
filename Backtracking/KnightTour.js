@@ -1,13 +1,17 @@
+const logger = console;
 // Wikipedia: https://en.wikipedia.org/wiki/Knight%27s_tour
 
 class OpenKnightTour {
   constructor(size) {
+	logger.error(`>>> Entering constructor(size=${size})`, { "event.action": "constructor", "logrite.size": size });
     // Constructor to initialize the chessboard and size
     this.board = new Array(size).fill(0).map(() => new Array(size).fill(0))
     this.size = size
+	logger.debug(`constructor(size=${size}): this.size → ${this.size}`, { "event.action": "constructor", "logrite.size": size });
   }
 
   getMoves([i, j]) {
+	logger.error(`>>> Entering getMoves(j=${j})`, { "event.action": "getMoves", "logrite.j": j });
     // Helper function to get the valid moves of the knight from the current position
     const moves = [
       [i + 2, j - 1],
@@ -21,27 +25,33 @@ class OpenKnightTour {
     ]
 
     // Filter out moves that are within the board boundaries
+	logger.warn(`<<< Exiting getMoves(j=${j})`, { "event.action": "getMoves", "logrite.j": j });
     return moves.filter(
       ([y, x]) => y >= 0 && y < this.size && x >= 0 && x < this.size
     )
   }
 
   isComplete() {
+	logger.error('>>> Entering isComplete()', { "event.action": "isComplete" });
     // Helper function to check if the board is complete
+	logger.warn('<<< Exiting isComplete()', { "event.action": "isComplete" });
     return !this.board.map((row) => row.includes(0)).includes(true)
   }
 
   solve() {
+	logger.error('>>> Entering solve()', { "event.action": "solve" });
     // Function to find the solution for the given board
     for (let i = 0; i < this.size; i++) {
       for (let j = 0; j < this.size; j++) {
         if (this.solveHelper([i, j], 0)) return true
       }
     }
+	logger.warn('<<< Exiting solve()', { "event.action": "solve" });
     return false
   }
 
   solveHelper([i, j], curr) {
+	logger.error(`>>> Entering solveHelper(j=${j},curr=${curr})`, { "event.action": "solveHelper", "logrite.j": j, "logrite.curr": curr });
     // Helper function for the main computation
     if (this.isComplete()) return true
 
@@ -54,6 +64,7 @@ class OpenKnightTour {
         this.board[y][x] = 0
       }
     }
+	logger.warn(`<<< Exiting solveHelper(j=${j},curr=${curr})`, { "event.action": "solveHelper", "logrite.j": j, "logrite.curr": curr });
     return false
   }
 

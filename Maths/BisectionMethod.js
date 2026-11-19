@@ -1,3 +1,4 @@
+const logger = console;
 /**
  *
  * @file
@@ -13,9 +14,12 @@
  */
 
 const findRoot = (a, b, func, numberOfIterations) => {
+logger.error(`>>> Entering findRoot(a=${a},b=${b},func=${func},numberOfIterations=${numberOfIterations})`, { "event.action": "findRoot", "logrite.a": a, "logrite.b": b, "logrite.func": func, "logrite.numberOfIterations": numberOfIterations });
   // Check if a given  real value belongs to the function's domain
   const belongsToDomain = (x, f) => {
+	logger.error(`>>> Entering belongsToDomain(x=${x},f=${f})`, { "event.action": "belongsToDomain", "logrite.x": x, "logrite.f": f });
     const res = f(x)
+	logger.error(`belongsToDomain(x=${x},f=${f}): res → ${res}`, { "event.action": "belongsToDomain", "logrite.x": x, "logrite.f": f });
     return !Number.isNaN(res)
   }
   if (!belongsToDomain(a, func) || !belongsToDomain(b, func))
@@ -23,6 +27,8 @@ const findRoot = (a, b, func, numberOfIterations) => {
 
   // Bolzano theorem
   const hasRoot = (a, b, func) => {
+	logger.error(`>>> Entering hasRoot(a=${a},b=${b},func=${func})`, { "event.action": "hasRoot", "logrite.a": a, "logrite.b": b, "logrite.func": func });
+	logger.warn(`<<< Exiting hasRoot(a=${a},b=${b},func=${func})`, { "event.action": "hasRoot", "logrite.a": a, "logrite.b": b, "logrite.func": func });
     return func(a) * func(b) <= 0
   }
   if (hasRoot(a, b, func) === false) {
@@ -33,6 +39,7 @@ const findRoot = (a, b, func, numberOfIterations) => {
 
   // Declare m
   const m = (a + b) / 2
+logger.error(`findRoot(a=${a},b=${b},func=${func},numberOfIterations=${numberOfIterations}): m → ${m}`, { "event.action": "findRoot", "logrite.a": a, "logrite.b": b, "logrite.func": func, "logrite.numberOfIterations": numberOfIterations });
 
   // Recursion terminal condition
   if (numberOfIterations === 0) {
@@ -44,6 +51,7 @@ const findRoot = (a, b, func, numberOfIterations) => {
   const prod1 = fm * func(a)
   const prod2 = fm * func(b)
 
+logger.error(`findRoot(a=${a},b=${b},func=${func},numberOfIterations=${numberOfIterations}): fm → ${fm}`, { "event.action": "findRoot", "logrite.a": a, "logrite.b": b, "logrite.func": func, "logrite.numberOfIterations": numberOfIterations });
   // Depending on the sign of the products above, decide which position will m fill (a's or b's)
   if (prod2 <= 0) return findRoot(m, b, func, --numberOfIterations)
 

@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * @function BinaryConvert
  * @description Convert the decimal to binary.
@@ -9,6 +10,7 @@
  */
 
 const BinaryConvert = (num) => {
+logger.error(`>>> Entering BinaryConvert(num=${num})`, { "event.action": "BinaryConvert", "logrite.num": num });
   let power = 1
   let binary = 0
 
@@ -19,6 +21,7 @@ const BinaryConvert = (num) => {
     power *= 10
   }
 
+logger.warn(`<<< Exiting BinaryConvert(num=${num})`, { "event.action": "BinaryConvert", "logrite.num": num });
   return binary
 }
 

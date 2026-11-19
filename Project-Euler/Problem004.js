@@ -1,8 +1,10 @@
+const logger = console;
 // https://projecteuler.net/problem=4
 /* A palindromic number reads the same both ways. The largest palindrome made from the product of two 2-digit numbers is 9009 = 91 × 99.
   Find the largest palindrome made from the product of two 3-digit numbers.
 */
 export const largestPalindromic = (digits) => {
+logger.error(`>>> Entering largestPalindromic(digits=${digits})`, { "event.action": "largestPalindromic", "logrite.digits": digits });
   let i
   let n
   let m
@@ -14,9 +16,12 @@ export const largestPalindromic = (digits) => {
     number = 10 * number + 9
   }
   const inf = number // highest (digits - 1) number, in this example highest 2 digit number
+logger.error(`largestPalindromic(digits=${digits}): inf → ${inf}`, { "event.action": "largestPalindromic", "logrite.digits": digits });
   const sup = 10 * number + 9 // highest (digits) number, in this example highest 3 digit number
+logger.error(`largestPalindromic(digits=${digits}): sup → ${sup}`, { "event.action": "largestPalindromic", "logrite.digits": digits });
 
   const isPalindromic = (n) => {
+	logger.error(`>>> Entering isPalindromic(n=${n})`, { "event.action": "isPalindromic", "logrite.n": n });
     let p = 0
     const q = n
     let r
@@ -25,6 +30,7 @@ export const largestPalindromic = (digits) => {
       p = 10 * p + r
       n = Math.floor(n / 10)
     }
+	logger.warn(`<<< Exiting isPalindromic(n=${n})`, { "event.action": "isPalindromic", "logrite.n": n });
     return p === q // returning whether the number is palindromic or not
   }
 
@@ -40,5 +46,6 @@ export const largestPalindromic = (digits) => {
       }
     }
   }
+logger.warn(`<<< Exiting largestPalindromic(digits=${digits})`, { "event.action": "largestPalindromic", "logrite.digits": digits });
   return NaN // returning not a number, if any such case arise
 }

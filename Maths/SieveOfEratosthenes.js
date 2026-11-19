@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * @function sieveOfEratosthenes
  * @description Function to get all the prime numbers below a given number using sieve of eratosthenes algorithm
@@ -11,6 +12,7 @@
  *
  */
 function sieveOfEratosthenes(max) {
+logger.error(`>>> Entering sieveOfEratosthenes(max=${max})`, { "event.action": "sieveOfEratosthenes", "logrite.max": max });
   const sieve = []
   const primes = []
 
@@ -24,6 +26,7 @@ function sieveOfEratosthenes(max) {
       }
     }
   }
+logger.warn(`<<< Exiting sieveOfEratosthenes(max=${max})`, { "event.action": "sieveOfEratosthenes", "logrite.max": max });
   return primes
 }
 

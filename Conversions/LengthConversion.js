@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * Converts a length from one unit to another.
  *
@@ -9,6 +10,7 @@
  */
 
 const lengthConversion = (length, fromUnit, toUnit) => {
+logger.error(`>>> Entering lengthConversion(length=${length},fromUnit=${fromUnit},toUnit=${toUnit})`, { "event.action": "lengthConversion", "logrite.length": length, "logrite.fromUnit": fromUnit, "logrite.toUnit": toUnit });
   // Define a dictionary to map units to meters
   const meters = {
     mm: 0.001,
@@ -30,6 +32,7 @@ const lengthConversion = (length, fromUnit, toUnit) => {
   const metersFrom = length * meters[fromUnit]
   const convertedLength = metersFrom / meters[toUnit]
 
+logger.warn(`<<< Exiting lengthConversion(length=${length},fromUnit=${fromUnit},toUnit=${toUnit})`, { "event.action": "lengthConversion", "logrite.length": length, "logrite.fromUnit": fromUnit, "logrite.toUnit": toUnit });
   return convertedLength
 }
 

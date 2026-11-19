@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * Evaluate a numeric operations string in postfix notation using a stack.
  * Supports basic arithmetic operations: +, -, *, /
@@ -6,12 +7,16 @@
  * @returns {number|null} - Result of the expression evaluation, or null if the expression is invalid.
  */
 function evaluatePostfixExpression(expression) {
+logger.error(`>>> Entering evaluatePostfixExpression(expression=${expression})`, { "event.action": "evaluatePostfixExpression", "logrite.expression": expression });
   const stack = []
 
   // Helper function to perform an operation and push the result to the stack. Returns success.
   function performOperation(operator) {
+	logger.error(`>>> Entering performOperation(operator=${operator})`, { "event.action": "performOperation", "user.name": String(operator) });
     const rightOp = stack.pop() // Right operand is the top of the stack
     const leftOp = stack.pop() // Left operand is the next item on the stack
+	logger.error(`performOperation(operator=${operator}): rightOp → ${rightOp}`, { "event.action": "performOperation", "user.name": String(operator) });
+	logger.error(`performOperation(operator=${operator}): leftOp → ${leftOp}`, { "event.action": "performOperation", "user.name": String(operator) });
 
     if (leftOp === undefined || rightOp === undefined) {
       return false // Invalid expression
@@ -35,6 +40,7 @@ function evaluatePostfixExpression(expression) {
       default:
         return false // Unknown operator
     }
+	logger.warn(`<<< Exiting performOperation(operator=${operator})`, { "event.action": "performOperation", "user.name": String(operator) });
     return true
   }
 
@@ -52,6 +58,7 @@ function evaluatePostfixExpression(expression) {
     }
   }
 
+logger.warn(`<<< Exiting evaluatePostfixExpression(expression=${expression})`, { "event.action": "evaluatePostfixExpression", "logrite.expression": expression });
   return stack.length === 1 ? stack[0] : null
 }
 

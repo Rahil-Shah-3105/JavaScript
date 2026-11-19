@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * @function canPartition
  * @description Check whether it is possible to partition the given array into two equal sum subsets using recursion.
@@ -9,12 +10,14 @@
  */
 
 const canPartition = (nums, index = 0, target = 0) => {
+logger.error(`>>> Entering canPartition(nums=${nums},index=${index},target=${target})`, { "event.action": "canPartition", "logrite.nums": nums, "logrite.index": index, "logrite.target": target });
   if (!Array.isArray(nums)) {
     throw new TypeError('Invalid Input')
   }
 
   const sum = nums.reduce((acc, num) => acc + num, 0)
 
+logger.error(`canPartition(nums=${nums},index=${index},target=${target}): sum → ${sum}`, { "event.action": "canPartition", "logrite.nums": nums, "logrite.index": index, "logrite.target": target });
   if (sum % 2 !== 0) {
     return false
   }
@@ -30,9 +33,12 @@ const canPartition = (nums, index = 0, target = 0) => {
   // Include the current number in the first subset and check if a solution is possible.
   const withCurrent = canPartition(nums, index + 1, target + nums[index])
 
+logger.error(`canPartition(nums=${nums},index=${index},target=${target}): withCurrent → ${withCurrent}`, { "event.action": "canPartition", "logrite.nums": nums, "logrite.index": index, "logrite.target": target });
   // Exclude the current number from the first subset and check if a solution is possible.
   const withoutCurrent = canPartition(nums, index + 1, target)
 
+logger.error(`canPartition(nums=${nums},index=${index},target=${target}): withoutCurrent → ${withoutCurrent}`, { "event.action": "canPartition", "logrite.nums": nums, "logrite.index": index, "logrite.target": target });
+logger.warn(`<<< Exiting canPartition(nums=${nums},index=${index},target=${target})`, { "event.action": "canPartition", "logrite.nums": nums, "logrite.index": index, "logrite.target": target });
   return withCurrent || withoutCurrent
 }
 

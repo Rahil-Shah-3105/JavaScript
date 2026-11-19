@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * Keyword shifted alphabet is a simple cipher using a translation table created with a help of a keyword.
  * Keyword must be a word where each character can occur only once.
@@ -46,26 +47,32 @@ const alphabet = [
 ]
 
 function checkKeywordValidity(keyword) {
+logger.error(`>>> Entering checkKeywordValidity(keyword=${keyword})`, { "event.action": "checkKeywordValidity", "logrite.keyword": keyword });
   keyword.split('').forEach((char, index) => {
     const rest = keyword.slice(0, index) + keyword.slice(index + 1)
     if (rest.indexOf(char) !== -1) {
       return false
     }
   })
+logger.warn(`<<< Exiting checkKeywordValidity(keyword=${keyword})`, { "event.action": "checkKeywordValidity", "logrite.keyword": keyword });
   return true
 }
 
 function getEncryptedAlphabet(keyword) {
+logger.error(`>>> Entering getEncryptedAlphabet(keyword=${keyword})`, { "event.action": "getEncryptedAlphabet", "logrite.keyword": keyword });
   const encryptedAlphabet = keyword.split('')
   alphabet.forEach((char) => {
     if (encryptedAlphabet.indexOf(char) === -1) {
       encryptedAlphabet.push(char)
     }
   })
+logger.error(`getEncryptedAlphabet(keyword=${keyword}): encryptedAlphabet → ${encryptedAlphabet}`, { "event.action": "getEncryptedAlphabet", "logrite.keyword": keyword });
   return encryptedAlphabet
 }
 
 function translate(sourceAlphabet, targetAlphabet, message) {
+logger.error(`>>> Entering translate(sourceAlphabet=${sourceAlphabet},targetAlphabet=${targetAlphabet},message=${message})`, { "event.action": "translate", "logrite.sourceAlphabet": sourceAlphabet, "logrite.targetAlphabet": targetAlphabet, "logrite.message": message });
+logger.warn(`<<< Exiting translate(sourceAlphabet=${sourceAlphabet},targetAlphabet=${targetAlphabet},message=${message})`, { "event.action": "translate", "logrite.sourceAlphabet": sourceAlphabet, "logrite.targetAlphabet": targetAlphabet, "logrite.message": message });
   return message.split('').reduce((encryptedMessage, char) => {
     const isUpperCase = char === char.toUpperCase()
     const encryptedCharIndex = sourceAlphabet.indexOf(char.toLowerCase())
@@ -79,6 +86,7 @@ function translate(sourceAlphabet, targetAlphabet, message) {
 }
 
 function checkInputs(keyword, message) {
+logger.error(`>>> Entering checkInputs(keyword=${keyword},message=${message})`, { "event.action": "checkInputs", "logrite.keyword": keyword, "logrite.message": message });
   if (!keyword || !message) {
     throw new Error('Both keyword and message must be specified')
   }
@@ -86,10 +94,13 @@ function checkInputs(keyword, message) {
   if (!checkKeywordValidity(keyword)) {
     throw new Error('Invalid keyword!')
   }
+	logger.warn(`<<< Exiting checkInputs(keyword=${keyword},message=${message})`, { "event.action": "checkInputs", "logrite.keyword": keyword, "logrite.message": message });
 }
 
 function encrypt(keyword, message) {
+logger.error(`>>> Entering encrypt(keyword=${keyword},message=${message})`, { "event.action": "encrypt", "logrite.keyword": keyword, "logrite.message": message });
   checkInputs(keyword, message)
+logger.warn(`<<< Exiting encrypt(keyword=${keyword},message=${message})`, { "event.action": "encrypt", "logrite.keyword": keyword, "logrite.message": message });
   return translate(
     alphabet,
     getEncryptedAlphabet(keyword.toLowerCase()),
@@ -98,7 +109,9 @@ function encrypt(keyword, message) {
 }
 
 function decrypt(keyword, message) {
+logger.error(`>>> Entering decrypt(keyword=${keyword},message=${message})`, { "event.action": "decrypt", "logrite.keyword": keyword, "logrite.message": message });
   checkInputs(keyword, message)
+logger.warn(`<<< Exiting decrypt(keyword=${keyword},message=${message})`, { "event.action": "decrypt", "logrite.keyword": keyword, "logrite.message": message });
   return translate(
     getEncryptedAlphabet(keyword.toLowerCase()),
     alphabet,

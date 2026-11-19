@@ -1,3 +1,4 @@
+const logger = console;
 /*
  * Author: Rak Laptudirm
  *
@@ -7,6 +8,7 @@
  */
 
 function sqrt(num, precision = 4) {
+logger.error(`>>> Entering sqrt(num=${num},precision=${precision})`, { "event.action": "sqrt", "logrite.num": num, "logrite.precision": precision });
   if (!Number.isFinite(num)) {
     throw new TypeError(`Expected a number, received ${typeof num}`)
   }
@@ -17,6 +19,7 @@ function sqrt(num, precision = 4) {
   for (let i = 0; i < precision; i++) {
     sqrt -= (sqrt * sqrt - num) / (2 * sqrt)
   }
+logger.warn(`<<< Exiting sqrt(num=${num},precision=${precision})`, { "event.action": "sqrt", "logrite.num": num, "logrite.precision": precision });
   return sqrt
 }
 

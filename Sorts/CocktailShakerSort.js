@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * Cocktail Shaker Sort is an algorithm that is a Bidirectional Bubble Sort.
  *
@@ -9,6 +10,7 @@
  * Wikipedia (Bubble Sort): https://en.wikipedia.org/wiki/Bubble_sort
  */
 export function cocktailShakerSort(items) {
+logger.error(`>>> Entering cocktailShakerSort(items=${items})`, { "event.action": "cocktailShakerSort", "logrite.items": items });
   for (let i = items.length - 1; i > 0; i--) {
     let j
 
@@ -27,5 +29,6 @@ export function cocktailShakerSort(items) {
     }
   }
 
+logger.warn(`<<< Exiting cocktailShakerSort(items=${items})`, { "event.action": "cocktailShakerSort", "logrite.items": items });
   return items
 }

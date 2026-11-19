@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * @author Nandan V
  * Sunday, 26 July 2020 8:33 AM
@@ -13,12 +14,17 @@ class IntervalTimer {
    * @return {IntervalTimer} If exists, the existing object.
    */
   constructor(interval = 10, callBack = () => {}) {
+	logger.error(`>>> Entering constructor(interval=${interval},callBack=${callBack})`, { "event.action": "constructor", "logrite.interval": interval, "logrite.callBack": callBack });
     this.prevInterval = 0
     if (this.instance == null) {
+	logger.debug(`constructor(interval=${interval},callBack=${callBack}): this.prevInterval → ${this.prevInterval}`, { "event.action": "constructor", "logrite.interval": interval, "logrite.callBack": callBack });
       this.interval = interval
+	logger.debug(`constructor(interval=${interval},callBack=${callBack}): this.interval → ${this.interval}`, { "event.action": "constructor", "logrite.interval": interval, "logrite.callBack": callBack });
       this.callBack = callBack
+	logger.debug(`constructor(interval=${interval},callBack=${callBack}): this.callBack → ${this.callBack}`, { "event.action": "constructor", "logrite.interval": interval, "logrite.callBack": callBack });
       this.instance = this
     } else {
+	logger.warn(`<<< Exiting constructor(interval=${interval},callBack=${callBack})`, { "event.action": "constructor", "logrite.interval": interval, "logrite.callBack": callBack });
       return this.instance
     }
   }
@@ -27,7 +33,9 @@ class IntervalTimer {
    * @description Starts the timer.
    */
   startTimer() {
+	logger.error('>>> Entering startTimer()', { "event.action": "startTimer" });
     this.timer = setInterval(this.callBack, this.interval)
+	logger.warn('<<< Exiting startTimer()', { "event.action": "startTimer" });
   }
 
   /**
@@ -35,8 +43,10 @@ class IntervalTimer {
    * @return {number} Elapsed time in milliseconds.
    */
   resetTimer() {
+	logger.error('>>> Entering resetTimer()', { "event.action": "resetTimer" });
     clearInterval(this.timer)
     this.callBack = () => {}
+	logger.warn('<<< Exiting resetTimer()', { "event.action": "resetTimer" });
     return this.getElapsedTime()
   }
 
@@ -44,8 +54,11 @@ class IntervalTimer {
    * @return {number} Elapsed time in milliseconds since reset.
    */
   getElapsedTime(offset = 0) {
+	logger.error(`>>> Entering getElapsedTime(offset=${offset})`, { "event.action": "getElapsedTime", "logrite.offset": offset });
     this.timeElapsed = this.timer - this.prevInterval
     this.prevInterval = this.timer
+	logger.debug(`getElapsedTime(offset=${offset}): this.timeElapsed → ${this.timeElapsed}`, { "event.action": "getElapsedTime", "logrite.offset": offset });
+	logger.debug(`getElapsedTime(offset=${offset}): this.prevInterval → ${this.prevInterval}`, { "event.action": "getElapsedTime", "logrite.offset": offset });
     return this.timeElapsed - offset
   }
 
@@ -53,6 +66,8 @@ class IntervalTimer {
    * @return {number} Elapsed time since start.
    */
   getRunTime() {
+	logger.error('>>> Entering getRunTime()', { "event.action": "getRunTime" });
+	logger.warn('<<< Exiting getRunTime()', { "event.action": "getRunTime" });
     return this.timer
   }
 }

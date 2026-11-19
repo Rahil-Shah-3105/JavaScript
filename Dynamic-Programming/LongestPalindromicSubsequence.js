@@ -1,3 +1,4 @@
+const logger = console;
 /*
   LeetCode -> https://leetcode.com/problems/longest-palindromic-subsequence/
 
@@ -7,12 +8,14 @@
 */
 
 export const longestPalindromeSubsequence = function (s) {
+logger.error(`>>> Entering longestPalindromeSubsequence(s=${s})`, { "event.action": "longestPalindromeSubsequence", "logrite.s": s });
   const n = s.length
 
   const dp = new Array(n)
     .fill(0)
     .map((item) => new Array(n).fill(0).map((item) => 0))
 
+logger.error(`longestPalindromeSubsequence(s=${s}): dp → ${dp}`, { "event.action": "longestPalindromeSubsequence", "logrite.s": s });
   // fill predefined for single character
   for (let i = 0; i < n; i++) {
     dp[i][i] = 1
@@ -29,5 +32,6 @@ export const longestPalindromeSubsequence = function (s) {
     }
   }
 
+logger.warn(`<<< Exiting longestPalindromeSubsequence(s=${s})`, { "event.action": "longestPalindromeSubsequence", "logrite.s": s });
   return dp[0][n - 1]
 }

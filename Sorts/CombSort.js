@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * Comb sort improves on bubble sort.
  *
@@ -23,6 +24,7 @@
  * @return {number[]} The array of numbers sorted in increasing order.
  */
 function combSort(list) {
+logger.error(`>>> Entering combSort(list=${list})`, { "event.action": "combSort", "logrite.list": list });
   if (list.length === 0) {
     return list
   }
@@ -46,6 +48,7 @@ function combSort(list) {
       i += 1
     }
   }
+logger.warn(`<<< Exiting combSort(list=${list})`, { "event.action": "combSort", "logrite.list": list });
   return list
 }
 

@@ -1,3 +1,4 @@
+const logger = console;
 /*
  * Unlike a traditional sorting algorithm, which attempts to sort with the fewest
  * comparisons possible, the goal of pancake sort is to sort the sequence in as few reversals as
@@ -27,6 +28,7 @@
  * @returns The flipped array
  */
 export function flipArray(array, startIndex, endIndex) {
+logger.error(`>>> Entering flipArray(array=${array},startIndex=${startIndex},endIndex=${endIndex})`, { "event.action": "flipArray", "logrite.array": array, "logrite.startIndex": startIndex, "logrite.endIndex": endIndex });
   while (startIndex < endIndex) {
     // swap front and back of the subarray
     const temp = array[startIndex]
@@ -38,6 +40,7 @@ export function flipArray(array, startIndex, endIndex) {
     endIndex--
   }
 
+logger.warn(`<<< Exiting flipArray(array=${array},startIndex=${startIndex},endIndex=${endIndex})`, { "event.action": "flipArray", "logrite.array": array, "logrite.startIndex": startIndex, "logrite.endIndex": endIndex });
   return array
 }
 
@@ -50,11 +53,13 @@ export function flipArray(array, startIndex, endIndex) {
  * @returns The index of the maximum number
  */
 export function findMax(array, startIndex, endIndex) {
+logger.error(`>>> Entering findMax(array=${array},startIndex=${startIndex},endIndex=${endIndex})`, { "event.action": "findMax", "logrite.array": array, "logrite.startIndex": startIndex, "logrite.endIndex": endIndex });
   let maxIndex = 0
   for (let i = startIndex; i <= endIndex; i++) {
     if (array[i] > array[maxIndex]) maxIndex = i
   }
 
+logger.warn(`<<< Exiting findMax(array=${array},startIndex=${startIndex},endIndex=${endIndex})`, { "event.action": "findMax", "logrite.array": array, "logrite.startIndex": startIndex, "logrite.endIndex": endIndex });
   return maxIndex
 }
 
@@ -68,14 +73,17 @@ export function findMax(array, startIndex, endIndex) {
  * @returns The sorted array
  */
 export function pancakeSort(array) {
+logger.error(`>>> Entering pancakeSort(array=${array})`, { "event.action": "pancakeSort", "logrite.array": array });
   for (let subarraySize = array.length; subarraySize > 1; subarraySize--) {
     const maximumIndex = findMax(array, 0, subarraySize - 1)
 
+	logger.error(`pancakeSort(array=${array}): maximumIndex → ${maximumIndex}`, { "event.action": "pancakeSort", "logrite.array": array });
     if (maximumIndex !== subarraySize - 1) {
       flipArray(array, 0, maximumIndex)
       flipArray(array, 0, subarraySize - 1)
     }
   }
 
+logger.warn(`<<< Exiting pancakeSort(array=${array})`, { "event.action": "pancakeSort", "logrite.array": array });
   return array
 }

@@ -1,3 +1,4 @@
+const logger = console;
 /*
     Decimal To Roman
 
@@ -39,6 +40,7 @@ const orders = [
 ]
 
 function decimalToRoman(num) {
+logger.error(`>>> Entering decimalToRoman(num=${num})`, { "event.action": "decimalToRoman", "logrite.num": num });
   let roman = ''
   for (const symbol of orders) {
     while (num >= values[symbol]) {
@@ -46,6 +48,7 @@ function decimalToRoman(num) {
       num -= values[symbol]
     }
   }
+logger.error(`decimalToRoman(num=${num}): roman → ${roman}`, { "event.action": "decimalToRoman", "logrite.num": num });
   return roman
 }
 

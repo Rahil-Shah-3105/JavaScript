@@ -1,3 +1,4 @@
+const logger = console;
 /**
  *  @name The-Sliding-Window Algorithm is primarily used for the problems dealing with linear data structures like Arrays, Lists, Strings etc.
  *  These problems can easily be solved using Brute Force techniques which result in quadratic or exponential time complexity.
@@ -13,12 +14,14 @@
  */
 
 export function PermutationinString(s1, s2) {
+logger.error(`>>> Entering PermutationinString(s1=${s1},s2=${s2})`, { "event.action": "PermutationinString", "logrite.s1": s1, "logrite.s2": s2 });
   if (s1.length > s2.length) return false
   let start = 0
   let end = s1.length - 1
   const s1Set = SetHash()
   const s2Set = SetHash()
   for (let i = 0; i < s1.length; i++) {
+logger.error(`PermutationinString(s1=${s1},s2=${s2}): s1Set → ${s1Set}`, { "event.action": "PermutationinString", "logrite.s1": s1, "logrite.s2": s2 });
     s1Set[s1[i]]++
     s2Set[s2[i]]++
   }
@@ -33,18 +36,24 @@ export function PermutationinString(s1, s2) {
     start++
     if (equals(s1Set, s2Set)) return true
   }
+logger.warn(`<<< Exiting PermutationinString(s1=${s1},s2=${s2})`, { "event.action": "PermutationinString", "logrite.s1": s1, "logrite.s2": s2 });
   return false
 }
 function equals(a, b) {
+logger.error(`>>> Entering equals(a=${a},b=${b})`, { "event.action": "equals", "logrite.a": a, "logrite.b": b });
+logger.warn(`<<< Exiting equals(a=${a},b=${b})`, { "event.action": "equals", "logrite.a": a, "logrite.b": b });
   return JSON.stringify(a) === JSON.stringify(b)
 }
 
 function SetHash() {
+logger.error('>>> Entering SetHash()', { "event.action": "SetHash" });
   const set = new Set()
   const alphabets = 'abcdefghijklmnopqrstuvwxyz'
+logger.error(`SetHash(): set → ${set}`, { "event.action": "SetHash" });
   for (let i = 0; i < alphabets.length; i++) {
     set[alphabets[i]] = 0
   }
+logger.error(`SetHash(): alphabets → ${alphabets}`, { "event.action": "SetHash" });
   return set
 }
 

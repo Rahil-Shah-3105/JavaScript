@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * @function fibonacci
  * @description Fibonacci is the sum of previous two fibonacci numbers.
@@ -6,6 +7,7 @@
  * @see [Fibonacci_Numbers](https://en.wikipedia.org/wiki/Fibonacci_number)
  */
 const fibonacci = (N) => {
+logger.error(`>>> Entering fibonacci(N=${N})`, { "event.action": "fibonacci", "logrite.N": N });
   if (!Number.isInteger(N)) {
     throw new TypeError('Input should be integer')
   }
@@ -21,6 +23,7 @@ const fibonacci = (N) => {
     secondNumber = sumOfNumbers
   }
 
+logger.warn(`<<< Exiting fibonacci(N=${N})`, { "event.action": "fibonacci", "logrite.N": N });
   return N ? secondNumber : firstNumber
 }
 

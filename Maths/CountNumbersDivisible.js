@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * Count the numbers divisible by ‘M’ in a given range
  *
@@ -19,6 +20,7 @@
  * @returns {number} count of total number of divisibles
  */
 const countNumbersDivisible = (num1, num2, divider) => {
+logger.error(`>>> Entering countNumbersDivisible(num1=${num1},num2=${num2},divider=${divider})`, { "event.action": "countNumbersDivisible", "logrite.num1": num1, "logrite.num2": num2, "logrite.divider": divider });
   if (
     typeof num1 !== 'number' ||
     typeof num2 !== 'number' ||
@@ -57,6 +59,7 @@ const countNumbersDivisible = (num1, num2, divider) => {
 
   // As it includes integer division meaning floating values
   // to get exact count Math.round() is added
+logger.warn(`<<< Exiting countNumbersDivisible(num1=${num1},num2=${num2},divider=${divider})`, { "event.action": "countNumbersDivisible", "logrite.num1": num1, "logrite.num2": num2, "logrite.divider": divider });
   return Math.round(divisibleCount)
 }
 

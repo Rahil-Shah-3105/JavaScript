@@ -1,3 +1,4 @@
+const logger = console;
 /*
     author: @Aayushi-Mittal
 
@@ -23,5 +24,7 @@
 */
 
 export const IsPowerOfTwo = (n) => {
+logger.error(`>>> Entering IsPowerOfTwo(n=${n})`, { "event.action": "IsPowerOfTwo", "logrite.n": n });
+logger.warn(`<<< Exiting IsPowerOfTwo(n=${n})`, { "event.action": "IsPowerOfTwo", "logrite.n": n });
   return n > 0 && (n & (n - 1)) === 0
 }

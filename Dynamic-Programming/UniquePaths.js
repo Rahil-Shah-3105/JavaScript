@@ -1,3 +1,4 @@
+const logger = console;
 /*
  *
  *  Unique Paths
@@ -19,6 +20,7 @@
  */
 
 const uniquePaths = (m, n) => {
+logger.error(`>>> Entering uniquePaths(m=${m},n=${n})`, { "event.action": "uniquePaths", "logrite.m": m, "logrite.n": n });
   // only one way to reach end
   if (m === 1 || n === 1) return 1
 
@@ -26,6 +28,7 @@ const uniquePaths = (m, n) => {
   // base case, position 1 has only 1 move
   const paths = new Array(m).fill(1)
 
+logger.error(`uniquePaths(m=${m},n=${n}): paths → ${paths}`, { "event.action": "uniquePaths", "logrite.m": m, "logrite.n": n });
   for (let i = 1; i < n; i++) {
     for (let j = 1; j < m; j++) {
       // paths[j] in RHS represents the cell value stored above the current cell
@@ -34,6 +37,7 @@ const uniquePaths = (m, n) => {
       paths[j] = paths[j - 1] + paths[j]
     }
   }
+logger.warn(`<<< Exiting uniquePaths(m=${m},n=${n})`, { "event.action": "uniquePaths", "logrite.m": m, "logrite.n": n });
   return paths[m - 1]
 }
 

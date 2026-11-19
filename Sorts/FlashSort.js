@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * Flashsort is a distribution sorting algorithm showing linear
  * computational complexity O(n) for uniformly distributed
@@ -7,12 +8,14 @@
  */
 
 export function flashSort(arr) {
+logger.error(`>>> Entering flashSort(arr=${arr})`, { "event.action": "flashSort", "logrite.arr": arr });
   let max = 0
   let min = arr[0]
   const n = arr.length
   const m = ~~(0.45 * n)
   const l = new Array(m)
 
+logger.error(`flashSort(arr=${arr}): m → ${m}`, { "event.action": "flashSort", "logrite.arr": arr });
   for (let i = 1; i < n; ++i) {
     if (arr[i] < min) {
       min = arr[i]
@@ -28,6 +31,7 @@ export function flashSort(arr) {
 
   const c1 = (m - 1) / (arr[max] - min)
 
+logger.error(`flashSort(arr=${arr}): c1 → ${c1}`, { "event.action": "flashSort", "logrite.arr": arr });
   for (let k = 0; k < m; k++) {
     l[k] = 0
   }
@@ -77,6 +81,7 @@ export function flashSort(arr) {
     }
     arr[i + 1] = hold
   }
+logger.warn(`<<< Exiting flashSort(arr=${arr})`, { "event.action": "flashSort", "logrite.arr": arr });
   return arr
 }
 

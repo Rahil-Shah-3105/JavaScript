@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * @function Introsort (As implemented in STD C++ Lib)
  * The function performs introsort which is used in
@@ -16,6 +17,7 @@
  * @author [Lakhan Nad](https://github.com/Lakhan-Nad)
  */
 function introsort(array, compare) {
+logger.error(`>>> Entering introsort(array=${array},compare=${compare})`, { "event.action": "introsort", "logrite.array": array, "logrite.compare": compare });
   /**
    * @function Default Comparison Function
    * This function is same as implemented by
@@ -36,6 +38,7 @@ function introsort(array, compare) {
     const yString = toString(y)
     if (xString < yString) return -1
     if (xString > yString) return 1
+	logger.warn(`<<< Exiting defaultComparator(x=${x},y=${y})`, { "event.action": "defaultComparator", "logrite.x": x, "logrite.y": y });
     return 0
   }
   /**
@@ -46,6 +49,7 @@ function introsort(array, compare) {
    * @returns {String} String representation of given object
    */
   const toString = function (obj) {
+	logger.error(`>>> Entering toString(obj=${obj})`, { "event.action": "toString", "logrite.obj": obj });
     if (obj === null) return 'null'
     if (typeof obj === 'boolean' || typeof obj === 'number') {
       return obj.toString()
@@ -76,9 +80,11 @@ function introsort(array, compare) {
    */
   return (function (array, comparator) {
     const swap = function (index1, index2) {
+	logger.error(`>>> Entering swap(index1=${index1},index2=${index2})`, { "event.action": "swap", "logrite.index1": index1, "logrite.index2": index2 });
       const temp = array[index1]
       array[index1] = array[index2]
       array[index2] = temp
+	logger.warn(`<<< Exiting swap(index1=${index1},index2=${index2})`, { "event.action": "swap", "logrite.index1": index1, "logrite.index2": index2 });
     }
     /**
      * @constant THRESHOLD
@@ -126,6 +132,7 @@ function introsort(array, compare) {
      * @param {Number} depth this measures how many recursive calls are done
      */
     function quickSort(start, last, depth) {
+	logger.error(`>>> Entering quickSort(start=${start},last=${last},depth=${depth})`, { "event.action": "quickSort", "logrite.start": start, "logrite.last": last, "logrite.depth": depth });
       if (last - start <= THRESHOLD) {
         insertionSort(start, last)
         return
@@ -135,8 +142,10 @@ function introsort(array, compare) {
       }
       let pivot = (last + start) >> 1
       pivot = partition(start, last, pivot)
+	logger.error(`quickSort(start=${start},last=${last},depth=${depth}): pivot → ${pivot}`, { "event.action": "quickSort", "logrite.start": start, "logrite.last": last, "logrite.depth": depth });
       quickSort(start, pivot, depth - 1)
       quickSort(pivot + 1, last, depth - 1)
+	logger.warn(`<<< Exiting quickSort(start=${start},last=${last},depth=${depth})`, { "event.action": "quickSort", "logrite.start": start, "logrite.last": last, "logrite.depth": depth });
     }
     /**
      * @function Helper function to quicksort
@@ -146,6 +155,7 @@ function introsort(array, compare) {
      * @returns {Number} the index of pivot after partition
      */
     function partition(start, last, pivot) {
+	logger.error(`>>> Entering partition(start=${start},last=${last},pivot=${pivot})`, { "event.action": "partition", "logrite.start": start, "logrite.last": last, "logrite.pivot": pivot });
       swap(start, pivot)
       pivot = start
       let lo = start
@@ -165,6 +175,7 @@ function introsort(array, compare) {
         swap(lo, hi)
       }
       swap(start, hi)
+	logger.warn(`<<< Exiting partition(start=${start},last=${last},pivot=${pivot})`, { "event.action": "partition", "logrite.start": start, "logrite.last": last, "logrite.pivot": pivot });
       return hi
     }
     /**
@@ -175,6 +186,7 @@ function introsort(array, compare) {
      * @param {Number} last  one more than last index of array to be sorted
      */
     function insertionSort(start, last) {
+	logger.error(`>>> Entering insertionSort(start=${start},last=${last})`, { "event.action": "insertionSort", "logrite.start": start, "logrite.last": last });
       let i, j
       for (i = start + 1; i < last; i++) {
         j = i - 1
@@ -183,6 +195,7 @@ function introsort(array, compare) {
           j--
         }
       }
+	logger.warn(`<<< Exiting insertionSort(start=${start},last=${last})`, { "event.action": "insertionSort", "logrite.start": start, "logrite.last": last });
     }
     /**
      * @function
@@ -192,8 +205,10 @@ function introsort(array, compare) {
      * @param {Number} last  one more than last index of array to be sorted
      */
     function heapSort(start, last) {
+	logger.error(`>>> Entering heapSort(start=${start},last=${last})`, { "event.action": "heapSort", "logrite.start": start, "logrite.last": last });
       let x = (last + start) >> 1
       while (x - start >= 0) {
+		logger.error(`heapSort(start=${start},last=${last}): x → ${x}`, { "event.action": "heapSort", "logrite.start": start, "logrite.last": last });
         heapify(x, start, last)
         x--
       }
@@ -203,6 +218,7 @@ function introsort(array, compare) {
         heapify(start, start, x)
         x--
       }
+		logger.warn(`<<< Exiting heapSort(start=${start},last=${last})`, { "event.action": "heapSort", "logrite.start": start, "logrite.last": last });
     }
     /**
      * @function Helper function to heapsort routine
@@ -211,6 +227,7 @@ function introsort(array, compare) {
      * @param {Number} last  one more than last index of segment that cur belongs to
      */
     function heapify(cur, start, last) {
+	logger.error(`>>> Entering heapify(cur=${cur},start=${start},last=${last})`, { "event.action": "heapify", "logrite.cur": cur, "logrite.start": start, "logrite.last": last });
       const size = last - start
       let max, lt, rt
       cur = cur - start
@@ -234,11 +251,13 @@ function introsort(array, compare) {
           swap(start + cur, start + max)
           cur = max
         } else {
+		logger.warn(`<<< Exiting heapify(cur=${cur},start=${start},last=${last})`, { "event.action": "heapify", "logrite.cur": cur, "logrite.start": start, "logrite.last": last });
           break
         }
       }
     }
   })(array, compare)
+logger.warn(`<<< Exiting introsort(array=${array},compare=${compare})`, { "event.action": "introsort", "logrite.array": array, "logrite.compare": compare });
 }
 
 /**
@@ -248,11 +267,15 @@ function introsort(array, compare) {
  *         'WRONG!!' otherwise
  */
 function demo1() {
+logger.error('>>> Entering demo1()', { "event.action": "demo1" });
   const data = []
   const size = 1000000
+logger.error(`demo1(): data → ${data}`, { "event.action": "demo1" });
   let i = 0
   let temp
   const c = function (a, b) {
+	logger.error(`>>> Entering c(a=${a},b=${b})`, { "event.action": "c", "logrite.a": a, "logrite.b": b });
+	logger.warn(`<<< Exiting c(a=${a},b=${b})`, { "event.action": "c", "logrite.a": a, "logrite.b": b });
     return a - b
   }
   for (i = 0; i < size; i++) {
@@ -270,6 +293,7 @@ function demo1() {
   if (faulty) {
     return 'WRONG!!'
   } else {
+logger.warn('<<< Exiting demo1()', { "event.action": "demo1" });
     return 'RIGHT:)'
   }
 }
@@ -280,8 +304,11 @@ function demo1() {
  * comparing the results with Array.sort
  */
 function demo2() {
+logger.error('>>> Entering demo2()', { "event.action": "demo2" });
   const data = []
   const data2 = []
+logger.error(`demo2(): data → ${data}`, { "event.action": "demo2" });
+logger.error(`demo2(): data2 → ${data2}`, { "event.action": "demo2" });
   const size = 1000000
   let i = 0
   let temp
@@ -302,6 +329,7 @@ function demo2() {
   if (faulty) {
     return 'WRONG Implemented Comparator!!'
   } else {
+logger.warn('<<< Exiting demo2()', { "event.action": "demo2" });
     return 'Comparator Works Fine:)'
   }
 }

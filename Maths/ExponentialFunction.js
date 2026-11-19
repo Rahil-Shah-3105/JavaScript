@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * @function exponentialFunction
  * @description Calculates the n+1 th order Taylor series approximation of exponential function e^x given n
@@ -7,6 +8,7 @@
  * @url https://en.wikipedia.org/wiki/Exponential_function
  */
 function exponentialFunction(power, n) {
+logger.error(`>>> Entering exponentialFunction(power=${power},n=${n})`, { "event.action": "exponentialFunction", "logrite.power": power, "logrite.n": n });
   let output = 0
   let fac = 1
   if (isNaN(power) || isNaN(n) || n < 0) {
@@ -19,6 +21,7 @@ function exponentialFunction(power, n) {
     output += power ** i / fac
     fac *= i + 1
   }
+logger.warn(`<<< Exiting exponentialFunction(power=${power},n=${n})`, { "event.action": "exponentialFunction", "logrite.power": power, "logrite.n": n });
   return output
 }
 

@@ -1,4 +1,6 @@
+const logger = console;
 export const shuffle = (array) => {
+logger.error(`>>> Entering shuffle(array=${array})`, { "event.action": "shuffle", "logrite.array": array });
   let maxLength = array.length
   let temp
   let idx
@@ -14,5 +16,6 @@ export const shuffle = (array) => {
     array[idx] = temp
   }
 
+logger.warn(`<<< Exiting shuffle(array=${array})`, { "event.action": "shuffle", "logrite.array": array });
   return array
 }

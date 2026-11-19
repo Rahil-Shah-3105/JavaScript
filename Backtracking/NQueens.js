@@ -1,11 +1,15 @@
+const logger = console;
 class NQueens {
   constructor(size) {
+	logger.error(`>>> Entering constructor(size=${size})`, { "event.action": "constructor", "logrite.size": size });
     if (size < 0) {
       throw RangeError('Invalid board size')
     }
     this.board = new Array(size).fill('.').map(() => new Array(size).fill('.'))
     this.size = size
+	logger.debug(`constructor(size=${size}): this.size → ${this.size}`, { "event.action": "constructor", "logrite.size": size });
     this.solutionCount = 0
+	logger.debug(`constructor(size=${size}): this.solutionCount → ${this.solutionCount}`, { "event.action": "constructor", "logrite.size": size });
   }
 
   isValid([row, col]) {
@@ -30,14 +34,19 @@ class NQueens {
   }
 
   placeQueen(row, col) {
+	logger.error(`>>> Entering placeQueen(row=${row},col=${col})`, { "event.action": "placeQueen", "logrite.row": row, "logrite.col": col });
     this.board[row][col] = 'Q'
+	logger.warn(`<<< Exiting placeQueen(row=${row},col=${col})`, { "event.action": "placeQueen", "logrite.row": row, "logrite.col": col });
   }
 
   removeQueen(row, col) {
+	logger.error(`>>> Entering removeQueen(row=${row},col=${col})`, { "event.action": "removeQueen", "logrite.row": row, "logrite.col": col });
     this.board[row][col] = '.'
+	logger.warn(`<<< Exiting removeQueen(row=${row},col=${col})`, { "event.action": "removeQueen", "logrite.row": row, "logrite.col": col });
   }
 
   solve(col = 0) {
+	logger.error(`>>> Entering solve(col=${col})`, { "event.action": "solve", "logrite.col": col });
     if (col >= this.size) {
       this.solutionCount++
       return true
@@ -51,6 +60,7 @@ class NQueens {
       }
     }
 
+	logger.warn(`<<< Exiting solve(col=${col})`, { "event.action": "solve", "logrite.col": col });
     return false
   }
 

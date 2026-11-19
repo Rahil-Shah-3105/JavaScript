@@ -1,3 +1,4 @@
+const logger = console;
 /*
     author: TangibleDream
     license: GPL-3.0 or later
@@ -40,13 +41,17 @@
 */
 
 const gridGetX = (columns, index) => {
+logger.error(`>>> Entering gridGetX(columns=${columns},index=${index})`, { "event.action": "gridGetX", "logrite.columns": columns, "logrite.index": index });
   while (index + 1 > columns) {
     index = index - columns
   }
+logger.warn(`<<< Exiting gridGetX(columns=${columns},index=${index})`, { "event.action": "gridGetX", "logrite.columns": columns, "logrite.index": index });
   return index + 1
 }
 
 const gridGetY = (columns, index) => {
+logger.error(`>>> Entering gridGetY(columns=${columns},index=${index})`, { "event.action": "gridGetY", "logrite.columns": columns, "logrite.index": index });
+logger.warn(`<<< Exiting gridGetY(columns=${columns},index=${index})`, { "event.action": "gridGetY", "logrite.columns": columns, "logrite.index": index });
   return Math.floor(index / columns) + 1
 }
 

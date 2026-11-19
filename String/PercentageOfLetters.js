@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * @function percentageOfLetter
  * @description Return the percentage of characters in 'str'
@@ -11,6 +12,7 @@
  * percentageOfLetter(str, letter) // ===> 33
  */
 const percentageOfLetter = (str, letter) => {
+logger.error(`>>> Entering percentageOfLetter(str=${str},letter=${letter})`, { "event.action": "percentageOfLetter", "logrite.str": str, "logrite.letter": letter });
   if (typeof str !== 'string' || typeof letter !== 'string') {
     throw new Error('Input data must be strings')
   }
@@ -21,6 +23,7 @@ const percentageOfLetter = (str, letter) => {
     letterCount += str[i].toLowerCase() === letter.toLowerCase() ? 1 : 0
   }
   const percentage = Math.floor((100 * letterCount) / str.length)
+logger.error(`percentageOfLetter(str=${str},letter=${letter}): percentage → ${percentage}`, { "event.action": "percentageOfLetter", "logrite.str": str, "logrite.letter": letter });
   return percentage
 }
 

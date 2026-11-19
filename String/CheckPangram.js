@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * What is Pangram?
  * Pangram is a sentence that contains all the letters in the alphabet https://en.wikipedia.org/wiki/Pangram
@@ -12,6 +13,7 @@
  * @example - checkPangramRegex('"Waltz, bad nymph, for quick jigs vex." is a pangram') => true
  */
 const checkPangramRegex = (string) => {
+logger.error(`>>> Entering checkPangramRegex(string=${string})`, { "event.action": "checkPangramRegex", "logrite.string": string });
   if (typeof string !== 'string') {
     throw new TypeError('The given value is not a string')
   }
@@ -25,6 +27,7 @@ const checkPangramRegex = (string) => {
    * Star - * -> Matches 0 or more of the preceding token.
    * Numeric reference - \{$n} -> Matches the results of a capture group. E.g. - \1  matches the results of the first capture group & \3 matches the third.
    */
+logger.warn(`<<< Exiting checkPangramRegex(string=${string})`, { "event.action": "checkPangramRegex", "logrite.string": string });
   return string.match(/([a-z])(?!.*\1)/gi).length === 26
 }
 
@@ -35,12 +38,14 @@ const checkPangramRegex = (string) => {
  * @returns {boolean}
  */
 const checkPangramSet = (string) => {
+logger.error(`>>> Entering checkPangramSet(string=${string})`, { "event.action": "checkPangramSet", "logrite.string": string });
   if (typeof string !== 'string') {
     throw new TypeError('The given value is not a string')
   }
 
   const lettersSet = new Set()
 
+logger.error(`checkPangramSet(string=${string}): lettersSet → ${lettersSet}`, { "event.action": "checkPangramSet", "logrite.string": string });
   for (const letter of string.toUpperCase()) {
     if (/[A-Z]/.test(letter)) {
       // if the letter is a valid uppercase alphabet then the add method insert the letter to the HashSet
@@ -48,6 +53,7 @@ const checkPangramSet = (string) => {
     }
   }
 
+logger.warn(`<<< Exiting checkPangramSet(string=${string})`, { "event.action": "checkPangramSet", "logrite.string": string });
   return lettersSet.size === 26
 }
 

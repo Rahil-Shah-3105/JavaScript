@@ -1,3 +1,4 @@
+const logger = console;
 /*
   Modified from:
     https://github.com/TheAlgorithms/Python/blob/master/maths/prime_check.py
@@ -7,6 +8,7 @@
 */
 
 const PrimeCheck = (n) => {
+logger.error(`>>> Entering PrimeCheck(n=${n})`, { "event.action": "PrimeCheck", "logrite.n": n });
   // input: n: int
   // output: boolean
   if (n === 1) return false
@@ -19,6 +21,7 @@ const PrimeCheck = (n) => {
       return false
     }
   }
+logger.warn(`<<< Exiting PrimeCheck(n=${n})`, { "event.action": "PrimeCheck", "logrite.n": n });
   return true
 }
 

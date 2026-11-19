@@ -1,15 +1,21 @@
+const logger = console;
 class GraphUnweightedUndirected {
   // Unweighted Undirected Graph class
   constructor() {
+	logger.error('>>> Entering constructor()', { "event.action": "constructor" });
     this.connections = {}
+	logger.debug(`constructor(): this.connections → ${this.connections}`, { "event.action": "constructor" });
   }
 
   addNode(node) {
+	logger.error(`>>> Entering addNode(node=${node})`, { "event.action": "addNode", "logrite.node": node });
     // Function to add a node to the graph (connection represented by set)
     this.connections[node] = new Set()
+	logger.warn(`<<< Exiting addNode(node=${node})`, { "event.action": "addNode", "logrite.node": node });
   }
 
   addEdge(node1, node2) {
+	logger.error(`>>> Entering addEdge(node1=${node1},node2=${node2})`, { "event.action": "addEdge", "logrite.node1": node1, "logrite.node2": node2 });
     // Function to add an edge (adds the node too if they are not present in the graph)
     if (!(node1 in this.connections)) {
       this.addNode(node1)
@@ -19,15 +25,18 @@ class GraphUnweightedUndirected {
     }
     this.connections[node1].add(node2)
     this.connections[node2].add(node1)
+	logger.warn(`<<< Exiting addEdge(node1=${node1},node2=${node2})`, { "event.action": "addEdge", "logrite.node1": node1, "logrite.node2": node2 });
   }
 
   DFSIterative(node, value) {
+	logger.error(`>>> Entering DFSIterative(node=${node},value=${value})`, { "event.action": "DFSIterative", "logrite.node": node, "logrite.value": value });
     // DFS Function to search if a node with the given value is present in the graph
     const stack = [node]
     const visited = new Set()
     while (stack.length > 0) {
       const currNode = stack.pop()
       // if the current node contains the value being searched for, true is returned
+	logger.error(`DFSIterative(node=${node},value=${value}): currNode → ${currNode}`, { "event.action": "DFSIterative", "logrite.node": node, "logrite.value": value });
       if (currNode === value) {
         return true
       }
@@ -40,6 +49,7 @@ class GraphUnweightedUndirected {
         }
       }
     }
+	logger.error(`DFSIterative(node=${node},value=${value}): visited → ${visited}`, { "event.action": "DFSIterative", "logrite.node": node, "logrite.value": value });
     return false
   }
 }

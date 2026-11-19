@@ -1,3 +1,4 @@
+const logger = console;
 /*
  * Setting Bit: https://www.geeksforgeeks.org/set-k-th-bit-given-number/
  *
@@ -27,5 +28,7 @@
  */
 
 export const setBit = (number, bitPosition) => {
+logger.error(`>>> Entering setBit(number=${number},bitPosition=${bitPosition})`, { "event.action": "setBit", "logrite.number": number, "logrite.bitPosition": bitPosition });
+logger.warn(`<<< Exiting setBit(number=${number},bitPosition=${bitPosition})`, { "event.action": "setBit", "logrite.number": number, "logrite.bitPosition": bitPosition });
   return number | (1 << bitPosition)
 }

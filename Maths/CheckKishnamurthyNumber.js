@@ -1,3 +1,4 @@
+const logger = console;
 /*
     Problem statement and Explanation : https://www.geeksforgeeks.org/check-if-a-number-is-a-krishnamurthy-number-or-not-2/
 
@@ -7,11 +8,13 @@
 
 // factorial utility method.
 const factorial = (n) => {
+logger.error(`>>> Entering factorial(n=${n})`, { "event.action": "factorial", "logrite.n": n });
   let fact = 1
   while (n !== 0) {
     fact = fact * n
     n--
   }
+logger.warn(`<<< Exiting factorial(n=${n})`, { "event.action": "factorial", "logrite.n": n });
   return fact
 }
 
@@ -22,6 +25,7 @@ const factorial = (n) => {
  * @example 145 => 1! + 4! + 5! = 1  + 24 + 120 = 145
  */
 const CheckKishnamurthyNumber = (number) => {
+logger.error(`>>> Entering CheckKishnamurthyNumber(number=${number})`, { "event.action": "CheckKishnamurthyNumber", "logrite.number": number });
   // firstly, check that input is a number or not.
   if (typeof number !== 'number') {
     throw new TypeError('Argument is not a number.')
@@ -41,6 +45,7 @@ const CheckKishnamurthyNumber = (number) => {
     newNumber = Math.floor(newNumber / 10)
   }
   // if the sumOfAllDigitFactorial is equal to the given number it means the number is a Krishnamurthy number.
+logger.warn(`<<< Exiting CheckKishnamurthyNumber(number=${number})`, { "event.action": "CheckKishnamurthyNumber", "logrite.number": number });
   return sumOfAllDigitFactorial === number
 }
 

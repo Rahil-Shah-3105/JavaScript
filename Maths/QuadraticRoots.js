@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * @see https://www.cuemath.com/algebra/roots-of-quadratic-equation/
  * @author Dibya Debayan Dash
@@ -15,6 +16,7 @@
  * // Expected output: [1]
  */
 const quadraticRoots = (a, b, c) => {
+logger.error(`>>> Entering quadraticRoots(a=${a},b=${b},c=${c})`, { "event.action": "quadraticRoots", "logrite.a": a, "logrite.b": b, "logrite.c": c });
   // Calculate the discriminant
   const discriminant = b * b - 4 * a * c
 
@@ -27,6 +29,8 @@ const quadraticRoots = (a, b, c) => {
   } else {
     // Two real roots
     const sqrtDiscriminant = Math.sqrt(discriminant)
+	logger.error(`quadraticRoots(a=${a},b=${b},c=${c}): sqrtDiscriminant → ${sqrtDiscriminant}`, { "event.action": "quadraticRoots", "logrite.a": a, "logrite.b": b, "logrite.c": c });
+logger.warn(`<<< Exiting quadraticRoots(a=${a},b=${b},c=${c})`, { "event.action": "quadraticRoots", "logrite.a": a, "logrite.b": b, "logrite.c": c });
     return [
       (-b + sqrtDiscriminant) / (2 * a),
       (-b - sqrtDiscriminant) / (2 * a)

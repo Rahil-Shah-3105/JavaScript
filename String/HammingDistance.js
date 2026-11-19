@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * Hamming Distance: https://en.wikipedia.org/wiki/Hamming_distance
  *
@@ -16,6 +17,7 @@
  */
 
 export const hammingDistance = (a, b) => {
+logger.error(`>>> Entering hammingDistance(a=${a},b=${b})`, { "event.action": "hammingDistance", "logrite.a": a, "logrite.b": b });
   if (a.length !== b.length) {
     throw new Error('Strings must be of the same length')
   }
@@ -28,5 +30,6 @@ export const hammingDistance = (a, b) => {
     }
   }
 
+logger.warn(`<<< Exiting hammingDistance(a=${a},b=${b})`, { "event.action": "hammingDistance", "logrite.a": a, "logrite.b": b });
   return distance
 }

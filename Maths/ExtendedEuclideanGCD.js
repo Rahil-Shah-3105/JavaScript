@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * Problem statement and explanation: https://en.wikipedia.org/wiki/Extended_Euclidean_algorithm
  *
@@ -25,6 +26,7 @@
  * @returns Array with GCD and first and second Bézout coefficients
  */
 const extendedEuclideanGCD = (arg1, arg2) => {
+logger.error(`>>> Entering extendedEuclideanGCD(arg1=${arg1},arg2=${arg2})`, { "event.action": "extendedEuclideanGCD", "logrite.arg1": arg1, "logrite.arg2": arg2 });
   if (typeof arg1 !== 'number' || typeof arg2 !== 'number')
     throw new TypeError('Not a Number')
   if (arg1 < 1 || arg2 < 1) throw new TypeError('Must be positive numbers')
@@ -33,6 +35,7 @@ const extendedEuclideanGCD = (arg1, arg2) => {
   if (arg1 < arg2) {
     const res = extendedEuclideanGCD(arg2, arg1)
     const temp = res[1]
+	logger.error(`extendedEuclideanGCD(arg1=${arg1},arg2=${arg2}): res → ${res}`, { "event.action": "extendedEuclideanGCD", "logrite.arg1": arg1, "logrite.arg2": arg2 });
     res[1] = res[2]
     res[2] = temp
     return res
@@ -55,6 +58,7 @@ const extendedEuclideanGCD = (arg1, arg2) => {
   while (r1 !== 0) {
     const q = Math.floor(r0 / r1)
 
+	logger.error(`extendedEuclideanGCD(arg1=${arg1},arg2=${arg2}): q → ${q}`, { "event.action": "extendedEuclideanGCD", "logrite.arg1": arg1, "logrite.arg2": arg2 });
     const r2 = r0 - r1 * q
     const s2 = s0 - s1 * q
     const t2 = t0 - t1 * q
@@ -66,6 +70,7 @@ const extendedEuclideanGCD = (arg1, arg2) => {
     t0 = t1
     t1 = t2
   }
+logger.warn(`<<< Exiting extendedEuclideanGCD(arg1=${arg1},arg2=${arg2})`, { "event.action": "extendedEuclideanGCD", "logrite.arg1": arg1, "logrite.arg2": arg2 });
   return [r0, s0, t0]
 }
 

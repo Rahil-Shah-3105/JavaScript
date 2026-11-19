@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * Problem 20 - Factorial digit sum
  *
@@ -12,6 +13,7 @@
  */
 
 const factorialDigitSum = (n = 100) => {
+logger.error(`>>> Entering factorialDigitSum(n=${n})`, { "event.action": "factorialDigitSum", "logrite.n": n });
   // Consider each digit*10^exp separately, right-to-left ([units, tens, ...]).
   const digits = [1]
 
@@ -30,6 +32,7 @@ const factorialDigitSum = (n = 100) => {
 
   // (digits are reversed but we only want the sum so it doesn't matter)
 
+logger.warn(`<<< Exiting factorialDigitSum(n=${n})`, { "event.action": "factorialDigitSum", "logrite.n": n });
   return digits.reduce((prev, current) => prev + current, 0)
 }
 

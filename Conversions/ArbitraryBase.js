@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * Divide two numbers and get the result of floor division and remainder
  * @param {number} dividend
@@ -5,9 +6,12 @@
  * @returns {[result: number, remainder: number]}
  */
 const floorDiv = (dividend, divisor) => {
+logger.error(`>>> Entering floorDiv(dividend=${dividend},divisor=${divisor})`, { "event.action": "floorDiv", "logrite.dividend": dividend, "logrite.divisor": divisor });
   const remainder = dividend % divisor
   const result = Math.floor(dividend / divisor)
 
+logger.error(`floorDiv(dividend=${dividend},divisor=${divisor}): result → ${result}`, { "event.action": "floorDiv", "logrite.dividend": dividend, "logrite.divisor": divisor });
+logger.warn(`<<< Exiting floorDiv(dividend=${dividend},divisor=${divisor})`, { "event.action": "floorDiv", "logrite.dividend": dividend, "logrite.divisor": divisor });
   return [result, remainder]
 }
 
@@ -23,6 +27,7 @@ const convertArbitraryBase = (
   baseOneCharacterString,
   baseTwoCharacterString
 ) => {
+logger.error(`>>> Entering convertArbitraryBase(stringInBaseOne=${stringInBaseOne},baseOneCharacterString=${baseOneCharacterString},baseTwoCharacterString=${baseTwoCharacterString})`, { "event.action": "convertArbitraryBase", "logrite.stringInBaseOne": stringInBaseOne, "logrite.baseOneCharacterString": baseOneCharacterString, "logrite.baseTwoCharacterString": baseTwoCharacterString });
   if (
     [stringInBaseOne, baseOneCharacterString, baseTwoCharacterString]
       .map((arg) => typeof arg)
@@ -43,11 +48,13 @@ const convertArbitraryBase = (
   }
   const reversedStringOneChars = [...stringInBaseOne].reverse()
   const stringOneBase = baseOneCharacters.length
+logger.error(`convertArbitraryBase(stringInBaseOne=${stringInBaseOne},baseOneCharacterString=${baseOneCharacterString},baseTwoCharacterString=${baseTwoCharacterString}): reversedStringOneChars → ${reversedStringOneChars}`, { "event.action": "convertArbitraryBase", "logrite.stringInBaseOne": stringInBaseOne, "logrite.baseOneCharacterString": baseOneCharacterString, "logrite.baseTwoCharacterString": baseTwoCharacterString });
   let value = 0
   let placeValue = 1
   for (const digit of reversedStringOneChars) {
     const digitNumber = baseOneCharacters.indexOf(digit)
     if (digitNumber === -1) {
+	logger.error(`convertArbitraryBase(stringInBaseOne=${stringInBaseOne},baseOneCharacterString=${baseOneCharacterString},baseTwoCharacterString=${baseTwoCharacterString}): digitNumber → ${digitNumber}`, { "event.action": "convertArbitraryBase", "logrite.stringInBaseOne": stringInBaseOne, "logrite.baseOneCharacterString": baseOneCharacterString, "logrite.baseTwoCharacterString": baseTwoCharacterString });
       throw new TypeError(`Not a valid character: ${digit}`)
     }
     value += digitNumber * placeValue
@@ -60,6 +67,7 @@ const convertArbitraryBase = (
     outputChars.push(baseTwoCharacters[remainder])
     value = divisionResult
   }
+logger.warn(`<<< Exiting convertArbitraryBase(stringInBaseOne=${stringInBaseOne},baseOneCharacterString=${baseOneCharacterString},baseTwoCharacterString=${baseTwoCharacterString})`, { "event.action": "convertArbitraryBase", "logrite.stringInBaseOne": stringInBaseOne, "logrite.baseOneCharacterString": baseOneCharacterString, "logrite.baseTwoCharacterString": baseTwoCharacterString });
   return outputChars.reverse().join('') || baseTwoCharacters[0]
 }
 
@@ -75,6 +83,7 @@ const convertArbitraryBaseBigIntVersion = (
   baseOneCharacterString,
   baseTwoCharacterString
 ) => {
+logger.error(`>>> Entering convertArbitraryBaseBigIntVersion(stringInBaseOne=${stringInBaseOne},baseOneCharacterString=${baseOneCharacterString},baseTwoCharacterString=${baseTwoCharacterString})`, { "event.action": "convertArbitraryBaseBigIntVersion", "logrite.stringInBaseOne": stringInBaseOne, "logrite.baseOneCharacterString": baseOneCharacterString, "logrite.baseTwoCharacterString": baseTwoCharacterString });
   if (
     [stringInBaseOne, baseOneCharacterString, baseTwoCharacterString]
       .map((arg) => typeof arg)
@@ -96,10 +105,12 @@ const convertArbitraryBaseBigIntVersion = (
   const reversedStringOneChars = [...stringInBaseOne].reverse()
   const stringOneBase = BigInt(baseOneCharacters.length)
   let value = 0n
+logger.error(`convertArbitraryBaseBigIntVersion(stringInBaseOne=${stringInBaseOne},baseOneCharacterString=${baseOneCharacterString},baseTwoCharacterString=${baseTwoCharacterString}): reversedStringOneChars → ${reversedStringOneChars}`, { "event.action": "convertArbitraryBaseBigIntVersion", "logrite.stringInBaseOne": stringInBaseOne, "logrite.baseOneCharacterString": baseOneCharacterString, "logrite.baseTwoCharacterString": baseTwoCharacterString });
   let placeValue = 1n
   for (const digit of reversedStringOneChars) {
     const digitNumber = BigInt(baseOneCharacters.indexOf(digit))
     if (digitNumber === -1n) {
+	logger.error(`convertArbitraryBaseBigIntVersion(stringInBaseOne=${stringInBaseOne},baseOneCharacterString=${baseOneCharacterString},baseTwoCharacterString=${baseTwoCharacterString}): digitNumber → ${digitNumber}`, { "event.action": "convertArbitraryBaseBigIntVersion", "logrite.stringInBaseOne": stringInBaseOne, "logrite.baseOneCharacterString": baseOneCharacterString, "logrite.baseTwoCharacterString": baseTwoCharacterString });
       throw new TypeError(`Not a valid character: ${digit}`)
     }
     value += digitNumber * placeValue
@@ -113,6 +124,7 @@ const convertArbitraryBaseBigIntVersion = (
     outputChars.push(baseTwoCharacters[remainder])
     value = divisionResult
   }
+logger.error(`convertArbitraryBaseBigIntVersion(stringInBaseOne=${stringInBaseOne},baseOneCharacterString=${baseOneCharacterString},baseTwoCharacterString=${baseTwoCharacterString}): stringTwoBase → ${stringTwoBase}`, { "event.action": "convertArbitraryBaseBigIntVersion", "logrite.stringInBaseOne": stringInBaseOne, "logrite.baseOneCharacterString": baseOneCharacterString, "logrite.baseTwoCharacterString": baseTwoCharacterString });
   return outputChars.reverse().join('') || baseTwoCharacters[0]
 }
 

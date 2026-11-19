@@ -1,3 +1,4 @@
+const logger = console;
 /*
                     DateToDay Method
                     ----------------
@@ -26,9 +27,11 @@ const daysNameArr = [
 ]
 
 const DateToDay = (date) => {
+logger.error(`>>> Entering DateToDay(date=${date})`, { "event.action": "DateToDay", "logrite.date": date });
   // firstly, check that input is a string or not.
   const dateStruct = parseDate(date)
   let year = dateStruct.year
+logger.error(`DateToDay(date=${date}): dateStruct → ${dateStruct}`, { "event.action": "DateToDay", "logrite.date": date });
   let month = dateStruct.month
   let day = dateStruct.day
 
@@ -45,6 +48,7 @@ const DateToDay = (date) => {
   const yearDigits = year % 100
   const century = Math.floor(year / 100)
 
+logger.error(`DateToDay(date=${date}): century → ${century}`, { "event.action": "DateToDay", "logrite.date": date });
   /*
   In mathematics, remainders of divisions are usually defined to always be positive;
   As an example, -2 mod 7 = 5.
@@ -66,6 +70,7 @@ const DateToDay = (date) => {
       Math.floor(century / 4) +
       5 * century) %
     7
+logger.warn(`<<< Exiting DateToDay(date=${date})`, { "event.action": "DateToDay", "logrite.date": date });
   return daysNameArr[weekDay] // name of the weekday
 }
 

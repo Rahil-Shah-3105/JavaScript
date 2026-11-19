@@ -1,3 +1,4 @@
+const logger = console;
 /*
  * Unique Paths 2
  *
@@ -22,6 +23,7 @@
  * @returns {Array [][]}
  */
 const generateMatrix = (rows, columns, filler = 0) => {
+logger.error(`>>> Entering generateMatrix(rows=${rows},columns=${columns},filler=${filler})`, { "event.action": "generateMatrix", "logrite.rows": rows, "logrite.columns": columns, "logrite.filler": filler });
   const matrix = []
   for (let i = 0; i < rows; i++) {
     const submatrix = []
@@ -30,6 +32,7 @@ const generateMatrix = (rows, columns, filler = 0) => {
     }
     matrix[i] = submatrix
   }
+logger.warn(`<<< Exiting generateMatrix(rows=${rows},columns=${columns},filler=${filler})`, { "event.action": "generateMatrix", "logrite.rows": rows, "logrite.columns": columns, "logrite.filler": filler });
   return matrix
 }
 
@@ -39,6 +42,7 @@ const generateMatrix = (rows, columns, filler = 0) => {
  * @returns {Number}
  */
 const uniquePaths2 = (obstacles) => {
+logger.error(`>>> Entering uniquePaths2(obstacles=${obstacles})`, { "event.action": "uniquePaths2", "logrite.obstacles": obstacles });
   if (!Array.isArray(obstacles)) {
     throw new Error('Input data must be type of Array')
   }
@@ -47,6 +51,7 @@ const uniquePaths2 = (obstacles) => {
   const columns = obstacles[0].length
   const grid = generateMatrix(rows, columns)
   // Fill the outermost cell with 1 b/c it has
+logger.error(`uniquePaths2(obstacles=${obstacles}): grid → ${grid}`, { "event.action": "uniquePaths2", "logrite.obstacles": obstacles });
   // the only way to reach neighbor
   for (let i = 0; i < rows; i++) {
     // If robot encounters an obstacle in these cells,
@@ -70,6 +75,7 @@ const uniquePaths2 = (obstacles) => {
       grid[i][j] = obstacles[i][j] ? 0 : grid[i - 1][j] + grid[i][j - 1]
     }
   }
+logger.warn(`<<< Exiting uniquePaths2(obstacles=${obstacles})`, { "event.action": "uniquePaths2", "logrite.obstacles": obstacles });
   return grid[rows - 1][columns - 1]
 }
 

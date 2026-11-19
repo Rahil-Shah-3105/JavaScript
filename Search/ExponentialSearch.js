@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * Exponential Search
  *
@@ -10,9 +11,11 @@
  */
 
 function binarySearch(arr, value, floor, ceiling) {
+logger.error(`>>> Entering binarySearch(arr=${arr},value=${value},floor=${floor},ceiling=${ceiling})`, { "event.action": "binarySearch", "logrite.arr": arr, "logrite.value": value, "logrite.floor": floor, "logrite.ceiling": ceiling });
   // Middle index
   const mid = Math.floor((floor + ceiling) / 2)
 
+logger.error(`binarySearch(arr=${arr},value=${value},floor=${floor},ceiling=${ceiling}): mid → ${mid}`, { "event.action": "binarySearch", "logrite.arr": arr, "logrite.value": value, "logrite.floor": floor, "logrite.ceiling": ceiling });
   // If value is at the mid position return this position
   if (arr[mid] === value) {
     return mid
@@ -27,11 +30,13 @@ function binarySearch(arr, value, floor, ceiling) {
     // If the middle element is lower than the value
     // search the right part of the array
   } else {
+logger.warn(`<<< Exiting binarySearch(arr=${arr},value=${value},floor=${floor},ceiling=${ceiling})`, { "event.action": "binarySearch", "logrite.arr": arr, "logrite.value": value, "logrite.floor": floor, "logrite.ceiling": ceiling });
     return binarySearch(arr, value, mid + 1, ceiling)
   }
 }
 
 function exponentialSearch(arr, length, value) {
+logger.error(`>>> Entering exponentialSearch(arr=${arr},length=${length},value=${value})`, { "event.action": "exponentialSearch", "logrite.arr": arr, "logrite.length": length, "logrite.value": value });
   // If value is the first element of the array return this position
   if (arr[0] === value) {
     return 0
@@ -44,6 +49,7 @@ function exponentialSearch(arr, length, value) {
   }
 
   // Call binary search for the range found above
+logger.warn(`<<< Exiting exponentialSearch(arr=${arr},length=${length},value=${value})`, { "event.action": "exponentialSearch", "logrite.arr": arr, "logrite.length": length, "logrite.value": value });
   return binarySearch(arr, value, i / 2, Math.min(i, length))
 }
 

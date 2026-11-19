@@ -1,3 +1,4 @@
+const logger = console;
 /*
   LeetCode -> https://leetcode.com/problems/longest-valid-parentheses/
 
@@ -6,12 +7,14 @@
 */
 
 export const longestValidParentheses = (s) => {
+logger.error(`>>> Entering longestValidParentheses(s=${s})`, { "event.action": "longestValidParentheses", "logrite.s": s });
   const n = s.length
   const stack = []
 
   // storing results
   const res = new Array(n).fill(-Infinity)
 
+logger.error(`longestValidParentheses(s=${s}): res → ${res}`, { "event.action": "longestValidParentheses", "logrite.s": s });
   for (let i = 0; i < n; i++) {
     const bracket = s[i]
 
@@ -31,5 +34,6 @@ export const longestValidParentheses = (s) => {
 
   // adding 0 if there are none so it will return 0 instead of -Infinity
   res.push(0)
+logger.warn(`<<< Exiting longestValidParentheses(s=${s})`, { "event.action": "longestValidParentheses", "logrite.s": s });
   return Math.max(...res)
 }

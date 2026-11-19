@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * @author mrmagic2020
  * @description Enciphers a combination of letters, numbers and symbols into morse code.
@@ -9,6 +10,7 @@
  * @example morse('Hello World!') = '**** * *-** *-** ---   *-- --- *-* *-** -** -*-*--'
  */
 const morse = (msg, dot = '*', dash = '-') => {
+logger.error(`>>> Entering morse(msg=${msg},dot=${dot},dash=${dash})`, { "event.action": "morse", "logrite.msg": msg, "logrite.dot": dot, "logrite.dash": dash });
   const key = {
     A: '*-',
     B: '-***',
@@ -66,7 +68,9 @@ const morse = (msg, dot = '*', dash = '-') => {
     '@': '*--*-*'
   }
 
+logger.error(`morse(msg=${msg},dot=${dot},dash=${dash}): key → ${key}`, { "event.action": "morse", "logrite.msg": msg, "logrite.dot": dot, "logrite.dash": dash });
   let newMsg = ''
+logger.error(`morse(msg=${msg},dot=${dot},dash=${dash}): newMsg → ${newMsg}`, { "event.action": "morse", "logrite.msg": msg, "logrite.dot": dot, "logrite.dash": dash });
 
   msg
     .toString()
@@ -84,6 +88,7 @@ const morse = (msg, dot = '*', dash = '-') => {
       newMsg += ' '
     })
 
+logger.warn(`<<< Exiting morse(msg=${msg},dot=${dot},dash=${dash})`, { "event.action": "morse", "logrite.msg": msg, "logrite.dot": dot, "logrite.dash": dash });
   return newMsg.trim()
 }
 

@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * Author: dephraiim
  * License: GPL-3.0 or later
@@ -9,12 +10,14 @@
  */
 
 const armstrongNumber = (num) => {
+logger.error(`>>> Entering armstrongNumber(num=${num})`, { "event.action": "armstrongNumber", "logrite.num": num });
   if (typeof num !== 'number' || num < 0) return false
   const numStr = num.toString()
   const sum = [...numStr].reduce(
     (acc, digit) => acc + parseInt(digit) ** numStr.length,
     0
   )
+logger.error(`armstrongNumber(num=${num}): numStr → ${numStr}`, { "event.action": "armstrongNumber", "logrite.num": num });
   return sum === num
 }
 

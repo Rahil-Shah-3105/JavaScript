@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * Problem 19 - Counting Sundays
  *
@@ -19,6 +20,7 @@
 import { isLeapYear } from '../Maths/LeapYear'
 
 function problem19() {
+logger.error('>>> Entering problem19()', { "event.action": "problem19" });
   let sundaysCount = 0 // Count of Sundays
   let dayOfWeek = 2 // 1st Jan 1900 was a Monday, so 1st Jan 1901 was a Tuesday
 
@@ -42,6 +44,7 @@ function problem19() {
     }
   }
 
+logger.warn('<<< Exiting problem19()', { "event.action": "problem19" });
   return sundaysCount
 }
 

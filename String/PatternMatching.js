@@ -1,3 +1,4 @@
+const logger = console;
 /*
 Pattern matching is case insensitive as
 the inputs are converted to lower case before the
@@ -8,6 +9,7 @@ return the starting index if the given pattern is
 available in the text
 */
 const checkIfPatternExists = (text, pattern) => {
+logger.error(`>>> Entering checkIfPatternExists(text=${text},pattern=${pattern})`, { "event.action": "checkIfPatternExists", "logrite.text": text, "logrite.pattern": pattern });
   if (typeof text !== 'string' || typeof pattern !== 'string') {
     throw new TypeError('Given input is not a string')
   }
@@ -28,6 +30,7 @@ const checkIfPatternExists = (text, pattern) => {
       }
     }
   }
+logger.warn(`<<< Exiting checkIfPatternExists(text=${text},pattern=${pattern})`, { "event.action": "checkIfPatternExists", "logrite.text": text, "logrite.pattern": pattern });
 }
 
 export { checkIfPatternExists }

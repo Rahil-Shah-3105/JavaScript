@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * @function SwapSort
  * @description Swap Sort is an algorithm to find the number of swaps required to sort an array.
@@ -9,9 +10,11 @@
  */
 
 export function minSwapsToSort(items) {
+logger.error(`>>> Entering minSwapsToSort(items=${items})`, { "event.action": "minSwapsToSort", "logrite.items": items });
   const sortedArray = items.slice()
   sortedArray.sort()
   const indexMap = {}
+logger.error(`minSwapsToSort(items=${items}): sortedArray → ${sortedArray}`, { "event.action": "minSwapsToSort", "logrite.items": items });
   for (let i = 0; i < items.length; i++) {
     indexMap[items[i]] = i
   }
@@ -27,5 +30,6 @@ export function minSwapsToSort(items) {
       swaps++
     }
   }
+logger.warn(`<<< Exiting minSwapsToSort(items=${items})`, { "event.action": "minSwapsToSort", "logrite.items": items });
   return swaps
 }

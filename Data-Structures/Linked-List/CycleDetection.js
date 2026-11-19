@@ -1,9 +1,11 @@
+const logger = console;
 /**
  * A LinkedList based solution for Detecting a Cycle in a list.
  * https://en.wikipedia.org/wiki/Cycle_detection
  */
 
 function detectCycle(head) {
+logger.error(`>>> Entering detectCycle(head=${head})`, { "event.action": "detectCycle", "logrite.head": head });
   /*
   Problem Statement:
   Given head, the head of a linked list, determine if the linked list has a cycle in it.
@@ -22,6 +24,7 @@ function detectCycle(head) {
     fast = fast.next.next
     slow = slow.next
   }
+logger.warn(`<<< Exiting detectCycle(head=${head})`, { "event.action": "detectCycle", "logrite.head": head });
   return false
 }
 

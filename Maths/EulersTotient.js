@@ -1,3 +1,4 @@
+const logger = console;
 /*
   Source:
     https://en.wikipedia.org/wiki/Euler%27s_totient_function
@@ -9,6 +10,7 @@
 */
 
 export const EulersTotient = (n) => {
+logger.error(`>>> Entering EulersTotient(n=${n})`, { "event.action": "EulersTotient", "logrite.n": n });
   // input: n: int
   // output: phi(n): count of numbers b/w 1 and n that are coprime to n
   let res = n
@@ -25,5 +27,6 @@ export const EulersTotient = (n) => {
   if (n > 1) {
     res = res - Math.floor(res / n)
   }
+logger.warn(`<<< Exiting EulersTotient(n=${n})`, { "event.action": "EulersTotient", "logrite.n": n });
   return res
 }

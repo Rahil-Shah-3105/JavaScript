@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * @function squareRootLogarithmic
  * @description
@@ -16,6 +17,7 @@
  *
  */
 const squareRootLogarithmic = (num) => {
+logger.error(`>>> Entering squareRootLogarithmic(num=${num})`, { "event.action": "squareRootLogarithmic", "logrite.num": num });
   if (typeof num !== 'number') {
     throw new Error('Input data must be numbers')
   }
@@ -26,6 +28,7 @@ const squareRootLogarithmic = (num) => {
   while (sqrt <= edge) {
     const mid = Math.trunc((sqrt + edge) / 2)
     if (mid * mid === num) {
+	logger.error(`squareRootLogarithmic(num=${num}): mid → ${mid}`, { "event.action": "squareRootLogarithmic", "logrite.num": num });
       return mid
     } else if (mid * mid < num) {
       sqrt = mid + 1
@@ -35,6 +38,7 @@ const squareRootLogarithmic = (num) => {
     }
   }
 
+logger.warn(`<<< Exiting squareRootLogarithmic(num=${num})`, { "event.action": "squareRootLogarithmic", "logrite.num": num });
   return answer
 }
 

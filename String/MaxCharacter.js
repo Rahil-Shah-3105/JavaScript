@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * @function maxCharacter
  * @example - Given a string of characters, return the character that appears the most often. Example: input = "Hello World!" return "l"
@@ -6,6 +7,7 @@
  * @returns {string} - char
  */
 const maxCharacter = (str, ignorePattern) => {
+logger.error(`>>> Entering maxCharacter(str=${str},ignorePattern=${ignorePattern})`, { "event.action": "maxCharacter", "logrite.str": str, "logrite.ignorePattern": ignorePattern });
   // initially it's count only alphabets
   if (typeof str !== 'string') {
     throw new TypeError('Argument should be a string')
@@ -16,6 +18,7 @@ const maxCharacter = (str, ignorePattern) => {
   // store all char in occurrence map
   const occurrenceMap = new Map()
 
+logger.error(`maxCharacter(str=${str},ignorePattern=${ignorePattern}): occurrenceMap → ${occurrenceMap}`, { "event.action": "maxCharacter", "logrite.str": str, "logrite.ignorePattern": ignorePattern });
   for (const char of str) {
     if (!ignorePattern?.test(char)) {
       occurrenceMap.set(char, occurrenceMap.get(char) + 1 || 1)
@@ -24,6 +27,7 @@ const maxCharacter = (str, ignorePattern) => {
 
   // find the max char from the occurrence map
   let max = { char: '', occur: -Infinity }
+logger.error(`maxCharacter(str=${str},ignorePattern=${ignorePattern}): max → ${max}`, { "event.action": "maxCharacter", "logrite.str": str, "logrite.ignorePattern": ignorePattern });
 
   for (const [char, occur] of occurrenceMap) {
     if (occur > max.occur) {
@@ -31,6 +35,7 @@ const maxCharacter = (str, ignorePattern) => {
     }
   }
 
+logger.warn(`<<< Exiting maxCharacter(str=${str},ignorePattern=${ignorePattern})`, { "event.action": "maxCharacter", "logrite.str": str, "logrite.ignorePattern": ignorePattern });
   return max.char
 }
 

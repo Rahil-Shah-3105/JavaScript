@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * A LinkedList based solution for finding the starting node of the cycle in a list.
  * @returns the node where cycle begins in the linked list. If there is no cycle present, returns null.
@@ -6,6 +7,7 @@
  */
 
 function findCycleStart(head) {
+logger.error(`>>> Entering findCycleStart(head=${head})`, { "event.action": "findCycleStart", "logrite.head": head });
   let length = 0
   let fast = head
   let slow = head
@@ -39,11 +41,13 @@ function findCycleStart(head) {
   }
 
   // return the meeting node
+logger.warn(`<<< Exiting findCycleStart(head=${head})`, { "event.action": "findCycleStart", "logrite.head": head });
   return ahead
 }
 
 // head is a node on a cycle
 function cycleLength(head) {
+logger.error(`>>> Entering cycleLength(head=${head})`, { "event.action": "cycleLength", "logrite.head": head });
   // How long until we visit head again?
   let cur = head
   let len = 0

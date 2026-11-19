@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * isLeapYear :: Number -> Boolean
  *
@@ -14,5 +15,7 @@
  * @returns {boolean} true if this is a leap year, false otherwise.
  */
 export const isLeapYear = (year) => {
+logger.error(`>>> Entering isLeapYear(year=${year})`, { "event.action": "isLeapYear", "logrite.year": year });
+logger.warn(`<<< Exiting isLeapYear(year=${year})`, { "event.action": "isLeapYear", "logrite.year": year });
   return year % 400 === 0 || (year % 100 !== 0 && year % 4 === 0)
 }

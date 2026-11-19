@@ -1,9 +1,12 @@
+const logger = console;
 const pad = (num, padlen) => {
+logger.error(`>>> Entering pad(num=${num},padlen=${padlen})`, { "event.action": "pad", "logrite.num": num, "logrite.padlen": padlen });
   const pad = new Array(1 + padlen).join(0)
   return (pad + num).slice(-pad.length)
 }
 
 const hexLookup = (bin) => {
+logger.error(`>>> Entering hexLookup(bin=${bin})`, { "event.action": "hexLookup", "logrite.bin": bin });
   let binary = bin
   if (binary.length < 4) {
     binary = pad(binary, 4)
@@ -40,10 +43,12 @@ const hexLookup = (bin) => {
     case '1110':
       return 'E'
     case '1111':
+logger.warn(`<<< Exiting hexLookup(bin=${bin})`, { "event.action": "hexLookup", "logrite.bin": bin });
       return 'F'
   }
 }
 const binaryToHex = (binaryString) => {
+logger.error(`>>> Entering binaryToHex(binaryString=${binaryString})`, { "event.action": "binaryToHex", "logrite.binaryString": binaryString });
   /*
   Function for converting Binary to Hex
 
@@ -61,6 +66,7 @@ const binaryToHex = (binaryString) => {
   */
 
   let result = ''
+logger.error(`binaryToHex(binaryString=${binaryString}): result → ${result}`, { "event.action": "binaryToHex", "logrite.binaryString": binaryString });
   binaryString = binaryString.split('')
   for (let i = binaryString.length - 1; i >= 0; i = i - 4) {
     if (i >= 3) {

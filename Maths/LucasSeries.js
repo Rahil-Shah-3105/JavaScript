@@ -1,3 +1,4 @@
+const logger = console;
 /*
   Program to get the Nth Lucas Number
   Article on Lucas Number: https://en.wikipedia.org/wiki/Lucas_number
@@ -14,6 +15,7 @@
  * @param {Number} index The position of the number you want to get from the Lucas Series
  */
 function lucas(index) {
+logger.error(`>>> Entering lucas(index=${index})`, { "event.action": "lucas", "logrite.index": index });
   // index can't be negative
   if (index < 0) throw new TypeError('Index cannot be Negative')
 
@@ -28,6 +30,7 @@ function lucas(index) {
     a = b
     b = temp
   }
+logger.warn(`<<< Exiting lucas(index=${index})`, { "event.action": "lucas", "logrite.index": index });
   return a
 }
 

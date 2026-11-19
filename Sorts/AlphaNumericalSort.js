@@ -1,3 +1,4 @@
+const logger = console;
 /*
   https://en.wikipedia.org/wiki/Natural_sort_order
 
@@ -21,6 +22,7 @@
 */
 
 const alphaNumericalSort = (a, b) => {
+logger.error(`>>> Entering alphaNumericalSort(a=${a},b=${b})`, { "event.action": "alphaNumericalSort", "logrite.a": a, "logrite.b": b });
   /*
     https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare
 
@@ -32,6 +34,7 @@ const alphaNumericalSort = (a, b) => {
     localeCompare(compareString, locales, options)
 
   */
+logger.warn(`<<< Exiting alphaNumericalSort(a=${a},b=${b})`, { "event.action": "alphaNumericalSort", "logrite.a": a, "logrite.b": b });
   return a.localeCompare(b, undefined, { numeric: true })
 }
 

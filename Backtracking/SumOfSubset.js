@@ -1,3 +1,4 @@
+const logger = console;
 /*
  *
  *  Sum of Subset problem
@@ -18,6 +19,7 @@
  * @returns {number[][]} Subsets whose elements add up to targetSum
  */
 const sumOfSubset = (set, subset, setindex, sum, targetSum) => {
+logger.error(`>>> Entering sumOfSubset(set=${set},subset=${subset},setindex=${setindex},sum=${sum},targetSum=${targetSum})`, { "event.action": "sumOfSubset", "logrite.set": set, "logrite.subset": subset, "logrite.setindex": setindex, "logrite.sum": sum, "logrite.targetSum": targetSum });
   // Base case where the subset sum is equal to target sum
   // Evaluation of following subsets on this path will always add up to
   // greater than targetSum, so no need to continue
@@ -29,6 +31,7 @@ const sumOfSubset = (set, subset, setindex, sum, targetSum) => {
 
   // Initialize results array. Will contain only valid subsets
   let results = []
+logger.error(`sumOfSubset(set=${set},subset=${subset},setindex=${setindex},sum=${sum},targetSum=${targetSum}): results → ${results}`, { "event.action": "sumOfSubset", "logrite.set": set, "logrite.subset": subset, "logrite.setindex": setindex, "logrite.sum": sum, "logrite.targetSum": targetSum });
 
   // Slice gets from the set all the elements at the right of the last element
   // to be evaluated (last element of subset)
@@ -58,6 +61,7 @@ const sumOfSubset = (set, subset, setindex, sum, targetSum) => {
   })
 
   // Return results
+logger.warn(`<<< Exiting sumOfSubset(set=${set},subset=${subset},setindex=${setindex},sum=${sum},targetSum=${targetSum})`, { "event.action": "sumOfSubset", "logrite.set": set, "logrite.subset": subset, "logrite.setindex": setindex, "logrite.sum": sum, "logrite.targetSum": targetSum });
   return results
 }
 

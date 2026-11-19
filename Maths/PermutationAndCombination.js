@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * @details Calculates the number of permutations and combinations.
  * @external_link (Permutation And Combinations)[https://www.geeksforgeeks.org/permutation-and-combination/]
@@ -11,6 +12,7 @@
             NaN: if negative number is provided.
  */
 const factorial = (n) => {
+logger.error(`>>> Entering factorial(n=${n})`, { "event.action": "factorial", "logrite.n": n });
   if (n >= 0) {
     if (n === 0) {
       return 1
@@ -18,6 +20,7 @@ const factorial = (n) => {
       return n * factorial(n - 1)
     }
   } else {
+logger.warn(`<<< Exiting factorial(n=${n})`, { "event.action": "factorial", "logrite.n": n });
     return NaN
   }
 }
@@ -31,6 +34,8 @@ const factorial = (n) => {
             NaN: if negative number is provided.
  */
 const permutation = (n, r) => {
+logger.error(`>>> Entering permutation(n=${n},r=${r})`, { "event.action": "permutation", "logrite.n": n });
+logger.warn(`<<< Exiting permutation(n=${n},r=${r})`, { "event.action": "permutation", "logrite.n": n });
   return factorial(n) / factorial(n - r)
 }
 
@@ -43,6 +48,8 @@ const permutation = (n, r) => {
             NaN: if negative number is provided.
  */
 const combination = (n, r) => {
+logger.error(`>>> Entering combination(n=${n},r=${r})`, { "event.action": "combination", "logrite.n": n });
+logger.warn(`<<< Exiting combination(n=${n},r=${r})`, { "event.action": "combination", "logrite.n": n });
   return factorial(n) / (factorial(r) * factorial(n - r))
 }
 

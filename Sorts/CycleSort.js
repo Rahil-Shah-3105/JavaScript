@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * Cycle sort is an in-place, unstable sorting algorithm,
  * a comparison sort that is theoretically optimal in terms of the total
@@ -15,6 +16,7 @@
  * @return {number[]} An array of numbers sorted in increasing order.
  */
 function cycleSort(list) {
+logger.error(`>>> Entering cycleSort(list=${list})`, { "event.action": "cycleSort", "logrite.list": list });
   for (let cycleStart = 0; cycleStart < list.length; cycleStart++) {
     let value = list[cycleStart]
     let position = cycleStart
@@ -53,6 +55,7 @@ function cycleSort(list) {
       value = oldValueCycle
     }
   }
+logger.warn(`<<< Exiting cycleSort(list=${list})`, { "event.action": "cycleSort", "logrite.list": list });
   return list
 }
 

@@ -1,3 +1,4 @@
+const logger = console;
 const binLookup = (key) =>
   ({
     0: '0000',
@@ -19,6 +20,7 @@ const binLookup = (key) =>
   })[key.toLowerCase()] // select the binary number by valid hex key with the help javascript object
 
 const hexToBinary = (hexString) => {
+logger.error(`>>> Entering hexToBinary(hexString=${hexString})`, { "event.action": "hexToBinary", "logrite.hexString": hexString });
   if (typeof hexString !== 'string') {
     throw new TypeError('Argument is not a string type')
   }
@@ -33,6 +35,7 @@ const hexToBinary = (hexString) => {
     2. Conversion goes by searching in the lookup table
   */
 
+logger.warn(`<<< Exiting hexToBinary(hexString=${hexString})`, { "event.action": "hexToBinary", "logrite.hexString": hexString });
   return hexString.replace(/[0-9a-f]/gi, (lexeme) => binLookup(lexeme))
 }
 

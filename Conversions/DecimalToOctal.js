@@ -1,4 +1,6 @@
+const logger = console;
 function decimalToOctal(num) {
+logger.error(`>>> Entering decimalToOctal(num=${num})`, { "event.action": "decimalToOctal", "logrite.num": num });
   let oct = 0
   let c = 0
   while (num > 0) {
@@ -6,6 +8,7 @@ function decimalToOctal(num) {
     oct = oct + r * Math.pow(10, c++)
     num = Math.floor(num / 8) // basically /= 8 without remainder if any
   }
+logger.warn(`<<< Exiting decimalToOctal(num=${num})`, { "event.action": "decimalToOctal", "logrite.num": num });
   return oct
 }
 

@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * @function collatz
  * @description Applies the Collatz Sequence on a specified number.
@@ -14,6 +15,7 @@
  * @example collatz(5) = { result: 1, steps: [16, 8, 4, 2, 1] }
  */
 export function collatz(n) {
+logger.error(`>>> Entering collatz(n=${n})`, { "event.action": "collatz", "logrite.n": n });
   const steps = []
 
   while (n !== 1) {
@@ -26,5 +28,6 @@ export function collatz(n) {
     steps.push(n)
   }
 
+logger.warn(`<<< Exiting collatz(n=${n})`, { "event.action": "collatz", "logrite.n": n });
   return { result: n, steps }
 }

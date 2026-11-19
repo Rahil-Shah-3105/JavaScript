@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * @function ClimbStairs
  * @description You are climbing a stair case. It takes n steps to reach to the top.Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
@@ -7,6 +8,7 @@
  */
 
 const climbStairs = (n) => {
+logger.error(`>>> Entering climbStairs(n=${n})`, { "event.action": "climbStairs", "logrite.n": n });
   let prev = 0
   let cur = 1
   let temp
@@ -16,6 +18,7 @@ const climbStairs = (n) => {
     prev = cur
     cur += temp
   }
+logger.warn(`<<< Exiting climbStairs(n=${n})`, { "event.action": "climbStairs", "logrite.n": n });
   return cur
 }
 

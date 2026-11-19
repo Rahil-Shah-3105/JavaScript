@@ -1,3 +1,4 @@
+const logger = console;
 /* The Levenshtein distance (a.k.a edit distance) is a
 measure of similarity between two strings. It is
 defined as the minimum number of changes required to
@@ -10,11 +11,13 @@ common problem in the application of Dynamic Programming.
 */
 
 const levenshteinDistance = (a, b) => {
+logger.error(`>>> Entering levenshteinDistance(a=${a},b=${b})`, { "event.action": "levenshteinDistance", "logrite.a": a, "logrite.b": b });
   // Declaring array 'D' with rows = len(a) + 1 and columns = len(b) + 1:
   const distanceMatrix = Array(b.length + 1)
     .fill(null)
     .map(() => Array(a.length + 1).fill(null))
 
+logger.error(`levenshteinDistance(a=${a},b=${b}): distanceMatrix → ${distanceMatrix}`, { "event.action": "levenshteinDistance", "logrite.a": a, "logrite.b": b });
   // Initializing first column:
   for (let i = 0; i <= a.length; i += 1) {
     distanceMatrix[0][i] = i
@@ -37,6 +40,7 @@ const levenshteinDistance = (a, b) => {
     }
   }
 
+logger.warn(`<<< Exiting levenshteinDistance(a=${a},b=${b})`, { "event.action": "levenshteinDistance", "logrite.a": a, "logrite.b": b });
   return distanceMatrix[b.length][a.length]
 }
 

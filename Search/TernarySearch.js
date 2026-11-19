@@ -1,3 +1,4 @@
+const logger = console;
 /* Ternary search is similar to binary search but it divides the sorted array
  * into three parts and determines which part the key lies in. The array will
  * be divided into three intervals by using two middle points, mid1 and mid2.
@@ -12,11 +13,13 @@
  */
 
 function ternarySearchRecursive(arr, key, low = 0, high = arr.length - 1) {
+logger.error(`>>> Entering ternarySearchRecursive(arr=${arr},key=${key},low=${low},high=${high})`, { "event.action": "ternarySearchRecursive", "logrite.arr": arr, "logrite.key": key, "logrite.low": low, "logrite.high": high });
   if (high >= low) {
     // find the mid1 and mid2
     const mid1 = Math.floor(low + (high - low) / 3)
     const mid2 = Math.floor(high - (high - low) / 3)
 
+	logger.error(`ternarySearchRecursive(arr=${arr},key=${key},low=${low},high=${high}): mid1 → ${mid1}`, { "event.action": "ternarySearchRecursive", "logrite.arr": arr, "logrite.key": key, "logrite.low": low, "logrite.high": high });
     // check if key is found at any mid
     if (arr[mid1] === key) {
       // return index of key if found
@@ -43,16 +46,19 @@ function ternarySearchRecursive(arr, key, low = 0, high = arr.length - 1) {
     }
   } else {
     // if low > high => we have searched the whole array without finding the item
+logger.warn(`<<< Exiting ternarySearchRecursive(arr=${arr},key=${key},low=${low},high=${high})`, { "event.action": "ternarySearchRecursive", "logrite.arr": arr, "logrite.key": key, "logrite.low": low, "logrite.high": high });
     return -1
   }
 }
 
 function ternarySearchIterative(arr, key, low = 0, high = arr.length - 1) {
+logger.error(`>>> Entering ternarySearchIterative(arr=${arr},key=${key},low=${low},high=${high})`, { "event.action": "ternarySearchIterative", "logrite.arr": arr, "logrite.key": key, "logrite.low": low, "logrite.high": high });
   while (high >= low) {
     // find the mid1 and mid2
     const mid1 = Math.floor(low + (high - low) / 3)
     const mid2 = Math.floor(high - (high - low) / 3)
 
+	logger.error(`ternarySearchIterative(arr=${arr},key=${key},low=${low},high=${high}): mid1 → ${mid1}`, { "event.action": "ternarySearchIterative", "logrite.arr": arr, "logrite.key": key, "logrite.low": low, "logrite.high": high });
     // check if key is found at any mid
     if (arr[mid1] === key) {
       // return index of key if found
@@ -80,6 +86,7 @@ function ternarySearchIterative(arr, key, low = 0, high = arr.length - 1) {
     }
   }
   // the key was not found
+logger.warn(`<<< Exiting ternarySearchIterative(arr=${arr},key=${key},low=${low},high=${high})`, { "event.action": "ternarySearchIterative", "logrite.arr": arr, "logrite.key": key, "logrite.low": low, "logrite.high": high });
   return -1
 }
 

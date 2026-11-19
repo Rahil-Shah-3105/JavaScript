@@ -1,6 +1,8 @@
+const logger = console;
 // Problem Statement => https://www.youtube.com/watch?v=lBRtnuxg-gU
 
 const minCostPath = (matrix) => {
+logger.error(`>>> Entering minCostPath(matrix=${matrix})`, { "event.action": "minCostPath", "logrite.matrix": matrix });
   /*
         Find the min cost path from top-left to bottom-right in matrix
         >>> minCostPath([[2, 1], [3, 1], [4, 2]])
@@ -25,6 +27,7 @@ const minCostPath = (matrix) => {
     }
   }
 
+logger.warn(`<<< Exiting minCostPath(matrix=${matrix})`, { "event.action": "minCostPath", "logrite.matrix": matrix });
   return moves[n - 1][m - 1]
 }
 

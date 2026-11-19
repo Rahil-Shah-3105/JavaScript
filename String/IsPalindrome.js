@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * @function isPalindromeIterative
  * @description isPalindromeIterative function checks whether the provided input is palindrome or not
@@ -17,6 +18,7 @@
 */
 
 export function isPalindromeIterative(x) {
+logger.error(`>>> Entering isPalindromeIterative(x=${x})`, { "event.action": "isPalindromeIterative", "logrite.x": x });
   if (typeof x !== 'string' && typeof x !== 'number') {
     throw new TypeError('Input must be a string or a number')
   }
@@ -24,6 +26,7 @@ export function isPalindromeIterative(x) {
   // Convert x to string whether it's number or string
   const string = x.toString()
   const length = string.length
+logger.error(`isPalindromeIterative(x=${x}): string → ${string}`, { "event.action": "isPalindromeIterative", "logrite.x": x });
 
   if (length === 1) return true
 
@@ -33,5 +36,6 @@ export function isPalindromeIterative(x) {
     if (string[start] !== string[end]) return false
   }
   // If early return in condition inside for loop is not reached, then input is palindrome
+logger.warn(`<<< Exiting isPalindromeIterative(x=${x})`, { "event.action": "isPalindromeIterative", "logrite.x": x });
   return true
 }

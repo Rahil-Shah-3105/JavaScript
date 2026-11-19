@@ -1,3 +1,4 @@
+const logger = console;
 /*
     Problem statement and Explanation : https://medium.com/@ManBearPigCode/how-to-reverse-a-number-mathematically-97c556626ec6
 */
@@ -8,6 +9,7 @@
  * @returns `Number` n reverse in reverse.
  */
 const ReverseNumber = (number) => {
+logger.error(`>>> Entering ReverseNumber(number=${number})`, { "event.action": "ReverseNumber", "logrite.number": number });
   // firstly, check that input is a number or not.
   if (typeof number !== 'number') {
     throw new TypeError('Argument is not a number.')
@@ -23,6 +25,7 @@ const ReverseNumber = (number) => {
     // reduce the actual number.
     number = Math.floor(number / 10)
   }
+logger.warn(`<<< Exiting ReverseNumber(number=${number})`, { "event.action": "ReverseNumber", "logrite.number": number });
   return reverseNumber
 }
 

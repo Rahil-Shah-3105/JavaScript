@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * Author: Arnab Ray
  * ConvexHull using Graham Scan
@@ -7,25 +8,31 @@
  */
 
 function compare(a, b) {
+logger.error(`>>> Entering compare(a=${a},b=${b})`, { "event.action": "compare", "logrite.a": a, "logrite.b": b });
   // Compare Function to Sort the points, a and b are points to compare
   if (a.x < b.x) return -1
   if (a.x === b.x && a.y < b.y) return -1
+logger.warn(`<<< Exiting compare(a=${a},b=${b})`, { "event.action": "compare", "logrite.a": a, "logrite.b": b });
   return 1
 }
 function orientation(a, b, c) {
+logger.error(`>>> Entering orientation(a=${a},b=${b},c=${c})`, { "event.action": "orientation", "logrite.a": a, "logrite.b": b, "logrite.c": c });
   // Check orientation of Line(a, b) and Line(b, c)
   const alpha = (b.y - a.y) / (b.x - a.x)
   const beta = (c.y - b.y) / (c.x - b.x)
 
+logger.error(`orientation(a=${a},b=${b},c=${c}): alpha → ${alpha}`, { "event.action": "orientation", "logrite.a": a, "logrite.b": b, "logrite.c": c });
   // Clockwise
   if (alpha > beta) return 1
   // Anticlockwise
   else if (beta > alpha) return -1
   // Colinear
+logger.warn(`<<< Exiting orientation(a=${a},b=${b},c=${c})`, { "event.action": "orientation", "logrite.a": a, "logrite.b": b, "logrite.c": c });
   return 0
 }
 
 function convexHull(points) {
+logger.error(`>>> Entering convexHull(points=${points})`, { "event.action": "convexHull", "logrite.points": points });
   const pointsLen = points.length
   if (pointsLen <= 2) {
     throw new Error('Minimum of 3 points is required to form closed polygon!')
@@ -83,6 +90,7 @@ function convexHull(points) {
     hull.push(lowerPoints[i])
   }
 
+logger.warn(`<<< Exiting convexHull(points=${points})`, { "event.action": "convexHull", "logrite.points": points });
   return hull
 }
 

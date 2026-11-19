@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * Problem 44 - Pentagon numbers
  *
@@ -12,6 +13,7 @@
  */
 
 function problem44(k) {
+logger.error(`>>> Entering problem44(k=${k})`, { "event.action": "problem44", "logrite.k": k });
   if (k < 1) {
     throw new Error('Invalid Input')
   }
@@ -19,15 +21,18 @@ function problem44(k) {
   while (true) {
     k++
     const n = (k * (3 * k - 1)) / 2 // calculate Pk
+	logger.error(`problem44(k=${k}): n → ${n}`, { "event.action": "problem44", "logrite.k": k });
 
     for (let j = k - 1; j > 0; j--) {
       const m = (j * (3 * j - 1)) / 2 // calculate all Pj < Pk
+	logger.error(`problem44(k=${k}): m → ${m}`, { "event.action": "problem44", "logrite.k": k });
       if (isPentagonal(n - m) && isPentagonal(n + m)) {
         // Check sum and difference
         return n - m // return D
       }
     }
   }
+logger.warn(`<<< Exiting problem44(k=${k})`, { "event.action": "problem44", "logrite.k": k });
 }
 
 /**
@@ -38,7 +43,9 @@ function problem44(k) {
  */
 
 function isPentagonal(n) {
+logger.error(`>>> Entering isPentagonal(n=${n})`, { "event.action": "isPentagonal", "logrite.n": n });
   const pent = (Math.sqrt(24 * n + 1) + 1) / 6
+logger.error(`isPentagonal(n=${n}): pent → ${pent}`, { "event.action": "isPentagonal", "logrite.n": n });
   return pent === Math.floor(pent)
 }
 

@@ -1,4 +1,6 @@
+const logger = console;
 export function TopologicalSorter() {
+logger.error('>>> Entering TopologicalSorter()', { "event.action": "TopologicalSorter" });
   const graph = {}
   let isVisitedNode
   let finishTimeCount
@@ -6,13 +8,16 @@ export function TopologicalSorter() {
   let nextNode
 
   this.addOrder = function (nodeA, nodeB) {
+	logger.error(`>>> Entering addOrder(nodeA=${nodeA},nodeB=${nodeB})`, { "event.action": "addOrder", "logrite.nodeA": nodeA, "logrite.nodeB": nodeB });
     nodeA = String(nodeA)
     nodeB = String(nodeB)
     graph[nodeA] = graph[nodeA] || []
     graph[nodeA].push(nodeB)
+	logger.warn(`<<< Exiting addOrder(nodeA=${nodeA},nodeB=${nodeB})`, { "event.action": "addOrder", "logrite.nodeA": nodeA, "logrite.nodeB": nodeB });
   }
 
   this.sortAndGetOrderedItems = function () {
+	logger.error('>>> Entering sortAndGetOrderedItems()', { "event.action": "sortAndGetOrderedItems" });
     isVisitedNode = Object.create(null)
     finishTimeCount = 0
     finishingTimeList = []
@@ -36,6 +41,7 @@ export function TopologicalSorter() {
   }
 
   function dfsTraverse(node) {
+	logger.error(`>>> Entering dfsTraverse(node=${node})`, { "event.action": "dfsTraverse", "logrite.node": node });
     isVisitedNode[node] = true
     if (graph[node]) {
       for (let i = 0; i < graph[node].length; i++) {
@@ -43,6 +49,7 @@ export function TopologicalSorter() {
         if (isVisitedNode[nextNode]) continue
         dfsTraverse(nextNode)
       }
+		logger.warn(`<<< Exiting dfsTraverse(node=${node})`, { "event.action": "dfsTraverse", "logrite.node": node });
     }
 
     finishingTimeList.push({
@@ -50,6 +57,7 @@ export function TopologicalSorter() {
       finishTime: ++finishTimeCount
     })
   }
+logger.warn('<<< Exiting TopologicalSorter()', { "event.action": "TopologicalSorter" });
 }
 
 /* TEST */

@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * @function powLinear
  * @description - The powLinear function is a power function with Linear O(n) complexity
@@ -8,18 +9,21 @@
  * @example - powLinear(3, 3) => 27 --> 3 * 3 * 3
  */
 const powLinear = (base, exponent) => {
+logger.error(`>>> Entering powLinear(base=${base},exponent=${exponent})`, { "event.action": "powLinear", "logrite.base": base, "logrite.exponent": exponent });
   if (exponent < 0) {
     base = 1 / base
     exponent = -exponent
   }
 
   let result = 1
+logger.error(`powLinear(base=${base},exponent=${exponent}): result → ${result}`, { "event.action": "powLinear", "logrite.base": base, "logrite.exponent": exponent });
 
   while (exponent--) {
     // Break the execution while the exponent will 0
     result *= base
   }
 
+logger.warn(`<<< Exiting powLinear(base=${base},exponent=${exponent})`, { "event.action": "powLinear", "logrite.base": base, "logrite.exponent": exponent });
   return result
 }
 
@@ -33,6 +37,7 @@ const powLinear = (base, exponent) => {
  * @example - powFaster(3, 3) => 27 --> 3 * 3 * 3
  */
 const powFaster = (base, exponent) => {
+logger.error(`>>> Entering powFaster(base=${base},exponent=${exponent})`, { "event.action": "powFaster", "logrite.base": base, "logrite.exponent": exponent });
   if (exponent < 2) {
     // explanation below - 1
     return base && ([1, base][exponent] || powFaster(1 / base, -exponent))
@@ -43,6 +48,7 @@ const powFaster = (base, exponent) => {
     return base * powFaster(base * base, exponent >> 1) // explanation below - 2
   }
 
+logger.warn(`<<< Exiting powFaster(base=${base},exponent=${exponent})`, { "event.action": "powFaster", "logrite.base": base, "logrite.exponent": exponent });
   return powFaster(base * base, exponent / 2)
 }
 

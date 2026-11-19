@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * @function Palindrome
  * @description Check whether the given string is Palindrome or not.
@@ -7,6 +8,7 @@
  */
 
 const palindrome = (str) => {
+logger.error(`>>> Entering palindrome(str=${str})`, { "event.action": "palindrome", "logrite.str": str });
   if (typeof str !== 'string') {
     throw new TypeError('Invalid Input')
   }
@@ -18,6 +20,7 @@ const palindrome = (str) => {
   if (str[0] !== str[str.length - 1]) {
     return false
   } else {
+logger.warn(`<<< Exiting palindrome(str=${str})`, { "event.action": "palindrome", "logrite.str": str });
     return palindrome(str.slice(1, str.length - 1))
   }
 }

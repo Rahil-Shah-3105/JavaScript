@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * @function lower
  * @description Will convert the entire string to lowercase letters.
@@ -8,10 +9,12 @@
  */
 
 const lower = (str) => {
+logger.error(`>>> Entering lower(str=${str})`, { "event.action": "lower", "logrite.str": str });
   if (typeof str !== 'string') {
     throw new TypeError('Invalid Input Type')
   }
 
+logger.warn(`<<< Exiting lower(str=${str})`, { "event.action": "lower", "logrite.str": str });
   return str.replace(/[A-Z]/g, (char) =>
     String.fromCharCode(char.charCodeAt() + 32)
   )

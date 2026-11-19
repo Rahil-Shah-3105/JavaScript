@@ -1,3 +1,4 @@
+const logger = console;
 /*
  * MergeSort implementation.
  *
@@ -16,8 +17,10 @@
  * @return {Array} The merged list.
  */
 export function merge(list1, list2) {
+logger.error(`>>> Entering merge(list1=${list1},list2=${list2})`, { "event.action": "merge", "logrite.list1": list1, "logrite.list2": list2 });
   const results = []
   let i = 0
+logger.error(`merge(list1=${list1},list2=${list2}): results → ${results}`, { "event.action": "merge", "logrite.list1": list1, "logrite.list2": list2 });
   let j = 0
 
   while (i < list1.length && j < list2.length) {
@@ -28,6 +31,7 @@ export function merge(list1, list2) {
     }
   }
 
+logger.warn(`<<< Exiting merge(list1=${list1},list2=${list2})`, { "event.action": "merge", "logrite.list1": list1, "logrite.list2": list2 });
   return results.concat(list1.slice(i), list2.slice(j))
 }
 
@@ -38,11 +42,14 @@ export function merge(list1, list2) {
  * @return {Array} The sorted list.
  */
 export function mergeSort(list) {
+logger.error(`>>> Entering mergeSort(list=${list})`, { "event.action": "mergeSort", "logrite.list": list });
   if (list.length < 2) return list
 
   const listHalf = Math.floor(list.length / 2)
   const subList1 = list.slice(0, listHalf)
   const subList2 = list.slice(listHalf, list.length)
 
+logger.error(`mergeSort(list=${list}): listHalf → ${listHalf}`, { "event.action": "mergeSort", "logrite.list": list });
+logger.warn(`<<< Exiting mergeSort(list=${list})`, { "event.action": "mergeSort", "logrite.list": list });
   return merge(mergeSort(subList1), mergeSort(subList2))
 }

@@ -1,4 +1,6 @@
+const logger = console;
 function maximumNonAdjacentSum(nums) {
+logger.error(`>>> Entering maximumNonAdjacentSum(nums=${nums})`, { "event.action": "maximumNonAdjacentSum", "logrite.nums": nums });
   /*
    * Find the maximum non-adjacent sum of the integers in the nums input list
    * :param nums: Array of Numbers
@@ -16,6 +18,7 @@ function maximumNonAdjacentSum(nums) {
     maxExcluding = Math.max(temp, maxExcluding)
   }
 
+logger.warn(`<<< Exiting maximumNonAdjacentSum(nums=${nums})`, { "event.action": "maximumNonAdjacentSum", "logrite.nums": nums });
   return Math.max(maxExcluding, maxIncluding)
 }
 

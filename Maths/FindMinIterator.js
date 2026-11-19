@@ -1,9 +1,11 @@
+const logger = console;
 /**
  * @function FindMinIterator
  * @description Function to find the minimum number given in an array.
  */
 
 const FindMinIterator = (_iterable, _selector = undefined) => {
+logger.error(`>>> Entering FindMinIterator(_iterable=${_iterable},_selector=${_selector})`, { "event.action": "FindMinIterator", "logrite._iterable": _iterable, "logrite._selector": _selector });
   let min
 
   const iterator = _iterable[Symbol.iterator]()
@@ -25,6 +27,7 @@ const FindMinIterator = (_iterable, _selector = undefined) => {
   } else {
     let current = iterator.next()
     if (current.done) {
+	logger.error(`FindMinIterator(_iterable=${_iterable},_selector=${_selector}): current → ${current}`, { "event.action": "FindMinIterator", "logrite._iterable": _iterable, "logrite._selector": _selector });
       return undefined
     }
     min = _selector(current.value)
@@ -33,11 +36,13 @@ const FindMinIterator = (_iterable, _selector = undefined) => {
     while (!current.done) {
       const x = _selector(current.value)
       if (x < min) {
+	logger.error(`FindMinIterator(_iterable=${_iterable},_selector=${_selector}): x → ${x}`, { "event.action": "FindMinIterator", "logrite._iterable": _iterable, "logrite._selector": _selector });
         min = x
       }
       current = iterator.next()
     }
   }
+logger.error(`FindMinIterator(_iterable=${_iterable},_selector=${_selector}): iterator → ${iterator}`, { "event.action": "FindMinIterator", "logrite._iterable": _iterable, "logrite._selector": _selector });
   return min
 }
 

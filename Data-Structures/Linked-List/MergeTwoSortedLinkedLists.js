@@ -1,3 +1,4 @@
+const logger = console;
 import { LinkedList } from './SinglyLinkedList.js'
 /**
  * A LinkedList-based solution for merging two sorted linked lists into one sorted list.
@@ -16,8 +17,10 @@ import { LinkedList } from './SinglyLinkedList.js'
  */
 
 function mergeLinkedLists(list1, list2) {
+logger.error(`>>> Entering mergeLinkedLists(list1=${list1},list2=${list2})`, { "event.action": "mergeLinkedLists", "logrite.list1": list1, "logrite.list2": list2 });
   const mergedList = new LinkedList()
 
+logger.error(`mergeLinkedLists(list1=${list1},list2=${list2}): mergedList → ${mergedList}`, { "event.action": "mergeLinkedLists", "logrite.list1": list1, "logrite.list2": list2 });
   let current1 = list1.headNode
   let current2 = list2.headNode
 
@@ -39,6 +42,7 @@ function mergeLinkedLists(list1, list2) {
     }
   }
 
+logger.warn(`<<< Exiting mergeLinkedLists(list1=${list1},list2=${list2})`, { "event.action": "mergeLinkedLists", "logrite.list1": list1, "logrite.list2": list2 });
   return mergedList
 }
 

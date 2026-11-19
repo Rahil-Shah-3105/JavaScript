@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * The Koch snowflake is a fractal curve and one of the earliest fractals to have been described.
  *
@@ -16,8 +17,10 @@
 /** Class to handle the vector calculations. */
 export class Vector2 {
   constructor(x, y) {
+	logger.error(`>>> Entering constructor(x=${x},y=${y})`, { "event.action": "constructor", "logrite.x": x, "logrite.y": y });
     this.x = x
     this.y = y
+	logger.debug(`constructor(x=${x},y=${y}): this.y → ${this.y}`, { "event.action": "constructor", "logrite.x": x, "logrite.y": y });
   }
 
   /**
@@ -27,8 +30,10 @@ export class Vector2 {
    * @returns The sum-vector.
    */
   add(vector) {
+	logger.error(`>>> Entering add(vector=${vector})`, { "event.action": "add", "logrite.vector": vector });
     const x = this.x + vector.x
     const y = this.y + vector.y
+	logger.warn(`<<< Exiting add(vector=${vector})`, { "event.action": "add", "logrite.vector": vector });
     return new Vector2(x, y)
   }
 
@@ -39,8 +44,10 @@ export class Vector2 {
    * @returns The difference-vector.
    */
   subtract(vector) {
+	logger.error(`>>> Entering subtract(vector=${vector})`, { "event.action": "subtract", "logrite.vector": vector });
     const x = this.x - vector.x
     const y = this.y - vector.y
+	logger.warn(`<<< Exiting subtract(vector=${vector})`, { "event.action": "subtract", "logrite.vector": vector });
     return new Vector2(x, y)
   }
 
@@ -51,8 +58,10 @@ export class Vector2 {
    * @returns The scaled vector.
    */
   multiply(scalar) {
+	logger.error(`>>> Entering multiply(scalar=${scalar})`, { "event.action": "multiply", "logrite.scalar": scalar });
     const x = this.x * scalar
     const y = this.y * scalar
+	logger.warn(`<<< Exiting multiply(scalar=${scalar})`, { "event.action": "multiply", "logrite.scalar": scalar });
     return new Vector2(x, y)
   }
 
@@ -63,11 +72,15 @@ export class Vector2 {
    * @returns The rotated vector.
    */
   rotate(angleInDegrees) {
+	logger.error(`>>> Entering rotate(angleInDegrees=${angleInDegrees})`, { "event.action": "rotate", "logrite.angleInDegrees": angleInDegrees });
     const radians = (angleInDegrees * Math.PI) / 180
     const ca = Math.cos(radians)
     const sa = Math.sin(radians)
     const x = ca * this.x - sa * this.y
+	logger.error(`rotate(angleInDegrees=${angleInDegrees}): radians → ${radians}`, { "event.action": "rotate", "logrite.angleInDegrees": angleInDegrees });
+	logger.error(`rotate(angleInDegrees=${angleInDegrees}): ca → ${ca}`, { "event.action": "rotate", "logrite.angleInDegrees": angleInDegrees });
     const y = sa * this.x + ca * this.y
+	logger.warn(`<<< Exiting rotate(angleInDegrees=${angleInDegrees})`, { "event.action": "rotate", "logrite.angleInDegrees": angleInDegrees });
     return new Vector2(x, y)
   }
 }
@@ -82,11 +95,13 @@ export class Vector2 {
  * @returns The transformed vectors after the iteration-steps.
  */
 export function iterate(initialVectors, steps) {
+logger.error(`>>> Entering iterate(initialVectors=${initialVectors},steps=${steps})`, { "event.action": "iterate", "logrite.initialVectors": initialVectors, "logrite.steps": steps });
   let vectors = initialVectors
   for (let i = 0; i < steps; i++) {
     vectors = iterationStep(vectors)
   }
 
+logger.warn(`<<< Exiting iterate(initialVectors=${initialVectors},steps=${steps})`, { "event.action": "iterate", "logrite.initialVectors": initialVectors, "logrite.steps": steps });
   return vectors
 }
 
@@ -100,6 +115,7 @@ export function iterate(initialVectors, steps) {
  * @returns The transformed vectors after the iteration-step.
  */
 function iterationStep(vectors) {
+logger.error(`>>> Entering iterationStep(vectors=${vectors})`, { "event.action": "iterationStep", "logrite.vectors": vectors });
   const newVectors = []
   for (let i = 0; i < vectors.length - 1; i++) {
     const startVector = vectors[i]
@@ -114,5 +130,6 @@ function iterationStep(vectors) {
   }
 
   newVectors.push(vectors[vectors.length - 1])
+logger.warn(`<<< Exiting iterationStep(vectors=${vectors})`, { "event.action": "iterationStep", "logrite.vectors": vectors });
   return newVectors
 }

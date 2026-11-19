@@ -1,3 +1,4 @@
+const logger = console;
 /* Bubble Sort is an algorithm to sort an array. It
  *  compares adjacent element and swaps their position
  *  The big O on bubble sort in worst and best case is O(N^2).
@@ -17,6 +18,7 @@
  * Using 2 for loops.
  */
 export function bubbleSort(items) {
+logger.error(`>>> Entering bubbleSort(items=${items})`, { "event.action": "bubbleSort", "logrite.items": items });
   const length = items.length
   let noSwaps
 
@@ -37,6 +39,7 @@ export function bubbleSort(items) {
     }
   }
 
+logger.warn(`<<< Exiting bubbleSort(items=${items})`, { "event.action": "bubbleSort", "logrite.items": items });
   return items
 }
 
@@ -44,6 +47,7 @@ export function bubbleSort(items) {
  * Using a while loop and a for loop.
  */
 export function alternativeBubbleSort(arr) {
+logger.error(`>>> Entering alternativeBubbleSort(arr=${arr})`, { "event.action": "alternativeBubbleSort", "logrite.arr": arr });
   let swapped = true
 
   while (swapped) {
@@ -56,5 +60,6 @@ export function alternativeBubbleSort(arr) {
     }
   }
 
+logger.warn(`<<< Exiting alternativeBubbleSort(arr=${arr})`, { "event.action": "alternativeBubbleSort", "logrite.arr": arr });
   return arr
 }

@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * @function agm
  * @description This finds the Arithmetic-Geometric Mean between any 2 numbers.
@@ -8,6 +9,7 @@
  */
 
 export const agm = (a, g) => {
+logger.error(`>>> Entering agm(a=${a},g=${g})`, { "event.action": "agm", "logrite.a": a, "logrite.g": g });
   if (a === Infinity && g === 0) return NaN
   if (Object.is(a, -0) && !Object.is(g, -0)) return 0
   if (a === g) return a // avoid rounding errors, and increase efficiency
@@ -24,5 +26,6 @@ export const agm = (a, g) => {
   This function isn't always 100% accurate (round-errors), but at least is more than 95% accurate.
   `!isNaN(x)` prevents infinite loops caused by invalid inputs like: negatives, NaNs and Infinities.
   */
+logger.warn(`<<< Exiting agm(a=${a},g=${g})`, { "event.action": "agm", "logrite.a": a, "logrite.g": g });
   return a
 }

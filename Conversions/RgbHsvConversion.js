@@ -1,3 +1,4 @@
+const logger = console;
 /*
  * The RGB color model is an additive color model in which red, green, and blue light are added
  * together in various ways to reproduce a broad array of colors. The name of the model comes from
@@ -17,6 +18,7 @@
  * @return The tuple of RGB-components.
  */
 export function hsvToRgb(hue, saturation, value) {
+logger.error(`>>> Entering hsvToRgb(hue=${hue},saturation=${saturation},value=${value})`, { "event.action": "hsvToRgb", "logrite.hue": hue, "logrite.saturation": saturation, "logrite.value": value });
   if (hue < 0 || hue > 360) {
     throw new Error('hue should be between 0 and 360')
   }
@@ -33,7 +35,9 @@ export function hsvToRgb(hue, saturation, value) {
   const hueSection = hue / 60
   const secondLargestComponent = chroma * (1 - Math.abs((hueSection % 2) - 1))
   const matchValue = value - chroma
+logger.error(`hsvToRgb(hue=${hue},saturation=${saturation},value=${value}): secondLargestComponent → ${secondLargestComponent}`, { "event.action": "hsvToRgb", "logrite.hue": hue, "logrite.saturation": saturation, "logrite.value": value });
 
+logger.warn(`<<< Exiting hsvToRgb(hue=${hue},saturation=${saturation},value=${value})`, { "event.action": "hsvToRgb", "logrite.hue": hue, "logrite.saturation": saturation, "logrite.value": value });
   return getRgbBySection(hueSection, chroma, matchValue, secondLargestComponent)
 }
 
@@ -46,6 +50,7 @@ export function hsvToRgb(hue, saturation, value) {
  * @return The tuple of HSV-components.
  */
 export function rgbToHsv(red, green, blue) {
+logger.error(`>>> Entering rgbToHsv(red=${red},green=${green},blue=${blue})`, { "event.action": "rgbToHsv", "logrite.red": red, "logrite.green": green, "logrite.blue": blue });
   if (red < 0 || red > 255) {
     throw new Error('red should be between 0 and 255')
   }
@@ -64,6 +69,7 @@ export function rgbToHsv(red, green, blue) {
   const value = Math.max(Math.max(dRed, dGreen), dBlue)
   const chroma = value - Math.min(Math.min(dRed, dGreen), dBlue)
   const saturation = value === 0 ? 0 : chroma / value
+logger.error(`rgbToHsv(red=${red},green=${green},blue=${blue}): value → ${value}`, { "event.action": "rgbToHsv", "logrite.red": red, "logrite.green": green, "logrite.blue": blue });
   let hue
 
   if (chroma === 0) {
@@ -78,14 +84,20 @@ export function rgbToHsv(red, green, blue) {
 
   hue = (hue + 360) % 360
 
+logger.warn(`<<< Exiting rgbToHsv(red=${red},green=${green},blue=${blue})`, { "event.action": "rgbToHsv", "logrite.red": red, "logrite.green": green, "logrite.blue": blue });
   return [hue, saturation, value]
 }
 
 export function approximatelyEqualHsv(hsv1, hsv2) {
+logger.error(`>>> Entering approximatelyEqualHsv(hsv1=${hsv1},hsv2=${hsv2})`, { "event.action": "approximatelyEqualHsv", "logrite.hsv1": hsv1, "logrite.hsv2": hsv2 });
   const bHue = Math.abs(hsv1[0] - hsv2[0]) < 0.2
   const bSaturation = Math.abs(hsv1[1] - hsv2[1]) < 0.002
+logger.error(`approximatelyEqualHsv(hsv1=${hsv1},hsv2=${hsv2}): bHue → ${bHue}`, { "event.action": "approximatelyEqualHsv", "logrite.hsv1": hsv1, "logrite.hsv2": hsv2 });
+logger.error(`approximatelyEqualHsv(hsv1=${hsv1},hsv2=${hsv2}): bSaturation → ${bSaturation}`, { "event.action": "approximatelyEqualHsv", "logrite.hsv1": hsv1, "logrite.hsv2": hsv2 });
   const bValue = Math.abs(hsv1[2] - hsv2[2]) < 0.002
 
+logger.error(`approximatelyEqualHsv(hsv1=${hsv1},hsv2=${hsv2}): bValue → ${bValue}`, { "event.action": "approximatelyEqualHsv", "logrite.hsv1": hsv1, "logrite.hsv2": hsv2 });
+logger.warn(`<<< Exiting approximatelyEqualHsv(hsv1=${hsv1},hsv2=${hsv2})`, { "event.action": "approximatelyEqualHsv", "logrite.hsv1": hsv1, "logrite.hsv2": hsv2 });
   return bHue && bSaturation && bValue
 }
 
@@ -96,6 +108,8 @@ function getRgbBySection(
   secondLargestComponent
 ) {
   function convertToInt(input) {
+	logger.error(`>>> Entering convertToInt(input=${input})`, { "event.action": "convertToInt" });
+	logger.warn(`<<< Exiting convertToInt(input=${input})`, { "event.action": "convertToInt" });
     return Math.round(255 * input)
   }
 

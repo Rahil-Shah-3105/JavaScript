@@ -1,3 +1,4 @@
+const logger = console;
 // Module that replicates the MD5 Cryptographic Hash
 // function in Javascript.
 
@@ -34,10 +35,12 @@ const K = [
  *      chunkify("this is a test", 2)
  */
 function chunkify(array, size) {
+logger.error(`>>> Entering chunkify(array=${array},size=${size})`, { "event.action": "chunkify", "logrite.array": array, "logrite.size": size });
   const chunks = []
   for (let i = 0; i < array.length; i += size) {
     chunks.push(array.slice(i, i + size))
   }
+logger.warn(`<<< Exiting chunkify(array=${array},size=${size})`, { "event.action": "chunkify", "logrite.array": array, "logrite.size": size });
   return chunks
 }
 
@@ -52,6 +55,8 @@ function chunkify(array, size) {
  *      rotateLeft(0b1011, 3); // 0b1011000
  */
 function rotateLeft(bits, turns) {
+logger.error(`>>> Entering rotateLeft(bits=${bits},turns=${turns})`, { "event.action": "rotateLeft", "logrite.bits": bits, "logrite.turns": turns });
+logger.warn(`<<< Exiting rotateLeft(bits=${bits},turns=${turns})`, { "event.action": "rotateLeft", "logrite.bits": bits, "logrite.turns": turns });
   return (bits << turns) | (bits >>> (32 - turns))
 }
 
@@ -62,8 +67,10 @@ function rotateLeft(bits, turns) {
  * @returns {Uint32Array} - Required Uint32Array
  */
 function u8ToU32(u8Array) {
+logger.error(`>>> Entering u8ToU32(u8Array=${u8Array})`, { "event.action": "u8ToU32", "logrite.u8Array": u8Array });
   const uint32Array = new Uint32Array(u8Array.length / 4)
 
+logger.error(`u8ToU32(u8Array=${u8Array}): uint32Array → ${uint32Array}`, { "event.action": "u8ToU32", "logrite.u8Array": u8Array });
   for (let i = 0; i < u8Array.length; i += 4) {
     uint32Array[i / 4] =
       (u8Array[i] |
@@ -73,6 +80,7 @@ function u8ToU32(u8Array) {
       0
   }
 
+logger.warn(`<<< Exiting u8ToU32(u8Array=${u8Array})`, { "event.action": "u8ToU32", "logrite.u8Array": u8Array });
   return uint32Array
 }
 
@@ -83,8 +91,10 @@ function u8ToU32(u8Array) {
  * @returns {Uint8Array} - Required Uint8Array
  */
 function u32ToU8(u32Array) {
+logger.error(`>>> Entering u32ToU8(u32Array=${u32Array})`, { "event.action": "u32ToU8", "logrite.u32Array": u32Array });
   const uint8Array = new Uint8Array(u32Array.length * 4)
 
+logger.error(`u32ToU8(u32Array=${u32Array}): uint8Array → ${uint8Array}`, { "event.action": "u32ToU8", "logrite.u32Array": u32Array });
   for (let i = 0; i < u32Array.length; i++) {
     uint8Array[i * 4] = u32Array[i] & 0xff
     uint8Array[i * 4 + 1] = (u32Array[i] >> 8) & 0xff
@@ -92,6 +102,7 @@ function u32ToU8(u32Array) {
     uint8Array[i * 4 + 3] = (u32Array[i] >> 24) & 0xff
   }
 
+logger.warn(`<<< Exiting u32ToU8(u32Array=${u32Array})`, { "event.action": "u32ToU8", "logrite.u32Array": u32Array });
   return uint8Array
 }
 
@@ -102,10 +113,13 @@ function u32ToU8(u32Array) {
  * @param {number} size Resulting size of the array
  */
 function padEnd(u8Array, size) {
+logger.error(`>>> Entering padEnd(u8Array=${u8Array},size=${size})`, { "event.action": "padEnd", "logrite.u8Array": u8Array, "logrite.size": size });
   const result = new Uint8Array(size)
   result.set(u8Array)
   result.fill(0, u8Array.length)
 
+logger.error(`padEnd(u8Array=${u8Array},size=${size}): result → ${result}`, { "event.action": "padEnd", "logrite.u8Array": u8Array, "logrite.size": size });
+logger.warn(`<<< Exiting padEnd(u8Array=${u8Array},size=${size})`, { "event.action": "padEnd", "logrite.u8Array": u8Array, "logrite.size": size });
   return result
 }
 
@@ -116,6 +130,7 @@ function padEnd(u8Array, size) {
  * @return {Uint32Array} - processed message
  */
 function preProcess(message) {
+logger.error(`>>> Entering preProcess(message=${message})`, { "event.action": "preProcess", "logrite.message": message });
   // Extend message by adding '0'
   //
   // message.length + 1 is for adding '1' bit
@@ -138,6 +153,7 @@ function preProcess(message) {
   m[m.length - 2] = ml & 0xffffffff
   m[m.length - 1] = (ml / 0x100000000) | 0
 
+logger.warn(`<<< Exiting preProcess(message=${message})`, { "event.action": "preProcess", "logrite.message": message });
   return m
 }
 
@@ -151,6 +167,7 @@ function preProcess(message) {
  * @return {Uint8Array} - message digest (hash value)
  */
 function MD5(message) {
+logger.error(`>>> Entering MD5(message=${message})`, { "event.action": "MD5", "logrite.message": message });
   // Initialize variables:
   let [a0, b0, c0, d0] = [
     0x67452301 >>> 0,
@@ -163,6 +180,7 @@ function MD5(message) {
   const words = Array.from(preProcess(message))
   const chunks = chunkify(words, 16)
 
+logger.error(`MD5(message=${message}): words → ${words}`, { "event.action": "MD5", "logrite.message": message });
   chunks.forEach(function (chunk, _) {
     // initialize variables for this chunk
     let [A, B, C, D] = [a0, b0, c0, d0]
@@ -198,6 +216,7 @@ function MD5(message) {
     d0 = (d0 + D) >>> 0
   })
 
+logger.warn(`<<< Exiting MD5(message=${message})`, { "event.action": "MD5", "logrite.message": message });
   return u32ToU8([a0, b0, c0, d0])
 }
 

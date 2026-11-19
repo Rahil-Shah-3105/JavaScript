@@ -1,3 +1,4 @@
+const logger = console;
 /*
  *
  * In the 20×20 grid below, four numbers along a diagonal line have been marked in red.
@@ -30,6 +31,7 @@
  */
 
 export function largestProductInAGrid(arr) {
+logger.error(`>>> Entering largestProductInAGrid(arr=${arr})`, { "event.action": "largestProductInAGrid", "logrite.arr": arr });
   let max = 0
   const k = 4
 
@@ -47,13 +49,16 @@ export function largestProductInAGrid(arr) {
       }
     }
   }
+logger.warn(`<<< Exiting largestProductInAGrid(arr=${arr})`, { "event.action": "largestProductInAGrid", "logrite.arr": arr });
   return max
 }
 
 function get(arr, y, x) {
+logger.error(`>>> Entering get(arr=${arr},y=${y},x=${x})`, { "event.action": "get", "logrite.arr": arr, "logrite.y": y, "logrite.x": x });
   if (y >= 0 && y < arr.length && x >= 0 && x < arr[y].length) {
     return arr[y][x]
   }
 
+logger.warn(`<<< Exiting get(arr=${arr},y=${y},x=${x})`, { "event.action": "get", "logrite.arr": arr, "logrite.y": y, "logrite.x": x });
   return 0
 }

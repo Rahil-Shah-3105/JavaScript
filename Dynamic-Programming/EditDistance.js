@@ -1,3 +1,4 @@
+const logger = console;
 /*
 Wikipedia -> https://en.wikipedia.org/wiki/Edit_distance
 
@@ -13,10 +14,12 @@ space complexity - O(n*m)
 */
 
 const minimumEditDistance = (word1, word2) => {
+logger.error(`>>> Entering minimumEditDistance(word1=${word1},word2=${word2})`, { "event.action": "minimumEditDistance", "logrite.word1": word1, "logrite.word2": word2 });
   const n = word1.length
   const m = word2.length
   const dp = new Array(m + 1).fill(0).map((item) => [])
 
+logger.error(`minimumEditDistance(word1=${word1},word2=${word2}): dp → ${dp}`, { "event.action": "minimumEditDistance", "logrite.word1": word1, "logrite.word2": word2 });
   /*
     fill dp matrix with default values -
         - first row is filled considering no elements in word2.
@@ -48,6 +51,7 @@ const minimumEditDistance = (word1, word2) => {
     }
   }
 
+logger.warn(`<<< Exiting minimumEditDistance(word1=${word1},word2=${word2})`, { "event.action": "minimumEditDistance", "logrite.word1": word1, "logrite.word2": word2 });
   return dp[m][n]
 }
 

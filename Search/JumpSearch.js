@@ -1,3 +1,4 @@
+const logger = console;
 /* The Jump Search algorithm allows to combine a linear search with a speed optimization.
  * This means that instead of going 1 by 1, we will increase the step of √n and increase that
  * step of √n which make the step getting bigger and bigger.
@@ -6,9 +7,11 @@
  */
 
 const jumpSearch = (arr, value) => {
+logger.error(`>>> Entering jumpSearch(arr=${arr},value=${value})`, { "event.action": "jumpSearch", "logrite.arr": arr, "logrite.value": value });
   const length = arr.length
   let step = Math.floor(Math.sqrt(length))
   let lowerBound = 0
+logger.error(`jumpSearch(arr=${arr},value=${value}): step → ${step}`, { "event.action": "jumpSearch", "logrite.arr": arr, "logrite.value": value });
   while (arr[Math.min(step, length) - 1] < value) {
     lowerBound = step
     step += step
@@ -27,6 +30,7 @@ const jumpSearch = (arr, value) => {
   if (arr[lowerBound] === value) {
     return lowerBound
   }
+logger.error(`jumpSearch(arr=${arr},value=${value}): upperBound → ${upperBound}`, { "event.action": "jumpSearch", "logrite.arr": arr, "logrite.value": value });
   return -1
 }
 

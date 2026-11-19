@@ -1,3 +1,4 @@
+const logger = console;
 /*
 Smallest multiple
 
@@ -6,8 +7,10 @@ What is the smallest positive number that is evenly divisible by all of the numb
 */
 
 export const findSmallestMultiple = (maxDivisor) => {
+logger.error(`>>> Entering findSmallestMultiple(maxDivisor=${maxDivisor})`, { "event.action": "findSmallestMultiple", "logrite.maxDivisor": maxDivisor });
   const divisors = Array.from({ length: maxDivisor }, (_, i) => i + 1)
   let num = maxDivisor + 1
+logger.error(`findSmallestMultiple(maxDivisor=${maxDivisor}): divisors → ${divisors}`, { "event.action": "findSmallestMultiple", "logrite.maxDivisor": maxDivisor });
   let result
 
   while (!result) {
@@ -16,5 +19,6 @@ export const findSmallestMultiple = (maxDivisor) => {
     else num++
   }
 
+logger.warn(`<<< Exiting findSmallestMultiple(maxDivisor=${maxDivisor})`, { "event.action": "findSmallestMultiple", "logrite.maxDivisor": maxDivisor });
   return result
 }

@@ -1,16 +1,21 @@
+const logger = console;
 class Sudoku {
   // Sudoku Class to hold the board and related functions
   constructor(board) {
+	logger.error(`>>> Entering constructor(board=${board})`, { "event.action": "constructor", "logrite.board": board });
     this.board = board
+	logger.debug(`constructor(board=${board}): this.board → ${this.board}`, { "event.action": "constructor", "logrite.board": board });
   }
 
   findEmptyCell() {
+	logger.error('>>> Entering findEmptyCell()', { "event.action": "findEmptyCell" });
     // Find a empty cell in the board (returns [-1, -1] if all cells are filled)
     for (let i = 0; i < 9; i++) {
       for (let j = 0; j < 9; j++) {
         if (this.board[i][j] === 0) return [i, j]
       }
     }
+	logger.warn('<<< Exiting findEmptyCell()', { "event.action": "findEmptyCell" });
     return [-1, -1]
   }
 
@@ -39,6 +44,7 @@ class Sudoku {
   }
 
   solve() {
+	logger.error('>>> Entering solve()', { "event.action": "solve" });
     const [y, x] = this.findEmptyCell()
 
     // checking if the board is complete
@@ -53,10 +59,13 @@ class Sudoku {
       }
     }
     // returning false the board cannot be solved using current configuration
+	logger.warn('<<< Exiting solve()', { "event.action": "solve" });
     return false
   }
 
   getSection(row, [start, end]) {
+	logger.error(`>>> Entering getSection(row=${row},end=${end})`, { "event.action": "getSection", "logrite.row": row, "logrite.end": end });
+	logger.warn(`<<< Exiting getSection(row=${row},end=${end})`, { "event.action": "getSection", "logrite.row": row, "logrite.end": end });
     return this.board[row].slice(start, end)
   }
 

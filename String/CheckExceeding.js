@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * @function checkExceeding
  * @description - Exceeding words are words where the gap between two adjacent characters is increasing. The gap is the distance in ascii
@@ -7,11 +8,13 @@
  * @example - checkExceeding('update') => false, ascii difference - [5, 12, 3, 19, 15] which is not incremental
  */
 const checkExceeding = (str) => {
+logger.error(`>>> Entering checkExceeding(str=${str})`, { "event.action": "checkExceeding", "logrite.str": str });
   if (typeof str !== 'string') {
     throw new TypeError('Argument is not a string')
   }
 
   const upperChars = str.toUpperCase().replace(/[^A-Z]/g, '') // remove all from str except A to Z alphabets
+logger.error(`checkExceeding(str=${str}): upperChars → ${upperChars}`, { "event.action": "checkExceeding", "logrite.str": str });
 
   const adjacentDiffList = []
 
@@ -34,6 +37,7 @@ const checkExceeding = (str) => {
     }
   }
 
+logger.warn(`<<< Exiting checkExceeding(str=${str})`, { "event.action": "checkExceeding", "logrite.str": str });
   return true
 }
 

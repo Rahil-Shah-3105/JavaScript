@@ -1,3 +1,4 @@
+const logger = console;
 import { isEven } from './IsEven'
 
 /**
@@ -15,11 +16,13 @@ import { isEven } from './IsEven'
  * @see [Pow-Logarithmic](https://www.geeksforgeeks.org/write-a-c-program-to-calculate-powxn/)
  */
 const powLogarithmic = (x, n) => {
+logger.error(`>>> Entering powLogarithmic(x=${x},n=${n})`, { "event.action": "powLogarithmic", "logrite.x": x, "logrite.n": n });
   if (n === 0) return 1
   const result = powLogarithmic(x, Math.floor(n / 2))
   if (isEven(n)) {
     return result * result
   }
+logger.error(`powLogarithmic(x=${x},n=${n}): result → ${result}`, { "event.action": "powLogarithmic", "logrite.x": x, "logrite.n": n });
   return result * result * x
 }
 

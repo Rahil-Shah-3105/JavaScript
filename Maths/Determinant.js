@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * Given a square matrix, find its determinant using Laplace Expansion.
  * Time Complexity : O(n!)
@@ -20,6 +21,7 @@
  */
 
 const subMatrix = (matrix, i, j) => {
+logger.error(`>>> Entering subMatrix(matrix=${matrix},i=${i},j=${j})`, { "event.action": "subMatrix", "logrite.matrix": matrix, "logrite.i": i, "logrite.j": j });
   let matrixSize = matrix[0].length
   if (matrixSize === 1) {
     return matrix[0][0]
@@ -37,20 +39,24 @@ const subMatrix = (matrix, i, j) => {
       subMatrix[subMatrix.length - 1].push(matrix[x][y])
     }
   }
+logger.warn(`<<< Exiting subMatrix(matrix=${matrix},i=${i},j=${j})`, { "event.action": "subMatrix", "logrite.matrix": matrix, "logrite.i": i, "logrite.j": j });
   return subMatrix
 }
 
 const isMatrixSquare = (matrix) => {
+logger.error(`>>> Entering isMatrixSquare(matrix=${matrix})`, { "event.action": "isMatrixSquare", "logrite.matrix": matrix });
   let numRows = matrix.length
   for (let i = 0; i < numRows; i++) {
     if (numRows !== matrix[i].length) {
       return false
     }
   }
+logger.warn(`<<< Exiting isMatrixSquare(matrix=${matrix})`, { "event.action": "isMatrixSquare", "logrite.matrix": matrix });
   return true
 }
 
 const determinant = (matrix) => {
+logger.error(`>>> Entering determinant(matrix=${matrix})`, { "event.action": "determinant", "logrite.matrix": matrix });
   if (
     !Array.isArray(matrix) ||
     matrix.length === 0 ||
@@ -66,6 +72,7 @@ const determinant = (matrix) => {
     return matrix[0][0]
   }
   let result = 0
+logger.error(`determinant(matrix=${matrix}): result → ${result}`, { "event.action": "determinant", "logrite.matrix": matrix });
   let setIndex = 0
   for (let i = 0; i < numCols; i++) {
     result +=
@@ -73,6 +80,7 @@ const determinant = (matrix) => {
       matrix[setIndex][i] *
       determinant(subMatrix(matrix, setIndex, i))
   }
+logger.warn(`<<< Exiting determinant(matrix=${matrix})`, { "event.action": "determinant", "logrite.matrix": matrix });
   return result
 }
 export { determinant }

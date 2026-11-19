@@ -1,3 +1,4 @@
+const logger = console;
 /**
 * Problem 25 - 1000-digit Fibonacci number
 *
@@ -29,10 +30,13 @@
 // brute force method
 
 function fibonacciIndex(t = 1000) {
+logger.error(`>>> Entering fibonacciIndex(t=${t})`, { "event.action": "fibonacciIndex", "logrite.t": t });
   const digits = 10n ** BigInt(t - 1)
   let fib0 = BigInt(0)
   let fib1 = BigInt(1)
   let index = 1
+logger.error(`fibonacciIndex(t=${t}): digits → ${digits}`, { "event.action": "fibonacciIndex", "logrite.t": t });
+logger.error(`fibonacciIndex(t=${t}): fib0 → ${fib0}`, { "event.action": "fibonacciIndex", "logrite.t": t });
   while (fib1 < digits) {
     // using this to compare number of digits instead of .toString() significantly improved run time
     const tempfib = fib1
@@ -40,6 +44,7 @@ function fibonacciIndex(t = 1000) {
     fib0 = tempfib
     index += 1
   }
+logger.warn(`<<< Exiting fibonacciIndex(t=${t})`, { "event.action": "fibonacciIndex", "logrite.t": t });
   return index
 }
 

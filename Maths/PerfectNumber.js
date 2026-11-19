@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * Author: dephraiim
  * License: GPL-3.0 or later
@@ -16,14 +17,19 @@
  */
 
 const factorsExcludingNumber = (n) => {
+logger.error(`>>> Entering factorsExcludingNumber(n=${n})`, { "event.action": "factorsExcludingNumber", "logrite.n": n });
+logger.warn(`<<< Exiting factorsExcludingNumber(n=${n})`, { "event.action": "factorsExcludingNumber", "logrite.n": n });
   return [...Array(n).keys()].filter((num) => n % num === 0)
 }
 
 const perfectNumber = (n) => {
+logger.error(`>>> Entering perfectNumber(n=${n})`, { "event.action": "perfectNumber", "logrite.n": n });
   const factorSum = factorsExcludingNumber(n).reduce((num, initialValue) => {
+logger.error(`perfectNumber(n=${n}): factorSum → ${factorSum}`, { "event.action": "perfectNumber", "logrite.n": n });
     return num + initialValue
   }, 0)
 
+logger.warn(`<<< Exiting perfectNumber(n=${n})`, { "event.action": "perfectNumber", "logrite.n": n });
   return factorSum === n
 }
 

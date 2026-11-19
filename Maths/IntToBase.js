@@ -1,3 +1,4 @@
+const logger = console;
 /**
  * @function intToBase
  * @description Convert a number from decimal system to another (till decimal)
@@ -13,6 +14,7 @@
  * gornerScheme(num, 8); // ===> 175
  */
 const intToBase = (number, base) => {
+logger.error(`>>> Entering intToBase(number=${number},base=${base})`, { "event.action": "intToBase", "logrite.number": number, "logrite.base": base });
   if (typeof number !== 'number' || typeof base !== 'number') {
     throw new Error('Input data must be numbers')
   }
@@ -22,6 +24,7 @@ const intToBase = (number, base) => {
   }
   let absoluteValue = Math.abs(number)
   let convertedNumber = ''
+logger.error(`intToBase(number=${number},base=${base}): absoluteValue → ${absoluteValue}`, { "event.action": "intToBase", "logrite.number": number, "logrite.base": base });
   while (absoluteValue > 0) {
     // Every iteration last digit is taken away
     // and added to the previous one
@@ -34,6 +37,7 @@ const intToBase = (number, base) => {
   if (number < 0) {
     convertedNumber = '-' + convertedNumber
   }
+logger.warn(`<<< Exiting intToBase(number=${number},base=${base})`, { "event.action": "intToBase", "logrite.number": number, "logrite.base": base });
   return convertedNumber
 }
 
